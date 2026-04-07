@@ -15,12 +15,12 @@ npm run dev
 
 ## Commands
 
-| Command             | Description                      |
-|---------------------|----------------------------------|
-| `npm run dev`       | Start dev server                 |
-| `npm run build`     | Type-check + production build    |
-| `npm run lint`      | ESLint                           |
-| `npm run preview`   | Preview production build         |
+| Command           | Description                   |
+| ----------------- | ----------------------------- |
+| `npm run dev`     | Start dev server              |
+| `npm run build`   | Type-check + production build |
+| `npm run lint`    | ESLint                        |
+| `npm run preview` | Preview production build      |
 
 ## Architecture
 

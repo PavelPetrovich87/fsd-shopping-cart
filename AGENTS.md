@@ -30,15 +30,37 @@ All commands must exit with code 0. Warnings are errors.
 
 ```
 1. Explore current file structure (ls/glob src/) before writing code
-2. Write code
-3. Run: npm run lint
-4. Errors? Read the message → fix → go to 3
-5. Run: npm run build
-6. Errors? Fix → go to 5
-7. Done only when ALL commands exit 0
+2. For shared/ui components: write story first, then component (see Story-First Convention below)
+3. Write code
+4. Run: npm run lint
+5. Errors? Read the message → fix → go to 4
+6. Run: npm run lint:arch
+7. Errors? Fix → go to 4
+8. Run: npm run build
+9. Errors? Fix → go to 8
+10. Done only when ALL commands exit 0
 ```
 
 Do not skip steps. Do not suppress warnings. The linter is your guide.
+
+## Story-First Convention
+
+When creating a UI component in `shared/ui/`:
+
+1. Create `ComponentName.stories.tsx` FIRST — define all variants, sizes, and states as Storybook stories
+2. Write the component implementation to satisfy the stories
+3. Stories are executable specifications: Storybook compilation catches type/prop mismatches
+
+Story format: Use CSF3 with `satisfies Meta<typeof Component>` for type safety.
+
+## Bug Fix Workflow
+
+When fixing a bug in `shared/ui/`:
+
+1. Reproduce the bug as a story (e.g., `ButtonOverflow.stories.tsx`)
+2. Verify the story shows the bug
+3. Fix the component
+4. The reproduction story stays as a regression guard — never delete it
 
 ## File Structure
 
@@ -62,10 +84,10 @@ Slices are added as the project grows. Always check the actual file system for c
 
 ## Import Rules (Quick Reference)
 
-| Rule | Example of violation |
-|------|---------------------|
-| No higher-level imports | `entities/` importing from `features/` |
-| No cross-slice imports | `features/cart` importing from `features/wishlist` |
-| Public API only | `import { X } from '@/features/cart/ui/Button'` |
-| Relative inside slice | `import { X } from '@/features/cart/model/store'` inside cart |
-| Absolute between slices | `import { X } from '../../entities/product'` |
+| Rule                    | Example of violation                                          |
+| ----------------------- | ------------------------------------------------------------- |
+| No higher-level imports | `entities/` importing from `features/`                        |
+| No cross-slice imports  | `features/cart` importing from `features/wishlist`            |
+| Public API only         | `import { X } from '@/features/cart/ui/Button'`               |
+| Relative inside slice   | `import { X } from '@/features/cart/model/store'` inside cart |
+| Absolute between slices | `import { X } from '../../entities/product'`                  |

@@ -117,22 +117,109 @@ Components must not be declared inside the render body of other components.
 // ❌ Violation: new function reference on every render
 export const ProductList = () => {
   const Item = ({ name }: { name: string }) => <li>{name}</li>
-  return <ul><Item name="Phone" /></ul>
+  return (
+    <ul>
+      <Item name="Phone" />
+    </ul>
+  )
 }
 
 // ✅ Correct: declare outside
 const Item = ({ name }: { name: string }) => <li>{name}</li>
 
 export const ProductList = () => {
-  return <ul><Item name="Phone" /></ul>
+  return (
+    <ul>
+      <Item name="Phone" />
+    </ul>
+  )
 }
 ```
 
 ---
 
-## 3. Structural Rules
+## 3. Styling Rules
 
-### 3.1 Every Slice Has a Public API `[ci-custom]`
+### 3.1 Utility-First `[prettier]`
+
+Use Tailwind utility classes directly in JSX. Avoid `@apply` except in global base styles (`index.css`).
+
+```tsx
+// ❌ Violation: custom CSS class
+<button className="cart-button">Add</button>
+
+// ✅ Correct: Tailwind utilities
+<button className="rounded-lg bg-blue-600 px-4 py-2 text-white">Add</button>
+```
+
+Class order is enforced automatically by `prettier-plugin-tailwindcss`.
+
+### 3.2 Zero-Trust Styling for Custom shared/ui `[eslint]`
+
+Custom components in `shared/ui/` must NOT use `className` JSX attribute. All styling is internal — consumers control appearance through variant/size props only.
+
+**Directory split enforces the boundary:**
+
+```
+src/shared/ui/
+├── shadcn/          ← shadcn library components (className allowed, managed by cva)
+│   └── button.tsx
+├── MyCustom.tsx     ← our components (className FORBIDDEN by ESLint)
+└── index.ts
+```
+
+shadcn components retain `className` by design (merged via `cn()` + `cva`). The variant/size pattern enforced by `cva` + TypeScript types is the harness for these components.
+
+```tsx
+// ❌ Violation: open className prop
+type ButtonProps = { className?: string; children: React.ReactNode }
+
+// ✅ Correct: constrained variant props
+type ButtonProps = {
+  variant: 'primary' | 'secondary' | 'ghost'
+  size: 'sm' | 'md' | 'lg'
+  children: React.ReactNode
+}
+```
+
+**Why:** An open `className` lets AI agents (and developers) inject layout-breaking utilities into an encapsulated component. Variant props create a strict, type-checked contract.
+
+### 3.3 Component Does Not Control Its Own Layout `[review]`
+
+A component must not set external positioning styles (`margin`, `position: absolute`, `grid-column`, etc.) on its own root element. The parent decides where the component sits.
+
+```tsx
+// ❌ Violation: component dictates its own margin
+export const ProductCard = () => (
+  <div className="mt-8 ml-4 rounded-lg bg-white p-4">...</div>
+)
+
+// ✅ Correct: only internal styles
+export const ProductCard = () => (
+  <div className="rounded-lg bg-white p-4">...</div>
+)
+// Parent handles layout: <div className="mt-8 ml-4"><ProductCard /></div>
+```
+
+### 3.4 Escape Hatches via Composition, Not Styles `[review]`
+
+When a component needs customization, use slots (children/render props), not style overrides.
+
+```tsx
+// ❌ Violation: style override
+<Card className="border-red-500" />
+
+// ✅ Correct: composition
+<Card header={<AlertBanner />}>
+  <ErrorContent />
+</Card>
+```
+
+---
+
+## 4. Structural Rules
+
+### 4.1 Every Slice Has a Public API `[ci-custom]`
 
 Every slice directory must contain an `index.ts` file.
 
@@ -143,7 +230,7 @@ Every slice directory must contain an `index.ts` file.
 
 Enforced by `validate-architecture.ts` (Day 5).
 
-### 3.2 Architecture Graph Matches Imports `[ci-custom]`
+### 4.2 Architecture Graph Matches Imports `[ci-custom]`
 
 The dependency graph in `ARCHITECTURE.md` must match actual imports in the codebase. Any divergence fails CI.
 
@@ -153,10 +240,12 @@ Enforced by `validate-architecture.ts` (Day 5).
 
 ## Enforcement
 
-| Tag | Tool | When |
-|-----|------|------|
-| `[steiger]` | Steiger FSD linter | `npm run steiger` (Day 3) |
-| `[eslint]` | ESLint 9 flat config | `npm run lint` |
-| `[ci-custom]` | `validate-architecture.ts` | CI pipeline (Day 5) |
+| Tag           | Tool                       | When                   |
+| ------------- | -------------------------- | ---------------------- |
+| `[steiger]`   | Steiger FSD linter         | `npm run lint:arch`    |
+| `[eslint]`    | ESLint 9 flat config       | `npm run lint`         |
+| `[prettier]`  | Prettier + TW plugin       | `npm run format:check` |
+| `[review]`    | Code review (manual)       | PR review              |
+| `[ci-custom]` | `validate-architecture.ts` | CI pipeline (Day 5)    |
 
 All commands must exit with code 0. Warnings are treated as errors.

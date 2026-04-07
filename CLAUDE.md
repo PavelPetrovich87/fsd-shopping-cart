@@ -38,11 +38,11 @@ src/
 
 ### Import Invariants
 
-| Rule | Meaning |
-|------|---------|
-| **No cross-slice imports** | `features/cart` cannot import from `features/wishlist` |
-| **No layer violation** | Lower layers cannot import from upper layers |
-| **Public API only** | Import from slice `index.ts` only, never from internal paths |
+| Rule                       | Meaning                                                      |
+| -------------------------- | ------------------------------------------------------------ |
+| **No cross-slice imports** | `features/cart` cannot import from `features/wishlist`       |
+| **No layer violation**     | Lower layers cannot import from upper layers                 |
+| **Public API only**        | Import from slice `index.ts` only, never from internal paths |
 
 ### Adding a Slice
 

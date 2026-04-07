@@ -17,12 +17,14 @@ The owner is **Pavel**, a Senior Software Engineer. He is building this repo as 
 These principles were derived from Day 1 research and govern EVERY decision in this repo:
 
 ### Pillar 1: Minimize Hallucination Surface
+
 - Fewer abstractions = fewer places for the agent to guess wrong.
 - Declarative tools over imperative (Tailwind classes > CSS-in-JS).
 - Code ownership over black-box dependencies (shadcn/ui model: components live in `shared/ui/`, not in `node_modules`).
 - Flat public APIs: each FSD slice exports through `index.ts`, no deep barrel re-exports.
 
 ### Pillar 2: Define Invariants, Not Conventions
+
 - A **convention** is a recommendation ("keep files small"). It requires interpretation. It drifts.
 - An **invariant** is a binary rule ("features/A cannot import from features/B"). It's either violated or not.
 - Every rule in this repo must satisfy three criteria:
@@ -32,6 +34,7 @@ These principles were derived from Day 1 research and govern EVERY decision in t
 - If a rule can't be enforced by a tool, it doesn't belong in CONVENTIONS.md.
 
 ### Pillar 3: Build Convergent Feedback Loops
+
 - The agent workflow is: `write code → run lint → get error with fix instructions → fix → re-lint → zero errors`.
 - The agent does NOT need to memorize rules. It needs to reach **exit code 0**.
 - Error messages must include: (1) what's wrong, (2) why it's wrong, (3) how to fix it.
@@ -79,11 +82,11 @@ src/
 
 These rules are enforced by custom ESLint rules. Do NOT violate them — the linter will catch you.
 
-| Rule | What it means | ESLint rule |
-|------|--------------|-------------|
-| **No cross-slice imports** | `features/cart` cannot import from `features/wishlist` | `fsd/no-cross-slice-imports` |
-| **No layer violation** | `entities/` cannot import from `features/`. `shared/` cannot import from `entities/`. | `fsd/no-layer-violation` |
-| **Public API only** | `import { X } from '@/features/cart'` is OK. `import { X } from '@/features/cart/model/store'` is FORBIDDEN. | `fsd/public-api-only` |
+| Rule                       | What it means                                                                                                | ESLint rule                  |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------ | ---------------------------- |
+| **No cross-slice imports** | `features/cart` cannot import from `features/wishlist`                                                       | `fsd/no-cross-slice-imports` |
+| **No layer violation**     | `entities/` cannot import from `features/`. `shared/` cannot import from `entities/`.                        | `fsd/no-layer-violation`     |
+| **Public API only**        | `import { X } from '@/features/cart'` is OK. `import { X } from '@/features/cart/model/store'` is FORBIDDEN. | `fsd/public-api-only`        |
 
 ### Adding a New Slice
 
@@ -122,13 +125,16 @@ Do NOT skip steps. Do NOT suppress warnings. The linter is your guide, not your 
 This repo is being constructed incrementally. Here's where we are:
 
 ### Day 1 — Theory (COMPLETE ✅)
+
 Read three articles, extracted principles. Created concept notes and flashcards in the learning vault.
 Key output: "The Self-Enforcing Repository" — a meta-concept unifying all three sources into the Three Pillars above.
 
 ### Day 2 — Repository Architecture & Documentation (CURRENT 🟡)
+
 **Goal:** Create the skeleton. No feature code — only structure, docs, and empty scaffolding.
 
 Tasks:
+
 - [x] `git init` + Vite init (React + TypeScript)
 - [ ] Design FSD folder structure with explicit layer boundaries
 - [ ] Create `README.md` — project purpose, tech stack, setup, contribution rules
@@ -138,9 +144,11 @@ Tasks:
 - [ ] Create empty slice scaffolding: `features/shopping-cart/index.ts`, `entities/product/index.ts`
 
 ### Day 3 — Linting & Custom FSD Rules
+
 **Goal:** The linting stack IS the harness. Standard rules + 3 custom ESLint rules for FSD.
 
 Tasks:
+
 - [ ] ESLint (flat config, TypeScript, React)
 - [ ] Prettier
 - [ ] Stylelint (Tailwind plugin)
@@ -150,18 +158,22 @@ Tasks:
 - [ ] Test cases: intentional violations to verify rules catch them
 
 ### Day 4 — Tailwind + shadcn/ui
+
 **Goal:** Styling layer. shadcn components go into `shared/ui/` (FSD-compliant placement).
 
 Tasks:
+
 - [ ] Tailwind CSS v4
 - [ ] shadcn/ui init into `shared/ui/`
 - [ ] Base components: Button, Card, Input, Dialog, Badge
 - [ ] Verify components render AND pass all lint rules (including custom FSD rules)
 
 ### Day 5 — CI/CD + Architectural Validator
+
 **Goal:** GitHub Actions as the final enforcement layer. Custom architecture validator script.
 
 Tasks:
+
 - [ ] GitHub Actions: lint → validate → type-check → build
 - [ ] `scripts/validate-architecture.ts` — checks:
   - Every slice has `index.ts`
@@ -171,9 +183,11 @@ Tasks:
 - [ ] Push to GitHub, CI green
 
 ### Day 6 — Agent Test Drive + Retrospective
+
 **Goal:** Agent (Claude) builds the shopping cart feature. Pavel does NOT touch the code. The harness either works or it doesn't.
 
 Tasks:
+
 - [ ] Prompt: "Build a shopping cart feature using FSD structure with add/remove/quantity"
 - [ ] Agent hits lint errors, reads fix instructions, fixes them (this IS the feedback loop)
 - [ ] Write `RETROSPECTIVE.md`: what scaffolding helped, what was missing, which rules need tuning
@@ -195,6 +209,7 @@ The full study notes, concept notes, and flashcards for this project live in a s
 `/Users/user/Documents/my-learning-vault/harness_engineering/`
 
 Key concept notes created during Day 1:
+
 - `Self-Enforcing-Repository.md` — meta-article synthesizing all three Day 1 sources
 - `Feedback-Systems-Over-Conventions.md` — why invariants beat conventions
 - `Architectural-Constraints-AI-Flashcards.md` — SR flashcards on architectural enforcement

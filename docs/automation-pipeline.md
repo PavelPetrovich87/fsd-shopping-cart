@@ -31,13 +31,13 @@ Developer writes code
 
 ## Why Three, Not One?
 
-| Problem | Pre-commit | Pre-push | CI |
-|---------|:----------:|:--------:|:--:|
-| `export default` in a .tsx file | ✅ catches | — | ✅ catches |
-| `features/cart` imports from `features/auth` | — | ✅ catches | ✅ catches |
-| Type error in a component | — | ✅ catches | ✅ catches |
-| Forgot to run `npm install` after pulling | — | — | ✅ catches |
-| Different Node.js version breaks build | — | — | ✅ catches |
+| Problem                                      | Pre-commit |  Pre-push  |     CI     |
+| -------------------------------------------- | :--------: | :--------: | :--------: |
+| `export default` in a .tsx file              | ✅ catches |     —      | ✅ catches |
+| `features/cart` imports from `features/auth` |     —      | ✅ catches | ✅ catches |
+| Type error in a component                    |     —      | ✅ catches | ✅ catches |
+| Forgot to run `npm install` after pulling    |     —      |     —      | ✅ catches |
+| Different Node.js version breaks build       |     —      |     —      | ✅ catches |
 
 **Rule of thumb:** catch fast what you can, catch everything else before it goes remote.
 
@@ -76,7 +76,7 @@ You're in `features/shopping-cart/ui/CartButton.tsx` and import from another fea
 
 ```tsx
 // ❌ Cross-feature import
-import { useAuth } from '@/features/auth';
+import { useAuth } from '@/features/auth'
 ```
 
 **What happens:**
@@ -161,8 +161,8 @@ PRE-COMMIT (lint-staged)          PRE-PUSH                    CI (GitHub Actions
 
 ## Tools
 
-| Tool | Purpose | Install |
-|------|---------|---------|
-| **Husky** | Manages git hooks (pre-commit, pre-push) | `npm i -D husky` |
-| **lint-staged** | Runs linters only on staged files | `npm i -D lint-staged` |
-| **GitHub Actions** | CI/CD in the cloud | `.github/workflows/ci.yml` |
+| Tool               | Purpose                                  | Install                    |
+| ------------------ | ---------------------------------------- | -------------------------- |
+| **Husky**          | Manages git hooks (pre-commit, pre-push) | `npm i -D husky`           |
+| **lint-staged**    | Runs linters only on staged files        | `npm i -D lint-staged`     |
+| **GitHub Actions** | CI/CD in the cloud                       | `.github/workflows/ci.yml` |

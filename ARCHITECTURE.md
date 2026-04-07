@@ -12,14 +12,14 @@ Layers are ordered by level of abstraction. Each layer may only import from laye
 app → pages → widgets → features → entities → shared
 ```
 
-| Layer | Responsibility | May import from |
-|-------|---------------|-----------------|
-| `app` | Providers, routing, global styles | pages, widgets, features, entities, shared |
-| `pages` | Route-level composition | widgets, features, entities, shared |
-| `widgets` | Self-contained UI blocks | features, entities, shared |
-| `features` | User interactions with business logic | entities, shared |
-| `entities` | Business objects and data shapes | shared |
-| `shared` | Reusable, business-agnostic infrastructure | nothing (leaf layer) |
+| Layer      | Responsibility                             | May import from                            |
+| ---------- | ------------------------------------------ | ------------------------------------------ |
+| `app`      | Providers, routing, global styles          | pages, widgets, features, entities, shared |
+| `pages`    | Route-level composition                    | widgets, features, entities, shared        |
+| `widgets`  | Self-contained UI blocks                   | features, entities, shared                 |
+| `features` | User interactions with business logic      | entities, shared                           |
+| `entities` | Business objects and data shapes           | shared                                     |
+| `shared`   | Reusable, business-agnostic infrastructure | nothing (leaf layer)                       |
 
 ### Slice Isolation
 
@@ -32,12 +32,12 @@ Each slice (e.g., `features/shopping-cart`, `entities/product`) is a self-contai
 
 ## Tech Stack
 
-| Tool | Purpose |
-|------|---------|
-| Vite 8 | Build tool, dev server |
-| React 19 | UI library |
-| TypeScript 5.9 | Type safety |
-| Tailwind CSS v4 | Utility-first styling (Day 4) |
+| Tool                   | Purpose                            |
+| ---------------------- | ---------------------------------- |
+| Vite 8                 | Build tool, dev server             |
+| React 19               | UI library                         |
+| TypeScript 5.9         | Type safety                        |
+| Tailwind CSS v4        | Utility-first styling (Day 4)      |
 | ESLint 9 (flat config) | Linting + custom FSD rules (Day 3) |
 
 ## Data Flow

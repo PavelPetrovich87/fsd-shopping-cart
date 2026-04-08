@@ -24,7 +24,7 @@ subtasks:
 - T007
 - T008
 phase: Phase 1 - Implementation
-lane: approved
+lane: done
 agent: "kilo"
 shell_pid: "17427"
 history:
@@ -43,6 +43,11 @@ history:
   agent: kilo
   shell_pid: ''
   action: Review passed, approved for merge
+- timestamp: '2026-04-08T14:10:00Z'
+  lane: done
+  agent: kilo
+  shell_pid: ''
+  action: Merged to main manually, workflow state reconciled
 authoritative_surface: src/shared/lib
 execution_mode: code_change
 mission_id: 01KNPJJXYHRFTRHNEYEEBWT0Z1

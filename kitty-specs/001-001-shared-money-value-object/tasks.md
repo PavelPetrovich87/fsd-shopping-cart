@@ -20,7 +20,7 @@
 ### Included Subtasks
 - [x] T001 Create `src/shared/lib/money.ts` with Money class
 - [x] T002 Implement `Money.fromPrice(dollars)` factory method (stores cents = dollars * 100)
-- [ ] T003 Implement `Money.add()`, `Money.subtract()`, `Money.multiply()` arithmetic operations
+- [x] T003 Implement `Money.add()`, `Money.subtract()`, `Money.multiply()` arithmetic operations
 - [ ] T004 Implement `Money.equals()` for value equality
 - [ ] T005 Implement `Money.format()` with Intl.NumberFormat (USD, "$25.00" format)
 - [ ] T006 Create `src/shared/lib/money.test.ts` with Vitest tests

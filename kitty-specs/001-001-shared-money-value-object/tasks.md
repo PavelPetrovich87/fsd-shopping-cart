@@ -18,7 +18,7 @@
 **Prompt**: `/tasks/WP01-money-value-object.md`
 
 ### Included Subtasks
-- [ ] T001 Create `src/shared/lib/money.ts` with Money class
+- [x] T001 Create `src/shared/lib/money.ts` with Money class
 - [ ] T002 Implement `Money.fromPrice(dollars)` factory method (stores cents = dollars * 100)
 - [ ] T003 Implement `Money.add()`, `Money.subtract()`, `Money.multiply()` arithmetic operations
 - [ ] T004 Implement `Money.equals()` for value equality

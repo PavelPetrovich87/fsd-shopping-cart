@@ -37,6 +37,24 @@ Key documentation files:
 
 **CRITICAL: spec-kitty is an ORCHESTRATOR, not a content generator.** CLI commands create directory scaffolds, YAML metadata, and git commits. The AI agent (you) writes the actual content — specs, plans, WP prompts. Don't expect spec-kitty commands to produce filled-in documents.
 
+### Human-CLI-Agent Collaboration Pattern
+
+spec-kitty requires a **Human-CLI-Agent loop**:
+
+```
+Human runs CLI → spec-kitty creates scaffold → AI agent fills content → Human runs next CLI
+```
+
+**AI agent cannot invoke spec-kitty commands** — user must run them manually.
+
+| Phase     | User Action                                             | AI Agent Action                  |
+| --------- | ------------------------------------------------------- | -------------------------------- |
+| specify   | `spec-kitty specify "feature"`                          | Fill spec.md with requirements   |
+| plan      | `spec-kitty plan --feature "feature"`                   | Fill plan.md with implementation |
+| tasks     | `spec-kitty agent mission finalize-tasks`               | Write WP prompts, commit         |
+| implement | `spec-kitty implement WP01 --mission "feature"`         | Work in worktree, implement code |
+| review    | `spec-kitty agent tasks move-task WP## --to for_review` | —                                |
+
 Workflow:
 
 ```

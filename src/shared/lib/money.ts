@@ -1,8 +1,15 @@
 export class Money {
-  private constructor(
-    private readonly cents: number,
-    private readonly currency: string = 'USD',
-  ) {}
+  private readonly cents: number
+  private readonly currency: string
+
+  private constructor(cents: number, currency: string = 'USD') {
+    this.cents = cents
+    this.currency = currency
+  }
+
+  static fromCents(cents: number, currency: string = 'USD'): Money {
+    return new Money(cents, currency)
+  }
 
   static fromPrice(dollars: number): Money {
     return new Money(Math.round(dollars * 100))

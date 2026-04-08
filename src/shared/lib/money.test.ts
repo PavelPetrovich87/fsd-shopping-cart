@@ -30,7 +30,7 @@ describe('Money', () => {
 
     it('throws on different currencies for add', () => {
       const usd = Money.fromPrice(10)
-      const eur = new Money(1000, 'EUR')
+      const eur = Money.fromCents(1000, 'EUR')
       expect(() => usd.add(eur)).toThrow(
         'Cannot add Money with different currencies',
       )
@@ -48,7 +48,7 @@ describe('Money', () => {
 
     it('returns false for different currency', () => {
       const usd = Money.fromPrice(10)
-      const eur = new Money(1000, 'EUR')
+      const eur = Money.fromCents(1000, 'EUR')
       expect(usd.equals(eur)).toBe(false)
     })
   })

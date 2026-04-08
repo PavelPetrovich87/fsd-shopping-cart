@@ -271,3 +271,4 @@ Key checkpoints for review:
 > **CRITICAL**: Activity log entries MUST be in chronological order (oldest first, newest last).
 
 - 2026-04-08T11:15:00Z – system – lane=planned – Prompt generated via /spec-kitty.tasks
+- 2026-04-08T12:52:17Z – unknown – shell_pid=17427 – Money VO implemented, all quality gates pass

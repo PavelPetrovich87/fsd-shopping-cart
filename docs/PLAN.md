@@ -147,47 +147,211 @@ Added Storybook as a harness layer:
 - `.github/workflows/ci.yml` — `build-storybook` step added
 - `.husky/pre-push` — `build-storybook` appended after build
 
-### Day 5: Architecture Validator ⏳
+### Day 5: Architecture Validator ✅
 
 **Goal:** Make documentation executable. The dependency graph in `ARCHITECTURE.md` must match actual imports in the codebase. Any divergence fails CI.
 
-**What needs to be done:**
-
-1. **Create `scripts/validate-architecture.ts`** — the core validator script:
-   - Parse the Mermaid `graph TD` block from `ARCHITECTURE.md` using regex or a simple parser. Extract edges (e.g., `shopping-cart --> product` means shopping-cart depends on product).
-   - Scan all `.ts/.tsx` files in `src/`. For each file, extract import paths. Map each import to its layer/slice (e.g., `@/entities/product` → `entities/product`, `../model/store` → same slice).
-   - Build an actual dependency graph: which slices import from which slices.
-   - Compare intended graph (from ARCHITECTURE.md) vs actual graph (from imports).
-   - Report two types of errors:
-     - **Undocumented dependency:** an import exists in code but the edge is missing from ARCHITECTURE.md. Example: `features/shopping-cart` imports `shared/config` but the graph doesn't show that edge.
-     - **Stale documentation:** an edge exists in ARCHITECTURE.md but no actual import backs it up. Example: graph shows `product --> shared/lib` but product never imports from shared/lib.
-   - Exit with code 1 if any errors found, code 0 if graph matches reality.
-
-2. **Handle edge cases:**
-   - Intra-slice imports (relative `./` and `../`) should NOT appear in the cross-slice graph.
-   - `shared` layer segments (`shared/ui`, `shared/lib`, etc.) should appear as separate nodes in the slice-level graph.
-   - Layer-level graph (the generic `features --> entities --> shared` one) should be validated separately from the slice-level graph.
-   - Empty slices (with only `.gitkeep` and `index.ts`) should not trigger stale-edge errors.
-
-3. **Add npm script:** `"validate:arch": "npx tsx scripts/validate-architecture.ts"` in package.json. Install `tsx` as devDependency if not already present.
-
-4. **Add to CI pipeline:** New step in `.github/workflows/ci.yml` after Steiger, before build:
-
-   ```yaml
-   - name: Validate architecture graph
-     run: npm run validate:arch
-   ```
-
-5. **Add to pre-push hook:** Append `npm run validate:arch` to `.husky/pre-push` (runs after Steiger, before build).
-
-6. **Update CONVENTIONS.md:** Change `[ci-custom]` tags on §4.1 and §4.2 to reference the actual script and command.
-
-7. **Test with intentional violations:**
-   - Add a fake import in `features/shopping-cart` → `features/some-other` (cross-slice). Verify the script catches it.
-   - Add a fake edge in ARCHITECTURE.md that has no backing import. Verify the script catches it.
-   - Remove edges and verify undocumented-dependency detection works.
-
 **Why this matters:** This is the capstone of the harness. Steiger catches FSD rule violations, ESLint catches code patterns, but `validate-architecture.ts` catches **architectural drift** — when the codebase slowly diverges from the intended design. It turns ARCHITECTURE.md from a wish-list into an executable contract.
+
+---
+
+#### Step 1: Install `tsx`
+
+```bash
+npm install -D tsx
+```
+
+`tsx` runs TypeScript files directly without pre-compilation. Needed for `scripts/validate-architecture.ts`.
+
+#### Step 2: Create `scripts/validate-architecture.ts`
+
+Create the file `scripts/validate-architecture.ts`. It does three things:
+
+**2a. Parse the intended graph from ARCHITECTURE.md**
+
+Read `ARCHITECTURE.md`, find the **Slice-Level Graph** (the second `mermaid` block — the one with `subgraph` statements). Parse edges like `shopping-cart --> product` into a Set of `"source -> target"` strings.
+
+Current Mermaid block to parse (see `ARCHITECTURE.md:99-120`):
+
+```mermaid
+graph TD
+    subgraph features
+        shopping-cart
+    end
+    subgraph entities
+        product
+    end
+    subgraph shared
+        shared/ui
+        shared/lib
+        shared/api
+        shared/config
+    end
+    shopping-cart --> product
+    shopping-cart --> shared/ui
+    shopping-cart --> shared/lib
+    product --> shared/lib
+```
+
+Parsing rules:
+
+- Skip lines with `graph TD`, `subgraph`, `end`, and lines inside subgraph blocks (node declarations)
+- Extract edges: `A --> B` → `{ source: "A", target: "B" }`
+- Ignore the layer-level graph (first Mermaid block) — it's a generic FSD diagram, not project-specific
+
+**2b. Build actual graph from imports**
+
+Scan all `*.ts` and `*.tsx` files in `src/` (excluding `*.stories.tsx`, `*.test.ts`, `*.d.ts`, `AGENTS.md`).
+
+**IMPORTANT: Use TypeScript Compiler API for import extraction, NOT regex.** Regex breaks on multi-line imports, commented-out imports, and string literals containing `from`. Use `ts.createSourceFile()` to parse each file into AST, then walk `ImportDeclaration` nodes to extract module specifiers. TypeScript is already in our deps — no new dependencies needed.
+
+**IMPORTANT: Read path aliases from `tsconfig.json`** (`compilerOptions.paths`), do not hardcode the `@/ → src/` mapping. This keeps a single source of truth for alias resolution.
+
+For each file:
+
+1. Determine which slice it belongs to: `src/features/shopping-cart/ui/Button.tsx` → `shopping-cart`
+2. Parse the file with `ts.createSourceFile()`, walk `ts.SyntaxKind.ImportDeclaration` nodes, extract `moduleSpecifier` text
+3. For each import:
+   - **Relative** (`./`, `../`) → intra-slice, skip
+   - **Absolute** (`@/shared/ui`, `@/entities/product`) → resolve alias via tsconfig paths, then map to target slice:
+     - `@/shared/ui` → `shared/ui`
+     - `@/shared/lib` → `shared/lib`
+     - `@/shared/api` → `shared/api`
+     - `@/shared/config` → `shared/config`
+     - `@/entities/product` → `product`
+     - `@/features/shopping-cart` → `shopping-cart`
+   - Rule: for `shared`, use `shared/<segment>` as the node name. For other layers, use just the slice name.
+4. Build Set of `"source -> target"` strings (same format as intended graph)
+
+**2c. Compare and report**
+
+Compare the two sets:
+
+```
+undocumented = actual - intended   (imports exist but not in ARCHITECTURE.md)
+stale        = intended - actual   (edges in ARCHITECTURE.md but no imports back them up)
+```
+
+**Output format:**
+
+```
+✅ Architecture graph matches imports (N edges verified)
+```
+
+or:
+
+```
+❌ Architecture graph mismatch:
+
+UNDOCUMENTED DEPENDENCIES (import exists, missing from ARCHITECTURE.md):
+  shopping-cart --> shared/config
+
+STALE DOCUMENTATION (in ARCHITECTURE.md, no import found):
+  product --> shared/lib
+
+Run: update ARCHITECTURE.md to match actual imports, or fix the imports.
+```
+
+Exit code: 0 if both sets empty, 1 otherwise.
+
+#### Step 3: Handle edge cases
+
+These MUST be handled in the script:
+
+| Case                                                                    | How to handle                                                                                                                                                          |
+| ----------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Intra-slice relative imports (`./store`, `../model/types`)              | Skip — not cross-slice                                                                                                                                                 |
+| `shared` internal imports (`shared/ui` → `shared/lib`)                  | Skip — shared segments can import each other (ARCHITECTURE.md §Slice Isolation)                                                                                        |
+| Empty slices (only `index.ts` + `.gitkeep`)                             | Don't generate edges for empty re-exports (`export {}`)                                                                                                                |
+| `index.ts` re-exports (`export { Button } from './shadcn/button'`)      | These are intra-slice, skip                                                                                                                                            |
+| Story files (`*.stories.tsx`)                                           | Exclude from scanning — stories import the component they test, this is not an architectural dependency                                                                |
+| Test files (`*.test.ts`, `*.spec.ts`)                                   | Exclude from scanning                                                                                                                                                  |
+| Type-only imports (`import type { X } from ...`)                        | INCLUDE — type dependencies are still architectural dependencies                                                                                                       |
+| Non-`@/` absolute imports (`react`, `clsx`, etc.)                       | Skip — external packages, not part of FSD graph                                                                                                                        |
+| Cross-imports within same layer (`features/cart` → `features/checkout`) | Report as **undocumented dependency** — such an edge can never be in the graph (FSD forbids it). Steiger also catches this, but our script should too for completeness |
+
+#### Step 4: Add npm script
+
+In `package.json`, add:
+
+```json
+"validate:arch": "tsx scripts/validate-architecture.ts"
+```
+
+Verify it works:
+
+```bash
+npm run validate:arch
+```
+
+Expected: should pass (current graph matches current imports — slices are mostly empty, so few/no actual edges).
+
+#### Step 5: Add to CI pipeline
+
+Edit `.github/workflows/ci.yml`. Add after the Steiger step, before build:
+
+```yaml
+- name: Validate architecture graph
+  run: npm run validate:arch
+```
+
+Full step order should be: Prettier → ESLint → Steiger → **validate:arch** → build → build-storybook.
+
+#### Step 6: Add to pre-push hook
+
+Edit `.husky/pre-push`. Current content:
+
+```bash
+npm run lint:arch && npm run build && npm run build-storybook
+```
+
+Change to:
+
+```bash
+npm run lint:arch && npm run validate:arch && npm run build && npm run build-storybook
+```
+
+#### Step 7: Update CONVENTIONS.md
+
+In CONVENTIONS.md §4 (Structural Rules):
+
+- §4.1 "Every Slice Has a Public API" — keep `[ci-custom]` tag, add: "Enforced by `npm run validate:arch` (`scripts/validate-architecture.ts`)."
+- §4.2 "Architecture Graph Matches Imports" — keep `[ci-custom]` tag, add: "Enforced by `npm run validate:arch`. Two error types: undocumented dependency (import exists, edge missing) and stale documentation (edge exists, no import)."
+
+#### Step 8: Test with intentional violations
+
+**Test 1 — Undocumented dependency:**
+Add a temporary import in `src/features/shopping-cart/index.ts`:
+
+```ts
+import { something } from '@/shared/config'
+```
+
+Run `npm run validate:arch` → should report `shopping-cart --> shared/config` as undocumented.
+Remove the import after testing.
+
+**Test 2 — Stale documentation:**
+Add a temporary edge in ARCHITECTURE.md slice graph:
+
+```
+product --> shared/api
+```
+
+Run `npm run validate:arch` → should report `product --> shared/api` as stale.
+Remove the edge after testing.
+
+**Test 3 — Clean run:**
+After removing test violations, run `npm run validate:arch` → should exit 0.
+
+#### Step 9: Final verification
+
+Run all checks in sequence:
+
+```bash
+npm run format:check && npm run lint && npm run lint:arch && npm run validate:arch && npm run build && npm run build-storybook
+```
+
+All must exit 0.
 
 **Referenced in:**
 
@@ -195,51 +359,203 @@ Added Storybook as a harness layer:
 - CONVENTIONS.md §4.2 (graph matches imports) — `[ci-custom]` tag
 - ARCHITECTURE.md "Definition of Done" and "Repository Intelligence Graph"
 
-**Estimated effort:** ~1-2 hours for the script + integration + testing.
+**Estimated effort:** ~1-2 hours.
+
+**Key artifacts:**
+
+- `scripts/validate-architecture.ts` — parses Mermaid graph, extracts imports via TypeScript AST, compares and reports
+- `package.json` — `validate:arch` script added
+- `.github/workflows/ci.yml` — `validate:arch` step added (between Steiger and build)
+- `.husky/pre-push` — `validate:arch` added between `lint:arch` and `build`
+- `CONVENTIONS.md` — §4.1/§4.2 updated with implementation details
+
+---
 
 ### Day 6: Agent Test Drive ⏳
 
-**Goal:** Validate the entire harness by having an AI agent build real features in the shopping cart, guided only by the repo's documentation and tooling.
-
-**What needs to be done:**
-
-1. **Prepare the test scenario** — write a clear feature brief (as a user would give to an agent):
-   - "Implement a product listing page that displays products from a mock API"
-   - "Add an 'Add to Cart' button on each product card"
-   - "Create a cart page showing added items with quantities and total"
-
-2. **Clean the slate** — the agent should start with the current scaffolding (empty slices, no application code). Remove the Vite template from `App.tsx` and replace with a minimal router or placeholder.
-
-3. **Run the agent** — give a fresh Claude Code session (or another agent) access to the repo. The agent should:
-   - Read AGENTS.md and ARCHITECTURE.md to understand the project
-   - Implement the features following FSD conventions
-   - Run `npm run lint`, `npm run lint:arch`, `npm run build` after each change
-   - Self-correct based on linter/build errors
-
-4. **Observe and document:**
-   - Did the agent read AGENTS.md before writing code?
-   - Did it follow the FSD layer hierarchy?
-   - Did it create proper public APIs (index.ts)?
-   - Where did the harness catch mistakes? (Which linter, which rule?)
-   - Where did the harness fail to catch mistakes? (Gaps to fix)
-   - How many iterations did the agent need to produce clean code?
-
-5. **Tighten the harness** — based on observed failures, add new rules/constraints:
-   - If the agent put a component in the wrong layer → improve AGENTS.md guidance
-   - If the agent used wrong import patterns → tighten ESLint rules
-   - If the agent created files outside FSD structure → add Steiger rules or folder constraints
-
-6. **Run a second agent** — repeat with a different agent (GPT, Cursor, etc.) to verify the harness is vendor-agnostic, not Claude-specific.
+**Goal:** Validate the entire harness by having an AI agent build real features in the shopping cart, guided only by the repo's documentation and tooling. The agent knows nothing about FSD — it learns from the repo.
 
 **Success criteria:** An agent with no prior FSD knowledge, reading only the repo's docs and tool output, produces architecturally correct code on the first or second try.
 
-**What to measure:**
+---
 
-- First-attempt success rate (% of files that pass all linters on first write)
-- Self-correction rate (how many lint→fix cycles before green)
-- Harness coverage (% of agent mistakes caught by automated tools vs found in manual review)
+#### Step 1: Prepare the repo for the test
 
-**Estimated effort:** ~2-3 hours including observation, documentation, and harness tightening.
+**1a. Clean App.tsx**
+
+Replace current `src/App.tsx` (Vite template) with a minimal shell:
+
+```tsx
+export const App = () => {
+  return (
+    <div className="bg-background text-foreground min-h-screen">
+      <h1 className="p-8 text-2xl font-bold">FSD Shopping Cart</h1>
+    </div>
+  )
+}
+```
+
+No router yet — the agent can add one if needed.
+
+**1b. Verify clean state**
+
+```bash
+npm run format:check && npm run lint && npm run lint:arch && npm run validate:arch && npm run build && npm run build-storybook
+```
+
+All exit 0. Commit this as "chore: prepare clean slate for agent test drive".
+
+#### Step 2: Write the feature brief
+
+Create `docs/agent-test-brief.md`:
+
+```markdown
+# Agent Test Brief
+
+You are given a React + TypeScript project that follows Feature-Sliced Design.
+Read AGENTS.md and ARCHITECTURE.md before writing any code.
+
+## Task 1: Product Entity
+
+Create the `entities/product` slice:
+
+- Type: `Product` with fields `id`, `name`, `price` (number), `image` (string URL)
+- Mock data: array of 6 products in `entities/product/api/`
+- UI: `ProductCard` component showing image, name, and price
+- Story: `ProductCard.stories.tsx` with Default and all meaningful states
+- Public API: export type, mock data, and component from `index.ts`
+
+## Task 2: Shopping Cart Feature
+
+Create the `features/shopping-cart` slice:
+
+- State: `CartItem` type (`product: Product`, `quantity: number`), store using React Context or Zustand
+- UI: `AddToCartButton` component (uses shadcn Button, accepts `productId`)
+- UI: `CartIcon` component showing item count badge
+- Story: stories for both components
+- Public API: export components and cart actions from `index.ts`
+
+## Task 3: Pages
+
+Create two pages in `pages/`:
+
+- `HomePage`: grid of ProductCards, each with AddToCartButton
+- `CartPage`: list of cart items with quantities, remove button, total price
+
+## Task 4: App Shell
+
+Wire pages into `App.tsx`:
+
+- Simple client-side routing (react-router or manual state)
+- Header with navigation and CartIcon
+- Layout using Tailwind
+
+## Rules
+
+- Follow the workflow in AGENTS.md exactly
+- Run all lint/build commands after EACH file you create
+- Do NOT skip the story-first convention for shared/ui components
+- If a linter fails, read the error, fix it, and re-run
+```
+
+#### Step 3: Run Agent #1 (Claude Code)
+
+Open a **new** Claude Code session in this repo (fresh context, no memory of previous work).
+
+Give it the brief:
+
+```
+Read docs/agent-test-brief.md and implement all 4 tasks. Follow the repo's AGENTS.md workflow exactly.
+```
+
+**Do NOT help the agent.** Let it figure things out from the repo docs and linter output. Only intervene if it's stuck in an infinite loop (>5 iterations on the same error).
+
+#### Step 4: Observe and log
+
+While the agent works, track in `docs/agent-test-log.md`:
+
+```markdown
+# Agent Test Log
+
+## Agent: Claude Code (session date: YYYY-MM-DD)
+
+### Observation Checklist
+
+| Question                                 | Answer |
+| ---------------------------------------- | ------ |
+| Did it read AGENTS.md first?             | yes/no |
+| Did it read ARCHITECTURE.md?             | yes/no |
+| Did it follow story-first for shared/ui? | yes/no |
+| Did it create index.ts for each slice?   | yes/no |
+| Did it run lint after each file?         | yes/no |
+| Did it run lint:arch?                    | yes/no |
+| Did it run build?                        | yes/no |
+
+### Harness Catches (where tooling corrected the agent)
+
+| Mistake                | Caught by | Rule                     | Iterations to fix |
+| ---------------------- | --------- | ------------------------ | ----------------- |
+| (e.g., default export) | ESLint    | import/no-default-export | 1                 |
+
+### Harness Misses (mistakes NOT caught by tooling)
+
+| Mistake                         | Should be caught by | Proposed fix             |
+| ------------------------------- | ------------------- | ------------------------ |
+| (e.g., domain logic in shared/) | AGENTS.md guidance  | Improve shared/AGENTS.md |
+
+### Metrics
+
+- Files created: N
+- First-attempt lint pass rate: X/N (Y%)
+- Total lint→fix cycles: N
+- Total build→fix cycles: N
+- Final state: all checks green? yes/no
+```
+
+#### Step 5: Tighten the harness
+
+Based on the log, fix gaps:
+
+| Observed problem                          | Fix                                                                            |
+| ----------------------------------------- | ------------------------------------------------------------------------------ |
+| Agent didn't read AGENTS.md               | Add instruction to CLAUDE.md: "ALWAYS read AGENTS.md before first edit"        |
+| Agent put component in wrong layer        | Improve per-layer AGENTS.md with more examples                                 |
+| Agent used wrong import pattern           | Add/tighten ESLint rule                                                        |
+| Agent created files outside FSD structure | Add Steiger rule or glob constraint                                            |
+| Agent skipped story-first                 | Make `build-storybook` fail when component has no story (future: custom check) |
+| Agent used `export default`               | Already caught by ESLint — verify it worked                                    |
+
+Commit harness improvements as "fix: tighten harness based on agent test drive".
+
+#### Step 6: Run Agent #2 (different vendor)
+
+Repeat Steps 3-4 with a different agent (Cursor, GPT-4 via Copilot, Windsurf, etc.) on the **same repo** (after reverting agent #1's code but keeping harness improvements).
+
+```bash
+git stash   # or create a branch for agent #1's work
+```
+
+Goal: verify the harness is **vendor-agnostic**. If agent #2 makes different mistakes, tighten further.
+
+#### Step 7: Final report
+
+Update `docs/agent-test-log.md` with a comparison table:
+
+```markdown
+## Summary
+
+| Metric                  | Claude Code | Agent #2 |
+| ----------------------- | ----------- | -------- |
+| Read AGENTS.md first?   | yes/no      | yes/no   |
+| First-attempt pass rate | X%          | X%       |
+| Lint→fix cycles         | N           | N        |
+| Harness catches         | N/M (X%)    | N/M (X%) |
+| All checks green?       | yes/no      | yes/no   |
+```
+
+And a conclusions section: what worked, what didn't, what to add to the harness.
+
+**Estimated effort:** ~2-3 hours (agent runs + observation + harness tightening).
 
 ---
 
@@ -294,17 +610,17 @@ src/
 
 ### Enforcement layers
 
-| Layer            | Tool                       | Config                     | Command                                   |
-| ---------------- | -------------------------- | -------------------------- | ----------------------------------------- |
-| Code quality     | ESLint 9 flat config       | `eslint.config.js`         | `npm run lint`                            |
-| FSD architecture | Steiger                    | `steiger.config.ts`        | `npm run lint:arch`                       |
-| Formatting       | Prettier + TW plugin       | `.prettierrc.json`         | `npm run format:check`                    |
-| Type safety      | TypeScript 5.9             | `tsconfig.app.json`        | `npm run build`                           |
-| Pre-commit       | Husky + lint-staged        | `.husky/pre-commit`        | auto on `git commit`                      |
-| Pre-push         | Husky                      | `.husky/pre-push`          | auto on `git push`                        |
-| CI               | GitHub Actions             | `.github/workflows/ci.yml` | auto on push/PR                           |
-| Storybook gate   | Storybook build            | `.storybook/`              | `npm run build-storybook` (pre-push + CI) |
-| Arch validation  | `validate-architecture.ts` | TBD (Day 5)                | TBD                                       |
+| Layer            | Tool                       | Config                             | Command                                   |
+| ---------------- | -------------------------- | ---------------------------------- | ----------------------------------------- |
+| Code quality     | ESLint 9 flat config       | `eslint.config.js`                 | `npm run lint`                            |
+| FSD architecture | Steiger                    | `steiger.config.ts`                | `npm run lint:arch`                       |
+| Formatting       | Prettier + TW plugin       | `.prettierrc.json`                 | `npm run format:check`                    |
+| Type safety      | TypeScript 5.9             | `tsconfig.app.json`                | `npm run build`                           |
+| Pre-commit       | Husky + lint-staged        | `.husky/pre-commit`                | auto on `git commit`                      |
+| Pre-push         | Husky                      | `.husky/pre-push`                  | auto on `git push`                        |
+| CI               | GitHub Actions             | `.github/workflows/ci.yml`         | auto on push/PR                           |
+| Storybook gate   | Storybook build            | `.storybook/`                      | `npm run build-storybook` (pre-push + CI) |
+| Arch validation  | `validate-architecture.ts` | `scripts/validate-architecture.ts` | `npm run validate:arch` (pre-push + CI)   |
 
 ---
 

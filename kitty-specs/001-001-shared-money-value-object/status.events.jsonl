@@ -1,0 +1,1 @@
+{"actor": "finalize-tasks", "at": "2026-04-08T11:16:29.967620+00:00", "event_id": "01KNPCXQMFQSH9R7MNAFVK30G6", "evidence": null, "execution_mode": "worktree", "force": true, "from_lane": "planned", "mission_slug": "001-001-shared-money-value-object", "policy_metadata": null, "reason": "canonical bootstrap", "review_ref": null, "to_lane": "planned", "wp_id": "WP01"}

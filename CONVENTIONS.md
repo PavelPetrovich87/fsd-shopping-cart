@@ -228,13 +228,18 @@ Every slice directory must contain an `index.ts` file.
 ✅ src/features/shopping-cart/index.ts
 ```
 
-Enforced by `validate-architecture.ts` (Day 5).
+Enforced by `npm run validate:arch` (`scripts/validate-architecture.ts`).
 
 ### 4.2 Architecture Graph Matches Imports `[ci-custom]`
 
 The dependency graph in `ARCHITECTURE.md` must match actual imports in the codebase. Any divergence fails CI.
 
-Enforced by `validate-architecture.ts` (Day 5).
+Two error types:
+
+- **Undocumented dependency:** an import exists but the edge is missing from ARCHITECTURE.md
+- **Stale documentation:** an edge exists in ARCHITECTURE.md but no import backs it up (source slice must not be empty)
+
+Enforced by `npm run validate:arch` (`scripts/validate-architecture.ts`).
 
 ---
 

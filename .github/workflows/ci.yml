@@ -31,6 +31,9 @@ jobs:
       - name: Steiger (FSD architecture)
         run: npm run lint:arch
 
+      - name: Validate architecture graph
+        run: npm run validate:arch
+
       - name: Type-check + Build
         run: npm run build
 

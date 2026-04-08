@@ -1,0 +1,25 @@
+{
+  "event_count": 1,
+  "last_event_id": "01KNPCXQMFQSH9R7MNAFVK30G6",
+  "materialized_at": "2026-04-08T11:16:29.967620+00:00",
+  "mission_slug": "001-001-shared-money-value-object",
+  "summary": {
+    "approved": 0,
+    "blocked": 0,
+    "canceled": 0,
+    "claimed": 0,
+    "done": 0,
+    "for_review": 0,
+    "in_progress": 0,
+    "planned": 1
+  },
+  "work_packages": {
+    "WP01": {
+      "actor": "finalize-tasks",
+      "force_count": 1,
+      "lane": "planned",
+      "last_event_id": "01KNPCXQMFQSH9R7MNAFVK30G6",
+      "last_transition_at": "2026-04-08T11:16:29.967620+00:00"
+    }
+  }
+}

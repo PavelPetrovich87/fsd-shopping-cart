@@ -85,6 +85,115 @@ Documenting results for each test per SPEC-KITTY-TEST.md.
 
 ---
 
+## Phase 1: Single Ticket - T-001 (Money Value Object)
+
+### Test 1.1: Generate spec
+
+**Command:** `spec-kitty specify "001-shared-money-value-object" --mission software-dev`
+
+**Result:** PARTIAL PASS
+
+**Details:**
+
+- Directory created: `kitty-specs/001-001-shared-money-value-object/`
+- meta.json created with feature identity
+- spec.md created but EMPTY (0 bytes)
+- Status events committed automatically
+
+**Finding:** spec-kitty creates scaffold only. Content must be written by AI agent OR manually. This is by design - spec-kitty is a CLI orchestration tool, not a content generator.
+
+**Verification:**
+
+- Spec uses correct FSD path (`src/shared/lib/money.ts`) - YES (after manual population)
+- Money described as shared utility - YES (after manual population)
+- Acceptance criteria from T-001 preserved - YES (after manual population)
+
+### Test 1.2: Generate plan
+
+**Command:** `spec-kitty plan --feature "001-001-shared-money-value-object"`
+
+**Result:** PARTIAL PASS
+
+**Details:**
+
+- plan.md created at `kitty-specs/001-001-shared-money-value-object/plan.md`
+- File contains template structure with placeholders (ACTION REQUIRED markers)
+- Implementation content NOT auto-generated
+
+**Verification:**
+
+- Plan references correct FSD segment (`shared/lib/`) - YES (after manual population)
+- Named exports mentioned - YES (after manual population)
+- Re-export from `shared/lib/index.ts` mentioned - YES (after manual population)
+
+### Test 1.3: Generate tasks / work packages
+
+**Command:** `spec-kitty tasks` then `spec-kitty agent mission finalize-tasks --mission "001-001-shared-money-value-object"`
+
+**Result:** PARTIAL PASS
+
+**Details:**
+
+- tasks.md created manually
+- WP01 prompt file created manually at `kitty-specs/.../tasks/WP01-money-value-object.md`
+- finalize-tasks required fixes:
+  - Requirement refs format: changed from `### Requirement Refs` to `**Requirements Refs**:`
+  - Missing `authoritative_surface` field in WP frontmatter
+- After fixes, finalize-tasks succeeded and committed all files
+
+**Verification:**
+
+- WP file has YAML frontmatter - YES
+- Frontmatter has lane, dependencies, subtasks - YES
+- Frontmatter updated by finalize-tasks with requirement_refs, owned_files, execution_mode - YES
+- Subtask paths point to `src/shared/lib/money.ts` - YES
+
+---
+
+## Phase 1 Summary
+
+| Test               | Status       | Notes                                                            |
+| ------------------ | ------------ | ---------------------------------------------------------------- |
+| 1.1 Generate spec  | PARTIAL PASS | Scaffold created, content written manually                       |
+| 1.2 Generate plan  | PARTIAL PASS | Template scaffold, implementation written manually               |
+| 1.3 Generate tasks | PARTIAL PASS | Tasks/WP written manually, finalize-tasks committed successfully |
+
+### Key Finding: spec-kitty CLI Design
+
+**spec-kitty is an AI agent orchestration tool, NOT a content generator.**
+
+- `spec-kitty specify` creates directory scaffold + meta.json
+- `spec-kitty plan` creates template file with placeholders
+- `spec-kitty tasks` is a slash command for AI agent (not a standalone CLI command)
+
+Content generation is delegated to AI agents via command templates. The CLI manages:
+
+- Directory structure
+- YAML frontmatter
+- Git commits
+- Dependency parsing
+- Validation
+
+This is different from what the test plan expected (auto-generation of content).
+
+---
+
+## Phase 1 Files Created
+
+- `kitty-specs/001-001-shared-money-value-object/spec.md` - Feature specification
+- `kitty-specs/001-001-shared-money-value-object/plan.md` - Implementation plan
+- `kitty-specs/001-001-shared-money-value-object/tasks.md` - Work package overview
+- `kitty-specs/001-001-shared-money-value-object/tasks/WP01-money-value-object.md` - WP prompt
+- `kitty-specs/001-001-shared-money-value-object/lanes.json` - Lane configuration
+
+---
+
 ## Next Steps
 
-Proceed to Phase 1 when ready: Test with T-001 (Money Value Object).
+Per SPEC-KITTY-TEST.md, the next phase is **Phase 2: Implementation in Worktree**.
+
+- Test 2.1: Create worktree and implement Money VO
+- Test 2.2: Verify harness works in worktree
+- Test 2.3: Husky hooks in worktree
+
+User said to stop after completing Phase 1.

@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "mission_slug": "001-001-shared-money-value-object",
+  "mission_id": "001-001-shared-money-value-object",
+  "mission_branch": "kitty/mission-001-001-shared-money-value-object",
+  "target_branch": "main",
+  "lanes": [
+    {
+      "lane_id": "lane-a",
+      "wp_ids": [
+        "WP01"
+      ],
+      "write_scope": [
+        "kitty-specs/001-001-shared-money-value-object/plan.md",
+        "kitty-specs/001-001-shared-money-value-object/spec.md",
+        "src/shared/lib/index.ts",
+        "src/shared/lib/money.test.ts",
+        "src/shared/lib/money.ts"
+      ],
+      "predicted_surfaces": [
+        "api"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    }
+  ],
+  "computed_at": "2026-04-08T11:16:30.093133+00:00",
+  "computed_from": "dependency_graph+ownership",
+  "planning_artifact_wps": []
+}

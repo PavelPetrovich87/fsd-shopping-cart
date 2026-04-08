@@ -24,12 +24,18 @@ subtasks:
 - T007
 - T008
 phase: Phase 1 - Implementation
+lane: for_review
 history:
 - timestamp: '2026-04-08T11:15:00Z'
   lane: planned
   agent: system
   shell_pid: ''
   action: Prompt generated via /spec-kitty.tasks
+- timestamp: '2026-04-08T12:52:00Z'
+  lane: for_review
+  agent: kilo
+  shell_pid: ''
+  action: Moved to for_review - Money VO implemented, all quality gates pass
 authoritative_surface: src/shared/lib
 execution_mode: code_change
 mission_id: 01KNPJJXYHRFTRHNEYEEBWT0Z1

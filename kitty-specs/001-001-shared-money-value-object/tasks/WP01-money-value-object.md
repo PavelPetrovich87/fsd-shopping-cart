@@ -25,6 +25,8 @@ subtasks:
 - T008
 phase: Phase 1 - Implementation
 lane: for_review
+agent: "kilo"
+shell_pid: "17427"
 history:
 - timestamp: '2026-04-08T11:15:00Z'
   lane: planned
@@ -274,3 +276,4 @@ Key checkpoints for review:
 
 - 2026-04-08T11:15:00Z – system – lane=planned – Prompt generated via /spec-kitty.tasks
 - 2026-04-08T12:52:17Z – unknown – shell_pid=17427 – Money VO implemented, all quality gates pass
+- 2026-04-08T13:41:31Z – kilo – shell_pid=17427 – Started review via action command

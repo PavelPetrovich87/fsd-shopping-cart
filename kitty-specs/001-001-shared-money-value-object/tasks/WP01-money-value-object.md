@@ -21,26 +21,22 @@ subtasks:
 - T007
 - T008
 phase: Phase 1 - Implementation
-assignee: ''
-agent: ''
-shell_pid: ''
 history:
 - timestamp: '2026-04-08T11:15:00Z'
   lane: planned
   agent: system
   shell_pid: ''
   action: Prompt generated via /spec-kitty.tasks
-authoritative_surface: 'src/shared/lib'
+authoritative_surface: src/shared/lib
 execution_mode: code_change
-lane: planned
+mission_id: 01KNPJK6G6CXPJ8SZWD9N7Y6NP
 owned_files:
 - kitty-specs/001-001-shared-money-value-object/plan.md
 - kitty-specs/001-001-shared-money-value-object/spec.md
 - src/shared/lib/index.ts
 - src/shared/lib/money.test.ts
 - src/shared/lib/money.ts
-review_status: ''
-reviewed_by: ''
+wp_code: WP01
 ---
 
 # Work Package Prompt: WP01 – Money Value Object Implementation

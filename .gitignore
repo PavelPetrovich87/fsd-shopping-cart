@@ -40,3 +40,9 @@ storybook-static
 .github/copilot/
 .kittify/
 .claudeignore
+.kittify/runtime/
+.kittify/events/
+.kittify/dossiers/
+kitty-specs/**/.kittify/dossiers/
+.kittify/derived/
+.kittify/.migration-backup/

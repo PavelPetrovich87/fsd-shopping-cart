@@ -24,7 +24,7 @@
 - [x] T004 Implement `Money.equals()` for value equality
 - [x] T005 Implement `Money.format()` with Intl.NumberFormat (USD, "$25.00" format)
 - [x] T006 Create `src/shared/lib/money.test.ts` with Vitest tests
-- [ ] T007 Update `src/shared/lib/index.ts` to re-export Money
+- [x] T007 Update `src/shared/lib/index.ts` to re-export Money
 - [ ] T008 Run quality gates: `npm run lint && npm run lint:arch && npm run build`
 
 **Requirements Refs**: FR-001, FR-002, FR-003, FR-004, FR-005

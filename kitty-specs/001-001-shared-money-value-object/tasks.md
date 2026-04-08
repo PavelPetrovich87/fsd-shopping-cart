@@ -22,7 +22,7 @@
 - [x] T002 Implement `Money.fromPrice(dollars)` factory method (stores cents = dollars * 100)
 - [x] T003 Implement `Money.add()`, `Money.subtract()`, `Money.multiply()` arithmetic operations
 - [x] T004 Implement `Money.equals()` for value equality
-- [ ] T005 Implement `Money.format()` with Intl.NumberFormat (USD, "$25.00" format)
+- [x] T005 Implement `Money.format()` with Intl.NumberFormat (USD, "$25.00" format)
 - [ ] T006 Create `src/shared/lib/money.test.ts` with Vitest tests
 - [ ] T007 Update `src/shared/lib/index.ts` to re-export Money
 - [ ] T008 Run quality gates: `npm run lint && npm run lint:arch && npm run build`

@@ -283,3 +283,4 @@ Key checkpoints for review:
 - 2026-04-08T12:52:17Z – unknown – shell_pid=17427 – Money VO implemented, all quality gates pass
 - 2026-04-08T13:41:31Z – kilo – shell_pid=17427 – Started review via action command
 - 2026-04-08T13:43:28Z – kilo – shell_pid=17427 – Review passed: Money VO (USD/RUB) with 10 unit tests. All quality gates passed (lint, lint:arch, build, test:unit).
+- 2026-04-08T14:10:52Z – kilo – shell_pid=17427 – Moved to done

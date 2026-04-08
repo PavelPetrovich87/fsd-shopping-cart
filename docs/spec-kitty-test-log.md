@@ -402,6 +402,50 @@ spec-kitty agent tasks move-task WP01 --to approved --note "Review passed: Money
 }
 ```
 
-### Test 3.3: Verify Branch Cleanup Required Before Merge
+### Test 3.3: Merge to Main
 
-**Note:** The lane branch (`kitty/mission-001-001-shared-money-value-object-lane-a`) must have planning artifacts removed before merge. This was done during Test 3.1. The implementation commit and cleanup commits are ready for merge to `kitty/mission-001-001-shared-money-value-object`.
+**Steps:**
+
+1. Merged lane-a branch into mission branch (fast-forward)
+2. Merged mission branch into main (manual git merge due to spec-kitty merge command bug)
+3. Resolved conflicts in spec-kitty workflow files by accepting spec-kitty version
+4. Fixed TypeScript errors in Money class:
+   - `erasableSyntaxOnly` required explicit property declarations
+   - Private constructor replaced with `fromCents()` factory
+
+**Result:** PASSED (with fixes)
+
+**Post-merge verification:**
+
+```
+npm run lint        ✓
+npm run lint:arch   ✓
+npm run build       ✓
+npm run test:unit   ✓ (15 tests passed)
+```
+
+### Test 3.4: Worktree Cleanup
+
+**Command:** `spec-kitty` merge would normally clean up worktrees, but since we did manual merge, worktree still exists.
+
+Worktree location: `.worktrees/001-001-shared-money-value-object-lane-a/`
+
+**Recommendation:** Remove worktree manually after confirming merge is stable.
+
+### Key Findings from Phase 3
+
+1. **spec-kitty merge command bug**: `spec-kitty agent mission merge` errors with "'str' object has no attribute 'value'" - manual git merge required.
+
+2. **Branch structure confusion**: Status is tracked in multiple places:
+   - Main checkout: WP frontmatter
+   - Mission branch: canonical status log
+   - These can get out of sync
+
+3. **Spec-kitty workflow files conflict**: When merging spec-kitty branches into main, conflicts arise in `.agent/workflows/`, `.agents/skills/`, `.github/prompts/` files. These are spec-kitty's own agent prompts, not needed for the project.
+
+4. **Money class TypeScript issues**: The worktree implementation had TypeScript errors due to `erasableSyntaxOnly` setting in the project. Had to refactor parameter properties to explicit declarations.
+
+5. **Merge workflow expectation mismatch**: spec-kitty expects a clean sequential workflow (all WPs done → accept → merge), but in practice:
+   - Manual git operations were needed
+   - Acceptance checks flagged issues on mission branch that didn't exist on main
+   - The lane/status model is confusing when using worktrees

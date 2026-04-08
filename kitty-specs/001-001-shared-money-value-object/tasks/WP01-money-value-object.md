@@ -11,6 +11,9 @@ requirement_refs:
 planning_base_branch: main
 merge_target_branch: main
 branch_strategy: Planning artifacts for this feature were generated on main. During /spec-kitty.implement this WP may branch from a dependency-specific base, but completed changes must merge back into main unless the human explicitly redirects the landing branch.
+base_branch: kitty/mission-001-001-shared-money-value-object
+base_commit: df3a52f49f2f94375e8c4f0067204b5ad10dc204
+created_at: '2026-04-08T12:44:03.955654+00:00'
 subtasks:
 - T001
 - T002
@@ -23,14 +26,14 @@ subtasks:
 phase: Phase 1 - Implementation
 assignee: ''
 agent: ''
-shell_pid: ''
+shell_pid: '17427'
 history:
 - timestamp: '2026-04-08T11:15:00Z'
   lane: planned
   agent: system
   shell_pid: ''
   action: Prompt generated via /spec-kitty.tasks
-authoritative_surface: 'src/shared/lib'
+authoritative_surface: src/shared/lib
 execution_mode: code_change
 lane: planned
 owned_files:

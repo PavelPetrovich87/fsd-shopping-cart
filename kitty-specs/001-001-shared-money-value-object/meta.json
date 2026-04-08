@@ -5,5 +5,7 @@
   "mission_slug": "001-001-shared-money-value-object",
   "mission_type": "software-dev",
   "slug": "001-001-shared-money-value-object",
-  "target_branch": "main"
+  "target_branch": "main",
+  "vcs": "git",
+  "vcs_locked_at": "2026-04-08T12:44:02.994339+00:00"
 }

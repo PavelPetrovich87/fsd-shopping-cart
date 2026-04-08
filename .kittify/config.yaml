@@ -1,0 +1,10 @@
+vcs:
+  type: git
+agents:
+  available:
+  - kilocode
+project:
+  uuid: c481dd71-5fa5-4ee4-8673-a5b9c823e870
+  slug: fsd-shopping-cart
+  node_id: fbf62b61c779
+  build_id: e518e8b4-47d6-40aa-8c8e-8637369933cc

@@ -24,7 +24,7 @@ subtasks:
 - T007
 - T008
 phase: Phase 1 - Implementation
-lane: for_review
+lane: approved
 agent: "kilo"
 shell_pid: "17427"
 history:

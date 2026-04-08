@@ -8,6 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "lint:arch": "steiger ./src",
+    "test:unit": "vitest run --config vitest.unit.config.ts --passWithNoTests",
+    "test:unit:watch": "vitest --config vitest.unit.config.ts",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "preview": "vite preview",

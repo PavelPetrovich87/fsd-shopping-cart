@@ -64,6 +64,7 @@ export default defineConfig([
     // Exceptions: config files that require default exports
     files: [
       'vite.config.ts',
+      'vitest.unit.config.ts',
       'steiger.config.ts',
       'eslint.config.js',
       '.storybook/**/*.ts',

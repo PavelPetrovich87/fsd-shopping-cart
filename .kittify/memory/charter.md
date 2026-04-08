@@ -108,6 +108,15 @@ For shared/ui components:
 9. Errors? Fix -> go to 8
 10. Done only when ALL commands exit 0
 
+### Spec-Kitty Operating Model
+
+- spec-kitty is an orchestrator, not a content generator. CLI commands scaffold mission artifacts; agents must fill specs, plans, work packages, and implementation details.
+- When a work package is started via `spec-kitty implement`, the allocated `.worktrees/.../` workspace becomes the only valid location for deliverable code changes.
+- If a fresh worktree is not runnable, bootstrap it before editing by installing dependencies inside that worktree.
+- For machine-driven automation, authoritative status comes from spec-kitty CLI state (`next`, `agent tasks status`, `agent tasks validate-workflow`) rather than the dashboard UI.
+- Dashboard and WP frontmatter are compatibility surfaces. If they drift from authoritative CLI state, normalize them before relying on them for human review.
+- Mixed human/agent mode is supported: humans may initiate phase transitions while agents perform content generation, implementation, and verification inside the active workspace.
+
 ### When Adding Cross-Slice Dependencies
 
 Update the Slice-Level Graph in ARCHITECTURE.md

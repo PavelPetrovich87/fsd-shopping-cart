@@ -55,6 +55,14 @@ Human runs CLI → spec-kitty creates scaffold → AI agent fills content → Hu
 | implement | `spec-kitty implement WP01 --mission "feature"`         | Work in worktree, implement code |
 | review    | `spec-kitty agent tasks move-task WP## --to for_review` | —                                |
 
+For automation and mixed human/agent workflows, prefer machine-readable CLI state over dashboard state:
+
+- `spec-kitty next --agent <name> --json`
+- `spec-kitty agent tasks status --mission <feature> --json`
+- `spec-kitty agent tasks validate-workflow WP## --mission <feature> --json`
+
+Treat dashboard output as a convenience view, not the source of truth.
+
 Workflow:
 
 ```

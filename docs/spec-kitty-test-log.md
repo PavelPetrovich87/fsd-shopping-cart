@@ -262,6 +262,45 @@ User said to stop after completing Phase 1.
 
 **Result:** ✅ Hooks fired (lint-staged ran on commit)
 
+### Test 2.4: Version Upgrade
+
+**Command:** `spec-kitty upgrade`
+
+**Result:** ✅ Upgraded from 1.0.3 to 3.1.0
+
+**Note:** Lane conflict detected during upgrade (event_log vs frontmatter), resolved using event_log as source of truth.
+
+### Test 2.5: Dashboard Lane Sync Issue
+
+**Finding:** After running `move-task`, dashboard showed WP01 in "Planned" instead of "For Review".
+
+**Root cause:** `move-task` updates event_log but does NOT update `lane:` field in WP frontmatter. Dashboard reads `lane:` field, not event_log.
+
+**Fix required:** Manually update `lane:` field in WP frontmatter:
+
+```yaml
+lane: for_review # Add/update this field
+```
+
+**Command to start dashboard:**
+
+```bash
+spec-kitty dashboard --open
+```
+
+**Status after fix:** ✅ WP01 now shows in "For Review" column.
+
+### Harness Follow-Up
+
+Based on Phase 2 findings, the project harness was tightened in these areas:
+
+- `AGENTS.md` updated with explicit spec-kitty worktree, CLI-state, and executable-test guidance
+- `.kittify/memory/charter.md` updated with spec-kitty operating model for human, mixed, and machine-driven workflows
+- `package.json` gained `test:unit` and `test:unit:watch` scripts for non-Storybook unit tests
+- `vitest.unit.config.ts` added so `src/**/*.test.ts` files run independently from Storybook's Vitest integration
+
+This keeps the project close to native spec-kitty usage while strengthening the existing harness where the experiment exposed real gaps.
+
 ### Phase 2 Summary
 
 | Test                   | Status | Notes                                                                      |
@@ -311,3 +350,58 @@ User said to stop after completing Phase 1.
 **Expected:** lint-staged runs ESLint + Prettier on staged files
 
 **Known risk:** Hooks may not fire in worktrees (git worktrees share `.git`)
+
+---
+
+## Phase 3: Review & Merge
+
+### Test 3.1: Review Workflow
+
+**Command:** `spec-kitty agent action review WP01 --agent kilo --mission 001-001-shared-money-value-object`
+
+**Result:** PASSED
+
+**Details:**
+
+- spec-kitty claimed WP01 for review and set lane to `in_progress`
+- Workspace correctly set to lane-a worktree
+- Review prompt shown with dependency/dependent checks
+
+**Cleanup issues encountered:**
+
+1. `.spec-kitty/` created in worktree during review action — added to worktree `.gitignore` and committed
+2. `kitty-specs/` planning artifacts found on lane branch — restored from mission branch and committed cleanup
+
+**Review criteria checked:**
+
+- No dependencies declared in WP01
+- No dependent WPs found in this mission
+- Implementation files exist: `money.ts`, `money.test.ts`, `index.ts`
+- Quality gates passed: lint, lint:arch, build, test:unit
+
+**Approve command:**
+
+```
+spec-kitty agent tasks move-task WP01 --to approved --note "Review passed: Money VO (USD/RUB) with 10 unit tests. All quality gates passed (lint, lint:arch, build, test:unit)." --mission 001-001-shared-money-value-object
+```
+
+**Result:** `✓ Moved WP01 from in_progress to approved`
+
+### Test 3.2: Post-Approval Status
+
+**Command:** `spec-kitty agent tasks status --mission 001-001-shared-money-value-object --json`
+
+**Result:** PASSED
+
+```
+{
+  "feature": "001-001-shared-money-value-object",
+  "total_wps": 1,
+  "by_lane": { "approved": 1 },
+  "progress_percentage": 80.0
+}
+```
+
+### Test 3.3: Verify Branch Cleanup Required Before Merge
+
+**Note:** The lane branch (`kitty/mission-001-001-shared-money-value-object-lane-a`) must have planning artifacts removed before merge. This was done during Test 3.1. The implementation commit and cleanup commits are ready for merge to `kitty/mission-001-001-shared-money-value-object`.

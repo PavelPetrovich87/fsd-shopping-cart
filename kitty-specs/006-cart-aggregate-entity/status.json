@@ -1,25 +1,25 @@
 {
-  "event_count": 7,
-  "last_event_id": "01KNSCFQKRT73NAXGR0244H1Q1",
-  "materialized_at": "2026-04-09T15:06:34.488476+00:00",
+  "event_count": 9,
+  "last_event_id": "01KNSCH7X2AYEBZF56FHP2QEN4",
+  "materialized_at": "2026-04-09T15:07:23.938773+00:00",
   "mission_slug": "006-cart-aggregate-entity",
   "summary": {
-    "approved": 0,
+    "approved": 1,
     "blocked": 0,
     "canceled": 0,
     "claimed": 0,
     "done": 0,
     "for_review": 0,
-    "in_progress": 1,
+    "in_progress": 0,
     "planned": 2
   },
   "work_packages": {
     "WP01": {
-      "actor": "kilo:auto/balanced:reviewer",
+      "actor": "user",
       "force_count": 2,
-      "lane": "in_progress",
-      "last_event_id": "01KNSCFQKRT73NAXGR0244H1Q1",
-      "last_transition_at": "2026-04-09T15:06:34.488476+00:00"
+      "lane": "approved",
+      "last_event_id": "01KNSCH7X2AYEBZF56FHP2QEN4",
+      "last_transition_at": "2026-04-09T15:07:23.938773+00:00"
     },
     "WP02": {
       "actor": "finalize-tasks",

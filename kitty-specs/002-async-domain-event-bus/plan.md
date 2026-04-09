@@ -1,108 +1,146 @@
-# Implementation Plan: [FEATURE]
-*Path: [templates/plan-template.md](templates/plan-template.md)*
+# Implementation Plan: Async Domain Event Bus
 
+**Mission**: 002-async-domain-event-bus  
+**Layer**: `shared/lib`  
+**Generated**: 2026-04-09
 
-**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
-**Input**: Feature specification from `/kitty-specs/[###-feature-name]/spec.md`
+---
 
-**Note**: This template is filled in by the `/spec-kitty.plan` command. See `src/specify_cli/missions/software-dev/command-templates/plan.md` for the execution workflow.
+## Branch Contract
 
-The planner will not begin until all planning questions have been answered—capture those answers in this document before progressing to later phases.
+- Current branch at workflow start: `main`
+- Planning/base branch for this feature: `main`
+- Completed changes must merge into: `main`
 
-## Summary
-
-[Extract from feature spec: primary requirement + technical approach from research]
+---
 
 ## Technical Context
 
-<!--
-  ACTION REQUIRED: Replace the content in this section with the technical details
-  for the project. The structure here is presented in advisory capacity to guide
-  the iteration process.
--->
+### Feature Overview
 
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
-**Project Type**: [single/web/mobile - determines source structure]  
-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
-**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
-**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
+Typed, async Pub/Sub event bus implemented as a dependency-injectable class. Domain entities emit events; consumers subscribe to react to them.
+
+### Design Decisions
+
+| Decision | Choice | Rationale |
+|----------|--------|-----------|
+| Instance model | Dependency Injection (DI) | Consumers create own instances; better testability than singleton |
+| Async execution | `Promise` microtask queue | Browser-compatible, non-blocking dispatch |
+| Type safety | Generics with `DomainEvent` base | Compile-time enforcement of event types |
+| Unsubscribe | Function reference | Closure-based cleanup; no memory leaks |
+| Handler isolation | Best-effort dispatch | One handler error does not block others |
+
+### Event Bus API
+
+```typescript
+class EventBus {
+  subscribe<T extends DomainEvent>(
+    eventType: T['type'],
+    handler: (event: T) => void
+  ): () => void;
+
+  publish<T extends DomainEvent>(event: T): void;
+}
+```
+
+### Usage Pattern (DI)
+
+```typescript
+// Feature creates its own bus instance
+const eventBus = new EventBus();
+
+// Subscribe
+const unsubscribe = eventBus.subscribe('ItemAddedToCart', (event) => {
+  // event is typed as ItemAddedToCart
+});
+
+// Unsubscribe when done
+unsubscribe();
+
+// Publish
+eventBus.publish({ type: 'ItemAddedToCart', payload: { skuId: 'SKU-1', quantity: 2 } });
+```
+
+---
 
 ## Charter Check
 
-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+**Status**: No charter file found (`.kittify/charter/charter.md` does not exist).  
+**Decision**: Proceed without charter governance for this Tier 1 infrastructure ticket.
 
-[Gates determined based on charter file]
+---
 
-## Project Structure
+## GATES
 
-### Documentation (this feature)
+| Gate | Status | Notes |
+|------|--------|-------|
+| Spec exists | PASS | `kitty-specs/002-async-domain-event-bus/spec.md` |
+| Branch matches target | PASS | Both `main` |
+| Dependencies resolved | PASS | No dependencies |
+| User intent confirmed | PASS | DI approach selected |
+| Clarifications resolved | PASS | All NFRs/constraints satisfied by spec |
 
-```
-kitty-specs/[###-feature]/
-├── plan.md              # This file (/spec-kitty.plan command output)
-├── research.md          # Phase 0 output (/spec-kitty.plan command)
-├── data-model.md        # Phase 1 output (/spec-kitty.plan command)
-├── quickstart.md        # Phase 1 output (/spec-kitty.plan command)
-├── contracts/           # Phase 1 output (/spec-kitty.plan command)
-└── tasks.md             # Phase 2 output (/spec-kitty.tasks command - NOT created by /spec-kitty.plan)
-```
+---
 
-### Source Code (repository root)
-<!--
-  ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
-  for this feature. Delete unused options and expand the chosen structure with
-  real paths (e.g., apps/admin, packages/something). The delivered plan must
-  not include Option labels.
--->
+## Phase 0: Research
 
-```
-# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
-src/
-├── models/
-├── services/
-├── cli/
-└── lib/
+**Output**: `research.md`
 
-tests/
-├── contract/
-├── integration/
-└── unit/
+No external research required. The event bus pattern is well-understood, browser-compatible APIs are specified, and no third-party libraries are involved.
 
-# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
-backend/
-├── src/
-│   ├── models/
-│   ├── services/
-│   └── api/
-└── tests/
+---
 
-frontend/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   └── services/
-└── tests/
+## Phase 1: Design & Contracts
 
-# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
-api/
-└── [same as backend above]
+### Generated Artifacts
 
-ios/ or android/
-└── [platform-specific structure: feature modules, UI flows, platform tests]
-```
+| Artifact | Path |
+|----------|------|
+| Data Model | `kitty-specs/002-async-domain-event-bus/data-model.md` |
+| Quickstart | `kitty-specs/002-async-domain-event-bus/quickstart.md` |
+| Agent Context | Skipped (`.kilo/agent/` does not exist) |
 
-**Structure Decision**: [Document the selected structure and reference the real
-directories captured above]
+### Implementation Tasks
 
-## Complexity Tracking
+1. **Implement EventBus class** (`src/shared/lib/event-bus.ts`)
+   - Generic `subscribe<T>` method with unsubscribe function
+   - `publish<T>` method with async dispatch via `Promise.resolve().then()`
+   - Internal `Map<string, Set<Handler>>` for subscription storage
+   - Error-safe handler invocation (try/catch per handler)
 
-*Fill ONLY if Charter Check has violations that must be justified*
+2. **Export EventBus** (`src/shared/lib/index.ts`)
+   - Re-export `EventBus` as public API
 
-| Violation | Why Needed | Simpler Alternative Rejected Because |
-|-----------|------------|-------------------------------------|
-| [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
-| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |
+3. **Write unit tests** (`src/shared/lib/event-bus.test.ts`)
+   - Single handler subscription
+   - Multiple handlers per event
+   - Unsubscribe cleanup
+   - Async non-blocking dispatch
+   - Type safety verification (compile-time)
+
+---
+
+## Files to Create/Modify
+
+| File | Action |
+|------|--------|
+| `src/shared/lib/event-bus.ts` | Create |
+| `src/shared/lib/event-bus.test.ts` | Create |
+| `src/shared/lib/index.ts` | Modify (add re-export) |
+
+---
+
+## Success Criteria
+
+1. `EventBus.subscribe()` returns a function that removes the handler
+2. `EventBus.publish()` dispatches asynchronously without blocking
+3. Multiple handlers receive events for the same type
+4. Unsubscribed handlers are not invoked on subsequent publishes
+5. TypeScript compiles without errors in strict mode
+6. All unit tests pass
+
+---
+
+## Next Step
+
+Run `/spec-kitty.tasks` to generate work packages.

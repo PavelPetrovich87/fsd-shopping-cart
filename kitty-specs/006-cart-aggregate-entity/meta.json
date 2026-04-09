@@ -1,9 +1,11 @@
 {
   "created_at": "2026-04-09T13:59:41.517307+00:00",
-  "friendly_name": "cart aggregate entity",
+  "friendly_name": "Cart Aggregate & CartItem Entity",
   "mission_number": "006",
   "mission_slug": "006-cart-aggregate-entity",
   "mission_type": "software-dev",
   "slug": "006-cart-aggregate-entity",
-  "target_branch": "main"
+  "target_branch": "main",
+  "vcs": "git",
+  "source_description": "T-004 in @docs/TICKETS.md — Cart Aggregate + CartItem Entity"
 }

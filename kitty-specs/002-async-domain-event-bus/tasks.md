@@ -37,11 +37,11 @@
 **Test Criteria**: No runtime tests yet — WP02 covers testing.
 
 **Included Subtasks**:
-- [ ] T001: Create DomainEvent interface and type definitions
-- [ ] T002: Implement subscribe() method with unsubscribe return
-- [ ] T003: Implement publish() method with async dispatch
-- [ ] T004: Implement error isolation (try/catch per handler)
-- [ ] T005: Add strict TypeScript types, no `any`
+- [x] T001: Create DomainEvent interface and type definitions
+- [x] T002: Implement subscribe() method with unsubscribe return
+- [x] T003: Implement publish() method with async dispatch
+- [x] T004: Implement error isolation (try/catch per handler)
+- [x] T005: Add strict TypeScript types, no `any`
 
 **Implementation Sketch**:
 1. Define `DomainEvent` interface and `Handler` type

@@ -15,10 +15,10 @@
 | T003 | Implement publish() method with async dispatch | WP01 | No | [D] |
 | T004 | Implement error isolation (try/catch per handler) | WP01 | No | [D] |
 | T005 | Add strict TypeScript types, no `any` | WP01 | No | [D] |
-| T006 | Write unit tests: single handler subscription | WP02 | No |
-| T007 | Write unit tests: multiple handlers per event | WP02 | No |
-| T008 | Write unit tests: unsubscribe cleanup | WP02 | No |
-| T009 | Write unit tests: async non-blocking dispatch | WP02 | No |
+| T006 | Write unit tests: single handler subscription | WP02 | No | [D] |
+| T007 | Write unit tests: multiple handlers per event | WP02 | No | [D] |
+| T008 | Write unit tests: unsubscribe cleanup | WP02 | No | [D] |
+| T009 | Write unit tests: async non-blocking dispatch | WP02 | No | [D] |
 | T010 | Update shared/lib/index.ts exports | WP03 | No |
 | T011 | Run lint, typecheck, verify tests pass | WP03 | No |
 

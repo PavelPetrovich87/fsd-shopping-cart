@@ -1,0 +1,1 @@
+{"actor": "finalize-tasks", "at": "2026-04-09T12:11:08.336749+00:00", "event_id": "01KNS2EG5GZ4G8X8KGGHCZP6CH", "evidence": null, "execution_mode": "worktree", "force": true, "from_lane": "planned", "mission_slug": "003-shared-fixtures", "policy_metadata": null, "reason": "canonical bootstrap", "review_ref": null, "to_lane": "planned", "wp_id": "WP01"}

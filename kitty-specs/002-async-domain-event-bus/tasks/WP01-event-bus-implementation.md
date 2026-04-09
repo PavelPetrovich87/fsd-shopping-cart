@@ -23,7 +23,7 @@ subtasks:
 - T003
 - T004
 - T005
-agent: "kilo:kilo-auto/balanced:implementer:implementer"
+agent: "kilo:kilo-auto/balanced:reviewer:reviewer"
 shell_pid: "83516"
 history:
 - date: '2026-04-09T12:09:29Z'
@@ -198,3 +198,4 @@ spec-kitty implement WP02
 
 - 2026-04-09T12:53:15Z – kilo:kilo-auto/balanced:implementer:implementer – shell_pid=83516 – Started implementation via action command
 - 2026-04-09T12:56:54Z – kilo:kilo-auto/balanced:implementer:implementer – shell_pid=83516 – Ready for review: EventBus implementation complete
+- 2026-04-09T12:57:08Z – kilo:kilo-auto/balanced:reviewer:reviewer – shell_pid=83516 – Started review via action command

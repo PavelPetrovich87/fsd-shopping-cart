@@ -10,12 +10,12 @@
 
 | ID | Description | WP | Parallel |
 |----|-------------|-----|----------|
-| T001 | Create `src/shared/api/fixtures/` directory | WP01 | ✓ |
-| T002 | Create `products.ts` with `Product` interface + 6 products | WP01 | ✓ |
-| T003 | Create `inventory.ts` with `InventoryRecord` interface + 6 records | WP01 | ✓ |
-| T004 | Create `coupons.ts` with `Coupon` interface + 2-3 coupons | WP01 | ✓ |
-| T005 | Create `fixtures/index.ts` re-export barrel | WP01 | ✓ |
-| T006 | Update `src/shared/api/index.ts` to export fixtures | WP01 | ✓ |
+| T001 | Create `src/shared/api/fixtures/` directory | WP01 | ✓ | [D] |
+| T002 | Create `products.ts` with `Product` interface + 6 products | WP01 | ✓ | [D] |
+| T003 | Create `inventory.ts` with `InventoryRecord` interface + 6 records | WP01 | ✓ | [D] |
+| T004 | Create `coupons.ts` with `Coupon` interface + 2-3 coupons | WP01 | ✓ | [D] |
+| T005 | Create `fixtures/index.ts` re-export barrel | WP01 | ✓ | [D] |
+| T006 | Update `src/shared/api/index.ts` to export fixtures | WP01 | ✓ | [D] |
 
 ---
 

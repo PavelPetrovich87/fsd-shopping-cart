@@ -1,7 +1,7 @@
 {
-  "event_count": 10,
-  "last_event_id": "01KNSGADYGFW0VQFRE6DE9YBZV",
-  "materialized_at": "2026-04-09T16:13:35.057079+00:00",
+  "event_count": 11,
+  "last_event_id": "01KNSGATD2D1YTK7B8K8ERMNFM",
+  "materialized_at": "2026-04-09T16:13:47.810790+00:00",
   "mission_slug": "004-product-variant-aggregate",
   "summary": {
     "approved": 1,
@@ -9,8 +9,8 @@
     "canceled": 0,
     "claimed": 0,
     "done": 0,
-    "for_review": 1,
-    "in_progress": 0,
+    "for_review": 0,
+    "in_progress": 1,
     "planned": 0
   },
   "work_packages": {
@@ -22,11 +22,11 @@
       "last_transition_at": "2026-04-09T16:12:58.779786+00:00"
     },
     "WP02": {
-      "actor": "user",
-      "force_count": 2,
-      "lane": "for_review",
-      "last_event_id": "01KNSGADYGFW0VQFRE6DE9YBZV",
-      "last_transition_at": "2026-04-09T16:13:35.057079+00:00"
+      "actor": "kilo:kilo-auto/balanced:reviewer",
+      "force_count": 3,
+      "lane": "in_progress",
+      "last_event_id": "01KNSGATD2D1YTK7B8K8ERMNFM",
+      "last_transition_at": "2026-04-09T16:13:47.810790+00:00"
     }
   }
 }

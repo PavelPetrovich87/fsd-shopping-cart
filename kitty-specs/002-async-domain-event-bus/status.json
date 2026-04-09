@@ -1,16 +1,16 @@
 {
-  "event_count": 13,
-  "last_event_id": "01KNS5E97ZY9VWBX1K0DA8R1EW",
-  "materialized_at": "2026-04-09T13:03:26.975602+00:00",
+  "event_count": 15,
+  "last_event_id": "01KNS5G03Z6MFE738VZWZE8ERB",
+  "materialized_at": "2026-04-09T13:04:23.167045+00:00",
   "mission_slug": "002-async-domain-event-bus",
   "summary": {
-    "approved": 1,
+    "approved": 2,
     "blocked": 0,
     "canceled": 0,
     "claimed": 0,
     "done": 0,
     "for_review": 0,
-    "in_progress": 1,
+    "in_progress": 0,
     "planned": 1
   },
   "work_packages": {
@@ -22,11 +22,11 @@
       "last_transition_at": "2026-04-09T12:57:55.285538+00:00"
     },
     "WP02": {
-      "actor": "kilo:kilo-auto/balanced:reviewer:reviewer",
+      "actor": "user",
       "force_count": 2,
-      "lane": "in_progress",
-      "last_event_id": "01KNS5E97ZY9VWBX1K0DA8R1EW",
-      "last_transition_at": "2026-04-09T13:03:26.975602+00:00"
+      "lane": "approved",
+      "last_event_id": "01KNS5G03Z6MFE738VZWZE8ERB",
+      "last_transition_at": "2026-04-09T13:04:23.167045+00:00"
     },
     "WP03": {
       "actor": "finalize-tasks",

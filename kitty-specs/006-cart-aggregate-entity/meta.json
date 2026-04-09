@@ -1,0 +1,9 @@
+{
+  "created_at": "2026-04-09T13:59:41.517307+00:00",
+  "friendly_name": "cart aggregate entity",
+  "mission_number": "006",
+  "mission_slug": "006-cart-aggregate-entity",
+  "mission_type": "software-dev",
+  "slug": "006-cart-aggregate-entity",
+  "target_branch": "main"
+}

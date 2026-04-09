@@ -67,10 +67,10 @@
 **Test Criteria**: All tests pass.
 
 **Included Subtasks**:
-- [ ] T006: Write unit tests: single handler subscription
-- [ ] T007: Write unit tests: multiple handlers per event
-- [ ] T008: Write unit tests: unsubscribe cleanup
-- [ ] T009: Write unit tests: async non-blocking dispatch
+- [x] T006: Write unit tests: single handler subscription
+- [x] T007: Write unit tests: multiple handlers per event
+- [x] T008: Write unit tests: unsubscribe cleanup
+- [x] T009: Write unit tests: async non-blocking dispatch
 
 **Implementation Sketch**:
 1. Set up test file with vitest imports

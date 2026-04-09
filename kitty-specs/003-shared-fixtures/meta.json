@@ -5,5 +5,7 @@
   "mission_slug": "003-shared-fixtures",
   "mission_type": "software-dev",
   "slug": "003-shared-fixtures",
-  "target_branch": "main"
+  "target_branch": "main",
+  "vcs": "git",
+  "vcs_locked_at": "2026-04-09T12:59:36.572809+00:00"
 }

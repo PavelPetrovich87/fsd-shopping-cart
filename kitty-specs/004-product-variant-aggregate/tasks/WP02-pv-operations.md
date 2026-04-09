@@ -14,6 +14,8 @@ subtasks: [T007, T008, T009, T011]
 authoritative_surface: src/entities/product/
 execution_mode: code_change
 owned_files: [src/entities/product/model/operations.ts, src/entities/product/model/product-variant.test.ts]
+agent: "kilo:kilo-auto/balanced:typescript-implementer:implementer"
+shell_pid: "19846"
 ---
 
 # WP02: Reservation Operations
@@ -497,3 +499,7 @@ WP01 (types, factories) → WP02 (operations)
 3. **confirmDepletion**: Verify `totalOnHand` cannot go negative
 4. **Events**: Verify all events are properly discriminated unions
 5. **Immutability**: Verify no mutations of input objects
+
+## Activity Log
+
+- 2026-04-09T16:13:21Z – kilo:kilo-auto/balanced:typescript-implementer:implementer – shell_pid=19846 – Started implementation via action command

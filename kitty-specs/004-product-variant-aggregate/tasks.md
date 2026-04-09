@@ -9,7 +9,7 @@
 
 | ID | Description | WP | Parallel |
 |----|------------|----|--------|
-| T001 | Create directory structure for entities/product | WP01 | | [D] |
+| T001 | Create directory structure for entities/product | WP01 | | [D] | [D] |
 | T002 | Implement StockReservation VO (types + factory) | WP01 | [D] |
 | T003 | Implement domain event types (StockReserved, StockReleased, StockDepleted) | WP01 | [D] |
 | T004 | Implement ProductVariant types | WP01 | [D] |

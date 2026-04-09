@@ -9,7 +9,11 @@ requirement_refs:
 planning_base_branch: main
 merge_target_branch: main
 branch_strategy: Planning artifacts for this feature were generated on main. During /spec-kitty.implement this WP may branch from a dependency-specific base, but completed changes must merge back into main unless the human explicitly redirects the landing branch.
+base_branch: kitty/mission-006-cart-aggregate-entity
+base_commit: 628b69fa9873472b5b0e76b73822953ffddec6d9
+created_at: '2026-04-09T14:54:24.474995+00:00'
 subtasks: [T001, T002, T003]
+shell_pid: '19459'
 history:
 - date: '2026-04-09T14:25:50Z'
   action: created

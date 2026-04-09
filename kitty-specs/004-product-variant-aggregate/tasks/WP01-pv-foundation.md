@@ -14,7 +14,11 @@ requirement_refs:
 planning_base_branch: main
 merge_target_branch: main
 branch_strategy: Planning artifacts for this feature were generated on main. During /spec-kitty.implement this WP may branch from a dependency-specific base, but completed changes must merge back into main unless the human explicitly redirects the landing branch.
+base_branch: kitty/mission-004-product-variant-aggregate
+base_commit: cfec0006433690b42cfc6ccf46aa13e245d68bfc
+created_at: '2026-04-09T16:06:30.430739+00:00'
 subtasks: [T001, T002, T003, T004, T005, T006, T010]
+shell_pid: '19846'
 authoritative_surface: src/entities/product/
 execution_mode: code_change
 owned_files: [src/entities/product/model/types.ts, src/entities/product/model/events.ts, src/entities/product/model/stock-reservation.ts, src/entities/product/model/factory.ts, src/entities/product/model/available-stock.ts, src/entities/product/index.ts]

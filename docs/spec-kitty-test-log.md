@@ -402,39 +402,79 @@ spec-kitty agent tasks move-task WP01 --to approved --note "Review passed: Money
 }
 ```
 
-### Test 3.3: Merge to Main
+### Test 3.3: Merge to Main (retry after spec-kitty fix)
 
-**Steps:**
+After fixing the two bugs in `spec-kitty agent mission merge`, the merge completed successfully:
 
-1. Merged lane-a branch into mission branch (fast-forward)
-2. Merged mission branch into main (manual git merge due to spec-kitty merge command bug)
-3. Resolved conflicts in spec-kitty workflow files by accepting spec-kitty version
-4. Fixed TypeScript errors in Money class:
-   - `erasableSyntaxOnly` required explicit property declarations
-   - Private constructor replaced with `fromCents()` factory
+**Command:**
 
-**Result:** PASSED (with fixes)
+```bash
+spec-kitty agent mission merge --mission 001-001-shared-money-value-object
+```
+
+**Output:**
+
+```
+Lane-based merge for 001-001-shared-money-value-object
+  ✓ Gate evidence: All 1 WPs have review approval
+  ✓ Gate risk: Risk score 0.00 within threshold
+  ✓ Gate dependency: All dependencies complete
+  ✓ lane-a → kitty/mission-001-001-shared-money-value-object
+✓ kitty/mission-001-001-shared-money-value-object → main
+  Commit: a88f4c4
+  Removed worktree: 001-001-shared-money-value-object-lane-a
+Deleted branch kitty/mission-001-001-shared-money-value-object-lane-a
+Deleted branch kitty/mission-001-001-shared-money-value-object
+```
+
+**What merge did end-to-end:**
+
+1. Evaluated merge gates (evidence, risk, dependency)
+2. Merged lane-a branch into mission branch
+3. Merged mission branch into main (merge commit a88f4c4)
+4. Removed worktree
+5. Deleted lane branch
+6. Deleted mission branch
+7. Ran stale assertion check
+
+**Result:** PASSED
 
 **Post-merge verification:**
 
 ```
-npm run lint        ✓
-npm run lint:arch   ✓
-npm run build       ✓
-npm run test:unit   ✓ (15 tests passed)
+spec-kitty agent tasks status --json  → done: 1, progress: 100.0
+npm run lint                         ✓
+npm run lint:arch                    ✓
+npm run build                        ✓
+npm run test:unit                    ✓ (15 tests passed)
 ```
 
-### Test 3.4: Worktree Cleanup
+### Test 3.4: Worktree and Branch Cleanup
 
-**Command:** `spec-kitty` merge would normally clean up worktrees, but since we did manual merge, worktree still exists.
-
-Worktree location: `.worktrees/001-001-shared-money-value-object-lane-a/`
-
-**Recommendation:** Remove worktree manually after confirming merge is stable.
+Automatic cleanup succeeded — no manual intervention needed after the spec-kitty fix. Both worktree and branches were removed by the merge command.
 
 ### Key Findings from Phase 3
 
-1. **spec-kitty merge command bug**: `spec-kitty agent mission merge` errors with "'str' object has no attribute 'value'" - manual git merge required.
+1. **spec-kitty agent merge had two bugs** (both fixed locally in the installed package):
+
+   **Bug 1 — type mismatch**: `strategy` passed as plain `str` instead of `MergeStrategy` enum.
+   - Crash: `'str' object has no attribute 'value'`
+   - Fix: wrap in `MergeStrategy(strategy)` before calling `top_level_merge`
+
+   **Bug 2 — Typer sentinel values**: Omitted optional parameters kept their `typer.Option` sentinel objects instead of resolving to `False`.
+   - This made `json_output` truthy even though it was never explicitly set
+   - The merge's own guard `if json_output and not dry_run` then fired, blocking all non-dry-run execution
+   - Dry-run worked because it had a separate guard that checked `dry_run=True` first
+   - Fix: pass all optional parameters explicitly with real Python values (`json_output=False`, `feature=None`, `context_token=None`, `keep_workspace=False`)
+
+   **Root cause**: `top_level_merge` is a Typer command function reused as an internal service function. Direct Python invocation bypasses Typer's parameter resolution, leaking `OptionInfo` sentinel objects into runtime logic.
+
+   **Permanent upstream fix**: Extract merge logic into a plain function with real defaults; have both the CLI command and the agent wrapper call that shared internal function.
+
+   **Files patched** (in `/usr/local/lib/python3.14/site-packages/specify_cli/cli/commands/agent/mission.py`):
+   - Added import: `from specify_cli.merge.config import MergeStrategy`
+   - Fixed strategy: `strategy=MergeStrategy(strategy)`
+   - Added explicit optional args: `json_output=False`, `feature=None`, `context_token=None`, `keep_workspace=False`
 
 2. **Branch structure confusion**: Status is tracked in multiple places:
    - Main checkout: WP frontmatter
@@ -445,7 +485,28 @@ Worktree location: `.worktrees/001-001-shared-money-value-object-lane-a/`
 
 4. **Money class TypeScript issues**: The worktree implementation had TypeScript errors due to `erasableSyntaxOnly` setting in the project. Had to refactor parameter properties to explicit declarations.
 
-5. **Merge workflow expectation mismatch**: spec-kitty expects a clean sequential workflow (all WPs done → accept → merge), but in practice:
-   - Manual git operations were needed
-   - Acceptance checks flagged issues on mission branch that didn't exist on main
-   - The lane/status model is confusing when using worktrees
+5. **Merge workflow expectation mismatch**: spec-kitty merge is a two-tier, gated, resumable operation:
+   - Lane → Mission merge (merge-commit, with stale-lane detection)
+   - Mission → Target merge (squash by default)
+   - WP status marked done via `_mark_wp_merged_done`
+   - Merge state persisted to `.kittify/runtime/merge/<mission_id>/state.json`
+   - After fix, all of this ran automatically
+
+6. **Post-merge state surfaces**: After a successful merge:
+   - `kitty-specs/.../status.json` → `done: 1`
+   - `kitty-specs/.../status.events.jsonl` → `done` event emitted
+   - WP frontmatter `lane: done`
+   - All three are consistent (unlike the earlier manual-merge state)
+
+7. **Phase 3 verdict**: With the two spec-kitty bugs fixed, the full spec-kitty workflow (implement → review → approve → merge) completed successfully without manual intervention. The workflow is viable.
+
+### Overall Phase 1-3 Conclusion
+
+| Phase                            | Status                               |
+| -------------------------------- | ------------------------------------ |
+| Phase 0 (Setup)                  | PASSED                               |
+| Phase 1 (Specify + Plan + Tasks) | PASSED                               |
+| Phase 2 (Implement in worktree)  | PASSED                               |
+| Phase 3 (Review + Merge)         | PASSED (after spec-kitty bugs fixed) |
+
+**Next**: Proceed to Phase 4 (cross-slice ticket) if desired, or document remaining harness improvements.

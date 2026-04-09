@@ -1,7 +1,7 @@
 {
-  "event_count": 2,
-  "last_event_id": "01KNS4TZQMAYD83D87V9TCAF95",
-  "materialized_at": "2026-04-09T12:52:54.644727+00:00",
+  "event_count": 4,
+  "last_event_id": "01KNS6MM252RK2KPSQ85QSNCJK",
+  "materialized_at": "2026-04-09T13:24:23.237508+00:00",
   "mission_slug": "003-shared-fixtures",
   "summary": {
     "approved": 1,
@@ -16,10 +16,10 @@
   "work_packages": {
     "WP01": {
       "actor": "user",
-      "force_count": 2,
+      "force_count": 4,
       "lane": "approved",
-      "last_event_id": "01KNS4TZQMAYD83D87V9TCAF95",
-      "last_transition_at": "2026-04-09T12:52:54.644727+00:00"
+      "last_event_id": "01KNS6MM252RK2KPSQ85QSNCJK",
+      "last_transition_at": "2026-04-09T13:24:23.237508+00:00"
     }
   }
 }

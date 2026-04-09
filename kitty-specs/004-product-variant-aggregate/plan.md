@@ -1,108 +1,145 @@
-# Implementation Plan: [FEATURE]
-*Path: [templates/plan-template.md](templates/plan-template.md)*
+# Implementation Plan: ProductVariant Aggregate
 
-
-**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
-**Input**: Feature specification from `/kitty-specs/[###-feature-name]/spec.md`
-
-**Note**: This template is filled in by the `/spec-kitty.plan` command. See `src/specify_cli/missions/software-dev/command-templates/plan.md` for the execution workflow.
-
-The planner will not begin until all planning questions have been answered—capture those answers in this document before progressing to later phases.
+**Branch**: `004-product-variant-aggregate` | **Date**: 2026-04-09 | **Spec**: [spec.md](./spec.md)
+**Input**: Feature specification from `/kitty-specs/004-product-variant-aggregate/spec.md`
 
 ## Summary
 
-[Extract from feature spec: primary requirement + technical approach from research]
+Implement `ProductVariant` aggregate with functional approach (factory functions + plain objects). Manages inventory stock levels with reservation lifecycle: `availableStock` derived from `totalOnHand - sumReserved`, `reserve()` creates partial reservations when stock insufficient, `releaseReservation()` and `confirmDepletion()` manage reservation lifecycle. Domain events (`StockReserved`, `StockReleased`, `StockDepleted`) emitted for all mutations.
 
 ## Technical Context
 
-<!--
-  ACTION REQUIRED: Replace the content in this section with the technical details
-  for the project. The structure here is presented in advisory capacity to guide
-  the iteration process.
--->
-
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
-**Project Type**: [single/web/mobile - determines source structure]  
-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
-**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
-**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
+**Language/Version**: TypeScript 5.9  
+**Primary Dependencies**: React 19, Vite 8, Tailwind CSS v4  
+**Storage**: N/A (in-memory domain model, persisted via repository port)  
+**Testing**: Vitest (project standard)  
+**Target Platform**: Web browser (SPA)  
+**Performance Goals**: O(1) availableStock computation  
+**Constraints**: Integer arithmetic for stock, immutable operations  
+**Scale/Scope**: Single aggregate, 2 entity types, 3 domain events
 
 ## Charter Check
 
-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
-
-[Gates determined based on charter file]
+No charter file present. Skipped.
 
 ## Project Structure
 
 ### Documentation (this feature)
 
 ```
-kitty-specs/[###-feature]/
-├── plan.md              # This file (/spec-kitty.plan command output)
-├── research.md          # Phase 0 output (/spec-kitty.plan command)
-├── data-model.md        # Phase 1 output (/spec-kitty.plan command)
-├── quickstart.md        # Phase 1 output (/spec-kitty.plan command)
-├── contracts/           # Phase 1 output (/spec-kitty.plan command)
-└── tasks.md             # Phase 2 output (/spec-kitty.tasks command - NOT created by /spec-kitty.plan)
+kitty-specs/004-product-variant-aggregate/
+├── plan.md              # This file
+├── spec.md              # Feature specification
+├── research.md          # N/A (no unknowns)
+├── data-model.md        # Type definitions and function signatures
+└── checklists/
+    └── requirements.md  # Quality checklist
 ```
 
 ### Source Code (repository root)
-<!--
-  ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
-  for this feature. Delete unused options and expand the chosen structure with
-  real paths (e.g., apps/admin, packages/something). The delivered plan must
-  not include Option labels.
--->
 
 ```
-# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
 src/
-├── models/
-├── services/
-├── cli/
-└── lib/
-
-tests/
-├── contract/
-├── integration/
-└── unit/
-
-# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
-backend/
-├── src/
-│   ├── models/
-│   ├── services/
-│   └── api/
-└── tests/
-
-frontend/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   └── services/
-└── tests/
-
-# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
-api/
-└── [same as backend above]
-
-ios/ or android/
-└── [platform-specific structure: feature modules, UI flows, platform tests]
+├── entities/product/
+│   ├── model/
+│   │   ├── product-variant.ts    # ProductVariant factory + functions
+│   │   ├── stock-reservation.ts   # StockReservation VO
+│   │   ├── types.ts              # TypeScript interfaces
+│   │   ├── events.ts             # Domain event types
+│   │   └── product-variant.test.ts
+│   └── index.ts                   # Public API re-exports
 ```
 
-**Structure Decision**: [Document the selected structure and reference the real
-directories captured above]
+**Structure Decision**: FSD-compliant `entities/product/model/` with functional exports. Follows existing patterns from T-001 (Money VO in `shared/lib/`).
 
 ## Complexity Tracking
 
-*Fill ONLY if Charter Check has violations that must be justified*
+N/A — no charter violations.
 
-| Violation | Why Needed | Simpler Alternative Rejected Because |
-|-----------|------------|-------------------------------------|
-| [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
-| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |
+---
+
+## Phase 0: Research
+
+Not required. All clarifications resolved during specify phase.
+
+## Phase 1: Design & Contracts
+
+### Data Model
+
+#### ProductVariant Types
+
+```typescript
+// src/entities/product/model/types.ts
+export interface StockReservation {
+  orderId: string;
+  quantity: number;
+  timestamp: Date;
+}
+
+export interface ProductVariant {
+  readonly skuId: string;
+  readonly totalOnHand: number;
+  readonly sold: number;
+  readonly reservations: readonly StockReservation[];
+}
+
+export interface StockReserved {
+  type: 'StockReserved';
+  payload: { skuId: string; orderId: string; quantity: number; timestamp: Date };
+}
+
+export interface StockReleased {
+  type: 'StockReleased';
+  payload: { skuId: string; orderId: string; quantity: number };
+}
+
+export interface StockDepleted {
+  type: 'StockDepleted';
+  payload: { skuId: string; totalOnHand: number; threshold: number };
+}
+
+export type ProductDomainEvent = StockReserved | StockReleased | StockDepleted;
+```
+
+#### Factory Functions
+
+```typescript
+// src/entities/product/model/product-variant.ts
+
+export const LOW_STOCK_THRESHOLD = 5;
+
+export function createProductVariant(params: {
+  skuId: string;
+  totalOnHand: number;
+  sold?: number;
+  reservations?: StockReservation[];
+}): ProductVariant;
+
+export function availableStock(variant: ProductVariant): number;
+
+export function reserve(params: {
+  variant: ProductVariant;
+  orderId: string;
+  quantity: number;
+}): { variant: ProductVariant; event?: StockReserved; depletedEvent?: StockDepleted };
+
+export function releaseReservation(params: {
+  variant: ProductVariant;
+  orderId: string;
+}): { variant: ProductVariant; event?: StockReleased };
+
+export function confirmDepletion(params: {
+  variant: ProductVariant;
+  orderId: string;
+}): { variant: ProductVariant; event?: StockDepleted };
+```
+
+### Design Decisions
+
+| Decision | Choice | Rationale |
+|----------|--------|-----------|
+| Aggregate type | Functional (factory + ops) | User requirement for frontend functional style |
+| Reservations storage | `readonly StockReservation[]` | Ensures immutability |
+| Event return | Tuple `{ variant, event? }` | Enables event bus publishing |
+| Partial reservation | Clamp to `availableStock` | User clarification: option B |
+| Threshold | Constant `LOW_STOCK_THRESHOLD = 5` | User assumption, configurable later |

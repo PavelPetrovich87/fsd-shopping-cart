@@ -1,9 +1,10 @@
 {
   "created_at": "2026-04-09T13:57:49.012711+00:00",
-  "friendly_name": "product variant aggregate",
+  "friendly_name": "ProductVariant Aggregate",
   "mission_number": "004",
   "mission_slug": "004-product-variant-aggregate",
   "mission_type": "software-dev",
-  "slug": "004-product-variant-aggregate",
-  "target_branch": "main"
+  "slug": "product-variant-aggregate",
+  "target_branch": "main",
+  "vcs": "git"
 }

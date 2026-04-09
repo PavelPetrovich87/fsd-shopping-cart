@@ -1,108 +1,123 @@
-# Implementation Plan: [FEATURE]
-*Path: [templates/plan-template.md](templates/plan-template.md)*
+# Implementation Plan: 003-shared-fixtures
 
+*Spec: [spec.md](./spec.md)*
 
-**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
-**Input**: Feature specification from `/kitty-specs/[###-feature-name]/spec.md`
-
-**Note**: This template is filled in by the `/spec-kitty.plan` command. See `src/specify_cli/missions/software-dev/command-templates/plan.md` for the execution workflow.
-
-The planner will not begin until all planning questions have been answered—capture those answers in this document before progressing to later phases.
+**Branch**: `main` | **Date**: 2026-04-09 | **Spec**: `kitty-specs/003-shared-fixtures/spec.md`
 
 ## Summary
 
-[Extract from feature spec: primary requirement + technical approach from research]
+Create typed mock data fixtures for products, inventory, and coupons in `src/shared/api/fixtures/`. Fixtures are static TypeScript arrays consumed by mock repositories in entity slices. No research required — spec fully specifies data shapes.
+
+---
 
 ## Technical Context
 
-<!--
-  ACTION REQUIRED: Replace the content in this section with the technical details
-  for the project. The structure here is presented in advisory capacity to guide
-  the iteration process.
--->
+| Field | Value |
+|-------|-------|
+| Language/Version | TypeScript 5.9 |
+| Primary Dependencies | React 19, Vite 8, Tailwind CSS v4 |
+| Storage | Static in-memory fixture files |
+| Testing | ESLint + Steiger + `npm run build` |
+| Target Platform | Web (SPA) |
+| Performance Goals | N/A (static data) |
+| Constraints | No `any` types, strict TypeScript |
+| Scale/Scope | 6 products, 2-3 coupons, matching inventory |
 
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
-**Project Type**: [single/web/mobile - determines source structure]  
-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
-**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
-**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
+---
 
 ## Charter Check
 
-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+Skipped — charter file not found (`.kittify/charter/charter.md`).
 
-[Gates determined based on charter file]
+---
 
 ## Project Structure
 
-### Documentation (this feature)
+### Source Code (to create)
 
 ```
-kitty-specs/[###-feature]/
-├── plan.md              # This file (/spec-kitty.plan command output)
-├── research.md          # Phase 0 output (/spec-kitty.plan command)
-├── data-model.md        # Phase 1 output (/spec-kitty.plan command)
-├── quickstart.md        # Phase 1 output (/spec-kitty.plan command)
-├── contracts/           # Phase 1 output (/spec-kitty.plan command)
-└── tasks.md             # Phase 2 output (/spec-kitty.tasks command - NOT created by /spec-kitty.plan)
+src/shared/api/fixtures/
+├── products.ts    # 6 product objects + Product interface + productsData export
+├── inventory.ts  # 6 inventory records + InventoryRecord interface + inventoryData export
+├── coupons.ts    # 2-3 coupon objects + Coupon interface + couponsData export
+└── index.ts      # Re-exports all fixtures and types
+
+src/shared/api/
+└── index.ts      # UPDATE: add export * from './fixtures'
 ```
 
-### Source Code (repository root)
-<!--
-  ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
-  for this feature. Delete unused options and expand the chosen structure with
-  real paths (e.g., apps/admin, packages/something). The delivered plan must
-  not include Option labels.
--->
+---
 
-```
-# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
-src/
-├── models/
-├── services/
-├── cli/
-└── lib/
+## Design Decisions
 
-tests/
-├── contract/
-├── integration/
-└── unit/
+| Decision | Choice | Rationale |
+|----------|--------|-----------|
+| Image URLs | `https://picsum.photos/seed/{skuId}/400/400` | User confirmed placeholder approach |
+| Product count | 6 | Spec minimum |
+| Coupon count | 2-3 | Spec minimum |
+| Inventory reserved | All 0 | Mock data assumption from spec |
+| Product prices | 500-50000 cents | Spec assumption range |
 
-# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
-backend/
-├── src/
-│   ├── models/
-│   ├── services/
-│   └── api/
-└── tests/
+---
 
-frontend/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   └── services/
-└── tests/
+## Acceptance Criteria
 
-# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
-api/
-└── [same as backend above]
+| ID | Criterion | Verification |
+|----|-----------|--------------|
+| AC-1 | 6 products in `productsData` | Import compiles |
+| AC-2 | 2-3 coupons in `couponsData` | Import compiles |
+| AC-3 | Every product has matching inventory record | skuId alignment |
+| AC-4 | No `any` types in fixture files | ESLint + TypeScript |
+| AC-5 | `npm run build` exits 0 | Build verification |
+| AC-6 | Fixtures importable via `@/shared/api` | Export chain verified |
 
-ios/ or android/
-└── [platform-specific structure: feature modules, UI flows, platform tests]
-```
+---
 
-**Structure Decision**: [Document the selected structure and reference the real
-directories captured above]
+## Files to Create
 
-## Complexity Tracking
+| File | Content |
+|------|---------|
+| `src/shared/api/fixtures/products.ts` | `Product` interface, `productsData` array (6 items) |
+| `src/shared/api/fixtures/inventory.ts` | `InventoryRecord` interface, `inventoryData` array (6 items) |
+| `src/shared/api/fixtures/coupons.ts` | `Coupon` interface, `couponsData` array (2-3 items) |
+| `src/shared/api/fixtures/index.ts` | Re-exports all fixtures and types |
 
-*Fill ONLY if Charter Check has violations that must be justified*
+## Files to Update
 
-| Violation | Why Needed | Simpler Alternative Rejected Because |
-|-----------|------------|-------------------------------------|
-| [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
-| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |
+| File | Change |
+|-------|--------|
+| `src/shared/api/index.ts` | Add `export * from './fixtures';` |
+
+---
+
+## Phase 0: Research
+
+Not required — spec fully specifies all data shapes and types.
+
+---
+
+## Phase 1: Design
+
+Data model extracted from spec:
+
+| Entity | Fields | File |
+|--------|--------|------|
+| `Product` | skuId, name, description, imageUrl, listPriceCents, salePriceCents, category | products.ts |
+| `InventoryRecord` | skuId, totalOnHand, reserved | inventory.ts |
+| `Coupon` | code, description, discountType, discountValue, minPurchaseCents, maxUses, expiresAt | coupons.ts |
+
+No contracts needed — fixtures are in-memory static data, not API endpoints.
+
+---
+
+## Out of Scope
+
+- Real API integration
+- Dynamic data fetching
+- Coupon validation logic
+- Inventory reservation logic
+- Product image uploads
+
+---
+
+*Plan completed. Run `/spec-kitty.tasks` to generate work packages.*

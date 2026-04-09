@@ -19,8 +19,8 @@
 | T007 | Write unit tests: multiple handlers per event | WP02 | No | [D] |
 | T008 | Write unit tests: unsubscribe cleanup | WP02 | No | [D] |
 | T009 | Write unit tests: async non-blocking dispatch | WP02 | No | [D] |
-| T010 | Update shared/lib/index.ts exports | WP03 | No |
-| T011 | Run lint, typecheck, verify tests pass | WP03 | No |
+| T010 | Update shared/lib/index.ts exports | WP03 | No | [D] |
+| T011 | Run lint, typecheck, verify tests pass | WP03 | No | [D] |
 
 ---
 

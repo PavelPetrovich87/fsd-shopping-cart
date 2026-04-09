@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "mission_slug": "003-shared-fixtures",
+  "mission_id": "003-shared-fixtures",
+  "mission_branch": "kitty/mission-003-shared-fixtures",
+  "target_branch": "main",
+  "lanes": [
+    {
+      "lane_id": "lane-a",
+      "wp_ids": [
+        "WP01"
+      ],
+      "write_scope": [
+        "src/shared/api/fixtures/**",
+        "src/shared/api/index.ts"
+      ],
+      "predicted_surfaces": [
+        "api"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    }
+  ],
+  "computed_at": "2026-04-09T12:11:08.466426+00:00",
+  "computed_from": "dependency_graph+ownership",
+  "planning_artifact_wps": []
+}

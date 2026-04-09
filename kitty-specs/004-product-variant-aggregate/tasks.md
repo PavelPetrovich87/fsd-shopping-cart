@@ -9,17 +9,17 @@
 
 | ID | Description | WP | Parallel |
 |----|------------|----|--------|
-| T001 | Create directory structure for entities/product | WP01 | |
-| T002 | Implement StockReservation VO (types + factory) | WP01 | [P] |
-| T003 | Implement domain event types (StockReserved, StockReleased, StockDepleted) | WP01 | [P] |
-| T004 | Implement ProductVariant types | WP01 | [P] |
-| T005 | Implement createProductVariant factory | WP01 | |
-| T006 | Implement availableStock function | WP01 | |
-| T007 | Implement reserve operation with partial reservation logic | WP02 | |
-| T008 | Implement releaseReservation operation | WP02 | |
-| T009 | Implement confirmDepletion operation | WP02 | |
-| T010 | Implement StockReservation validation | WP01 | |
-| T011 | Write unit tests for all functions | WP02 | |
+| T001 | Create directory structure for entities/product | WP01 | | [D] |
+| T002 | Implement StockReservation VO (types + factory) | WP01 | [D] |
+| T003 | Implement domain event types (StockReserved, StockReleased, StockDepleted) | WP01 | [D] |
+| T004 | Implement ProductVariant types | WP01 | [D] |
+| T005 | Implement createProductVariant factory | WP01 | | [D] |
+| T006 | Implement availableStock function | WP01 | | [D] |
+| T007 | Implement reserve operation with partial reservation logic | WP02 | | [D] |
+| T008 | Implement releaseReservation operation | WP02 | | [D] |
+| T009 | Implement confirmDepletion operation | WP02 | | [D] |
+| T010 | Implement StockReservation validation | WP01 | | [D] |
+| T011 | Write unit tests for all functions | WP02 | | [D] |
 | T012 | Export public API from index.ts | WP02 | |
 
 ## Work Packages

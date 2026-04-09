@@ -19,8 +19,8 @@
 | T009 | Implement coupon operations (applyCoupon, removeCoupon) | WP02 | No | [D] |
 | T010 | Implement state transitions (initiateCheckout, markCheckedOut) | WP02 | No | [D] |
 | T011 | Implement subtotal computation using Money | WP02 | No | [D] |
-| T012 | Create index.ts with public API exports | WP03 | No |
-| T013 | Create cart.test.ts with comprehensive unit tests | WP03 | No |
+| T012 | Create index.ts with public API exports | WP03 | No | [D] |
+| T013 | Create cart.test.ts with comprehensive unit tests | WP03 | No | [D] |
 
 ---
 

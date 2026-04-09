@@ -11,14 +11,14 @@
 | T001 | Create types.ts with CartState enum and CartItem type | WP01 | Yes | [D] |
 | T002 | Create events.ts with all domain event interfaces | WP01 | Yes | [D] |
 | T003 | Create cart-item.ts with CartItem entity class | WP01 | Yes | [D] |
-| T004 | Create cart.ts foundation (constructor, factory, items map) | WP02 | No |
-| T005 | Implement addItem operation with event emission | WP02 | No |
-| T006 | Implement removeItem operation with event emission | WP02 | No |
-| T007 | Implement changeQuantity with qty ≥ 1 enforcement | WP02 | No |
-| T008 | Implement clearCart operation with event emission | WP02 | No |
-| T009 | Implement coupon operations (applyCoupon, removeCoupon) | WP02 | No |
-| T010 | Implement state transitions (initiateCheckout, markCheckedOut) | WP02 | No |
-| T011 | Implement subtotal computation using Money | WP02 | No |
+| T004 | Create cart.ts foundation (constructor, factory, items map) | WP02 | No | [D] |
+| T005 | Implement addItem operation with event emission | WP02 | No | [D] |
+| T006 | Implement removeItem operation with event emission | WP02 | No | [D] |
+| T007 | Implement changeQuantity with qty ≥ 1 enforcement | WP02 | No | [D] |
+| T008 | Implement clearCart operation with event emission | WP02 | No | [D] |
+| T009 | Implement coupon operations (applyCoupon, removeCoupon) | WP02 | No | [D] |
+| T010 | Implement state transitions (initiateCheckout, markCheckedOut) | WP02 | No | [D] |
+| T011 | Implement subtotal computation using Money | WP02 | No | [D] |
 | T012 | Create index.ts with public API exports | WP03 | No |
 | T013 | Create cart.test.ts with comprehensive unit tests | WP03 | No |
 

@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "mission_slug": "004-product-variant-aggregate",
+  "mission_id": "004-product-variant-aggregate",
+  "mission_branch": "kitty/mission-004-product-variant-aggregate",
+  "target_branch": "main",
+  "lanes": [
+    {
+      "lane_id": "lane-a",
+      "wp_ids": [
+        "WP01",
+        "WP02"
+      ],
+      "write_scope": [
+        "src/entities/product/index.ts",
+        "src/entities/product/model/available-stock.ts",
+        "src/entities/product/model/events.ts",
+        "src/entities/product/model/factory.ts",
+        "src/entities/product/model/operations.ts",
+        "src/entities/product/model/product-variant.test.ts",
+        "src/entities/product/model/stock-reservation.ts",
+        "src/entities/product/model/types.ts"
+      ],
+      "predicted_surfaces": [
+        "api",
+        "legacy-cleanup"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    }
+  ],
+  "computed_at": "2026-04-09T15:43:20.996212+00:00",
+  "computed_from": "dependency_graph+ownership",
+  "planning_artifact_wps": [],
+  "collapse_report": {
+    "events": [
+      {
+        "wp_a": "WP02",
+        "wp_b": "WP01",
+        "rule": "dependency",
+        "evidence": "WP02 depends on WP01"
+      }
+    ],
+    "total_merges": 1,
+    "independent_wps_collapsed": 0,
+    "by_rule": {
+      "dependency": 1
+    }
+  }
+}

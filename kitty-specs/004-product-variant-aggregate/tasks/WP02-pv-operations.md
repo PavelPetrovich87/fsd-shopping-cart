@@ -9,11 +9,11 @@ requirement_refs:
 - FR-006
 planning_base_branch: main
 merge_target_branch: main
-branch_strategy: main → main (single branch)
-subtasks: [T007, T008, T009, T011, T012]
+branch_strategy: Planning artifacts for this feature were generated on main. During /spec-kitty.implement this WP may branch from a dependency-specific base, but completed changes must merge back into main unless the human explicitly redirects the landing branch.
+subtasks: [T007, T008, T009, T011]
 authoritative_surface: src/entities/product/
 execution_mode: code_change
-owned_files: [src/entities/product/model/product-variant.ts, src/entities/product/model/product-variant.test.ts, src/entities/product/index.ts]
+owned_files: [src/entities/product/model/operations.ts, src/entities/product/model/product-variant.test.ts]
 ---
 
 # WP02: Reservation Operations
@@ -27,7 +27,7 @@ Implement the three core reservation lifecycle operations: `reserve`, `releaseRe
 **Mission**: 004-product-variant-aggregate  
 **Branch Strategy**: main → main  
 **Depends On**: WP01 (types, factories, availableStock)  
-**Files Modified**: `product-variant.ts`, `product-variant.test.ts`, `index.ts`
+**Files Modified**: `operations.ts`, `product-variant.test.ts`
 
 ### Design Principles
 
@@ -52,12 +52,14 @@ Implement the three core reservation lifecycle operations: `reserve`, `releaseRe
 7. Emit `StockDepleted` event if `variant.totalOnHand < LOW_STOCK_THRESHOLD`
 
 **Steps**:
-1. Add to `src/entities/product/model/product-variant.ts`:
+1. Create `src/entities/product/model/operations.ts` with the reserve function:
 
 ```typescript
 import { createStockReservation } from './stock-reservation';
+import type { ProductVariant } from './types';
 import type { StockReserved, StockDepleted } from './events';
-import { LOW_STOCK_THRESHOLD } from './product-variant';
+import { LOW_STOCK_THRESHOLD } from './factory';
+import { availableStock } from './available-stock';
 
 export function reserve(params: {
   variant: ProductVariant;
@@ -135,9 +137,10 @@ export function reserve(params: {
 5. Return new variant without the reservation
 
 **Steps**:
-1. Add to `src/entities/product/model/product-variant.ts`:
+1. Add to `src/entities/product/model/operations.ts`:
 
 ```typescript
+import type { ProductVariant } from './types';
 import type { StockReleased } from './events';
 
 export function releaseReservation(params: {
@@ -202,10 +205,12 @@ export function releaseReservation(params: {
 6. Return new variant
 
 **Steps**:
-1. Add to `src/entities/product/model/product-variant.ts`:
+1. Add to `src/entities/product/model/operations.ts`:
 
 ```typescript
+import type { ProductVariant } from './types';
 import type { StockDepleted } from './events';
+import { LOW_STOCK_THRESHOLD } from './factory';
 
 export function confirmDepletion(params: {
   variant: ProductVariant;
@@ -273,14 +278,10 @@ export function confirmDepletion(params: {
 
 ```typescript
 import { describe, it, expect } from 'vitest';
-import { 
-  createProductVariant, 
-  availableStock, 
-  reserve, 
-  releaseReservation, 
-  confirmDepletion,
-  LOW_STOCK_THRESHOLD 
-} from './product-variant';
+import { createProductVariant, LOW_STOCK_THRESHOLD } from './factory';
+import { availableStock } from './available-stock';
+import { createStockReservation } from './stock-reservation';
+import { reserve, releaseReservation, confirmDepletion } from './operations';
 
 describe('ProductVariant', () => {
   describe('createProductVariant', () => {
@@ -428,7 +429,7 @@ describe('ProductVariant', () => {
 
 ---
 
-### T012: Public API Export
+### T012: Public API Export (COMPLETED IN WP01)
 
 **Purpose**: Export all public types and functions from index.ts.
 
@@ -436,21 +437,21 @@ describe('ProductVariant', () => {
 1. Update `src/entities/product/index.ts`:
 
 ```typescript
-// Aggregate + operations
-export { 
-  createProductVariant, 
-  availableStock, 
-  reserve, 
-  releaseReservation, 
-  confirmDepletion,
-  LOW_STOCK_THRESHOLD 
-} from './model/product-variant';
+// Factory + constants
+export { createProductVariant, LOW_STOCK_THRESHOLD } from './model/factory';
+
+// Derived functions
+export { availableStock } from './model/available-stock';
+
+// Operations
+export { reserve, releaseReservation, confirmDepletion } from './model/operations';
 
 // Value Object
 export { createStockReservation } from './model/stock-reservation';
 
 // Types
-export type { ProductVariant, StockReservation } from './model/types';
+export type { ProductVariant } from './model/types';
+export type { StockReservation } from './model/stock-reservation';
 export type { ProductDomainEvent, StockReserved, StockReleased, StockDepleted } from './model/events';
 ```
 
@@ -458,6 +459,8 @@ export type { ProductDomainEvent, StockReserved, StockReleased, StockDepleted } 
 - [ ] All exports can be imported from `@/entities/product`
 - [ ] No circular dependencies
 - [ ] Types are properly exported (not just values)
+
+**Note**: WP01 creates the initial index.ts stub. WP02 extends it with operations exports.
 
 ---
 

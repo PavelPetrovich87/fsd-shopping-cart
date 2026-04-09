@@ -13,11 +13,11 @@ requirement_refs:
 - NFR-002
 planning_base_branch: main
 merge_target_branch: main
-branch_strategy: main → main (single branch)
+branch_strategy: Planning artifacts for this feature were generated on main. During /spec-kitty.implement this WP may branch from a dependency-specific base, but completed changes must merge back into main unless the human explicitly redirects the landing branch.
 subtasks: [T001, T002, T003, T004, T005, T006, T010]
 authoritative_surface: src/entities/product/
 execution_mode: code_change
-owned_files: [src/entities/product/model/types.ts, src/entities/product/model/events.ts, src/entities/product/model/stock-reservation.ts, src/entities/product/model/product-variant.ts]
+owned_files: [src/entities/product/model/types.ts, src/entities/product/model/events.ts, src/entities/product/model/stock-reservation.ts, src/entities/product/model/factory.ts, src/entities/product/model/available-stock.ts, src/entities/product/index.ts]
 ---
 
 # WP01: ProductVariant Foundation
@@ -30,7 +30,7 @@ Implement type definitions, value objects, factory functions, and the basic deri
 
 **Mission**: 004-product-variant-aggregate  
 **Branch Strategy**: main → main  
-**Files Created**: 4 files in `src/entities/product/model/`
+**Files Created**: 5 files in `src/entities/product/model/`
 
 This work package establishes the type system and immutable factory functions. All operations are pure/impure-hybrid: they accept an input state and return a new state along with optional domain events for the EventBus.
 
@@ -46,12 +46,13 @@ This work package establishes the type system and immutable factory functions. A
    - `src/entities/product/model/types.ts`
    - `src/entities/product/model/events.ts`
    - `src/entities/product/model/stock-reservation.ts`
-   - `src/entities/product/model/product-variant.ts`
+   - `src/entities/product/model/factory.ts`
+   - `src/entities/product/model/available-stock.ts`
 3. Create `src/entities/product/index.ts` with re-exports
 
 **Files**:
 - `src/entities/product/model/` (directory)
-- `src/entities/product/model/*.ts` (4 placeholder files)
+- `src/entities/product/model/*.ts` (5 placeholder files)
 - `src/entities/product/index.ts` (public API entry)
 
 **Validation**:
@@ -178,7 +179,7 @@ export interface ProductVariant {
 **Purpose**: Create immutable ProductVariant instances with validation.
 
 **Steps**:
-1. In `src/entities/product/model/product-variant.ts`:
+1. In `src/entities/product/model/factory.ts`:
 
 ```typescript
 import type { StockReservation } from './stock-reservation';
@@ -209,7 +210,7 @@ export function createProductVariant(params: {
 - [ ] Throws if totalOnHand < 0
 - [ ] Defaults sold to 0
 - [ ] Defaults reservations to empty array
-- [ ] LOW_STOCK_THRESHOLD constant exported
+- [ ] LOW_STOCK_THRESHOLD exported and equals 5
 
 **Edge Cases**:
 - totalOnHand = 0 → valid (empty stock)
@@ -222,9 +223,11 @@ export function createProductVariant(params: {
 **Purpose**: Derive available stock from totalOnHand minus all reserved quantities.
 
 **Steps**:
-1. Add to `src/entities/product/model/product-variant.ts`:
+1. Create `src/entities/product/model/available-stock.ts`:
 
 ```typescript
+import type { ProductVariant } from './types';
+
 export function availableStock(variant: ProductVariant): number {
   const sumReserved = variant.reservations.reduce(
     (sum, r) => sum + r.quantity,

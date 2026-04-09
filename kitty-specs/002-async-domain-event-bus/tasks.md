@@ -98,8 +98,8 @@
 **Test Criteria**: All commands exit with code 0.
 
 **Included Subtasks**:
-- [ ] T010: Update shared/lib/index.ts exports
-- [ ] T011: Run lint, typecheck, verify tests pass
+- [x] T010: Update shared/lib/index.ts exports
+- [x] T011: Run lint, typecheck, verify tests pass
 
 **Implementation Sketch**:
 1. Read existing `index.ts` structure

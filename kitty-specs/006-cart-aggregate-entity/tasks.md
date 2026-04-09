@@ -8,9 +8,9 @@
 
 | ID | Description | WP | Parallel |
 |----|-------------|-----|----------|
-| T001 | Create types.ts with CartState enum and CartItem type | WP01 | Yes |
-| T002 | Create events.ts with all domain event interfaces | WP01 | Yes |
-| T003 | Create cart-item.ts with CartItem entity class | WP01 | Yes |
+| T001 | Create types.ts with CartState enum and CartItem type | WP01 | Yes | [D] |
+| T002 | Create events.ts with all domain event interfaces | WP01 | Yes | [D] |
+| T003 | Create cart-item.ts with CartItem entity class | WP01 | Yes | [D] |
 | T004 | Create cart.ts foundation (constructor, factory, items map) | WP02 | No |
 | T005 | Implement addItem operation with event emission | WP02 | No |
 | T006 | Implement removeItem operation with event emission | WP02 | No |

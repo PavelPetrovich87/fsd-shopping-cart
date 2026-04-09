@@ -10,11 +10,11 @@
 
 | ID | Description | WP | Parallel |
 |----|-------------|-----|----------|
-| T001 | Create DomainEvent interface and type definitions | WP01 | No |
-| T002 | Implement subscribe() method with unsubscribe return | WP01 | No |
-| T003 | Implement publish() method with async dispatch | WP01 | No |
-| T004 | Implement error isolation (try/catch per handler) | WP01 | No |
-| T005 | Add strict TypeScript types, no `any` | WP01 | No |
+| T001 | Create DomainEvent interface and type definitions | WP01 | No | [D] |
+| T002 | Implement subscribe() method with unsubscribe return | WP01 | No | [D] |
+| T003 | Implement publish() method with async dispatch | WP01 | No | [D] |
+| T004 | Implement error isolation (try/catch per handler) | WP01 | No | [D] |
+| T005 | Add strict TypeScript types, no `any` | WP01 | No | [D] |
 | T006 | Write unit tests: single handler subscription | WP02 | No |
 | T007 | Write unit tests: multiple handlers per event | WP02 | No |
 | T008 | Write unit tests: unsubscribe cleanup | WP02 | No |

@@ -1,16 +1,16 @@
 {
-  "event_count": 18,
-  "last_event_id": "01KNVNM9SPJ3DHA8E273GRKCYF",
-  "materialized_at": "2026-04-10T12:24:50.230437+00:00",
+  "event_count": 21,
+  "last_event_id": "01KNVNP8X5MES0DA8D4C4VV008",
+  "materialized_at": "2026-04-10T12:25:54.853720+00:00",
   "mission_slug": "005-coupon-aggregate",
   "summary": {
-    "approved": 1,
+    "approved": 2,
     "blocked": 0,
     "canceled": 0,
     "claimed": 0,
     "done": 0,
     "for_review": 0,
-    "in_progress": 1,
+    "in_progress": 0,
     "planned": 0
   },
   "work_packages": {
@@ -22,11 +22,11 @@
       "last_transition_at": "2026-04-10T12:14:47.125610+00:00"
     },
     "WP02": {
-      "actor": "kilocode:o3:reviewer:reviewer",
+      "actor": "user",
       "force_count": 3,
-      "lane": "in_progress",
-      "last_event_id": "01KNVNM9SPJ3DHA8E273GRKCYF",
-      "last_transition_at": "2026-04-10T12:24:50.230437+00:00"
+      "lane": "approved",
+      "last_event_id": "01KNVNP8X5MES0DA8D4C4VV008",
+      "last_transition_at": "2026-04-10T12:25:54.853720+00:00"
     }
   }
 }

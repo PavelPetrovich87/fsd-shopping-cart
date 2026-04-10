@@ -1,0 +1,90 @@
+openapi: 3.0.3
+info:
+  title: Reactive Zustand Cart Repository Contracts
+  version: 1.0.0
+  description: Logical repository behavior contracts derived from T-009 functional requirements.
+paths:
+  /cart:
+    get:
+      summary: Read current cart through reactive repository model
+      operationId: getCartReactive
+      responses:
+        '200':
+          description: Current cart snapshot
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CartSnapshot'
+    put:
+      summary: Persist cart state into repository
+      operationId: saveCart
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SaveCartRequest'
+      responses:
+        '200':
+          description: Cart state persisted and available to reactive readers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CartSnapshot'
+components:
+  schemas:
+    SaveCartRequest:
+      type: object
+      required:
+        - cartId
+        - items
+        - state
+      properties:
+        cartId:
+          type: string
+        state:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CartItem'
+        coupons:
+          type: array
+          items:
+            type: string
+    CartSnapshot:
+      type: object
+      required:
+        - cartId
+        - items
+        - state
+      properties:
+        cartId:
+          type: string
+        state:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CartItem'
+        coupons:
+          type: array
+          items:
+            type: string
+        subtotal:
+          type: object
+          properties:
+            cents:
+              type: integer
+              minimum: 0
+    CartItem:
+      type: object
+      required:
+        - skuId
+        - quantity
+      properties:
+        skuId:
+          type: string
+        quantity:
+          type: integer
+          minimum: 1

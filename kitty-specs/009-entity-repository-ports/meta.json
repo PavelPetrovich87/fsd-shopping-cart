@@ -1,10 +1,12 @@
 {
   "created_at": "2026-04-10T13:47:34.447558+00:00",
-  "friendly_name": "entity repository ports",
+  "friendly_name": "Entity Repository Ports",
   "mission_id": "01KNVTBSNFS4DKKXS8S4DZY12D",
   "mission_number": "009",
   "mission_slug": "009-entity-repository-ports",
   "mission_type": "software-dev",
   "slug": "009-entity-repository-ports",
-  "target_branch": "main"
+  "target_branch": "main",
+  "vcs": "git",
+  "source_description": "T-007 here @docs/TICKETS.md"
 }

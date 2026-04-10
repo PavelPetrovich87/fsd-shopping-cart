@@ -1,0 +1,109 @@
+openapi: 3.0.3
+info:
+  title: Entity Repository Port Contracts
+  version: 1.0.0
+  description: Logical repository interface contracts for mission 009 entity ports.
+paths:
+  /ports/cart/get-cart:
+    post:
+      summary: Retrieve current cart aggregate via cart repository port
+      operationId: cartRepositoryGetCart
+      responses:
+        '200':
+          description: Cart aggregate retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+  /ports/cart/save-cart:
+    post:
+      summary: Persist cart aggregate via cart repository port
+      operationId: cartRepositorySaveCart
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cart'
+      responses:
+        '204':
+          description: Cart aggregate persisted
+  /ports/stock/find-by-sku:
+    post:
+      summary: Resolve product variant by SKU via stock repository port
+      operationId: stockRepositoryFindBySku
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FindBySkuRequest'
+      responses:
+        '200':
+          description: Product variant aggregate found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductVariant'
+        '404':
+          description: Variant not found for SKU
+  /ports/stock/save:
+    post:
+      summary: Persist product variant aggregate via stock repository port
+      operationId: stockRepositorySave
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductVariant'
+      responses:
+        '204':
+          description: Product variant aggregate persisted
+  /ports/coupon/find-by-code:
+    post:
+      summary: Resolve coupon aggregate by code via coupon repository port
+      operationId: couponRepositoryFindByCode
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FindCouponByCodeRequest'
+      responses:
+        '200':
+          description: Coupon aggregate found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Coupon'
+        '404':
+          description: Coupon not found (null result in interface contract)
+components:
+  schemas:
+    FindBySkuRequest:
+      type: object
+      required:
+        - skuId
+      properties:
+        skuId:
+          type: string
+    FindCouponByCodeRequest:
+      type: object
+      required:
+        - code
+      properties:
+        code:
+          type: string
+    Cart:
+      type: object
+      description: Domain cart aggregate placeholder schema for contract documentation.
+      additionalProperties: true
+    ProductVariant:
+      type: object
+      description: Domain product variant aggregate placeholder schema for contract documentation.
+      additionalProperties: true
+    Coupon:
+      type: object
+      description: Domain coupon aggregate placeholder schema for contract documentation.
+      additionalProperties: true

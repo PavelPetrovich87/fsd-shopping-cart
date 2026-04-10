@@ -6,5 +6,7 @@
   "mission_slug": "008-mock-repository-adapters",
   "mission_type": "software-dev",
   "slug": "008-mock-repository-adapters",
-  "target_branch": "main"
+  "target_branch": "main",
+  "vcs": "git",
+  "vcs_locked_at": "2026-04-10T14:03:19.868765+00:00"
 }

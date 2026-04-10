@@ -15,6 +15,8 @@ subtasks:
 - T008
 - T009
 - T010
+agent: "kilo:minimax-m2.7:implementer:implementer"
+shell_pid: "11920"
 history:
 - timestamp: '2026-04-10T13:55:23Z'
   action: planned
@@ -155,3 +157,7 @@ Validation checklist:
 - Coupon adapter implemented and publicly exported.
 - Deterministic found/not-found behavior validated by tests.
 - Behavior satisfies FR-004, FR-005, FR-006 with static fixture-only operation.
+
+## Activity Log
+
+- 2026-04-10T14:09:17Z – kilo:minimax-m2.7:implementer:implementer – shell_pid=11920 – Started implementation via action command

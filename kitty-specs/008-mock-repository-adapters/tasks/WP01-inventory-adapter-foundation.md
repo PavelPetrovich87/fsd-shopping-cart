@@ -9,12 +9,16 @@ requirement_refs:
 planning_base_branch: main
 merge_target_branch: main
 branch_strategy: Planning artifacts for this feature were generated on main. During /spec-kitty.implement this WP may branch from a dependency-specific base, but completed changes must merge back into main unless the human explicitly redirects the landing branch.
+base_branch: kitty/mission-008-mock-repository-adapters
+base_commit: 832c8f53eea16f33d8b588e7c9f89166d3343de1
+created_at: '2026-04-10T14:03:21.722177+00:00'
 subtasks:
 - T001
 - T002
 - T003
 - T004
 - T005
+shell_pid: '11920'
 history:
 - timestamp: '2026-04-10T13:55:23Z'
   action: planned

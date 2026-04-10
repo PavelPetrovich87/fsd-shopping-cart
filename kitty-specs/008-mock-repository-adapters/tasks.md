@@ -21,11 +21,11 @@
 | T003 | Handle unknown/malformed SKU with deterministic not-found outcome | WP01 | No | [D] |
 | T004 | Export inventory repository through product slice public API | WP01 | Yes | [D] |
 | T005 | Add inventory repository behavior tests for found/not-found/determinism | WP01 | No | [D] |
-| T006 | Implement coupon repository initialization from shared fixtures | WP02 | No |
-| T007 | Implement `findByCode` mapping from fixture data to `Coupon` | WP02 | No |
-| T008 | Handle unknown/empty coupon code returning `null` deterministically | WP02 | No |
-| T009 | Export coupon repository through coupon slice public API | WP02 | Yes |
-| T010 | Add coupon repository behavior tests for found/not-found/determinism | WP02 | No |
+| T006 | Implement coupon repository initialization from shared fixtures | WP02 | No | [D] |
+| T007 | Implement `findByCode` mapping from fixture data to `Coupon` | WP02 | No | [D] |
+| T008 | Handle unknown/empty coupon code returning `null` deterministically | WP02 | No | [D] |
+| T009 | Export coupon repository through coupon slice public API | WP02 | Yes | [D] |
+| T010 | Add coupon repository behavior tests for found/not-found/determinism | WP02 | No | [D] |
 | T011 | Run lint/arch/build and verify FR/NFR coverage evidence | WP03 | No |
 | T012 | Add cross-slice adapter usage verification test for port compatibility | WP03 | No |
 | T013 | Record final implementation verification notes in feature quickstart doc | WP03 | No |
@@ -71,11 +71,11 @@ Risks:
 **Independent Test**: Known coupon code resolves to valid `Coupon`; unknown or empty code returns `null`.  
 **Estimated Prompt Size**: ~320 lines
 
-- [ ] T006 Implement coupon repository initialization from shared fixtures (WP02)
-- [ ] T007 Implement `findByCode` mapping from fixture data to `Coupon` (WP02)
-- [ ] T008 Handle unknown/empty coupon code returning `null` deterministically (WP02)
-- [ ] T009 Export coupon repository through coupon slice public API (WP02)
-- [ ] T010 Add coupon repository behavior tests for found/not-found/determinism (WP02)
+- [x] T006 Implement coupon repository initialization from shared fixtures (WP02)
+- [x] T007 Implement `findByCode` mapping from fixture data to `Coupon` (WP02)
+- [x] T008 Handle unknown/empty coupon code returning `null` deterministically (WP02)
+- [x] T009 Export coupon repository through coupon slice public API (WP02)
+- [x] T010 Add coupon repository behavior tests for found/not-found/determinism (WP02)
 
 Implementation sketch:
 - Create repository in `src/entities/coupon/api/mock-coupon-repository.ts` with fixture snapshot loaded once at initialization.

@@ -24,10 +24,10 @@
 | T006 | Implement `getCart()` reactive read behavior through selector/hook integration | WP02 | No | [D] |
 | T007 | Implement `saveCart(cart)` persistence path with atomic store update semantics | WP02 | No | [D] |
 | T008 | Export repository and store artifacts via `src/entities/cart/index.ts` public API | WP02 | Yes | [D] |
-| T009 | Add repository integration tests for save->get round-trip equivalence | WP03 | No |
-| T010 | Add integration checks for sequential saves and empty-cart save edge case | WP03 | No |
-| T011 | Validate local save-to-update latency target and capture evidence in assertions | WP03 | No |
-| T012 | Run required quality gates (`lint`, `lint:arch`, `build`) and verify mission acceptance coverage | WP03 | No |
+| T009 | Add repository integration tests for save->get round-trip equivalence | WP03 | No | [D] |
+| T010 | Add integration checks for sequential saves and empty-cart save edge case | WP03 | No | [D] |
+| T011 | Validate local save-to-update latency target and capture evidence in assertions | WP03 | No | [D] |
+| T012 | Run required quality gates (`lint`, `lint:arch`, `build`) and verify mission acceptance coverage | WP03 | No | [D] |
 
 ## Work Packages
 
@@ -97,10 +97,10 @@ Risks:
 **Independent Test**: Integration tests pass for round-trip, sequential update, and empty-cart edge cases; all required gates pass with exit code 0.  
 **Estimated Prompt Size**: ~350 lines
 
-- [ ] T009 Add repository integration tests for save->get round-trip equivalence (WP03)
-- [ ] T010 Add integration checks for sequential saves and empty-cart save edge case (WP03)
-- [ ] T011 Validate local save-to-update latency target and capture evidence in assertions (WP03)
-- [ ] T012 Run required quality gates (`lint`, `lint:arch`, `build`) and verify mission acceptance coverage (WP03)
+- [x] T009 Add repository integration tests for save->get round-trip equivalence (WP03)
+- [x] T010 Add integration checks for sequential saves and empty-cart save edge case (WP03)
+- [x] T011 Validate local save-to-update latency target and capture evidence in assertions (WP03)
+- [x] T012 Run required quality gates (`lint`, `lint:arch`, `build`) and verify mission acceptance coverage (WP03)
 
 Implementation sketch:
 - Add integration test file at cart API scope to verify end-to-end repository/store behavior.

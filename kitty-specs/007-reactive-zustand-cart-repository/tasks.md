@@ -16,10 +16,10 @@
 
 | ID | Description | WP | Parallel |
 | --- | --- | --- | --- |
-| T001 | Define Zustand cart store state contract and initializer | WP01 | No |
-| T002 | Implement store actions for replacing persisted cart state | WP01 | No |
-| T003 | Add selector/hook-style reactive access helpers for cart consumers | WP01 | Yes |
-| T004 | Add store-level behavior tests for initialization and update propagation | WP01 | No |
+| T001 | Define Zustand cart store state contract and initializer | WP01 | No | [D] |
+| T002 | Implement store actions for replacing persisted cart state | WP01 | No | [D] |
+| T003 | Add selector/hook-style reactive access helpers for cart consumers | WP01 | Yes | [D] |
+| T004 | Add store-level behavior tests for initialization and update propagation | WP01 | No | [D] |
 | T005 | Implement `ZustandCartRepository` construction over cart store | WP02 | No |
 | T006 | Implement `getCart()` reactive read behavior through selector/hook integration | WP02 | No |
 | T007 | Implement `saveCart(cart)` persistence path with atomic store update semantics | WP02 | No |
@@ -39,10 +39,10 @@
 **Independent Test**: Store initializes with valid cart state, applies replacements safely, and reactive selector output updates after state changes.  
 **Estimated Prompt Size**: ~360 lines
 
-- [ ] T001 Define Zustand cart store state contract and initializer (WP01)
-- [ ] T002 Implement store actions for replacing persisted cart state (WP01)
-- [ ] T003 Add selector/hook-style reactive access helpers for cart consumers (WP01)
-- [ ] T004 Add store-level behavior tests for initialization and update propagation (WP01)
+- [x] T001 Define Zustand cart store state contract and initializer (WP01)
+- [x] T002 Implement store actions for replacing persisted cart state (WP01)
+- [x] T003 Add selector/hook-style reactive access helpers for cart consumers (WP01)
+- [x] T004 Add store-level behavior tests for initialization and update propagation (WP01)
 
 Implementation sketch:
 - Create `src/entities/cart/api/cart-store.ts` with explicit cart state shape and initialization strategy aligned to domain invariants.

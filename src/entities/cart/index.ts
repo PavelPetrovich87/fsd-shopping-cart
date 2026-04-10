@@ -1,5 +1,3 @@
-export type { ICartRepository } from './model/ports'
-
 export { CartState } from './model/types'
 export type { CartItemData, CartData } from './model/types'
 

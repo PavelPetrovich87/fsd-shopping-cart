@@ -16,11 +16,11 @@
 
 | ID | Description | WP | Parallel |
 | --- | --- | --- | --- |
-| T001 | Implement inventory repository initialization from shared fixtures | WP01 | No |
-| T002 | Implement `findBySku` mapping from fixture data to `ProductVariant` | WP01 | No |
-| T003 | Handle unknown/malformed SKU with deterministic not-found outcome | WP01 | No |
-| T004 | Export inventory repository through product slice public API | WP01 | Yes |
-| T005 | Add inventory repository behavior tests for found/not-found/determinism | WP01 | No |
+| T001 | Implement inventory repository initialization from shared fixtures | WP01 | No | [D] |
+| T002 | Implement `findBySku` mapping from fixture data to `ProductVariant` | WP01 | No | [D] |
+| T003 | Handle unknown/malformed SKU with deterministic not-found outcome | WP01 | No | [D] |
+| T004 | Export inventory repository through product slice public API | WP01 | Yes | [D] |
+| T005 | Add inventory repository behavior tests for found/not-found/determinism | WP01 | No | [D] |
 | T006 | Implement coupon repository initialization from shared fixtures | WP02 | No |
 | T007 | Implement `findByCode` mapping from fixture data to `Coupon` | WP02 | No |
 | T008 | Handle unknown/empty coupon code returning `null` deterministically | WP02 | No |
@@ -40,11 +40,11 @@
 **Independent Test**: Known SKU resolves to valid `ProductVariant`; unknown SKU returns not-found outcome without runtime failure.  
 **Estimated Prompt Size**: ~340 lines
 
-- [ ] T001 Implement inventory repository initialization from shared fixtures (WP01)
-- [ ] T002 Implement `findBySku` mapping from fixture data to `ProductVariant` (WP01)
-- [ ] T003 Handle unknown/malformed SKU with deterministic not-found outcome (WP01)
-- [ ] T004 Export inventory repository through product slice public API (WP01)
-- [ ] T005 Add inventory repository behavior tests for found/not-found/determinism (WP01)
+- [x] T001 Implement inventory repository initialization from shared fixtures (WP01)
+- [x] T002 Implement `findBySku` mapping from fixture data to `ProductVariant` (WP01)
+- [x] T003 Handle unknown/malformed SKU with deterministic not-found outcome (WP01)
+- [x] T004 Export inventory repository through product slice public API (WP01)
+- [x] T005 Add inventory repository behavior tests for found/not-found/determinism (WP01)
 
 Implementation sketch:
 - Create repository in `src/entities/product/api/mock-inventory-repository.ts` with fixture snapshot loaded once at adapter initialization.

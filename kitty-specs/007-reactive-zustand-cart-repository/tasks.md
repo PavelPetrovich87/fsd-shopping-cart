@@ -20,10 +20,10 @@
 | T002 | Implement store actions for replacing persisted cart state | WP01 | No | [D] |
 | T003 | Add selector/hook-style reactive access helpers for cart consumers | WP01 | Yes | [D] |
 | T004 | Add store-level behavior tests for initialization and update propagation | WP01 | No | [D] |
-| T005 | Implement `ZustandCartRepository` construction over cart store | WP02 | No |
-| T006 | Implement `getCart()` reactive read behavior through selector/hook integration | WP02 | No |
-| T007 | Implement `saveCart(cart)` persistence path with atomic store update semantics | WP02 | No |
-| T008 | Export repository and store artifacts via `src/entities/cart/index.ts` public API | WP02 | Yes |
+| T005 | Implement `ZustandCartRepository` construction over cart store | WP02 | No | [D] |
+| T006 | Implement `getCart()` reactive read behavior through selector/hook integration | WP02 | No | [D] |
+| T007 | Implement `saveCart(cart)` persistence path with atomic store update semantics | WP02 | No | [D] |
+| T008 | Export repository and store artifacts via `src/entities/cart/index.ts` public API | WP02 | Yes | [D] |
 | T009 | Add repository integration tests for save->get round-trip equivalence | WP03 | No |
 | T010 | Add integration checks for sequential saves and empty-cart save edge case | WP03 | No |
 | T011 | Validate local save-to-update latency target and capture evidence in assertions | WP03 | No |
@@ -68,10 +68,10 @@ Risks:
 **Independent Test**: Repository `saveCart` writes through to the store and `getCart` reflects the latest state reactively through the agreed selector/hook model.  
 **Estimated Prompt Size**: ~330 lines
 
-- [ ] T005 Implement `ZustandCartRepository` construction over cart store (WP02)
-- [ ] T006 Implement `getCart()` reactive read behavior through selector/hook integration (WP02)
-- [ ] T007 Implement `saveCart(cart)` persistence path with atomic store update semantics (WP02)
-- [ ] T008 Export repository and store artifacts via `src/entities/cart/index.ts` public API (WP02)
+- [x] T005 Implement `ZustandCartRepository` construction over cart store (WP02)
+- [x] T006 Implement `getCart()` reactive read behavior through selector/hook integration (WP02)
+- [x] T007 Implement `saveCart(cart)` persistence path with atomic store update semantics (WP02)
+- [x] T008 Export repository and store artifacts via `src/entities/cart/index.ts` public API (WP02)
 
 Implementation sketch:
 - Create `src/entities/cart/api/zustand-cart-repository.ts` implementing `ICartRepository`.

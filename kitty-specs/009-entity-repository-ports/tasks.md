@@ -16,10 +16,10 @@
 
 | ID | Description | WP | Parallel |
 | --- | --- | --- | --- |
-| T001 | Define `ICartRepository` contract in `src/entities/cart/model/ports.ts` using cart domain types | WP01 | No |
-| T002 | Define `IStockRepository` contract in `src/entities/product/model/ports.ts` using product variant domain types | WP01 | Yes |
-| T003 | Define `ICouponRepository` contract in `src/entities/coupon/model/ports.ts` with nullable coupon lookup result | WP01 | Yes |
-| T004 | Verify each port contract avoids infrastructure payload shapes and ambiguous typing | WP01 | No |
+| T001 | Define `ICartRepository` contract in `src/entities/cart/model/ports.ts` using cart domain types | WP01 | No | [D] |
+| T002 | Define `IStockRepository` contract in `src/entities/product/model/ports.ts` using product variant domain types | WP01 | Yes | [D] |
+| T003 | Define `ICouponRepository` contract in `src/entities/coupon/model/ports.ts` with nullable coupon lookup result | WP01 | Yes | [D] |
+| T004 | Verify each port contract avoids infrastructure payload shapes and ambiguous typing | WP01 | No | [D] |
 | T005 | Export cart port types from `src/entities/cart/index.ts` public API | WP02 | No |
 | T006 | Export product port types from `src/entities/product/index.ts` public API | WP02 | Yes |
 | T007 | Export coupon port types from `src/entities/coupon/index.ts` public API | WP02 | Yes |
@@ -35,10 +35,10 @@
 **Independent Test**: Repository interfaces compile with domain entity/value object signatures only and no infrastructure-shape leakage.  
 **Estimated Prompt Size**: ~280 lines
 
-- [ ] T001 Define `ICartRepository` contract in `src/entities/cart/model/ports.ts` using cart domain types (WP01)
-- [ ] T002 Define `IStockRepository` contract in `src/entities/product/model/ports.ts` using product variant domain types (WP01)
-- [ ] T003 Define `ICouponRepository` contract in `src/entities/coupon/model/ports.ts` with nullable coupon lookup result (WP01)
-- [ ] T004 Verify each port contract avoids infrastructure payload shapes and ambiguous typing (WP01)
+- [x] T001 Define `ICartRepository` contract in `src/entities/cart/model/ports.ts` using cart domain types (WP01)
+- [x] T002 Define `IStockRepository` contract in `src/entities/product/model/ports.ts` using product variant domain types (WP01)
+- [x] T003 Define `ICouponRepository` contract in `src/entities/coupon/model/ports.ts` with nullable coupon lookup result (WP01)
+- [x] T004 Verify each port contract avoids infrastructure payload shapes and ambiguous typing (WP01)
 
 Implementation sketch:
 - Add one `ports.ts` file per entity slice model directory and declare interface methods exactly as required by T-007.

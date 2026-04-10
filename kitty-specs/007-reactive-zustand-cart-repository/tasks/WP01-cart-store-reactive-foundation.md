@@ -7,11 +7,15 @@ requirement_refs:
 planning_base_branch: main
 merge_target_branch: main
 branch_strategy: Planning artifacts for this feature were generated on main. During /spec-kitty.implement this WP may branch from a dependency-specific base, but completed changes must merge back into main unless the human explicitly redirects the landing branch.
+base_branch: kitty/mission-007-reactive-zustand-cart-repository
+base_commit: 20c19abd624a78b7e30b058600b63e94a5b37819
+created_at: '2026-04-10T14:02:33.345919+00:00'
 subtasks:
 - T001
 - T002
 - T003
 - T004
+shell_pid: '11961'
 history:
 - timestamp: '2026-04-10T13:57:04Z'
   action: planned

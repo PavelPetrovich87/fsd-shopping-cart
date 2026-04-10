@@ -20,7 +20,7 @@ shell_pid: "19423"
 authoritative_surface: src/entities/coupon/model/
 execution_mode: code_change
 owned_files: [src/entities/coupon/model/types.ts, src/entities/coupon/model/events.ts]
-agent: "kilocode:o3:implementer:implementer"
+agent: "kilocode:o3:reviewer:reviewer"
 ---
 
 # Work Package: WP01 — Foundation Types & Events
@@ -191,3 +191,5 @@ Verify:
 ## Activity Log
 
 - 2026-04-10T12:11:17Z – kilocode:o3:implementer:implementer – shell_pid=19423 – Assigned agent via action command
+- 2026-04-10T12:13:12Z – kilocode:o3:implementer:implementer – shell_pid=19423 – Ready for review
+- 2026-04-10T12:13:32Z – kilocode:o3:reviewer:reviewer – shell_pid=19423 – Started review via action command

@@ -1,7 +1,7 @@
 {
-  "event_count": 4,
-  "last_event_id": "01KNVMV7DCT78DDB2PDQ99KYQD",
-  "materialized_at": "2026-04-10T12:11:08.588362+00:00",
+  "event_count": 6,
+  "last_event_id": "01KNVMZKWM7E7VK26YCY67B35R",
+  "materialized_at": "2026-04-10T12:13:32.436226+00:00",
   "mission_slug": "005-coupon-aggregate",
   "summary": {
     "approved": 0,
@@ -15,11 +15,11 @@
   },
   "work_packages": {
     "WP01": {
-      "actor": "implement-command",
-      "force_count": 1,
+      "actor": "kilocode:o3:reviewer:reviewer",
+      "force_count": 2,
       "lane": "in_progress",
-      "last_event_id": "01KNVMV7DCT78DDB2PDQ99KYQD",
-      "last_transition_at": "2026-04-10T12:11:08.588362+00:00"
+      "last_event_id": "01KNVMZKWM7E7VK26YCY67B35R",
+      "last_transition_at": "2026-04-10T12:13:32.436226+00:00"
     },
     "WP02": {
       "actor": "finalize-tasks",

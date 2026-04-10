@@ -1,0 +1,75 @@
+openapi: 3.0.3
+info:
+  title: Mock Repository Adapter Contracts
+  version: 1.0.0
+  description: Logical lookup contracts derived from mission functional requirements.
+paths:
+  /inventory/{skuId}:
+    get:
+      summary: Resolve product variant by SKU
+      operationId: findInventoryBySku
+      parameters:
+        - in: path
+          name: skuId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Product variant found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductVariant'
+        '404':
+          description: SKU not found
+  /coupons/{code}:
+    get:
+      summary: Resolve coupon by code
+      operationId: findCouponByCode
+      parameters:
+        - in: path
+          name: code
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Coupon found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Coupon'
+        '404':
+          description: Coupon not found (maps to null in repository contract)
+components:
+  schemas:
+    ProductVariant:
+      type: object
+      required:
+        - skuId
+      properties:
+        skuId:
+          type: string
+        totalOnHand:
+          type: integer
+          minimum: 0
+        reserved:
+          type: integer
+          minimum: 0
+        sold:
+          type: integer
+          minimum: 0
+    Coupon:
+      type: object
+      required:
+        - code
+      properties:
+        code:
+          type: string
+        mode:
+          type: string
+          enum: [flat, percentage]
+        value:
+          type: number
+          minimum: 0

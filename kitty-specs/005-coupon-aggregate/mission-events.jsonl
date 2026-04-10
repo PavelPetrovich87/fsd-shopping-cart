@@ -1,0 +1,1 @@
+{"mission": "software-dev", "payload": {"action": "research", "agent": "kilocode:o3:orchestrator:orchestrator", "decision_kind": "step", "mission_state": "discovery", "result_input": "success", "wp_id": null}, "timestamp": "2026-04-10T12:10:58.322520+00:00", "type": "MissionNextInvoked"}

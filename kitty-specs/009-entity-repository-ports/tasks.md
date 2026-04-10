@@ -20,10 +20,10 @@
 | T002 | Define `IStockRepository` contract in `src/entities/product/model/ports.ts` using product variant domain types | WP01 | Yes |
 | T003 | Define `ICouponRepository` contract in `src/entities/coupon/model/ports.ts` with nullable coupon lookup result | WP01 | Yes |
 | T004 | Verify each port contract avoids infrastructure payload shapes and ambiguous typing | WP01 | No |
-| T005 | Export cart port types from `src/entities/cart/index.ts` public API | WP02 | No |
-| T006 | Export product port types from `src/entities/product/index.ts` public API | WP02 | Yes |
-| T007 | Export coupon port types from `src/entities/coupon/index.ts` public API | WP02 | Yes |
-| T008 | Run `npm run lint`, `npm run lint:arch`, and `npm run build` to validate mission scope | WP02 | No |
+| T005 | Export cart port types from `src/entities/cart/index.ts` public API | WP02 | No | [D] |
+| T006 | Export product port types from `src/entities/product/index.ts` public API | WP02 | Yes | [D] |
+| T007 | Export coupon port types from `src/entities/coupon/index.ts` public API | WP02 | Yes | [D] |
+| T008 | Run `npm run lint`, `npm run lint:arch`, and `npm run build` to validate mission scope | WP02 | No | [D] |
 
 ## Work Packages
 
@@ -64,10 +64,10 @@ Risks:
 **Independent Test**: Port types are importable from each slice entrypoint and all lint/architecture/build checks pass with exit code 0.  
 **Estimated Prompt Size**: ~260 lines
 
-- [ ] T005 Export cart port types from `src/entities/cart/index.ts` public API (WP02)
-- [ ] T006 Export product port types from `src/entities/product/index.ts` public API (WP02)
-- [ ] T007 Export coupon port types from `src/entities/coupon/index.ts` public API (WP02)
-- [ ] T008 Run `npm run lint`, `npm run lint:arch`, and `npm run build` to validate mission scope (WP02)
+- [x] T005 Export cart port types from `src/entities/cart/index.ts` public API (WP02)
+- [x] T006 Export product port types from `src/entities/product/index.ts` public API (WP02)
+- [x] T007 Export coupon port types from `src/entities/coupon/index.ts` public API (WP02)
+- [x] T008 Run `npm run lint`, `npm run lint:arch`, and `npm run build` to validate mission scope (WP02)
 
 Implementation sketch:
 - Update each entity slice `index.ts` to re-export its new port interfaces while preserving existing export conventions.

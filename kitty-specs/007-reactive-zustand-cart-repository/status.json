@@ -1,7 +1,7 @@
 {
-  "event_count": 6,
-  "last_event_id": "01KNVVPSF9NYWAEV7W4P51G6QV",
-  "materialized_at": "2026-04-10T14:11:03.273268+00:00",
+  "event_count": 8,
+  "last_event_id": "01KNVVQARP63VJVRABCWVJVEHA",
+  "materialized_at": "2026-04-10T14:11:20.982362+00:00",
   "mission_number": "007",
   "mission_slug": "007-reactive-zustand-cart-repository",
   "mission_type": "software-dev",
@@ -12,9 +12,9 @@
     "claimed": 0,
     "done": 0,
     "for_review": 1,
-    "in_progress": 0,
+    "in_progress": 1,
     "in_review": 0,
-    "planned": 2
+    "planned": 1
   },
   "work_packages": {
     "WP01": {
@@ -25,11 +25,11 @@
       "last_transition_at": "2026-04-10T14:11:03.273268+00:00"
     },
     "WP02": {
-      "actor": "finalize-tasks",
+      "actor": "kilocode:minimax-m2.7:implementer:implementer",
       "force_count": 1,
-      "lane": "planned",
-      "last_event_id": "01KNVV0E6VSFBX8BFXX1PWPNJE",
-      "last_transition_at": "2026-04-10T13:58:50.843463+00:00"
+      "lane": "in_progress",
+      "last_event_id": "01KNVVQARP63VJVRABCWVJVEHA",
+      "last_transition_at": "2026-04-10T14:11:20.982362+00:00"
     },
     "WP03": {
       "actor": "finalize-tasks",

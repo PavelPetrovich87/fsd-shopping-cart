@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "mission_slug": "009-entity-repository-ports",
+  "mission_id": "01KNVTBSNFS4DKKXS8S4DZY12D",
+  "mission_branch": "kitty/mission-009-entity-repository-ports",
+  "target_branch": "main",
+  "lanes": [
+    {
+      "lane_id": "lane-a",
+      "wp_ids": [
+        "WP01",
+        "WP02"
+      ],
+      "write_scope": [
+        "src/entities/cart/index.ts",
+        "src/entities/cart/model/ports.ts",
+        "src/entities/coupon/index.ts",
+        "src/entities/coupon/model/ports.ts",
+        "src/entities/product/index.ts",
+        "src/entities/product/model/ports.ts"
+      ],
+      "predicted_surfaces": [
+        "api",
+        "legacy-cleanup"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    }
+  ],
+  "computed_at": "2026-04-10T13:59:29.846951+00:00",
+  "computed_from": "dependency_graph+ownership",
+  "planning_artifact_wps": [],
+  "collapse_report": {
+    "events": [
+      {
+        "wp_a": "WP02",
+        "wp_b": "WP01",
+        "rule": "dependency",
+        "evidence": "WP02 depends on WP01"
+      }
+    ],
+    "total_merges": 1,
+    "independent_wps_collapsed": 0,
+    "by_rule": {
+      "dependency": 1
+    }
+  }
+}

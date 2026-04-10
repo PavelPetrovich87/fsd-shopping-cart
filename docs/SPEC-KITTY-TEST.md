@@ -21,6 +21,7 @@ Our project is a self-enforcing FSD repository with these enforcement layers:
 | Storybook gate   | Storybook build          | `npm run build-storybook` |
 | Arch validation  | validate-architecture.ts | `npm run validate:arch`   |
 | Pre-commit       | Husky + lint-staged      | auto on `git commit`      |
+| Pre-merge        | Husky                    | auto on `git merge`       |
 | Pre-push         | Husky                    | auto on `git push`        |
 | CI               | GitHub Actions           | auto on push/PR           |
 
@@ -402,10 +403,20 @@ After implementation is complete:
 
 **Verify:** Does the review check our harness criteria?
 
-- All lint commands pass?
+**CRITICAL — Acceptance gate (must pass BEFORE approve/merge):**
+
+- [ ] `npm run lint` exits 0
+- [ ] `npm run lint:arch` exits 0
+- [ ] `npm run build` exits 0
+
+Additional review checks:
+
 - Named exports only?
 - Correct FSD paths?
 - Tests pass?
+
+> **Lesson learned (Phase 3):** Agent approved and merged without running lint/build.
+> Two safeguards now in place: (1) this checklist in review criteria, (2) `pre-merge-commit` git hook as hard gate.
 
 #### Test 3.2: Merge back to main
 
@@ -474,6 +485,232 @@ npm run validate:arch
 
 ---
 
+### Phase 5: Guardrail Validation
+
+This phase validates the repository protections that must prevent a repeat of the Mission 004 direct-main bypass.
+
+**Goal:** make it mechanically difficult or impossible to:
+
+- commit directly to `main`
+- implement code from the planning checkout instead of a lane worktree
+- push directly to protected branches
+- create untraceable commits with no WP identity
+
+These tests are intentionally adversarial. We try to break the workflow and verify the guardrails stop us.
+
+**Critical constraint:** guardrails must preserve normal Spec-Kitty operation, including multiple agents working in parallel across multiple worktrees. A guardrail that blocks invalid behavior but also blocks valid lane-based parallel work is a failed design.
+
+#### Guardrail design assumption for this phase
+
+The repository must distinguish between:
+
+1. **Implementation/review commits**
+   - touch `src/`, tests, stories, or runtime code
+   - must happen from `.worktrees/...`
+   - must follow WP-scoped commit policy
+
+2. **Spec-state/orchestrator commits**
+   - touch only `kitty-specs/` and, if needed, `.kittify/`
+   - may happen from the planning checkout because Spec-Kitty status commands do this by design
+   - must not include regular source code changes
+
+If the hook implementation cannot preserve this distinction, the guardrail implementation is not acceptable.
+
+#### Test 5.1: Block direct commit to `main`
+
+From the main checkout:
+
+```bash
+git checkout main
+touch /tmp/spec-kitty-main-guardrail-test
+git add -A
+git commit -m "test: direct main commit should fail"
+```
+
+**Expected result:** commit is rejected by local hook.
+
+**Verify:**
+
+- Hook prints a clear message that direct commits to `main` / `master` are forbidden
+- Exit code is non-zero
+- No commit is created
+
+#### Test 5.2: Block commit outside `.worktrees/`
+
+From the main checkout on a non-main branch, attempt a code commit:
+
+```bash
+git checkout -b test/non-worktree-guardrail
+git add -A
+git commit -m "feat(WP99): commit from non-worktree should fail"
+```
+
+**Expected result:** commit is rejected because the working directory is not a Spec-Kitty worktree.
+
+**Verify:**
+
+- Hook checks `git rev-parse --show-toplevel`
+- Message explains commits must happen inside `.worktrees/...`
+- Exit code is non-zero
+
+**Important:** this test must stage a real source-code path such as `src/...`, not only documentation or `kitty-specs/...`, otherwise it does not validate the actual policy.
+
+#### Test 5.3: Allow commit inside a valid Spec-Kitty worktree
+
+From a real lane worktree:
+
+```bash
+cd .worktrees/<mission>-lane-a
+git add -A
+git commit -m "feat(WP01): verify worktree commit guardrail"
+```
+
+**Expected result:** commit is allowed if all other checks pass.
+
+**Verify:**
+
+- Hook accepts `.worktrees/...` execution context
+- Husky and lint-related checks still run
+- Commit policy remains enforced
+
+#### Test 5.3b: Allow spec-state commit from planning checkout
+
+Run a legitimate Spec-Kitty status transition from the main checkout:
+
+```bash
+spec-kitty agent tasks mark-status T001 --status done --mission <slug>
+```
+
+or:
+
+```bash
+spec-kitty agent tasks move-task WP01 --to for_review --mission <slug> --note "Guardrail validation"
+```
+
+**Expected result:** command succeeds and the hook stack does not block the resulting orchestrator commit, provided the staged changes are limited to `kitty-specs/` and related workflow state.
+
+**Verify:**
+
+- Spec-Kitty status command still works from the planning checkout
+- Hook classification allows orchestrator/spec-state commits
+- No source-code files are included in that commit
+
+#### Test 5.4: Block push to `main`
+
+Attempt to push directly to `main`:
+
+```bash
+git push origin main
+```
+
+**Expected result:** local `pre-push` hook rejects the push.
+
+**Verify:**
+
+- Push aborts before remote update
+- Message states direct push to protected branch is forbidden
+
+#### Test 5.5: Validate commit message policy
+
+In a valid worktree, try both invalid and valid messages:
+
+```bash
+git commit -m "misc changes"
+git commit -m "feat(WP01): valid guardrail test"
+```
+
+**Expected result:**
+
+- generic message is rejected
+- WP-scoped message is accepted
+
+**Accepted examples:**
+
+- `feat(WP01): ...`
+- `fix(WP02): ...`
+- `chore(spec): ...`
+
+#### Test 5.6: Validate workspace ownership policy
+
+If workspace ownership checks are implemented, verify that a commit is rejected when:
+
+- branch does not match `kitty/mission-*-lane-*`
+- `.kittify/workspaces/*.json` has no matching active context
+- commit message references a different WP than the active workspace
+
+**Expected result:** hook rejects ownership mismatch with a clear diagnostic.
+
+#### Test 5.6b: Validate parallel worktree ownership does not conflict
+
+Use a mission with at least two independent WPs in separate lanes. Drive the setup through Spec-Kitty, not manual git commands.
+
+**Suggested flow:**
+
+1. Create/finalize a mission whose `lanes.json` yields at least two lanes
+2. Run:
+
+```bash
+spec-kitty next --agent <name> --mission <slug>
+spec-kitty agent action implement WP01 --mission <slug> --agent <agent-a>
+spec-kitty agent action implement WP02 --mission <slug> --agent <agent-b>
+```
+
+3. Enter both resulting worktrees independently
+4. Make a valid WP-scoped commit in each worktree
+
+**Expected result:**
+
+- both commits are allowed
+- hook does not confuse worktree A with worktree B
+- ownership validation is path/lane-based, not globally singleton-based
+
+**Failure condition:** one active worktree prevents another valid worktree from committing.
+
+#### Test 5.6c: Validate parallel review + implement flow through Spec-Kitty
+
+Still using a multi-lane mission:
+
+1. Put one WP into review through Spec-Kitty
+2. Keep another WP in implementation in a different lane
+3. Execute the normal status transitions through Spec-Kitty commands
+
+**Expected result:**
+
+- review-related spec-state commits from main are allowed
+- code commits in the still-active implementation worktree are allowed
+- no guardrail falsely treats concurrent agents as a conflict
+
+#### Test 5.7: Validate CI/server-side protected-branch gate
+
+Open a branch or simulate a CI run that violates protected-branch policy.
+
+**Expected result:** CI fails even if local hooks were bypassed.
+
+**Verify:**
+
+- direct mutation to `main` is rejected by branch protection or CI
+- repository can rely on remote enforcement, not only local discipline
+
+#### Exit Criteria for Phase 5
+
+- [ ] Direct commit to `main` is blocked locally
+- [ ] Commit outside `.worktrees/` is blocked locally
+- [ ] Commit inside valid worktree is allowed
+- [ ] Spec-Kitty status/planning commits from the main checkout still work
+- [ ] Direct push to `main` is blocked locally
+- [ ] Invalid commit message is blocked
+- [ ] Valid WP commit message is accepted
+- [ ] Ownership mismatch is rejected if workspace guard is enabled
+- [ ] Two valid parallel worktrees can commit concurrently without false rejection
+- [ ] Parallel review + implementation across separate lanes still works through Spec-Kitty
+- [ ] CI rejects protected-branch bypass attempts
+
+#### Why this phase is required
+
+Mission 004 exposed that workflow guidance alone is insufficient. The agent can still write code in the wrong checkout if no mechanical restriction exists. This phase validates the hard guardrails that must sit underneath Spec-Kitty.
+
+---
+
 ## Known Problems & Expected Friction
 
 ### Problem 1: ARCHITECTURE.md conflicts in parallel worktrees (CRITICAL)
@@ -518,6 +755,28 @@ npm run validate:arch
 
 **Mitigation:** During `/spec-kitty.tasks`, tell the agent: "This is a small task, 1-2 WPs maximum."
 
+### Problem 6: Missing repository guardrails around Spec-Kitty workflow (HIGH)
+
+**What:** Even when Spec-Kitty allocates a worktree correctly, nothing in the repository itself may prevent accidental implementation or commit activity from the main checkout.
+
+**When it triggers:**
+
+- agent continues working after a workspace-resolution hiccup
+- human commits from `main`
+- hooks are weak or missing
+- protected branch rules are not enforced remotely
+
+**Mitigation:** Add and test the guardrail stack from Phase 5:
+
+- block direct commits to `main`
+- require `.worktrees/...` context for implementation commits
+- block pushes to `main`
+- enforce commit message policy
+- verify workspace ownership
+- rely on CI / branch protection as the non-bypassable layer
+
+**Additional caution:** these guardrails must be path-aware and Spec-Kitty-aware. A naive blanket ban on commits from the planning checkout will break legitimate `spec-kitty agent tasks ...` status commits and may block parallel workflows.
+
 ---
 
 ## Success Criteria
@@ -530,6 +789,7 @@ npm run validate:arch
 | Merge back to main is clean                                  | No broken checks after merge                                                    |
 | validate:arch catches missing graph edges                    | Intentionally skip ARCHITECTURE.md update → validator catches it                |
 | Overhead is justified                                        | spec-kitty pipeline for 1 ticket takes ≤ 2x the time of manual implementation   |
+| Guardrails prevent direct-main bypass                        | Phase 5 adversarial tests reject forbidden commit/push paths                    |
 
 ## Decision Matrix
 
@@ -542,6 +802,7 @@ After running Phases 1-3:
 | Worktree friction too high (node_modules, hooks) | Reject worktree isolation, use spec-kitty specs only (no worktrees) |
 | validate:arch conflicts unmanageable             | Reject parallel execution, use spec-kitty with sequential WPs only  |
 | Overhead > 3x manual implementation              | Reject entirely, keep docs/TICKETS.md                               |
+| Workflow works but guardrails can be bypassed    | Do not adopt until Phase 5 protections are implemented and passing  |
 
 ---
 

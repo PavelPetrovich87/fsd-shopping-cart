@@ -62,6 +62,9 @@ src/
 6. Done only when ALL commands exit 0
 ```
 
+**CRITICAL:** Steps 3-5 MUST pass BEFORE any merge or approve decision.
+Git `pre-merge-commit` hook enforces this — merge will be rejected if lint/build fail.
+
 ## Communication
 
 - **Language:** Russian for conversation, English for all code/docs/comments

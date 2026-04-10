@@ -96,6 +96,25 @@ export default defineConfig([
       ],
     },
   },
+  {
+    // CONVENTIONS.md 4.1: Plain Objects Only — no classes in domain layer
+    files: ['src/entities/**/*.{ts,tsx}', 'src/features/**/model/**/*.{ts,tsx}'],
+    rules: {
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: 'ClassDeclaration',
+          message:
+            'Classes are forbidden in entities/ and features/**/model/. Use factory functions + plain objects. See CONVENTIONS.md §4.1.',
+        },
+        {
+          selector: 'ClassExpression',
+          message:
+            'Classes are forbidden in entities/ and features/**/model/. Use factory functions + plain objects. See CONVENTIONS.md §4.1.',
+        },
+      ],
+    },
+  },
   ...storybook.configs['flat/recommended'],
   {
     // Storybook CSF format requires export default for meta

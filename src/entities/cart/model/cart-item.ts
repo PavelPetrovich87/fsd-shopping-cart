@@ -1,58 +1,46 @@
-import type { CartItemData } from './types';
+import type { CartItemData } from './types'
 
-export class CartItem {
-  readonly skuId: string;
-  readonly name: string;
-  readonly unitPriceCents: number;
-  readonly quantity: number;
-  readonly createdAt: Date;
+export interface CartItem {
+  readonly skuId: string
+  readonly name: string
+  readonly unitPriceCents: number
+  readonly quantity: number
+  readonly createdAt: Date
+}
 
-  private constructor(data: CartItemData) {
-    this.skuId = data.skuId;
-    this.name = data.name;
-    this.unitPriceCents = data.unitPriceCents;
-    this.quantity = data.quantity;
-    this.createdAt = data.createdAt;
-    Object.freeze(this);
+export function getTotalPriceCents(item: CartItem): number {
+  return item.unitPriceCents * item.quantity
+}
+
+export function createCartItem(data: CartItemData): CartItem {
+  if (data.quantity < 1) {
+    throw new Error('Quantity must be at least 1')
   }
-
-  static create(data: CartItemData): CartItem {
-    if (data.quantity < 1) {
-      throw new Error('Quantity must be at least 1');
-    }
-    if (data.unitPriceCents < 0) {
-      throw new Error('Unit price cannot be negative');
-    }
-    return new CartItem({
-      ...data,
-      createdAt: data.createdAt ?? new Date(),
-    });
+  if (data.unitPriceCents < 0) {
+    throw new Error('Unit price cannot be negative')
   }
-
-  get totalPriceCents(): number {
-    return this.unitPriceCents * this.quantity;
+  return {
+    skuId: data.skuId,
+    name: data.name,
+    unitPriceCents: data.unitPriceCents,
+    quantity: data.quantity,
+    createdAt: data.createdAt ?? new Date(),
   }
+}
 
-  withQuantity(newQuantity: number): CartItem {
-    if (newQuantity < 1) {
-      throw new Error('Quantity must be at least 1');
-    }
-    return CartItem.create({
-      skuId: this.skuId,
-      name: this.name,
-      unitPriceCents: this.unitPriceCents,
-      quantity: newQuantity,
-      createdAt: this.createdAt,
-    });
+export function withQuantity(item: CartItem, newQuantity: number): CartItem {
+  if (newQuantity < 1) {
+    throw new Error('Quantity must be at least 1')
   }
+  return { ...item, quantity: newQuantity }
+}
 
-  toData(): CartItemData {
-    return {
-      skuId: this.skuId,
-      name: this.name,
-      unitPriceCents: this.unitPriceCents,
-      quantity: this.quantity,
-      createdAt: this.createdAt,
-    };
+export function toCartItemData(item: CartItem): CartItemData {
+  return {
+    skuId: item.skuId,
+    name: item.name,
+    unitPriceCents: item.unitPriceCents,
+    quantity: item.quantity,
+    createdAt: item.createdAt,
   }
 }

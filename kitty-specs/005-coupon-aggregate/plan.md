@@ -1,108 +1,117 @@
-# Implementation Plan: [FEATURE]
-*Path: [templates/plan-template.md](templates/plan-template.md)*
+# Implementation Plan: Coupon Aggregate
 
-
-**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
-**Input**: Feature specification from `/kitty-specs/[###-feature-name]/spec.md`
-
-**Note**: This template is filled in by the `/spec-kitty.plan` command. See `src/specify_cli/missions/software-dev/command-templates/plan.md` for the execution workflow.
-
-The planner will not begin until all planning questions have been answered—capture those answers in this document before progressing to later phases.
+**Branch**: `005-coupon-aggregate` | **Date**: 2026-04-09 | **Spec**: [spec.md](./spec.md)
 
 ## Summary
 
-[Extract from feature spec: primary requirement + technical approach from research]
+Implement a `Coupon` aggregate root that validates coupon codes and calculates discounts against a cart subtotal. Supports flat-amount and percentage discount modes with optional validity periods. Emits typed domain events. Depends on existing `Money` VO and `EventBus` from shared/lib.
 
 ## Technical Context
 
-<!--
-  ACTION REQUIRED: Replace the content in this section with the technical details
-  for the project. The structure here is presented in advisory capacity to guide
-  the iteration process.
--->
+**Language/Version**: TypeScript 5.9  
+**Primary Dependencies**: `Money` (shared/lib), `EventBus` (shared/lib)  
+**Storage**: In-memory (mock repository via fixtures, real persistence in T-008)  
+**Testing**: Vitest (matching project convention)  
+**Target Platform**: Web (React 19 SPA)  
+**Project Type**: FSD Feature-Sliced Design module  
+**Performance Goals**: N/A (in-memory domain logic)  
+**Constraints**: Integer arithmetic for all currency calculations  
+**Scale/Scope**: Single domain aggregate, ~6 files
 
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
-**Project Type**: [single/web/mobile - determines source structure]  
-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
-**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
-**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
+## Technical Decisions
 
-## Charter Check
-
-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
-
-[Gates determined based on charter file]
+| Decision | Choice | Rationale |
+|---|---|---|
+| Percentage storage | Separate `percentageValue: number` field | Cleaner than storing percentage as Money cents |
+| Validity checking | Inline date comparison in aggregate | Simple business logic, no external service needed |
+| Discount floor | Enforced at calculation time | Prevents negative totals at domain level |
 
 ## Project Structure
 
-### Documentation (this feature)
+### Source Code
 
 ```
-kitty-specs/[###-feature]/
-├── plan.md              # This file (/spec-kitty.plan command output)
-├── research.md          # Phase 0 output (/spec-kitty.plan command)
-├── data-model.md        # Phase 1 output (/spec-kitty.plan command)
-├── quickstart.md        # Phase 1 output (/spec-kitty.plan command)
-├── contracts/           # Phase 1 output (/spec-kitty.plan command)
-└── tasks.md             # Phase 2 output (/spec-kitty.tasks command - NOT created by /spec-kitty.plan)
-```
-
-### Source Code (repository root)
-<!--
-  ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
-  for this feature. Delete unused options and expand the chosen structure with
-  real paths (e.g., apps/admin, packages/something). The delivered plan must
-  not include Option labels.
--->
-
-```
-# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
 src/
-├── models/
-├── services/
-├── cli/
-└── lib/
-
-tests/
-├── contract/
-├── integration/
-└── unit/
-
-# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
-backend/
-├── src/
-│   ├── models/
-│   ├── services/
-│   └── api/
-└── tests/
-
-frontend/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   └── services/
-└── tests/
-
-# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
-api/
-└── [same as backend above]
-
-ios/ or android/
-└── [platform-specific structure: feature modules, UI flows, platform tests]
+└── entities/
+    └── coupon/
+        ├── model/
+        │   ├── coupon.ts              # Aggregate root
+        │   ├── types.ts               # CouponMode, CouponProps interfaces
+        │   ├── events.ts              # Domain event types
+        │   └── coupon.test.ts         # Unit tests
+        └── index.ts                   # Public API (re-exports)
 ```
 
-**Structure Decision**: [Document the selected structure and reference the real
-directories captured above]
+### Feature Scope (from T-006 ticket)
+
+Files to create:
+- `src/entities/coupon/model/coupon.ts` — Coupon aggregate
+- `src/entities/coupon/model/types.ts` — CouponMode, CouponProps, CouponValidated, CouponValidationFailed, DiscountCalculated types
+- `src/entities/coupon/model/events.ts` — Domain event definitions
+- `src/entities/coupon/model/coupon.test.ts` — Unit tests
+- `src/entities/coupon/index.ts` — Public API
+
+## Data Model
+
+### Coupon (Aggregate Root)
+
+```typescript
+interface CouponProps {
+  code: string                    // Unique identifier (normalized to uppercase)
+  discountMode: 'flat' | 'percentage'
+  discountAmount?: Money          // For flat mode (e.g., $5 off)
+  percentageValue?: number        // For percentage mode (e.g., 10 = 10%)
+  validFrom?: Date | null         // Optional start date
+  expiresAt?: Date | null         // Optional expiration date
+  isActive: boolean               // Deactivation flag
+}
+```
+
+### Domain Events
+
+```typescript
+interface CouponValidated {
+  type: 'CouponValidated'
+  couponCode: string
+  timestamp: Date
+}
+
+interface CouponValidationFailed {
+  type: 'CouponValidationFailed'
+  couponCode: string
+  reason: 'expired' | 'not_yet_active' | 'inactive' | 'not_found'
+  timestamp: Date
+}
+
+interface DiscountCalculated {
+  type: 'DiscountCalculated'
+  couponCode: string
+  subtotal: Money
+  discount: Money
+  resultingTotal: Money
+  timestamp: Date
+}
+```
+
+## Implementation Notes
+
+1. **Immutability**: All operations return new Coupon instances
+2. **Code normalization**: Codes normalized to uppercase on creation
+3. **Validation order**: Check `isActive` → check `validFrom` → check `expiresAt`
+4. **Discount calculation**: `discount = mode === 'flat' ? amount : subtotal * percentage / 100`
+5. **Floor enforcement**: `Math.max(0, calculatedDiscount)`
+
+## Charter Check
+
+*No charter file present — skipped*
 
 ## Complexity Tracking
 
-*Fill ONLY if Charter Check has violations that must be justified*
+| Aspect | Decision | Justification |
+|---|---|---|
+| Two discount modes | Separate fields | Cleaner than encoding percentage as Money cents |
+| Optional dates | Nullable fields | Supports both dated and undated coupons |
 
-| Violation | Why Needed | Simpler Alternative Rejected Because |
-|-----------|------------|-------------------------------------|
-| [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
-| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |
+## Next Phase
+
+Ready for `/spec-kitty.tasks` to generate work packages.

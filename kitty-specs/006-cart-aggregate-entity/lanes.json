@@ -13,12 +13,12 @@
         "WP03"
       ],
       "write_scope": [
-        "src/entities/cart/model/types.ts",
-        "src/entities/cart/model/events.ts",
-        "src/entities/cart/model/cart-item.ts",
-        "src/entities/cart/model/cart.ts",
         "src/entities/cart/index.ts",
-        "src/entities/cart/model/cart.test.ts"
+        "src/entities/cart/model/cart-item.ts",
+        "src/entities/cart/model/cart.test.ts",
+        "src/entities/cart/model/cart.ts",
+        "src/entities/cart/model/events.ts",
+        "src/entities/cart/model/types.ts"
       ],
       "predicted_surfaces": [
         "api",
@@ -28,28 +28,13 @@
       "parallel_group": 0
     }
   ],
-  "computed_at": "2026-04-09T14:52:30.000000+00:00",
-  "computed_from": "dependency_graph+ownership",
+  "computed_at": "2026-04-09T15:22:00.000000+00:00",
+  "computed_from": "manual_creation",
   "planning_artifact_wps": [],
   "collapse_report": {
-    "events": [
-      {
-        "wp_a": "WP02",
-        "wp_b": "WP01",
-        "rule": "dependency",
-        "evidence": "WP02 depends on WP01"
-      },
-      {
-        "wp_a": "WP03",
-        "wp_b": "WP02",
-        "rule": "dependency",
-        "evidence": "WP03 depends on WP02"
-      }
-    ],
-    "total_merges": 2,
-    "independent_wps_collapsed": 0,
-    "by_rule": {
-      "dependency": 2
-    }
+    "events": [],
+    "total_merges": 1,
+    "independent_wps_collapsed": 3,
+    "by_rule": {}
   }
 }

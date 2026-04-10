@@ -2,9 +2,7 @@
   "event_count": 8,
   "last_event_id": "01KNPPX0TTCAB3GQQNDAYYSW0N",
   "materialized_at": "2026-04-08T14:10:52.378619+00:00",
-  "mission_number": "001",
   "mission_slug": "001-001-shared-money-value-object",
-  "mission_type": "software-dev",
   "summary": {
     "approved": 0,
     "blocked": 0,
@@ -13,7 +11,6 @@
     "done": 1,
     "for_review": 0,
     "in_progress": 0,
-    "in_review": 0,
     "planned": 0
   },
   "work_packages": {

@@ -217,9 +217,107 @@ When a component needs customization, use slots (children/render props), not sty
 
 ---
 
-## 4. Structural Rules
+## 4. Domain Model Rules
 
-### 4.1 Every Slice Has a Public API `[ci-custom]`
+### 4.1 Plain Objects Only — No Classes in Domain Layer `[eslint]`
+
+Domain aggregates, entities, and value objects in `entities/` and `features/**/model/` MUST use the **Factory Functions + Plain Objects** pattern. ES6 classes are forbidden in these locations.
+
+**Why:** Plain objects are natively serializable (JSON, structuredClone), work with React state (useState, Zustand) without wrapper hacks, and are transparent to devtools. Classes hide state behind `private` fields, break spread/destructuring, and require custom serialization.
+
+**Required structure:**
+
+```typescript
+// 1. State — plain interface, all readonly
+export interface Cart {
+  readonly id: string
+  readonly items: readonly CartItem[]
+  readonly status: 'active' | 'checkout_pending' | 'checked_out'
+}
+
+// 2. Factory — pure function, validates invariants, returns plain object
+export function createCart(id: string): Cart {
+  return { id, items: [], status: 'active' }
+}
+
+// 3. Behavior — pure function, takes state, returns NEW state
+export function addItem(cart: Cart, item: CartItem): Cart {
+  return { ...cart, items: [...cart.items, item] }
+}
+```
+
+**Anti-patterns (will be caught by ESLint):**
+
+```typescript
+// ❌ class declaration in entities/
+export class Cart { ... }
+
+// ❌ this-mutation
+this.items.push(item)
+
+// ❌ method call on instance
+cart.addItem(item)
+```
+
+**Scope:** `src/entities/**/*.ts`, `src/features/**/model/**/*.ts`
+
+**Out of scope:** `shared/lib/` (Value Objects like Money may use classes — preferred plain, but not enforced by linter).
+
+### 4.2 Immutable State Transitions `[eslint]`
+
+Behavioral functions in domain layer MUST return a new object. Direct mutation of input state is forbidden.
+
+```typescript
+// ❌ Violation: mutating input
+export function addItem(cart: Cart, item: CartItem): Cart {
+  cart.items.push(item) // mutation!
+  return cart
+}
+
+// ✅ Correct: new object
+export function addItem(cart: Cart, item: CartItem): Cart {
+  return { ...cart, items: [...cart.items, item] }
+}
+```
+
+### 4.3 Events as Data, Not Effects `[review]`
+
+Domain functions in `entities/` and `features/**/model/` must not produce side effects. No calling callbacks, emitting events, dispatching actions, or reaching for external systems.
+
+Instead, a state-changing function returns a **tuple**: new state + an array of domain events (plain objects describing what happened).
+
+```typescript
+// ❌ Violation: domain function triggers side effects
+export function addItem(cart: Cart, item: CartItem, onAdd: () => void): Cart {
+  onAdd() // callback = side effect
+  bus.emit('ItemAdded', item) // event emitter = side effect
+  return { ...cart, items: [...cart.items, item] }
+}
+
+// ✅ Correct: domain function returns facts, caller decides what to do with them
+export function addItem(cart: Cart, item: CartItem): [Cart, CartEvent[]] {
+  const newCart = { ...cart, items: [...cart.items, item] }
+  return [newCart, [{ type: 'ItemAddedToCart', payload: { itemId: item.id } }]]
+}
+```
+
+**Banned patterns** (any of these in domain files = violation):
+
+- `.emit()`, `.dispatch()`, `.publish()`, `.notify()`, `.fire()`, `.trigger()`
+- `.subscribe()`, `.on()`, `.addEventListener()`
+- `new EventEmitter()`, `new EventTarget()`
+- Invoking callback parameters (`onSuccess()`, `onChange()`, etc.)
+- Direct `fetch` / HTTP calls
+
+**Why:** The domain layer is a pure calculator — it computes new state and records facts. The `features/` orchestrator layer saves state to the store and routes events to whoever cares (analytics, notifications, dependent recalculations). This makes domain logic trivially testable: pass data in, assert on the returned tuple with `toEqual()`. No mocks, no spies.
+
+**Scope:** `src/entities/**/*.ts`, `src/features/**/model/**/*.ts`
+
+---
+
+## 5. Structural Rules
+
+### 5.1 Every Slice Has a Public API `[ci-custom]`
 
 Every slice directory must contain an `index.ts` file.
 
@@ -230,7 +328,7 @@ Every slice directory must contain an `index.ts` file.
 
 Enforced by `npm run validate:arch` (`scripts/validate-architecture.ts`).
 
-### 4.2 Architecture Graph Matches Imports `[ci-custom]`
+### 5.2 Architecture Graph Matches Imports `[ci-custom]`
 
 The dependency graph in `ARCHITECTURE.md` must match actual imports in the codebase. Any divergence fails CI.
 
@@ -245,12 +343,23 @@ Enforced by `npm run validate:arch` (`scripts/validate-architecture.ts`).
 
 ## Enforcement
 
-| Tag           | Tool                       | When                   |
-| ------------- | -------------------------- | ---------------------- |
-| `[steiger]`   | Steiger FSD linter         | `npm run lint:arch`    |
-| `[eslint]`    | ESLint 9 flat config       | `npm run lint`         |
-| `[prettier]`  | Prettier + TW plugin       | `npm run format:check` |
-| `[review]`    | Code review (manual)       | PR review              |
-| `[ci-custom]` | `validate-architecture.ts` | CI pipeline (Day 5)    |
+| Tag           | Tool                       | When                          |
+| ------------- | -------------------------- | ----------------------------- |
+| `[steiger]`   | Steiger FSD linter         | `npm run lint:arch`           |
+| `[eslint]`    | ESLint 9 flat config       | `npm run lint`                |
+| `[prettier]`  | Prettier + TW plugin       | `npm run format:check`        |
+| `[review]`    | Code review (manual)       | PR review                     |
+| `[ci-custom]` | `validate-architecture.ts` | CI pipeline (Day 5)           |
+| `[git-hook]`  | Husky hooks                | pre-commit / pre-merge / push |
+
+### Git Hooks
+
+| Hook               | Runs                                                     |
+| ------------------ | -------------------------------------------------------- |
+| `pre-commit`       | `lint-staged` (lint + format on changed files)           |
+| `pre-merge-commit` | `npm run lint && npm run lint:arch && npm run build`     |
+| `pre-push`         | `lint:arch && validate:arch && build && build-storybook` |
+
+The `pre-merge-commit` hook is the **merge gate** — it prevents broken code from landing in `main` even if a reviewing agent approves without running checks.
 
 All commands must exit with code 0. Warnings are treated as errors.

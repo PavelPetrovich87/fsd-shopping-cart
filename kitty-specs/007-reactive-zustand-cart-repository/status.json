@@ -1,16 +1,16 @@
 {
-  "event_count": 17,
-  "last_event_id": "01KNVX9BBCSTDVW3QZY0VANFBG",
-  "materialized_at": "2026-04-10T14:38:39.981281+00:00",
+  "event_count": 20,
+  "last_event_id": "01KNVXAZ0QVC21M1T9X8RE8Z1N",
+  "materialized_at": "2026-04-10T14:39:32.887586+00:00",
   "mission_slug": "007-reactive-zustand-cart-repository",
   "summary": {
-    "approved": 1,
+    "approved": 2,
     "blocked": 0,
     "canceled": 0,
     "claimed": 0,
     "done": 0,
     "for_review": 1,
-    "in_progress": 1,
+    "in_progress": 0,
     "planned": 0
   },
   "work_packages": {
@@ -22,11 +22,11 @@
       "last_transition_at": "2026-04-10T14:38:17.872339+00:00"
     },
     "WP02": {
-      "actor": "opencode",
+      "actor": "user",
       "force_count": 2,
-      "lane": "in_progress",
-      "last_event_id": "01KNVX9BBCSTDVW3QZY0VANFBG",
-      "last_transition_at": "2026-04-10T14:38:39.981281+00:00"
+      "lane": "approved",
+      "last_event_id": "01KNVXAZ0QVC21M1T9X8RE8Z1N",
+      "last_transition_at": "2026-04-10T14:39:32.887586+00:00"
     },
     "WP03": {
       "actor": "user",

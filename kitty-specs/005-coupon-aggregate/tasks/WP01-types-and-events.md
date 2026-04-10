@@ -12,10 +12,15 @@ requirement_refs:
 planning_base_branch: main
 merge_target_branch: main
 branch_strategy: Planning artifacts for this feature were generated on main. During /spec-kitty.implement this WP may branch from a dependency-specific base, but completed changes must merge back into main unless the human explicitly redirects the landing branch.
+base_branch: kitty/mission-005-coupon-aggregate
+base_commit: 24f5c02f871ee8dfe8900170d08bc599374f5f36
+created_at: '2026-04-10T12:11:08.338556+00:00'
 subtasks: [T001, T002]
+shell_pid: "19423"
 authoritative_surface: src/entities/coupon/model/
 execution_mode: code_change
 owned_files: [src/entities/coupon/model/types.ts, src/entities/coupon/model/events.ts]
+agent: "kilocode:o3:implementer:implementer"
 ---
 
 # Work Package: WP01 — Foundation Types & Events
@@ -182,3 +187,7 @@ Verify:
 2. Event payloads match the trigger conditions in spec.md Section 8
 3. All imports use correct paths (`@/shared/lib` for Money)
 4. No implementation details leak into type definitions
+
+## Activity Log
+
+- 2026-04-10T12:11:17Z – kilocode:o3:implementer:implementer – shell_pid=19423 – Assigned agent via action command

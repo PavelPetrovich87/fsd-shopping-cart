@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "mission_slug": "008-mock-repository-adapters",
+  "mission_id": "01KNVTBCWZJN9WXJ8K2RHX4YXY",
+  "mission_branch": "kitty/mission-008-mock-repository-adapters",
+  "target_branch": "main",
+  "lanes": [
+    {
+      "lane_id": "lane-a",
+      "wp_ids": [
+        "WP01",
+        "WP02",
+        "WP03"
+      ],
+      "write_scope": [
+        "kitty-specs/008-mock-repository-adapters/quickstart.md",
+        "src/entities/api/mock-repositories-contract.test.ts",
+        "src/entities/coupon/api/mock-coupon-repository.test.ts",
+        "src/entities/coupon/api/mock-coupon-repository.ts",
+        "src/entities/coupon/index.ts",
+        "src/entities/product/api/mock-inventory-repository.test.ts",
+        "src/entities/product/api/mock-inventory-repository.ts",
+        "src/entities/product/index.ts"
+      ],
+      "predicted_surfaces": [
+        "api",
+        "tests",
+        "workspace"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    }
+  ],
+  "computed_at": "2026-04-10T13:57:23.025849+00:00",
+  "computed_from": "dependency_graph+ownership",
+  "planning_artifact_wps": [],
+  "collapse_report": {
+    "events": [
+      {
+        "wp_a": "WP03",
+        "wp_b": "WP01",
+        "rule": "dependency",
+        "evidence": "WP03 depends on WP01"
+      },
+      {
+        "wp_a": "WP03",
+        "wp_b": "WP02",
+        "rule": "dependency",
+        "evidence": "WP03 depends on WP02"
+      }
+    ],
+    "total_merges": 2,
+    "independent_wps_collapsed": 0,
+    "by_rule": {
+      "dependency": 2
+    }
+  }
+}

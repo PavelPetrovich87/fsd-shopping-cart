@@ -7,8 +7,8 @@
 
 | ID | Description | WP | Parallel |
 |---|---|---|---|
-| T001 | Create types.ts with CouponProps, CouponMode, and event payload interfaces | WP01 | ✓ |
-| T002 | Create events.ts with domain event type definitions | WP01 | ✓ |
+| T001 | Create types.ts with CouponProps, CouponMode, and event payload interfaces | WP01 | ✓ | [D] |
+| T002 | Create events.ts with domain event type definitions | WP01 | ✓ | [D] |
 | T003 | Create coupon.ts aggregate root with validation and discount calculation | WP02 | |
 | T004 | Create coupon.test.ts unit tests | WP02 | |
 | T005 | Create index.ts public API exports | WP02 | |
@@ -26,8 +26,8 @@
 **Independent Test**: N/A (types file, not runnable)
 
 **Included Subtasks**:
-- [ ] T001: Create types.ts with CouponProps, CouponMode, and event payload interfaces
-- [ ] T002: Create events.ts with domain event type definitions
+- [x] T001: Create types.ts with CouponProps, CouponMode, and event payload interfaces
+- [x] T002: Create events.ts with domain event type definitions
 
 **Implementation Sketch**:
 1. Create `src/entities/coupon/model/types.ts`

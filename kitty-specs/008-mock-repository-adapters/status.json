@@ -1,16 +1,16 @@
 {
-  "event_count": 26,
-  "last_event_id": "01KNVWGP06KGASBKEG0N1ZY5RN",
-  "materialized_at": "2026-04-10T14:25:11.686112+00:00",
+  "event_count": 29,
+  "last_event_id": "01KNVWHV2VFAVPXZHTF61VMSB4",
+  "materialized_at": "2026-04-10T14:25:49.659531+00:00",
   "mission_number": "008",
   "mission_slug": "008-mock-repository-adapters",
   "mission_type": "software-dev",
   "summary": {
-    "approved": 3,
+    "approved": 0,
     "blocked": 0,
     "canceled": 0,
     "claimed": 0,
-    "done": 0,
+    "done": 3,
     "for_review": 0,
     "in_progress": 0,
     "in_review": 0,
@@ -18,25 +18,25 @@
   },
   "work_packages": {
     "WP01": {
-      "actor": "user",
+      "actor": "merge",
       "force_count": 2,
-      "lane": "approved",
-      "last_event_id": "01KNVWCV8ZAZXZET38RMZAR0PJ",
-      "last_transition_at": "2026-04-10T14:23:06.015456+00:00"
+      "lane": "done",
+      "last_event_id": "01KNVWHTN9TTYMQEV2DTYGPJ8G",
+      "last_transition_at": "2026-04-10T14:25:49.225828+00:00"
     },
     "WP02": {
-      "actor": "user",
+      "actor": "merge",
       "force_count": 2,
-      "lane": "approved",
-      "last_event_id": "01KNVWDZKKWZHF7J3W87Y710S6",
-      "last_transition_at": "2026-04-10T14:23:43.219892+00:00"
+      "lane": "done",
+      "last_event_id": "01KNVWHV2802MBEFJMQ9A8S9MS",
+      "last_transition_at": "2026-04-10T14:25:49.640594+00:00"
     },
     "WP03": {
-      "actor": "user",
+      "actor": "merge",
       "force_count": 4,
-      "lane": "approved",
-      "last_event_id": "01KNVWGP06KGASBKEG0N1ZY5RN",
-      "last_transition_at": "2026-04-10T14:25:11.686112+00:00"
+      "lane": "done",
+      "last_event_id": "01KNVWHV2VFAVPXZHTF61VMSB4",
+      "last_transition_at": "2026-04-10T14:25:49.659531+00:00"
     }
   }
 }

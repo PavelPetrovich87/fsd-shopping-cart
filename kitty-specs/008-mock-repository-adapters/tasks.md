@@ -26,9 +26,9 @@
 | T008 | Handle unknown/empty coupon code returning `null` deterministically | WP02 | No | [D] |
 | T009 | Export coupon repository through coupon slice public API | WP02 | Yes | [D] |
 | T010 | Add coupon repository behavior tests for found/not-found/determinism | WP02 | No | [D] |
-| T011 | Run lint/arch/build and verify FR/NFR coverage evidence | WP03 | No |
-| T012 | Add cross-slice adapter usage verification test for port compatibility | WP03 | No |
-| T013 | Record final implementation verification notes in feature quickstart doc | WP03 | No |
+| T011 | Run lint/arch/build and verify FR/NFR coverage evidence | WP03 | No | [D] |
+| T012 | Add cross-slice adapter usage verification test for port compatibility | WP03 | No | [D] |
+| T013 | Record final implementation verification notes in feature quickstart doc | WP03 | No | [D] |
 
 ## Work Packages
 
@@ -102,9 +102,9 @@ Risks:
 **Independent Test**: All required quality gates pass and integration checks confirm both adapters are consumable through repository contracts.  
 **Estimated Prompt Size**: ~250 lines
 
-- [ ] T011 Run lint/arch/build and verify FR/NFR coverage evidence (WP03)
-- [ ] T012 Add cross-slice adapter usage verification test for port compatibility (WP03)
-- [ ] T013 Record final implementation verification notes in feature quickstart doc (WP03)
+- [x] T011 Run lint/arch/build and verify FR/NFR coverage evidence (WP03)
+- [x] T012 Add cross-slice adapter usage verification test for port compatibility (WP03)
+- [x] T013 Record final implementation verification notes in feature quickstart doc (WP03)
 
 Implementation sketch:
 - Add a small integration-level verification in test scope that exercises both repository ports from consumer perspective.

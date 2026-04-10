@@ -20,6 +20,8 @@ subtasks: [T003, T004, T005]
 authoritative_surface: src/entities/coupon/
 execution_mode: code_change
 owned_files: [src/entities/coupon/model/coupon.ts, src/entities/coupon/model/coupon.test.ts, src/entities/coupon/index.ts]
+agent: "kilocode:o3:implementer:implementer"
+shell_pid: "19423"
 ---
 
 # Work Package: WP02 — Coupon Aggregate, Tests, Public API
@@ -346,3 +348,7 @@ When reviewing this work package, verify:
 5. **Percentage validation**: 0-100 range enforced
 6. **Test coverage**: All spec acceptance criteria have corresponding tests
 7. **No floating-point**: All currency uses `Money` (integer cents internally)
+
+## Activity Log
+
+- 2026-04-10T12:15:20Z – kilocode:o3:implementer:implementer – shell_pid=19423 – Started implementation via action command

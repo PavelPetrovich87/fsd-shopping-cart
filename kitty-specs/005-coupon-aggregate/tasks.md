@@ -9,9 +9,9 @@
 |---|---|---|---|
 | T001 | Create types.ts with CouponProps, CouponMode, and event payload interfaces | WP01 | ✓ | [D] |
 | T002 | Create events.ts with domain event type definitions | WP01 | ✓ | [D] |
-| T003 | Create coupon.ts aggregate root with validation and discount calculation | WP02 | |
-| T004 | Create coupon.test.ts unit tests | WP02 | |
-| T005 | Create index.ts public API exports | WP02 | |
+| T003 | Create coupon.ts aggregate root with validation and discount calculation | WP02 | | [D] |
+| T004 | Create coupon.test.ts unit tests | WP02 | | [D] |
+| T005 | Create index.ts public API exports | WP02 | | [D] |
 
 ## Work Packages
 
@@ -53,9 +53,9 @@
 **Independent Test**: `npm test src/entities/coupon/model/coupon.test.ts`
 
 **Included Subtasks**:
-- [ ] T003: Create coupon.ts aggregate root with validation and discount calculation
-- [ ] T004: Create coupon.test.ts unit tests
-- [ ] T005: Create index.ts public API exports
+- [x] T003: Create coupon.ts aggregate root with validation and discount calculation
+- [x] T004: Create coupon.test.ts unit tests
+- [x] T005: Create index.ts public API exports
 
 **Implementation Sketch**:
 1. Implement `coupon.ts` with:

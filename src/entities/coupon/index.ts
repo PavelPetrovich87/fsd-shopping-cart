@@ -1,3 +1,5 @@
+export type { ICouponRepository } from './model/ports'
+
 export { Coupon } from './model/coupon'
 
 export type {

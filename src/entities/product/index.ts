@@ -1,3 +1,5 @@
+export type { IStockRepository } from './model/ports'
+
 export { createProductVariant, LOW_STOCK_THRESHOLD } from './model/factory'
 export { availableStock } from './model/available-stock'
 export { createStockReservation } from './model/stock-reservation'

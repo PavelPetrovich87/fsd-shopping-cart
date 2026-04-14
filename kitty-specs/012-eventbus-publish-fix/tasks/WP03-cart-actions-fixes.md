@@ -192,3 +192,4 @@ npm run build
 
 - 2026-04-14T14:11:36Z – kilo:minimax-m2::implementer – shell_pid=11961 – Started implementation via action command
 - 2026-04-14T14:15:54Z – kilo:minimax-m2::implementer – shell_pid=11961 – WP03 complete: casts removed, spy tests added. Lint:arch shows pre-existing FSD violations in cart-actions (not introduced by our changes).
+- 2026-04-14T14:16:42Z – kilo:minimax-m2::implementer – shell_pid=11961 – Review passed: casts removed, spy tests verify eventBus.publish is called with correct eventType.

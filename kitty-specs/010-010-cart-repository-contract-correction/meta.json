@@ -1,0 +1,10 @@
+{
+  "created_at": "2026-04-14T10:48:42.890035+00:00",
+  "friendly_name": "010 cart repository contract correction",
+  "mission_id": "01KP5SQ5M9M032CAPGZFBPEGYG",
+  "mission_number": "010",
+  "mission_slug": "010-010-cart-repository-contract-correction",
+  "mission_type": "software-dev",
+  "slug": "010-010-cart-repository-contract-correction",
+  "target_branch": "main"
+}

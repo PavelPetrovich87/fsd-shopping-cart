@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "mission_slug": "010-010-cart-repository-contract-correction",
+  "mission_id": "01KP5SQ5M9M032CAPGZFBPEGYG",
+  "mission_branch": "kitty/mission-010-010-cart-repository-contract-correction",
+  "target_branch": "main",
+  "lanes": [
+    {
+      "lane_id": "lane-a",
+      "wp_ids": [
+        "WP01"
+      ],
+      "write_scope": [
+        "src/entities/cart/api/zustand-cart-repository.integration.test.ts",
+        "src/entities/cart/api/zustand-cart-repository.ts",
+        "src/entities/cart/model/ports.ts",
+        "src/entities/coupon/index.ts",
+        "src/entities/coupon/model/ports.ts",
+        "src/entities/product/index.ts",
+        "src/entities/product/model/ports.ts"
+      ],
+      "predicted_surfaces": [
+        "api",
+        "legacy-cleanup",
+        "tests",
+        "tracker-integration",
+        "workspace"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    }
+  ],
+  "computed_at": "2026-04-14T11:01:19.939253+00:00",
+  "computed_from": "dependency_graph+ownership",
+  "planning_artifact_wps": []
+}

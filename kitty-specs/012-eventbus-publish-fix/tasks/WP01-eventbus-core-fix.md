@@ -9,12 +9,16 @@ requirement_refs:
 planning_base_branch: main
 merge_target_branch: main
 branch_strategy: Planning artifacts for this feature were generated on main. During /spec-kitty.implement this WP may branch from a dependency-specific base, but completed changes must merge back into main unless the human explicitly redirects the landing branch.
+base_branch: kitty/mission-012-eventbus-publish-fix
+base_commit: ce9052638b0629d7d8e546f760b6c5b4cb91f004
+created_at: '2026-04-14T14:01:29.373738+00:00'
 subtasks:
 - T001
 - T002
 - T003
 - T004
 - T005
+shell_pid: '11961'
 history: []
 authoritative_surface: src/shared/lib/
 execution_mode: code_change

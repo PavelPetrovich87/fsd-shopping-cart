@@ -1,7 +1,7 @@
 {
-  "event_count": 13,
-  "last_event_id": "01KP659W2EYV1WV27DWJZY8HNQ",
-  "materialized_at": "2026-04-14T14:11:10.030717+00:00",
+  "event_count": 16,
+  "last_event_id": "01KP65AP5VRK83W4R620GR1MXH",
+  "materialized_at": "2026-04-14T14:11:36.763128+00:00",
   "mission_number": "012",
   "mission_slug": "012-eventbus-publish-fix",
   "mission_type": "software-dev",
@@ -11,10 +11,10 @@
     "canceled": 0,
     "claimed": 0,
     "done": 0,
-    "for_review": 1,
-    "in_progress": 0,
+    "for_review": 0,
+    "in_progress": 2,
     "in_review": 0,
-    "planned": 1
+    "planned": 0
   },
   "work_packages": {
     "WP01": {
@@ -25,18 +25,18 @@
       "last_transition_at": "2026-04-14T14:05:45.899499+00:00"
     },
     "WP02": {
-      "actor": "user",
-      "force_count": 1,
-      "lane": "for_review",
-      "last_event_id": "01KP659W2EYV1WV27DWJZY8HNQ",
-      "last_transition_at": "2026-04-14T14:11:10.030717+00:00"
+      "actor": "kilo:minimax-m2::reviewer",
+      "force_count": 2,
+      "lane": "in_progress",
+      "last_event_id": "01KP65ANNPS5A4RR6WV2KQAFKX",
+      "last_transition_at": "2026-04-14T14:11:36.246992+00:00"
     },
     "WP03": {
-      "actor": "finalize-tasks",
+      "actor": "kilo:minimax-m2::implementer",
       "force_count": 1,
-      "lane": "planned",
-      "last_event_id": "01KP647CFWAG1CGBRCE4WHDFCD",
-      "last_transition_at": "2026-04-14T13:52:19.964805+00:00"
+      "lane": "in_progress",
+      "last_event_id": "01KP65AP5VRK83W4R620GR1MXH",
+      "last_transition_at": "2026-04-14T14:11:36.763128+00:00"
     }
   }
 }

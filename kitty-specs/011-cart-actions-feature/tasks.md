@@ -11,9 +11,9 @@
 
 | ID | Description | WP | Parallel | Dependencies |
 |----|-------------|-----|----------|--------------|
-| T001 | Create `features/cart-actions` directory structure | WP01 | — | — |
-| T002 | Implement `model/errors.ts` — CartActionsError types | WP01 | [P] | T001 |
-| T003 | Implement `model/results.ts` — Result types | WP01 | [P] | T001 |
+| T001 | Create `features/cart-actions` directory structure | WP01 | — | — | [D] |
+| T002 | Implement `model/errors.ts` — CartActionsError types | WP01 | [P] | T001 | [D] |
+| T003 | Implement `model/results.ts` — Result types | WP01 | [P] | T001 | [D] |
 | T004 | Implement `AddToCart` use case | WP02 | — | T002, T003 |
 | T005 | Write `AddToCart` unit tests | WP02 | — | T004 |
 | T006 | Implement `RemoveFromCart` use case | WP03 | [P] | T002, T003 |
@@ -35,9 +35,9 @@
 **Testable independently:** Yes — types have no runtime behavior, only compile-time validation.
 
 **Included Subtasks:**
-- [ ] T001 — Create `features/cart-actions` directory structure
-- [ ] T002 — Implement `model/errors.ts` — CartActionsError types
-- [ ] T003 — Implement `model/results.ts` — Result types
+- [x] T001 — Create `features/cart-actions` directory structure
+- [x] T002 — Implement `model/errors.ts` — CartActionsError types
+- [x] T003 — Implement `model/results.ts` — Result types
 
 **Implementation Sketch:**
 1. Create `src/features/cart-actions/model/` directory structure

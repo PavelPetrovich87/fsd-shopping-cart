@@ -20,9 +20,9 @@
 | T007 | Write `RemoveFromCart` unit tests | WP03 | — | T006 | [D] |
 | T008 | Implement `ChangeCartItemQuantity` use case | WP03 | [P] | T002, T003 | [D] |
 | T009 | Write `ChangeCartItemQuantity` unit tests | WP03 | — | T008 | [D] |
-| T010 | Create `model/index.ts` — re-exports | WP04 | — | T004, T006, T008 |
-| T011 | Create `index.ts` — public API | WP04 | — | T010 |
-| T012 | Run quality gates (lint, typecheck, tests) | WP04 | — | T011 |
+| T010 | Create `model/index.ts` — re-exports | WP04 | — | T004, T006, T008 | [D] |
+| T011 | Create `index.ts` — public API | WP04 | — | T010 | [D] |
+| T012 | Run quality gates (lint, typecheck, tests) | WP04 | — | T011 | [D] |
 
 ---
 
@@ -140,9 +140,9 @@
 **Testable independently:** No — requires all preceding WPs
 
 **Included Subtasks:**
-- [ ] T010 — Create `model/index.ts` — re-exports
-- [ ] T011 — Create `index.ts` — public API
-- [ ] T012 — Run quality gates (lint, typecheck, tests)
+- [x] T010 — Create `model/index.ts` — re-exports
+- [x] T011 — Create `index.ts` — public API
+- [x] T012 — Run quality gates (lint, typecheck, tests)
 
 **Implementation Sketch:**
 1. Create `model/index.ts` — re-export all use cases and types

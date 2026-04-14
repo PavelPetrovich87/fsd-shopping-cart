@@ -1,108 +1,267 @@
-# Implementation Plan: [FEATURE]
-*Path: [templates/plan-template.md](templates/plan-template.md)*
+# Checkout Feature — Implementation Plan
 
+**Mission:** 014-checkout-feature
+**Plan created:** 2026-04-14
+**Spec:** `kitty-specs/014-checkout-feature/spec.md`
 
-**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
-**Input**: Feature specification from `/kitty-specs/[###-feature-name]/spec.md`
+---
 
-**Note**: This template is filled in by the `/spec-kitty.plan` command. See `src/specify_cli/missions/software-dev/command-templates/plan.md` for the execution workflow.
+## 1. Technical Context
 
-The planner will not begin until all planning questions have been answered—capture those answers in this document before progressing to later phases.
+### Feature Summary
+Implement `InitiateCheckout` use case in `features/checkout/model/`:
+- Validates stock availability for all cart items
+- Transitions cart from `Active` to `Checkout_Pending`
+- Emits `CheckoutInitiated` event via EventBus
+- Returns structured result (success, error, or stock conflict)
 
-## Summary
+### Key Design Decisions
 
-[Extract from feature spec: primary requirement + technical approach from research]
+| Decision | Choice | Rationale |
+|----------|--------|-----------|
+| Result typing | Discriminated union | Enables exhaustive handling in consumers |
+| Conflict typing | `StockConflict[]` array | Returns all conflicts at once, not just first |
+| Repository access | Async (Promise-based) | Matches T-010 async port interface |
+| Stock validation | Check all items before any mutation | Atomic decision: all-or-nothing |
 
-## Technical Context
+### Data Model (from spec)
 
-<!--
-  ACTION REQUIRED: Replace the content in this section with the technical details
-  for the project. The structure here is presented in advisory capacity to guide
-  the iteration process.
--->
+**Result Types**:
+```typescript
+type InitiateCheckoutResult =
+  | { success: true; cart: Cart }
+  | { success: false; reason: 'empty_cart' }
+  | { success: false; reason: 'invalid_state' }
+  | { success: false; reason: 'stock_conflict'; conflicts: StockConflict[] }
 
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
-**Project Type**: [single/web/mobile - determines source structure]  
-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
-**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
-**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
-
-## Charter Check
-
-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
-
-[Gates determined based on charter file]
-
-## Project Structure
-
-### Documentation (this feature)
-
-```
-kitty-specs/[###-feature]/
-├── plan.md              # This file (/spec-kitty.plan command output)
-├── research.md          # Phase 0 output (/spec-kitty.plan command)
-├── data-model.md        # Phase 1 output (/spec-kitty.plan command)
-├── quickstart.md        # Phase 1 output (/spec-kitty.plan command)
-├── contracts/           # Phase 1 output (/spec-kitty.plan command)
-└── tasks.md             # Phase 2 output (/spec-kitty.tasks command - NOT created by /spec-kitty.plan)
+interface StockConflict {
+  skuId: string;
+  productName: string;
+  requestedQuantity: number;
+  availableQuantity: number;
+}
 ```
 
-### Source Code (repository root)
-<!--
-  ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
-  for this feature. Delete unused options and expand the chosen structure with
-  real paths (e.g., apps/admin, packages/something). The delivered plan must
-  not include Option labels.
--->
-
-```
-# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
-src/
-├── models/
-├── services/
-├── cli/
-└── lib/
-
-tests/
-├── contract/
-├── integration/
-└── unit/
-
-# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
-backend/
-├── src/
-│   ├── models/
-│   ├── services/
-│   └── api/
-└── tests/
-
-frontend/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   └── services/
-└── tests/
-
-# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
-api/
-└── [same as backend above]
-
-ios/ or android/
-└── [platform-specific structure: feature modules, UI flows, platform tests]
+**Event Emitted**:
+```typescript
+interface CheckoutInitiated {
+  eventType: 'CheckoutInitiated';
+  cartId: string;
+  userId: string;
+  items: CartItem[];
+  subtotal: Money;
+  timestamp: Date;
+}
 ```
 
-**Structure Decision**: [Document the selected structure and reference the real
-directories captured above]
+### File Structure
 
-## Complexity Tracking
+```
+src/features/checkout/
+├── model/
+│   ├── initiate-checkout.ts        # InitiateCheckout use case
+│   ├── initiate-checkout.test.ts    # Unit tests
+│   ├── events.ts                    # CheckoutInitiated event type
+│   └── index.ts                     # Re-exports
+└── index.ts                         # Public API
+```
 
-*Fill ONLY if Charter Check has violations that must be justified*
+### Implementation Pattern
 
-| Violation | Why Needed | Simpler Alternative Rejected Because |
-|-----------|------------|-------------------------------------|
-| [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
-| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |
+```typescript
+export async function InitiateCheckout(
+  cartRepo: ICartRepository,
+  stockRepo: IStockRepository,
+  eventBus: EventBus
+): Promise<InitiateCheckoutResult> {
+  // 1. Get cart
+  const cart = await cartRepo.getCart();
+
+  // 2. Validate cart state
+  if (cart.state !== CartState.Active) {
+    return { success: false, reason: 'invalid_state' };
+  }
+
+  // 3. Check empty
+  if (cart.items.length === 0) {
+    return { success: false, reason: 'empty_cart' };
+  }
+
+  // 4. Validate stock for ALL items
+  const conflicts: StockConflict[] = [];
+  for (const item of cart.items) {
+    const variant = await stockRepo.findBySku(item.skuId);
+    if (!variant) continue; // product still exists
+    if (item.quantity > variant.availableStock) {
+      conflicts.push({
+        skuId: item.skuId,
+        productName: variant.name,
+        requestedQuantity: item.quantity,
+        availableQuantity: variant.availableStock,
+      });
+    }
+  }
+
+  // 5. If conflicts, return early
+  if (conflicts.length > 0) {
+    return { success: false, reason: 'stock_conflict', conflicts };
+  }
+
+  // 6. Transition cart state
+  cart.initiateCheckout();
+  await cartRepo.saveCart(cart);
+
+  // 7. Publish event
+  await eventBus.publish(new CheckoutInitiated({
+    cartId: cart.id,
+    userId: cart.userId,
+    items: cart.items,
+    subtotal: cart.subtotal,
+    timestamp: new Date(),
+  }));
+
+  return { success: true, cart };
+}
+```
+
+---
+
+## 2. Charter Check
+
+| Directive | Status | Notes |
+|-----------|--------|-------|
+| Arch Integrity | PASS | FSD layers respected: `features/checkout` imports from `entities/cart`, `entities/product`, `shared/lib` only |
+| Decision Doc | PASS | Decisions documented in this plan |
+| Spec Fidelity | PASS | Implementation matches spec.md |
+| Locality | PASS | All changes within `features/checkout` slice |
+| Boy Scout | N/A | No refactoring required |
+| Efficient Tooling | PASS | Uses existing test harness |
+
+**Charter compliance: PASS**
+
+---
+
+## 3. Gates
+
+| Gate | Criteria | Status |
+|------|----------|--------|
+| G-1 | Spec has no unresolved clarifications | PASS |
+| G-2 | Spec has measurable success criteria | PASS |
+| G-3 | Spec has defined result types | PASS (4 variants) |
+| G-4 | Implementation uses async/await | PASS |
+| G-5 | FSD layer boundaries respected | PASS |
+
+---
+
+## 4. Phase 1: Design & Contracts
+
+### 4.1 Repository Interface Expectations
+
+**From ICartRepository (T-010, async):**
+```typescript
+interface ICartRepository {
+  getCart(): Promise<Cart>;
+  saveCart(cart: Cart): Promise<void>;
+}
+```
+
+**From IStockRepository (T-007):**
+```typescript
+interface IStockRepository {
+  findBySku(skuId: string): Promise<ProductVariant | null>;
+  save(variant: ProductVariant): Promise<void>;
+}
+```
+
+**From EventBus (T-002, T-012 fix):**
+```typescript
+interface EventBus {
+  publish<T>(event: T): Promise<void>;
+  subscribe<T>(handler: (event: T) => void): () => void;
+}
+```
+
+### 4.2 Cart State Transitions
+
+```
+Active → Checkout_Pending (via initiateCheckout())
+Active → Checked_Out (via markCheckedOut())
+```
+
+### 4.3 Event Subscription (handled in T-019)
+
+The `CheckoutInitiated` event is consumed by the App Shell (T-019) to trigger stock reservation:
+```typescript
+eventBus.subscribe<CheckoutInitiated>((event) => {
+  // Reserve stock for each item via ProductVariant.reserve()
+});
+```
+
+---
+
+## 5. Implementation Notes
+
+### Test Structure
+
+```typescript
+describe('InitiateCheckout', () => {
+  describe('happy path', () => {
+    it('validates stock, transitions cart, emits event', async () => { /* ... */ });
+  });
+  describe('empty cart', () => {
+    it('returns empty_cart error', async () => { /* ... */ });
+  });
+  describe('invalid cart state', () => {
+    it('returns invalid_state error for Checkout_Pending', async () => { /* ... */ });
+  });
+  describe('stock conflict', () => {
+    it('returns stock_conflict with all conflicting items', async () => { /* ... */ });
+    it('cart state unchanged after conflict', async () => { /* ... */ });
+  });
+});
+```
+
+### Dependencies Required
+
+- `@/entities/cart` — Cart, CartState, CartItem, ICartRepository
+- `@/entities/product` — ProductVariant, IStockRepository
+- `@/shared/lib/event-bus` — EventBus
+- `@/shared/lib/money` — Money type (for subtotal)
+
+### Out of Scope
+
+- UI components (T-015, T-016)
+- Stock reservation (T-019 app shell)
+- Payment processing
+- Order confirmation
+
+---
+
+## 6. Acceptance Test Coverage
+
+| Requirement | Test Coverage |
+|-------------|---------------|
+| FR-001 | initiate-checkout.test.ts — validates all items |
+| FR-002 | initiate-checkout.test.ts — stock conflict returns all conflicts |
+| FR-003 | initiate-checkout.test.ts — cart transitions to Checkout_Pending |
+| FR-004 | initiate-checkout.test.ts — CheckoutInitiated event published |
+| FR-005 | initiate-checkout.test.ts — empty_cart error |
+| FR-006 | initiate-checkout.test.ts — invalid_state error |
+| FR-007 | All tests — eventBus.publish called with correct structure |
+
+---
+
+## 7. Quality Gates (Pre-commit)
+
+Before marking implementation complete:
+- [ ] `npm run lint` passes
+- [ ] `npm run lint:arch` passes
+- [ ] `npm run build` passes
+- [ ] All tests execute
+- [ ] No `any` types
+
+---
+
+## 8. Next Step
+
+Run `/spec-kitty.tasks` to generate work packages.

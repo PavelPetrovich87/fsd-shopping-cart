@@ -1,16 +1,16 @@
 {
-  "event_count": 32,
-  "last_event_id": "01KP61Y1KF9PPG3G8N10N85FWH",
-  "materialized_at": "2026-04-14T13:12:16.751289+00:00",
+  "event_count": 36,
+  "last_event_id": "01KP6203SJQNN41J4HYX3RK7CE",
+  "materialized_at": "2026-04-14T13:13:24.530896+00:00",
   "mission_number": "011",
   "mission_slug": "011-cart-actions-feature",
   "mission_type": "software-dev",
   "summary": {
-    "approved": 4,
+    "approved": 0,
     "blocked": 0,
     "canceled": 0,
     "claimed": 0,
-    "done": 0,
+    "done": 4,
     "for_review": 0,
     "in_progress": 0,
     "in_review": 0,
@@ -18,32 +18,32 @@
   },
   "work_packages": {
     "WP01": {
-      "actor": "user",
+      "actor": "merge",
       "force_count": 2,
-      "lane": "approved",
-      "last_event_id": "01KP60S9RKKR4DRQPX4ZMK0JW3",
-      "last_transition_at": "2026-04-14T12:52:12.691145+00:00"
+      "lane": "done",
+      "last_event_id": "01KP62031KD5PZMMKYSW8YQ8B8",
+      "last_transition_at": "2026-04-14T13:13:23.763891+00:00"
     },
     "WP02": {
-      "actor": "user",
+      "actor": "merge",
       "force_count": 2,
-      "lane": "approved",
-      "last_event_id": "01KP61BAYNDB7D8FB1FE4WTTQN",
-      "last_transition_at": "2026-04-14T13:02:03.733104+00:00"
+      "lane": "done",
+      "last_event_id": "01KP6203QMR4M5VP9DEVC63HRF",
+      "last_transition_at": "2026-04-14T13:13:24.468388+00:00"
     },
     "WP03": {
-      "actor": "user",
+      "actor": "merge",
       "force_count": 2,
-      "lane": "approved",
-      "last_event_id": "01KP61CDXP680NT597T8PR9WDE",
-      "last_transition_at": "2026-04-14T13:02:39.542048+00:00"
+      "lane": "done",
+      "last_event_id": "01KP6203RGJN2NXTYX2WCGFX5H",
+      "last_transition_at": "2026-04-14T13:13:24.496705+00:00"
     },
     "WP04": {
-      "actor": "user",
+      "actor": "merge",
       "force_count": 2,
-      "lane": "approved",
-      "last_event_id": "01KP61Y1KF9PPG3G8N10N85FWH",
-      "last_transition_at": "2026-04-14T13:12:16.751289+00:00"
+      "lane": "done",
+      "last_event_id": "01KP6203SJQNN41J4HYX3RK7CE",
+      "last_transition_at": "2026-04-14T13:13:24.530896+00:00"
     }
   }
 }

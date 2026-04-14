@@ -14,3 +14,6 @@ export type {
   StockReleased,
   StockDepleted,
 } from './model/events'
+
+export type { IStockRepository } from './model/ports'
+export { MockInventoryRepository } from './api/mock-inventory-repository'

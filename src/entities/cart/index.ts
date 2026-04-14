@@ -42,13 +42,3 @@ export {
   canTransitionTo,
   toCartData,
 } from './model/cart'
-
-export type { ICartRepository } from './model/ports'
-
-export { zustandCartRepository } from './api/zustand-cart-repository'
-export {
-  useCartStore,
-  useCart,
-  useCartSnapshot,
-  getCartSelector,
-} from './api/cart-store'

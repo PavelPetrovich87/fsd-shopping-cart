@@ -7,11 +7,11 @@
 
 | ID | Description | WP | Parallel | Implementation |
 |----|-------------|----|----------|----------------|
-| T001 | Update `DomainEvent` interface: `type: string` → `eventType: string` | WP01 | [P] | |
-| T002 | Update `EventBus.subscribe()`: use `eventType` for handler registration | WP01 | [P] | |
-| T003 | Update `EventBus.publish()`: use `event.eventType` for handler lookup | WP01 | [P] | |
-| T004 | Update error log message in `publish()`: use `event.eventType` | WP01 | [P] | |
-| T005 | Update `event-bus.test.ts` fixtures: `type` → `eventType` | WP01 | [P] | |
+| T001 | Update `DomainEvent` interface: `type: string` → `eventType: string` | WP01 | [P] | | [D] |
+| T002 | Update `EventBus.subscribe()`: use `eventType` for handler registration | WP01 | [P] | | [D] |
+| T003 | Update `EventBus.publish()`: use `event.eventType` for handler lookup | WP01 | [P] | | [D] |
+| T004 | Update error log message in `publish()`: use `event.eventType` | WP01 | [P] | | [D] |
+| T005 | Update `event-bus.test.ts` fixtures: `type` → `eventType` | WP01 | [P] | | [D] |
 | T006 | Update product domain events: `type` → `eventType`, flatten `payload`, add `occurredAt` | WP02 | [P] | |
 | T007 | Update coupon domain events: `type` → `eventType`, `timestamp` → `occurredAt` | WP02 | [P] | |
 | T008 | Remove `as unknown as { type: string }` casts from AddToCart, RemoveFromCart, ChangeQuantity | WP03 | [P] | |
@@ -31,11 +31,11 @@
 **Test criteria**: `npm run test:unit` passes for `event-bus.test.ts` after changes
 
 **Included subtasks**:
-- [ ] T001: Update `DomainEvent` interface: `type: string` → `eventType: string`
-- [ ] T002: Update `EventBus.subscribe()`: use `eventType` for handler registration
-- [ ] T003: Update `EventBus.publish()`: use `event.eventType` for handler lookup
-- [ ] T004: Update error log message in `publish()`: use `event.eventType`
-- [ ] T005: Update `event-bus.test.ts` fixtures: `type` → `eventType`
+- [x] T001: Update `DomainEvent` interface: `type: string` → `eventType: string`
+- [x] T002: Update `EventBus.subscribe()`: use `eventType` for handler registration
+- [x] T003: Update `EventBus.publish()`: use `event.eventType` for handler lookup
+- [x] T004: Update error log message in `publish()`: use `event.eventType`
+- [x] T005: Update `event-bus.test.ts` fixtures: `type` → `eventType`
 
 **Prompt**: `kitty-specs/012-eventbus-publish-fix/tasks/WP01-eventbus-core-fix.md`
 

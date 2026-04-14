@@ -1,10 +1,12 @@
 {
   "created_at": "2026-04-14T12:26:29.766240+00:00",
-  "friendly_name": "cart actions feature",
+  "friendly_name": "Cart Actions Feature",
   "mission_id": "01KP5ZA706ZNCRJX390FCZ73GE",
   "mission_number": "011",
   "mission_slug": "011-cart-actions-feature",
   "mission_type": "software-dev",
-  "slug": "011-cart-actions-feature",
-  "target_branch": "main"
+  "slug": "cart-actions-feature",
+  "source_description": "Implement AddToCart, RemoveFromCart, and ChangeCartItemQuantity use cases that orchestrate Cart entity with stock validation via Product entity, published via EventBus. Derived from T-011 ticket.",
+  "target_branch": "main",
+  "vcs": "git"
 }

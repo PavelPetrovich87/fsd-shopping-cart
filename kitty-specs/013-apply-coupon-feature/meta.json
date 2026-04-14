@@ -1,0 +1,10 @@
+{
+  "mission_number": "013",
+  "slug": "apply-coupon-feature",
+  "mission_slug": "013-apply-coupon-feature",
+  "friendly_name": "apply coupon feature",
+  "mission_type": "software-dev",
+  "target_branch": "main",
+  "vcs": "git",
+  "created_at": "2026-04-14T14:20:39.409706+00:00"
+}

@@ -28,7 +28,7 @@ subtasks:
 - T006
 - T007
 - T008
-shell_pid: '11961'
+shell_pid: "11961"
 history: []
 authoritative_surface: src/entities/
 execution_mode: code_change
@@ -41,6 +41,7 @@ owned_files:
 - src/entities/coupon/index.ts
 - src/entities/product/index.ts
 tags: []
+agent: "kilocode"
 ---
 
 # WP01: Contract Correction & File Restoration
@@ -278,3 +279,7 @@ Unit test file `src/entities/cart/api/cart-store.test.ts` uses the Zustand store
 - Verify `ZustandCartRepository` wraps sync store calls in `Promise.resolve()`
 - Verify all 7 integration tests use `await` on repository calls
 - Verify quality gates all pass before approving
+
+## Activity Log
+
+- 2026-04-14T11:05:53Z – kilocode – shell_pid=11961 – Assigned agent via action command

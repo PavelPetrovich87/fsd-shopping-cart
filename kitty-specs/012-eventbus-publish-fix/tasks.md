@@ -14,9 +14,9 @@
 | T005 | Update `event-bus.test.ts` fixtures: `type` → `eventType` | WP01 | [P] | | [D] |
 | T006 | Update product domain events: `type` → `eventType`, flatten `payload`, add `occurredAt` | WP02 | [P] | | [D] |
 | T007 | Update coupon domain events: `type` → `eventType`, `timestamp` → `occurredAt` | WP02 | [P] | | [D] |
-| T008 | Remove `as unknown as { type: string }` casts from AddToCart, RemoveFromCart, ChangeQuantity | WP03 | [P] | |
-| T009 | Update cart-action tests: assert `eventBus.publish` is called with correct event structure | WP03 | [P] | |
-| T010 | Run quality gates: `npm run lint`, `npm run lint:arch`, `npm run build` — all must exit 0 | WP03 | | After all other tasks |
+| T008 | Remove `as unknown as { type: string }` casts from AddToCart, RemoveFromCart, ChangeQuantity | WP03 | [P] | | [D] |
+| T009 | Update cart-action tests: assert `eventBus.publish` is called with correct event structure | WP03 | [P] | | [D] |
+| T010 | Run quality gates: `npm run lint`, `npm run lint:arch`, `npm run build` — all must exit 0 | WP03 | | After all other tasks | [D] |
 
 ## Work Packages
 
@@ -78,9 +78,9 @@
 **Test criteria**: All tests pass including new event delivery assertions
 
 **Included subtasks**:
-- [ ] T008: Remove casts from AddToCart, RemoveFromCart, ChangeQuantity
-- [ ] T009: Update cart-action tests: verify `eventBus.publish` is called with correct event structure
-- [ ] T010: Run quality gates: `npm run lint`, `npm run lint:arch`, `npm run build`
+- [x] T008: Remove casts from AddToCart, RemoveFromCart, ChangeQuantity
+- [x] T009: Update cart-action tests: verify `eventBus.publish` is called with correct event structure
+- [x] T010: Run quality gates: `npm run lint`, `npm run lint:arch`, `npm run build`
 
 **Prompt**: `kitty-specs/012-eventbus-publish-fix/tasks/WP03-cart-actions-fixes.md`
 

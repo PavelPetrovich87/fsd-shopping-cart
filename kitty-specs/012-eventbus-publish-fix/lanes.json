@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "mission_slug": "012-eventbus-publish-fix",
+  "mission_id": "01KP63MPDM234J01MVEYJA4P0D",
+  "mission_branch": "kitty/mission-012-eventbus-publish-fix",
+  "target_branch": "main",
+  "lanes": [
+    {
+      "lane_id": "lane-a",
+      "wp_ids": [
+        "WP01",
+        "WP02",
+        "WP03"
+      ],
+      "write_scope": [
+        "src/entities/coupon/model/events.ts",
+        "src/entities/product/model/events.ts",
+        "src/features/cart-actions/model/add-to-cart.test.ts",
+        "src/features/cart-actions/model/add-to-cart.ts",
+        "src/features/cart-actions/model/change-quantity.test.ts",
+        "src/features/cart-actions/model/change-quantity.ts",
+        "src/features/cart-actions/model/remove-from-cart.test.ts",
+        "src/features/cart-actions/model/remove-from-cart.ts",
+        "src/shared/lib/event-bus.test.ts",
+        "src/shared/lib/event-bus.ts"
+      ],
+      "predicted_surfaces": [
+        "api",
+        "legacy-cleanup",
+        "tracker-integration"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    }
+  ],
+  "computed_at": "2026-04-14T13:52:19.971254+00:00",
+  "computed_from": "dependency_graph+ownership",
+  "planning_artifact_wps": [],
+  "collapse_report": {
+    "events": [
+      {
+        "wp_a": "WP02",
+        "wp_b": "WP01",
+        "rule": "dependency",
+        "evidence": "WP02 depends on WP01"
+      },
+      {
+        "wp_a": "WP03",
+        "wp_b": "WP01",
+        "rule": "dependency",
+        "evidence": "WP03 depends on WP01"
+      }
+    ],
+    "total_merges": 2,
+    "independent_wps_collapsed": 0,
+    "by_rule": {
+      "dependency": 2
+    }
+  }
+}

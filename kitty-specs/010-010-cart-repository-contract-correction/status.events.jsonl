@@ -1,0 +1,1 @@
+{"actor": "finalize-tasks", "at": "2026-04-14T11:01:19.743983+00:00", "event_id": "01KP5TE8QZF0577NTTJCPKBZST", "evidence": null, "execution_mode": "worktree", "force": true, "from_lane": "planned", "mission_slug": "010-010-cart-repository-contract-correction", "policy_metadata": null, "reason": "canonical bootstrap", "review_ref": null, "to_lane": "planned", "wp_id": "WP01"}

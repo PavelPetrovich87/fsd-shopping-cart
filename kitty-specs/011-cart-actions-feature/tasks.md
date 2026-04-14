@@ -16,10 +16,10 @@
 | T003 | Implement `model/results.ts` — Result types | WP01 | [P] | T001 | [D] |
 | T004 | Implement `AddToCart` use case | WP02 | — | T002, T003 | [D] |
 | T005 | Write `AddToCart` unit tests | WP02 | — | T004 | [D] |
-| T006 | Implement `RemoveFromCart` use case | WP03 | [P] | T002, T003 |
-| T007 | Write `RemoveFromCart` unit tests | WP03 | — | T006 |
-| T008 | Implement `ChangeCartItemQuantity` use case | WP03 | [P] | T002, T003 |
-| T009 | Write `ChangeCartItemQuantity` unit tests | WP03 | — | T008 |
+| T006 | Implement `RemoveFromCart` use case | WP03 | [P] | T002, T003 | [D] |
+| T007 | Write `RemoveFromCart` unit tests | WP03 | — | T006 | [D] |
+| T008 | Implement `ChangeCartItemQuantity` use case | WP03 | [P] | T002, T003 | [D] |
+| T009 | Write `ChangeCartItemQuantity` unit tests | WP03 | — | T008 | [D] |
 | T010 | Create `model/index.ts` — re-exports | WP04 | — | T004, T006, T008 |
 | T011 | Create `index.ts` — public API | WP04 | — | T010 |
 | T012 | Run quality gates (lint, typecheck, tests) | WP04 | — | T011 |
@@ -96,10 +96,10 @@
 **Testable independently:** Yes — mocks all dependencies
 
 **Included Subtasks:**
-- [ ] T006 — Implement `RemoveFromCart` use case
-- [ ] T007 — Write `RemoveFromCart` unit tests
-- [ ] T008 — Implement `ChangeCartItemQuantity` use case
-- [ ] T009 — Write `ChangeCartItemQuantity` unit tests
+- [x] T006 — Implement `RemoveFromCart` use case
+- [x] T007 — Write `RemoveFromCart` unit tests
+- [x] T008 — Implement `ChangeCartItemQuantity` use case
+- [x] T009 — Write `ChangeCartItemQuantity` unit tests
 
 **Implementation Sketch:**
 

@@ -1,7 +1,7 @@
 {
-  "event_count": 16,
-  "last_event_id": "01KP615EZZRAANN70YMKY48RHX",
-  "materialized_at": "2026-04-14T12:58:51.263418+00:00",
+  "event_count": 17,
+  "last_event_id": "01KP619Z74BKYJJ9GGW465SKDW",
+  "materialized_at": "2026-04-14T13:01:18.948863+00:00",
   "mission_number": "011",
   "mission_slug": "011-cart-actions-feature",
   "mission_type": "software-dev",
@@ -11,8 +11,8 @@
     "canceled": 0,
     "claimed": 0,
     "done": 0,
-    "for_review": 1,
-    "in_progress": 1,
+    "for_review": 2,
+    "in_progress": 0,
     "in_review": 0,
     "planned": 1
   },
@@ -32,11 +32,11 @@
       "last_transition_at": "2026-04-14T12:58:51.263418+00:00"
     },
     "WP03": {
-      "actor": "implement-command",
+      "actor": "user",
       "force_count": 1,
-      "lane": "in_progress",
-      "last_event_id": "01KP60T19DWTGFBFFDEPSKZ36T",
-      "last_transition_at": "2026-04-14T12:52:36.781842+00:00"
+      "lane": "for_review",
+      "last_event_id": "01KP619Z74BKYJJ9GGW465SKDW",
+      "last_transition_at": "2026-04-14T13:01:18.948863+00:00"
     },
     "WP04": {
       "actor": "finalize-tasks",

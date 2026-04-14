@@ -1,25 +1,25 @@
 {
-  "event_count": 6,
-  "last_event_id": "01KP5VJX5GFGWEXTTBPX7555A6",
-  "materialized_at": "2026-04-14T11:21:20.304768+00:00",
+  "event_count": 7,
+  "last_event_id": "01KP5VM0EH16WGBE4QRNBFFPRT",
+  "materialized_at": "2026-04-14T11:21:56.434056+00:00",
   "mission_slug": "010-010-cart-repository-contract-correction",
   "summary": {
-    "approved": 1,
+    "approved": 0,
     "blocked": 0,
     "canceled": 0,
     "claimed": 0,
-    "done": 0,
+    "done": 1,
     "for_review": 0,
     "in_progress": 0,
     "planned": 0
   },
   "work_packages": {
     "WP01": {
-      "actor": "user",
+      "actor": "merge",
       "force_count": 4,
-      "lane": "approved",
-      "last_event_id": "01KP5VJX5GFGWEXTTBPX7555A6",
-      "last_transition_at": "2026-04-14T11:21:20.304768+00:00"
+      "lane": "done",
+      "last_event_id": "01KP5VM0EH16WGBE4QRNBFFPRT",
+      "last_transition_at": "2026-04-14T11:21:56.434056+00:00"
     }
   }
 }

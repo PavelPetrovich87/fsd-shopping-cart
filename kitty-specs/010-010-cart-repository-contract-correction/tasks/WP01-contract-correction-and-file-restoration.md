@@ -41,7 +41,7 @@ owned_files:
 - src/entities/coupon/index.ts
 - src/entities/product/index.ts
 tags: []
-agent: "kilocode"
+agent: "opencode"
 ---
 
 # WP01: Contract Correction & File Restoration
@@ -284,3 +284,4 @@ Unit test file `src/entities/cart/api/cart-store.test.ts` uses the Zustand store
 
 - 2026-04-14T11:05:53Z – kilocode – shell_pid=11961 – Assigned agent via action command
 - 2026-04-14T11:16:23Z – kilocode – shell_pid=11961 – Ready for review
+- 2026-04-14T11:20:09Z – opencode – shell_pid=11961 – Started review via action command

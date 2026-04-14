@@ -4,14 +4,14 @@
 
 | ID | Description | WP | Parallel |
 | -- | ----------- | -- | -------- |
-| T001 | Restore `src/entities/coupon/model/ports.ts` from git `2c09b43` | WP01 | [P] |
-| T002 | Restore `src/entities/product/model/ports.ts` from git `2c09b43` | WP01 | [P] |
-| T003 | Revert `src/entities/cart/model/ports.ts` to async `ICartRepository` signatures | WP01 | |
-| T004 | Update `src/entities/cart/api/zustand-cart-repository.ts` to async adapter | WP01 | |
-| T005 | Update `src/entities/cart/api/zustand-cart-repository.integration.test.ts` to async API | WP01 | |
-| T006 | Restore `ICouponRepository` export in `src/entities/coupon/index.ts` | WP01 | [P] |
-| T007 | Restore `IStockRepository` export in `src/entities/product/index.ts` | WP01 | [P] |
-| T008 | Run quality gates: lint, lint:arch, build, test:unit | WP01 | |
+| T001 | Restore `src/entities/coupon/model/ports.ts` from git `2c09b43` | WP01 | [P] | [D] |
+| T002 | Restore `src/entities/product/model/ports.ts` from git `2c09b43` | WP01 | [D] |
+| T003 | Revert `src/entities/cart/model/ports.ts` to async `ICartRepository` signatures | WP01 | | [D] |
+| T004 | Update `src/entities/cart/api/zustand-cart-repository.ts` to async adapter | WP01 | | [D] |
+| T005 | Update `src/entities/cart/api/zustand-cart-repository.integration.test.ts` to async API | WP01 | | [D] |
+| T006 | Restore `ICouponRepository` export in `src/entities/coupon/index.ts` | WP01 | [D] |
+| T007 | Restore `IStockRepository` export in `src/entities/product/index.ts` | WP01 | [D] |
+| T008 | Run quality gates: lint, lint:arch, build, test:unit | WP01 | | [D] |
 
 ## Work Packages
 
@@ -24,14 +24,14 @@
 **Test**: Integration test round-trip + all 131 existing unit tests must pass.
 
 **Included subtasks**:
-- [ ] T001 — Restore `coupon/model/ports.ts`
-- [ ] T002 — Restore `product/model/ports.ts`
-- [ ] T003 — Revert cart `ports.ts` to async signatures
-- [ ] T004 — Update `zustand-cart-repository.ts` to async adapter
-- [ ] T005 — Update integration tests to async API
-- [ ] T006 — Restore `ICouponRepository` export in `coupon/index.ts`
-- [ ] T007 — Restore `IStockRepository` export in `product/index.ts`
-- [ ] T008 — Run quality gates
+- [x] T001 — Restore `coupon/model/ports.ts`
+- [x] T002 — Restore `product/model/ports.ts`
+- [x] T003 — Revert cart `ports.ts` to async signatures
+- [x] T004 — Update `zustand-cart-repository.ts` to async adapter
+- [x] T005 — Update integration tests to async API
+- [x] T006 — Restore `ICouponRepository` export in `coupon/index.ts`
+- [x] T007 — Restore `IStockRepository` export in `product/index.ts`
+- [x] T008 — Run quality gates
 
 **Implementation sketch**:
 1. Use `git show 2c09b43:src/entities/coupon/model/ports.ts` and `git show 2c09b43:src/entities/product/model/ports.ts` to restore the deleted port files

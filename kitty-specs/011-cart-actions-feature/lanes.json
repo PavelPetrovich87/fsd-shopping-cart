@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "mission_slug": "011-cart-actions-feature",
+  "mission_id": "01KP5ZA706ZNCRJX390FCZ73GE",
+  "mission_branch": "kitty/mission-011-cart-actions-feature",
+  "target_branch": "main",
+  "lanes": [
+    {
+      "lane_id": "lane-a",
+      "wp_ids": [
+        "WP01"
+      ],
+      "write_scope": [
+        "src/features/cart-actions/model/errors.ts",
+        "src/features/cart-actions/model/results.ts"
+      ],
+      "predicted_surfaces": [
+        "api",
+        "legacy-cleanup"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    },
+    {
+      "lane_id": "lane-b",
+      "wp_ids": [
+        "WP02"
+      ],
+      "write_scope": [
+        "src/features/cart-actions/model/add-to-cart.test.ts",
+        "src/features/cart-actions/model/add-to-cart.ts"
+      ],
+      "predicted_surfaces": [
+        "api",
+        "legacy-cleanup",
+        "tracker-integration"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    },
+    {
+      "lane_id": "lane-c",
+      "wp_ids": [
+        "WP03"
+      ],
+      "write_scope": [
+        "src/features/cart-actions/model/change-quantity.test.ts",
+        "src/features/cart-actions/model/change-quantity.ts",
+        "src/features/cart-actions/model/remove-from-cart.test.ts",
+        "src/features/cart-actions/model/remove-from-cart.ts"
+      ],
+      "predicted_surfaces": [
+        "api",
+        "legacy-cleanup",
+        "tracker-integration"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    },
+    {
+      "lane_id": "lane-d",
+      "wp_ids": [
+        "WP04"
+      ],
+      "write_scope": [
+        "src/features/cart-actions/index.ts",
+        "src/features/cart-actions/model/index.ts"
+      ],
+      "predicted_surfaces": [
+        "api",
+        "legacy-cleanup"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    }
+  ],
+  "computed_at": "2026-04-14T12:41:08.141797+00:00",
+  "computed_from": "dependency_graph+ownership",
+  "planning_artifact_wps": []
+}

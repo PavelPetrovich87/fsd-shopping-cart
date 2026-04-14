@@ -86,7 +86,7 @@ export async function AddToCart(
     quantity: newQuantity
   };
 
-  eventBus.publish(event as unknown as { type: string });
+  eventBus.publish(event);
 
   return { success: true, cart: updatedCart, event };
 }

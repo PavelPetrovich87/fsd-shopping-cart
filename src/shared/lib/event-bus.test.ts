@@ -3,7 +3,7 @@ import { EventBus } from './event-bus'
 import type { DomainEvent } from './event-bus'
 
 export interface ItemAddedToCart extends DomainEvent {
-  type: 'ItemAddedToCart';
+  eventType: 'ItemAddedToCart';
   payload: {
     skuId: string;
     quantity: number;
@@ -11,7 +11,7 @@ export interface ItemAddedToCart extends DomainEvent {
 }
 
 export interface CheckoutInitiated extends DomainEvent {
-  type: 'CheckoutInitiated';
+  eventType: 'CheckoutInitiated';
   payload: {
     orderId: string;
   };
@@ -25,7 +25,7 @@ describe('EventBus', () => {
 
       bus.subscribe('ItemAddedToCart', handler);
       bus.publish({
-        type: 'ItemAddedToCart',
+        eventType: 'ItemAddedToCart',
         payload: { skuId: 'SKU-1', quantity: 2 },
       });
 
@@ -38,7 +38,7 @@ describe('EventBus', () => {
       const bus = new EventBus();
       const handler = vi.fn();
       const event = {
-        type: 'ItemAddedToCart',
+        eventType: 'ItemAddedToCart',
         payload: { skuId: 'SKU-1', quantity: 2 },
       };
 
@@ -60,7 +60,7 @@ describe('EventBus', () => {
       bus.subscribe('CheckoutInitiated', handlerA);
       bus.subscribe('CheckoutInitiated', handlerB);
       bus.publish({
-        type: 'CheckoutInitiated',
+        eventType: 'CheckoutInitiated',
         payload: { orderId: 'ORD-123' },
       });
 
@@ -75,7 +75,7 @@ describe('EventBus', () => {
       const handlerA = vi.fn();
       const handlerB = vi.fn();
       const event = {
-        type: 'CheckoutInitiated',
+        eventType: 'CheckoutInitiated',
         payload: { orderId: 'ORD-123' },
       };
 
@@ -99,7 +99,7 @@ describe('EventBus', () => {
       unsubscribe();
 
       bus.publish({
-        type: 'ItemAddedToCart',
+        eventType: 'ItemAddedToCart',
         payload: { skuId: 'SKU-1', quantity: 1 },
       });
 
@@ -117,7 +117,7 @@ describe('EventBus', () => {
 
       expect(() => {
         bus.publish({
-          type: 'ItemAddedToCart',
+          eventType: 'ItemAddedToCart',
           payload: { skuId: 'SKU-1', quantity: 1 },
         });
       }).not.toThrow();
@@ -134,7 +134,7 @@ describe('EventBus', () => {
       unsubscribeA();
 
       bus.publish({
-        type: 'ItemAddedToCart',
+        eventType: 'ItemAddedToCart',
         payload: { skuId: 'SKU-1', quantity: 1 },
       });
 
@@ -152,7 +152,7 @@ describe('EventBus', () => {
 
       bus.subscribe('ItemAddedToCart', handler);
       bus.publish({
-        type: 'ItemAddedToCart',
+        eventType: 'ItemAddedToCart',
         payload: { skuId: 'SKU-1', quantity: 1 },
       });
 
@@ -165,7 +165,7 @@ describe('EventBus', () => {
 
       bus.subscribe('ItemAddedToCart', handler);
       bus.publish({
-        type: 'ItemAddedToCart',
+        eventType: 'ItemAddedToCart',
         payload: { skuId: 'SKU-1', quantity: 1 },
       });
 
@@ -180,7 +180,7 @@ describe('EventBus', () => {
       bus.subscribe('ItemAddedToCart', handler);
 
       const result = bus.publish({
-        type: 'ItemAddedToCart',
+        eventType: 'ItemAddedToCart',
         payload: { skuId: 'SKU-1', quantity: 1 },
       });
 
@@ -200,7 +200,7 @@ describe('EventBus', () => {
       bus.subscribe('ItemAddedToCart', errorHandler);
       bus.subscribe('ItemAddedToCart', normalHandler);
       bus.publish({
-        type: 'ItemAddedToCart',
+        eventType: 'ItemAddedToCart',
         payload: { skuId: 'SKU-1', quantity: 1 },
       });
 
@@ -218,7 +218,7 @@ describe('EventBus', () => {
 
       expect(() => {
         bus.publish({
-          type: 'ItemAddedToCart',
+          eventType: 'ItemAddedToCart',
           payload: { skuId: 'SKU-1', quantity: 1 },
         });
       }).not.toThrow();

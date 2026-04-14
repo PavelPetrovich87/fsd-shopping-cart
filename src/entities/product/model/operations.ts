@@ -27,24 +27,21 @@ export function reserve(params: {
   })
 
   const event: StockReserved = {
-    type: 'StockReserved',
-    payload: {
-      skuId: params.variant.skuId,
-      orderId: params.orderId,
-      quantity: reserveQty,
-      timestamp: reservation.timestamp,
-    },
+    eventType: 'StockReserved',
+    skuId: params.variant.skuId,
+    orderId: params.orderId,
+    quantity: reserveQty,
+    occurredAt: reservation.timestamp,
   }
 
   let depletedEvent: StockDepleted | undefined
   if (params.variant.totalOnHand < LOW_STOCK_THRESHOLD) {
     depletedEvent = {
-      type: 'StockDepleted',
-      payload: {
-        skuId: params.variant.skuId,
-        totalOnHand: params.variant.totalOnHand,
-        threshold: LOW_STOCK_THRESHOLD,
-      },
+      eventType: 'StockDepleted',
+      skuId: params.variant.skuId,
+      totalOnHand: params.variant.totalOnHand,
+      threshold: LOW_STOCK_THRESHOLD,
+      occurredAt: new Date(),
     }
   }
 
@@ -75,12 +72,11 @@ export function releaseReservation(params: {
   })
 
   const event: StockReleased = {
-    type: 'StockReleased',
-    payload: {
-      skuId: params.variant.skuId,
-      orderId: params.orderId,
-      quantity: releasedQty,
-    },
+    eventType: 'StockReleased',
+    skuId: params.variant.skuId,
+    orderId: params.orderId,
+    quantity: releasedQty,
+    occurredAt: new Date(),
   }
 
   return { variant: newVariant, event }
@@ -118,12 +114,11 @@ export function confirmDepletion(params: {
   let event: StockDepleted | undefined
   if (newTotalOnHand < LOW_STOCK_THRESHOLD) {
     event = {
-      type: 'StockDepleted',
-      payload: {
-        skuId: params.variant.skuId,
-        totalOnHand: newTotalOnHand,
-        threshold: LOW_STOCK_THRESHOLD,
-      },
+      eventType: 'StockDepleted',
+      skuId: params.variant.skuId,
+      totalOnHand: newTotalOnHand,
+      threshold: LOW_STOCK_THRESHOLD,
+      occurredAt: new Date(),
     }
   }
 

@@ -1,29 +1,25 @@
 export interface StockReserved {
-  readonly type: 'StockReserved'
-  readonly payload: {
-    readonly skuId: string
-    readonly orderId: string
-    readonly quantity: number
-    readonly timestamp: Date
-  }
+  readonly eventType: 'StockReserved';
+  readonly skuId: string;
+  readonly orderId: string;
+  readonly quantity: number;
+  readonly occurredAt: Date;
 }
 
 export interface StockReleased {
-  readonly type: 'StockReleased'
-  readonly payload: {
-    readonly skuId: string
-    readonly orderId: string
-    readonly quantity: number
-  }
+  readonly eventType: 'StockReleased';
+  readonly skuId: string;
+  readonly orderId: string;
+  readonly quantity: number;
+  readonly occurredAt: Date;
 }
 
 export interface StockDepleted {
-  readonly type: 'StockDepleted'
-  readonly payload: {
-    readonly skuId: string
-    readonly totalOnHand: number
-    readonly threshold: number
-  }
+  readonly eventType: 'StockDepleted';
+  readonly skuId: string;
+  readonly totalOnHand: number;
+  readonly threshold: number;
+  readonly occurredAt: Date;
 }
 
-export type ProductDomainEvent = StockReserved | StockReleased | StockDepleted
+export type ProductDomainEvent = StockReserved | StockReleased | StockDepleted;

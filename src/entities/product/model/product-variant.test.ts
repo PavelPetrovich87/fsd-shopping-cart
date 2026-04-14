@@ -61,7 +61,7 @@ describe('ProductVariant', () => {
       })
       const result = reserve({ variant, orderId: 'order-1', quantity: 5 })
 
-      expect(result.event?.payload.quantity).toBe(5)
+      expect(result.event?.quantity).toBe(5)
       expect(availableStock(result.variant)).toBe(5)
     })
 
@@ -69,7 +69,7 @@ describe('ProductVariant', () => {
       const variant = createProductVariant({ skuId: 'SKU-001', totalOnHand: 3 })
       const result = reserve({ variant, orderId: 'order-1', quantity: 5 })
 
-      expect(result.event?.payload.quantity).toBe(3)
+      expect(result.event?.quantity).toBe(3)
       expect(availableStock(result.variant)).toBe(0)
     })
 
@@ -80,7 +80,7 @@ describe('ProductVariant', () => {
       })
       const result = reserve({ variant, orderId: 'order-1', quantity: 1 })
 
-      expect(result.depletedEvent?.type).toBe('StockDepleted')
+      expect(result.depletedEvent?.eventType).toBe('StockDepleted')
     })
 
     it('does not emit event when reserveQty is 0', () => {
@@ -99,7 +99,7 @@ describe('ProductVariant', () => {
 
       const result = releaseReservation({ variant, orderId: 'order-1' })
 
-      expect(result.event?.payload.quantity).toBe(5)
+      expect(result.event?.quantity).toBe(5)
       expect(availableStock(result.variant)).toBe(10)
     })
 
@@ -146,7 +146,7 @@ describe('ProductVariant', () => {
       const result = confirmDepletion({ variant, orderId: 'order-1' })
 
       expect(result.variant.totalOnHand).toBe(4)
-      expect(result.event?.type).toBe('StockDepleted')
+      expect(result.event?.eventType).toBe('StockDepleted')
     })
 
     it('silent no-op for non-existent orderId', () => {

@@ -98,7 +98,7 @@ export async function ChangeCartItemQuantity(
     newQuantity
   };
 
-  eventBus.publish(event as unknown as { type: string });
+  eventBus.publish(event);
 
   return { success: true, cart: updatedCart, event };
 }

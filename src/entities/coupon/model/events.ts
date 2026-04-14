@@ -3,25 +3,25 @@ import { Money } from '@/shared/lib';
 import type { CouponValidationReason } from './types';
 
 export interface CouponValidated {
-  type: 'CouponValidated';
-  couponCode: string;
-  timestamp: Date;
+  readonly eventType: 'CouponValidated';
+  readonly couponCode: string;
+  readonly occurredAt: Date;
 }
 
 export interface CouponValidationFailed {
-  type: 'CouponValidationFailed';
-  couponCode: string;
-  reason: CouponValidationReason;
-  timestamp: Date;
+  readonly eventType: 'CouponValidationFailed';
+  readonly couponCode: string;
+  readonly reason: CouponValidationReason;
+  readonly occurredAt: Date;
 }
 
 export interface DiscountCalculated {
-  type: 'DiscountCalculated';
-  couponCode: string;
-  subtotal: Money;
-  discount: Money;
-  resultingTotal: Money;
-  timestamp: Date;
+  readonly eventType: 'DiscountCalculated';
+  readonly couponCode: string;
+  readonly subtotal: Money;
+  readonly discount: Money;
+  readonly resultingTotal: Money;
+  readonly occurredAt: Date;
 }
 
 export type CouponDomainEvent =

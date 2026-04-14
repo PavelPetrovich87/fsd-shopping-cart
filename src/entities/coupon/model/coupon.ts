@@ -87,14 +87,14 @@ export class Coupon {
   }
 
   calculateDiscount(subtotal: Money, now: Date, eventBus?: EventBus): Money {
-    const timestamp = new Date()
+    const occurredAt = new Date()
 
     if (!this.isValid(now)) {
       const failedEvent: CouponValidationFailed = {
-        type: 'CouponValidationFailed',
+        eventType: 'CouponValidationFailed',
         couponCode: this.props.code,
         reason: this.getValidationFailureReason(now),
-        timestamp,
+        occurredAt,
       }
       eventBus?.publish(failedEvent)
 
@@ -102,9 +102,9 @@ export class Coupon {
     }
 
     const validatedEvent: CouponValidated = {
-      type: 'CouponValidated',
+      eventType: 'CouponValidated',
       couponCode: this.props.code,
-      timestamp,
+      occurredAt,
     }
     eventBus?.publish(validatedEvent)
 
@@ -118,12 +118,12 @@ export class Coupon {
     )
 
     const calculatedEvent: DiscountCalculated = {
-      type: 'DiscountCalculated',
+      eventType: 'DiscountCalculated',
       couponCode: this.props.code,
       subtotal,
       discount: cappedDiscount,
       resultingTotal: subtotal.subtract(cappedDiscount),
-      timestamp,
+      occurredAt,
     }
     eventBus?.publish(calculatedEvent)
 

@@ -42,6 +42,7 @@ describe('RemoveFromCart', () => {
         items: new Map([['SKU001', existingItem]])
       });
       vi.mocked(mockCartRepo.getCart).mockResolvedValue(cart);
+      const publishSpy = vi.spyOn(mockEventBus, 'publish');
 
       const result = await RemoveFromCart(
         'SKU001',
@@ -56,6 +57,11 @@ describe('RemoveFromCart', () => {
         expect(result.event.previousQuantity).toBe(3);
       }
       expect(mockCartRepo.saveCart).toHaveBeenCalled();
+      expect(publishSpy).toHaveBeenCalledTimes(1);
+      const publishedEvent = publishSpy.mock.calls[0][0];
+      expect(publishedEvent.eventType).toBe('ItemRemovedFromCart');
+      expect(publishedEvent.skuId).toBe('SKU001');
+      expect(publishedEvent.previousQuantity).toBe(3);
     });
   });
 

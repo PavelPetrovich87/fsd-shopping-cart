@@ -166,11 +166,11 @@ describe('Coupon', () => {
       expect(publishSpy).toHaveBeenCalledTimes(2);
       expect(publishSpy).toHaveBeenNthCalledWith(
         1,
-        expect.objectContaining({ type: 'CouponValidated', couponCode: 'SAVE5' }),
+        expect.objectContaining({ eventType: 'CouponValidated', couponCode: 'SAVE5' }),
       );
       expect(publishSpy).toHaveBeenNthCalledWith(
         2,
-        expect.objectContaining({ type: 'DiscountCalculated', couponCode: 'SAVE5' }),
+        expect.objectContaining({ eventType: 'DiscountCalculated', couponCode: 'SAVE5' }),
       );
     });
 
@@ -188,7 +188,7 @@ describe('Coupon', () => {
       expect(publishSpy).toHaveBeenCalledTimes(1);
       expect(publishSpy).toHaveBeenCalledWith(
         expect.objectContaining({
-          type: 'CouponValidationFailed',
+          eventType: 'CouponValidationFailed',
           couponCode: 'OFF',
           reason: 'inactive',
         }),

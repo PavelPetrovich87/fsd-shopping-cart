@@ -60,6 +60,7 @@ describe('ChangeCartItemQuantity', () => {
       const variant = createMockVariant({ totalOnHand: 10, reservations: [] });
       vi.mocked(mockCartRepo.getCart).mockResolvedValue(cart);
       vi.mocked(mockStockRepo.findBySku).mockResolvedValue(variant);
+      const publishSpy = vi.spyOn(mockEventBus, 'publish');
 
       const result = await ChangeCartItemQuantity(
         'SKU001', 5,
@@ -75,6 +76,12 @@ describe('ChangeCartItemQuantity', () => {
         expect(result.event.newQuantity).toBe(5);
       }
       expect(mockCartRepo.saveCart).toHaveBeenCalled();
+      expect(publishSpy).toHaveBeenCalledTimes(1);
+      const publishedEvent = publishSpy.mock.calls[0][0];
+      expect(publishedEvent.eventType).toBe('CartItemQuantityChanged');
+      expect(publishedEvent.skuId).toBe('SKU001');
+      expect(publishedEvent.previousQuantity).toBe(2);
+      expect(publishedEvent.newQuantity).toBe(5);
     });
 
     it('should decrease quantity', async () => {
@@ -91,6 +98,7 @@ describe('ChangeCartItemQuantity', () => {
       const variant = createMockVariant({ totalOnHand: 10, reservations: [] });
       vi.mocked(mockCartRepo.getCart).mockResolvedValue(cart);
       vi.mocked(mockStockRepo.findBySku).mockResolvedValue(variant);
+      const publishSpy = vi.spyOn(mockEventBus, 'publish');
 
       const result = await ChangeCartItemQuantity(
         'SKU001', 3,
@@ -103,6 +111,12 @@ describe('ChangeCartItemQuantity', () => {
       if (result.success) {
         expect(result.event.newQuantity).toBe(3);
       }
+      expect(publishSpy).toHaveBeenCalledTimes(1);
+      const publishedEvent = publishSpy.mock.calls[0][0];
+      expect(publishedEvent.eventType).toBe('CartItemQuantityChanged');
+      expect(publishedEvent.skuId).toBe('SKU001');
+      expect(publishedEvent.previousQuantity).toBe(5);
+      expect(publishedEvent.newQuantity).toBe(3);
     });
   });
 

@@ -52,6 +52,7 @@ describe('AddToCart', () => {
       const variant = createMockVariant();
       vi.mocked(mockCartRepo.getCart).mockResolvedValue(cart);
       vi.mocked(mockStockRepo.findBySku).mockResolvedValue(variant);
+      const publishSpy = vi.spyOn(mockEventBus, 'publish');
 
       const result = await AddToCart(
         'SKU001', 2,
@@ -67,6 +68,11 @@ describe('AddToCart', () => {
         expect(result.event.quantity).toBe(2);
       }
       expect(mockCartRepo.saveCart).toHaveBeenCalled();
+      expect(publishSpy).toHaveBeenCalledTimes(1);
+      const publishedEvent = publishSpy.mock.calls[0][0];
+      expect(publishedEvent.eventType).toBe('ItemAddedToCart');
+      expect(publishedEvent.skuId).toBe('SKU001');
+      expect(publishedEvent.quantity).toBe(2);
     });
 
     it('should increment quantity if item already in cart', async () => {
@@ -83,6 +89,7 @@ describe('AddToCart', () => {
       const variant = createMockVariant();
       vi.mocked(mockCartRepo.getCart).mockResolvedValue(cart);
       vi.mocked(mockStockRepo.findBySku).mockResolvedValue(variant);
+      const publishSpy = vi.spyOn(mockEventBus, 'publish');
 
       const result = await AddToCart(
         'SKU001', 2,
@@ -95,6 +102,10 @@ describe('AddToCart', () => {
       if (result.success) {
         expect(result.event.quantity).toBe(5);
       }
+      expect(publishSpy).toHaveBeenCalledTimes(1);
+      const publishedEvent = publishSpy.mock.calls[0][0];
+      expect(publishedEvent.eventType).toBe('ItemAddedToCart');
+      expect(publishedEvent.quantity).toBe(5);
     });
   });
 

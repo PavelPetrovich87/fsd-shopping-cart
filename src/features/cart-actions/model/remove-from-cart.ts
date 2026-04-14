@@ -50,7 +50,7 @@ export async function RemoveFromCart(
     previousQuantity
   };
 
-  eventBus.publish(event as unknown as { type: string });
+  eventBus.publish(event);
 
   return { success: true, cart: updatedCart, event };
 }

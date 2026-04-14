@@ -1,5 +1,6 @@
-import type { ProductVariant } from './types'
+import type { ProductVariant } from '../index'
 
 export interface IStockRepository {
-  findBySku(skuId: string): ProductVariant | null
+  findBySku(skuId: string): Promise<ProductVariant | null>
+  save(variant: ProductVariant): Promise<void>
 }

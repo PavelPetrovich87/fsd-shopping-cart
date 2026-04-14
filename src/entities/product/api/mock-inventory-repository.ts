@@ -21,7 +21,7 @@ function createMockInventoryRepository(): IStockRepository {
   const inventoryMap = createInventoryMap()
 
   return {
-    findBySku(skuId: string): ProductVariant | null {
+    async findBySku(skuId: string): Promise<ProductVariant | null> {
       if (!skuId || skuId.trim() === '') {
         return null
       }
@@ -45,6 +45,9 @@ function createMockInventoryRepository(): IStockRepository {
         sold: 0,
         reservations: [],
       })
+    },
+    async save(variant: ProductVariant): Promise<void> {
+      void variant
     },
   }
 }

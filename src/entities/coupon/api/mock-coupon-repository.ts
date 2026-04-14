@@ -15,7 +15,7 @@ function createMockCouponRepository(): ICouponRepository {
   const couponMap = createCouponMap()
 
   return {
-    findByCode(code: string): Coupon | null {
+    async findByCode(code: string): Promise<Coupon | null> {
       if (!code || code.trim() === '') {
         return null
       }

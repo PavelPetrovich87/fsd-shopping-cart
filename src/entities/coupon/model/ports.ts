@@ -1,5 +1,5 @@
-import type { Coupon } from './coupon'
+import type { Coupon } from '../index'
 
 export interface ICouponRepository {
-  findByCode(code: string): Coupon | null
+  findByCode(code: string): Promise<Coupon | null>
 }

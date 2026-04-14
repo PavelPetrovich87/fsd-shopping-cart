@@ -1,18 +1,18 @@
 {
-  "event_count": 29,
-  "last_event_id": "01KP61X43PSM9JXKXVG3VQJQJD",
-  "materialized_at": "2026-04-14T13:11:46.550115+00:00",
+  "event_count": 32,
+  "last_event_id": "01KP61Y1KF9PPG3G8N10N85FWH",
+  "materialized_at": "2026-04-14T13:12:16.751289+00:00",
   "mission_number": "011",
   "mission_slug": "011-cart-actions-feature",
   "mission_type": "software-dev",
   "summary": {
-    "approved": 3,
+    "approved": 4,
     "blocked": 0,
     "canceled": 0,
     "claimed": 0,
     "done": 0,
     "for_review": 0,
-    "in_progress": 1,
+    "in_progress": 0,
     "in_review": 0,
     "planned": 0
   },
@@ -39,11 +39,11 @@
       "last_transition_at": "2026-04-14T13:02:39.542048+00:00"
     },
     "WP04": {
-      "actor": "kilocode:minimax:reviewer:reviewer",
+      "actor": "user",
       "force_count": 2,
-      "lane": "in_progress",
-      "last_event_id": "01KP61X43PSM9JXKXVG3VQJQJD",
-      "last_transition_at": "2026-04-14T13:11:46.550115+00:00"
+      "lane": "approved",
+      "last_event_id": "01KP61Y1KF9PPG3G8N10N85FWH",
+      "last_transition_at": "2026-04-14T13:12:16.751289+00:00"
     }
   }
 }

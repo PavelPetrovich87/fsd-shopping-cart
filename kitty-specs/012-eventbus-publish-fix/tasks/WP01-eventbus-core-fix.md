@@ -197,3 +197,4 @@ console.error(`[EventBus] Handler error for event "${event.eventType}":`, error)
 ## Activity Log
 
 - 2026-04-14T14:01:36Z – kilo:minimax-m2::implementer – shell_pid=11961 – Assigned agent via action command
+- 2026-04-14T14:04:33Z – kilo:minimax-m2::implementer – shell_pid=11961 – WP01 complete: EventBus uses eventType. TypeScript build has errors in coupon/cart-actions (will be fixed in WP02/WP03).

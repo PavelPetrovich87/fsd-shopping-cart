@@ -14,8 +14,8 @@
 | T001 | Create `features/cart-actions` directory structure | WP01 | — | — | [D] |
 | T002 | Implement `model/errors.ts` — CartActionsError types | WP01 | [P] | T001 | [D] |
 | T003 | Implement `model/results.ts` — Result types | WP01 | [P] | T001 | [D] |
-| T004 | Implement `AddToCart` use case | WP02 | — | T002, T003 |
-| T005 | Write `AddToCart` unit tests | WP02 | — | T004 |
+| T004 | Implement `AddToCart` use case | WP02 | — | T002, T003 | [D] |
+| T005 | Write `AddToCart` unit tests | WP02 | — | T004 | [D] |
 | T006 | Implement `RemoveFromCart` use case | WP03 | [P] | T002, T003 |
 | T007 | Write `RemoveFromCart` unit tests | WP03 | — | T006 |
 | T008 | Implement `ChangeCartItemQuantity` use case | WP03 | [P] | T002, T003 |
@@ -60,8 +60,8 @@
 **Testable independently:** Yes — mocks all dependencies
 
 **Included Subtasks:**
-- [ ] T004 — Implement `AddToCart` use case
-- [ ] T005 — Write `AddToCart` unit tests
+- [x] T004 — Implement `AddToCart` use case
+- [x] T005 — Write `AddToCart` unit tests
 
 **Implementation Sketch:**
 1. Create `model/add-to-cart.ts` with async function:

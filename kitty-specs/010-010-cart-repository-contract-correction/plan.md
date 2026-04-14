@@ -1,108 +1,90 @@
-# Implementation Plan: [FEATURE]
-*Path: [templates/plan-template.md](templates/plan-template.md)*
+# Implementation Plan: 010 Cart Repository Contract Correction
 
+## Branch Contract
 
-**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
-**Input**: Feature specification from `/kitty-specs/[###-feature-name]/spec.md`
+- Current branch at plan start: `main`
+- Intended planning/base branch: `main`
+- Final merge target: `main`
+- `branch_matches_target`: true
 
-**Note**: This template is filled in by the `/spec-kitty.plan` command. See `src/specify_cli/missions/software-dev/command-templates/plan.md` for the execution workflow.
+## Charter Context
 
-The planner will not begin until all planning questions have been answered—capture those answers in this document before progressing to later phases.
+No charter file found at `.kittify/charter/charter.md`. Skipping Charter Check.
 
 ## Summary
 
-[Extract from feature spec: primary requirement + technical approach from research]
+Restore async `ICartRepository` contract (drifted to sync during T-009 merge), restore two port files deleted during cross-mission merge conflict (`coupon/model/ports.ts`, `product/model/ports.ts`), and update ZustandCartRepository adapter and integration tests to use async signatures.
 
 ## Technical Context
 
-<!--
-  ACTION REQUIRED: Replace the content in this section with the technical details
-  for the project. The structure here is presented in advisory capacity to guide
-  the iteration process.
--->
+**Language/Version**: TypeScript 5.9
+**Primary Dependencies**: React 19, Zustand, Vitest
+**Testing**: Vitest unit + integration tests
+**Target Platform**: Web application (React)
 
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
-**Project Type**: [single/web/mobile - determines source structure]  
-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
-**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
-**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
+### Current File State vs Required
 
-## Charter Check
+| File | Current State | Required State |
+| ---- | ------------- | -------------- |
+| `src/entities/cart/model/ports.ts` | `getCart(): Cart`, `saveCart(): void` (sync) | `getCart(): Promise<Cart>`, `saveCart(): Promise<void>` (async) |
+| `src/entities/cart/api/zustand-cart-repository.ts` | Sync adapter | Wrap in `Promise.resolve()` |
+| `src/entities/cart/api/zustand-cart-repository.integration.test.ts` | Sync calls | `await` on async calls |
+| `src/entities/coupon/model/ports.ts` | **Missing** (deleted during T-009 merge) | Restore from git `2c09b43` |
+| `src/entities/product/model/ports.ts` | **Missing** (deleted during T-009 merge) | Restore from git `2c09b43` |
+| `src/entities/coupon/index.ts` | No port type export | Add `export type { ICouponRepository } from './model/ports'` |
+| `src/entities/product/index.ts` | No port type export | Add `export type { IStockRepository } from './model/ports'` |
 
-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+### Gate Summary
 
-[Gates determined based on charter file]
+- `npm run lint` — ESLint (code quality)
+- `npm run lint:arch` — Steiger FSD linter (architecture compliance)
+- `npm run build` — TypeScript compilation + Vite bundle
+- `npm run test:unit` — Vitest unit tests (131 existing tests must pass)
 
 ## Project Structure
 
-### Documentation (this feature)
-
 ```
-kitty-specs/[###-feature]/
-├── plan.md              # This file (/spec-kitty.plan command output)
-├── research.md          # Phase 0 output (/spec-kitty.plan command)
-├── data-model.md        # Phase 1 output (/spec-kitty.plan command)
-├── quickstart.md        # Phase 1 output (/spec-kitty.plan command)
-├── contracts/           # Phase 1 output (/spec-kitty.plan command)
-└── tasks.md             # Phase 2 output (/spec-kitty.tasks command - NOT created by /spec-kitty.plan)
+kitty-specs/010-010-cart-repository-contract-correction/
+├── plan.md              # This file
+├── spec.md              # Mission specification
+├── checklists/
+│   └── requirements.md # Quality checklist
+├── tasks/               # Work package tasks (created by /spec-kitty.tasks)
+└── status.events.jsonl  # Mission events
 ```
 
-### Source Code (repository root)
-<!--
-  ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
-  for this feature. Delete unused options and expand the chosen structure with
-  real paths (e.g., apps/admin, packages/something). The delivered plan must
-  not include Option labels.
--->
+## Implementation Approach
 
-```
-# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
-src/
-├── models/
-├── services/
-├── cli/
-└── lib/
+### WP01: Contract Correction & File Restoration
 
-tests/
-├── contract/
-├── integration/
-└── unit/
+**Files to restore from git `2c09b43`**:
 
-# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
-backend/
-├── src/
-│   ├── models/
-│   ├── services/
-│   └── api/
-└── tests/
+1. `src/entities/coupon/model/ports.ts` — `ICouponRepository` with `findByCode(code: string): Promise<Coupon | null>`
+2. `src/entities/product/model/ports.ts` — `IStockRepository` with `findBySku` and `save` async signatures
 
-frontend/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   └── services/
-└── tests/
+**Files to modify**:
 
-# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
-api/
-└── [same as backend above]
+3. `src/entities/cart/model/ports.ts` — change `ICartRepository` to async signatures
+4. `src/entities/cart/api/zustand-cart-repository.ts` — wrap `getCart()` and `saveCart()` in `Promise.resolve()`
+5. `src/entities/cart/api/zustand-cart-repository.integration.test.ts` — add `await` to all repository calls
+6. `src/entities/coupon/index.ts` — add `export type { ICouponRepository } from './model/ports'`
+7. `src/entities/product/index.ts` — add `export type { IStockRepository } from './model/ports'`
 
-ios/ or android/
-└── [platform-specific structure: feature modules, UI flows, platform tests]
-```
+**Verification**: All 7 quality gates + all 131 existing unit tests pass.
 
-**Structure Decision**: [Document the selected structure and reference the real
-directories captured above]
+### Scope Constraints
 
-## Complexity Tracking
+- Only restore and correct existing contracts — no new functionality
+- Do not modify Zustand store structure (state shape, actions)
+- Do not modify Cart aggregate or domain logic
+- Do not touch `cart-store.test.ts` (already sync store tests)
 
-*Fill ONLY if Charter Check has violations that must be justified*
+## Work Packages
 
-| Violation | Why Needed | Simpler Alternative Rejected Because |
-|-----------|------------|-------------------------------------|
-| [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
-| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |
+| WP | Description | Files | Status |
+| -- | ----------- | ----- | ------ |
+| WP01 | Contract Correction & File Restoration | 7 files | pending |
+
+## Next Step
+
+Run `/spec-kitty.tasks` to generate work package task files.

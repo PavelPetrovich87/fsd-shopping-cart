@@ -6,7 +6,7 @@ requirement_refs:
 - FR-014
 planning_base_branch: main
 merge_target_branch: main
-branch_strategy: 'Current branch at workflow start: main. Planning/base branch for this feature: main. Completed changes must merge into main.'
+branch_strategy: Planning artifacts for this feature were generated on main. During /spec-kitty.implement this WP may branch from a dependency-specific base, but completed changes must merge back into main unless the human explicitly redirects the landing branch.
 created_at: '2026-04-15T10:02:31Z'
 subtasks:
 - T001
@@ -20,7 +20,10 @@ history:
 authoritative_surface: src/features/checkout/
 execution_mode: code_change
 owned_files:
-- src/features/checkout/model/**
+- src/features/checkout/model/events.ts
+- src/features/checkout/model/result-types.ts
+- src/features/checkout/model/initiate-checkout.ts
+- src/features/checkout/model/index.ts
 tags: []
 ---
 

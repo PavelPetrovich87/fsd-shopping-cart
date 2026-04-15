@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "mission_slug": "014-checkout-feature",
+  "mission_id": "014-checkout-feature",
+  "mission_branch": "kitty/mission-014-checkout-feature",
+  "target_branch": "main",
+  "lanes": [
+    {
+      "lane_id": "lane-a",
+      "wp_ids": [
+        "WP01",
+        "WP02"
+      ],
+      "write_scope": [
+        "src/features/checkout/index.ts",
+        "src/features/checkout/model/events.ts",
+        "src/features/checkout/model/index.ts",
+        "src/features/checkout/model/initiate-checkout.test.ts",
+        "src/features/checkout/model/initiate-checkout.ts",
+        "src/features/checkout/model/result-types.ts"
+      ],
+      "predicted_surfaces": [
+        "api",
+        "tracker-integration"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    }
+  ],
+  "computed_at": "2026-04-15T10:08:58.393950+00:00",
+  "computed_from": "dependency_graph+ownership",
+  "planning_artifact_wps": [],
+  "collapse_report": {
+    "events": [
+      {
+        "wp_a": "WP02",
+        "wp_b": "WP01",
+        "rule": "dependency",
+        "evidence": "WP02 depends on WP01"
+      }
+    ],
+    "total_merges": 1,
+    "independent_wps_collapsed": 0,
+    "by_rule": {
+      "dependency": 1
+    }
+  }
+}

@@ -1,0 +1,53 @@
+.visual-harness {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.harness-header {
+  background: white;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 24px 32px;
+}
+
+.header-content h1 {
+  margin: 0 0 4px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.header-content p {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.harness-main {
+  padding: 24px 32px;
+}
+
+.state-message {
+  text-align: center;
+  padding: 48px;
+  font-size: 16px;
+  border-radius: 8px;
+}
+
+.state-message.loading {
+  color: #666;
+}
+
+.state-message.error {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+@media (max-width: 768px) {
+  .harness-header {
+    padding: 16px;
+  }
+
+  .harness-main {
+    padding: 16px;
+  }
+}

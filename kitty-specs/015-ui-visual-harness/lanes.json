@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "mission_slug": "015-ui-visual-harness",
+  "mission_id": "015-ui-visual-harness",
+  "mission_branch": "kitty/mission-015-ui-visual-harness",
+  "target_branch": "main",
+  "lanes": [
+    {
+      "lane_id": "lane-a",
+      "wp_ids": [
+        "WP01"
+      ],
+      "write_scope": [
+        "kitty-specs/015-ui-visual-harness/plan.md",
+        "kitty-specs/015-ui-visual-harness/spec.md",
+        "src/shared/lib/visual-harness-config.ts",
+        "src/shared/lib/index.ts",
+        "visual-baselines",
+        "visual-diffs"
+      ],
+      "predicted_surfaces": [
+        "api"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    },
+    {
+      "lane_id": "lane-b",
+      "wp_ids": [
+        "WP02"
+      ],
+      "write_scope": [
+        "src/shared/lib/story-discovery.ts",
+        "src/shared/lib/story-metadata.ts"
+      ],
+      "predicted_surfaces": [
+        "api"
+      ],
+      "depends_on_lanes": [
+        "lane-a"
+      ],
+      "parallel_group": 1
+    },
+    {
+      "lane_id": "lane-c",
+      "wp_ids": [
+        "WP03",
+        "WP04"
+      ],
+      "write_scope": [
+        "src/widgets/VisualHarness",
+        "tests/visual"
+      ],
+      "predicted_surfaces": [
+        "ui",
+        "api"
+      ],
+      "depends_on_lanes": [
+        "lane-b"
+      ],
+      "parallel_group": 2
+    },
+    {
+      "lane_id": "lane-d",
+      "wp_ids": [
+        "WP05"
+      ],
+      "write_scope": [
+        "package.json"
+      ],
+      "predicted_surfaces": [
+        "ui"
+      ],
+      "depends_on_lanes": [
+        "lane-c"
+      ],
+      "parallel_group": 3
+    }
+  ],
+  "computed_at": "2026-04-15T13:40:55.093133+00:00",
+  "computed_from": "dependency_graph+ownership",
+  "planning_artifact_wps": []
+}

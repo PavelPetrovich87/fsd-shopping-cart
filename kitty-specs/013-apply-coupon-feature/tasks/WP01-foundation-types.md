@@ -11,10 +11,14 @@ requirement_refs:
 planning_base_branch: main
 merge_target_branch: main
 branch_strategy: Planning artifacts for this feature were generated on main. During /spec-kitty.implement this WP may branch from a dependency-specific base, but completed changes must merge back into main unless the human explicitly redirects the landing branch.
+base_branch: kitty/mission-013-apply-coupon-feature
+base_commit: 028ce2ebb7b822e063dbe8e7ae3383ee5720e875
+created_at: '2026-04-15T10:25:49.316260+00:00'
 subtasks:
 - T001
 - T002
 - T003
+shell_pid: '7109'
 history:
 - date: '2026-04-15'
   action: created

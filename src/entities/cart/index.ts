@@ -42,3 +42,5 @@ export {
   canTransitionTo,
   toCartData,
 } from './model/cart'
+
+export type { ICartRepository } from './model/ports'

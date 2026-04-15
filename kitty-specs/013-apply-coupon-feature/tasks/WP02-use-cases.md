@@ -309,3 +309,4 @@ Note: `eventType` (not `type`) — this matches the T-012 EventBus fix pattern.
 ## Activity Log
 
 - 2026-04-15T10:27:40Z – kilocode:minimax-m2.7:implementer:implementer – shell_pid=7109 – Assigned agent via action command
+- 2026-04-15T10:30:09Z – kilocode:minimax-m2.7:implementer:implementer – shell_pid=7109 – Ready for review: ApplyCoupon and RemoveCoupon use cases

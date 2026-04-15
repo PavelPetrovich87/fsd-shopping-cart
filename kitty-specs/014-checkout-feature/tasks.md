@@ -14,9 +14,9 @@
 | T001 | Create CheckoutInitiated event type | WP01 | [P] | [D] |
 | T002 | Create InitiateCheckoutResult and StockConflict types | WP01 | [D] |
 | T003 | Implement InitiateCheckout use case | WP01 | | [D] |
-| T004 | Write unit tests for all scenarios | WP02 | |
+| T004 | Write unit tests for all scenarios | WP02 | | [D] |
 | T005 | Create model/index.ts re-exports | WP01 | [D] |
-| T006 | Create public API index.ts | WP02 | [P] |
+| T006 | Create public API index.ts | WP02 | [D] |
 
 ---
 
@@ -72,8 +72,8 @@
 
 ### Subtasks
 
-- [ ] T004 Write unit tests in `src/features/checkout/model/initiate-checkout.test.ts`
-- [ ] T006 Create `src/features/checkout/index.ts` — public API re-exports
+- [x] T004 Write unit tests in `src/features/checkout/model/initiate-checkout.test.ts`
+- [x] T006 Create `src/features/checkout/index.ts` — public API re-exports
 
 ### Implementation Sketch
 

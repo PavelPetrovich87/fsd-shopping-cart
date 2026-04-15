@@ -23,7 +23,8 @@ subtasks:
 - T005
 - T006
 - T007
-shell_pid: '7109'
+shell_pid: "7109"
+agent: "kilocode:minimax-m2.7:implementer:implementer"
 history:
 - date: '2026-04-15'
   action: created
@@ -304,3 +305,7 @@ Note: `eventType` (not `type`) — this matches the T-012 EventBus fix pattern.
 - [ ] EventBus.publish called with correct event structure (`eventType` field)
 - [ ] Async/await used correctly for repository calls
 - [ ] TypeScript compilation succeeds
+
+## Activity Log
+
+- 2026-04-15T10:27:40Z – kilocode:minimax-m2.7:implementer:implementer – shell_pid=7109 – Assigned agent via action command

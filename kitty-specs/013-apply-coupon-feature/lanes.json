@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "mission_slug": "013-apply-coupon-feature",
+  "mission_id": "013-apply-coupon-feature",
+  "mission_branch": "kitty/mission-013-apply-coupon-feature",
+  "target_branch": "main",
+  "lanes": [
+    {
+      "lane_id": "lane-a",
+      "wp_ids": [
+        "WP01"
+      ],
+      "write_scope": [
+        "src/features/apply-coupon/model/errors.ts",
+        "src/features/apply-coupon/model/events.ts",
+        "src/features/apply-coupon/model/results.ts"
+      ],
+      "predicted_surfaces": [
+        "api",
+        "legacy-cleanup"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    },
+    {
+      "lane_id": "lane-b",
+      "wp_ids": [
+        "WP02"
+      ],
+      "write_scope": [
+        "src/features/apply-coupon/index.ts",
+        "src/features/apply-coupon/model/apply-coupon.ts",
+        "src/features/apply-coupon/model/index.ts",
+        "src/features/apply-coupon/model/remove-coupon.ts"
+      ],
+      "predicted_surfaces": [
+        "api",
+        "legacy-cleanup",
+        "tracker-integration"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    },
+    {
+      "lane_id": "lane-c",
+      "wp_ids": [
+        "WP03"
+      ],
+      "write_scope": [
+        "src/features/apply-coupon/model/apply-coupon.test.ts"
+      ],
+      "predicted_surfaces": [
+        "api",
+        "legacy-cleanup",
+        "tracker-integration"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    }
+  ],
+  "computed_at": "2026-04-15T10:24:05.316504+00:00",
+  "computed_from": "dependency_graph+ownership",
+  "planning_artifact_wps": []
+}

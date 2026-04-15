@@ -11,8 +11,8 @@
 | T005 | Create `model/remove-coupon.ts` — RemoveCoupon use case | WP02 | | [D] |
 | T006 | Create `model/index.ts` — re-exports for errors, events, results | WP02 | | [D] |
 | T007 | Create `index.ts` — public API entry point | WP02 | | [D] |
-| T008 | Create `model/apply-coupon.test.ts` — unit tests for ApplyCoupon + RemoveCoupon | WP03 | |
-| T009 | Run lint, lint:arch, build — verify all checks pass | WP03 | |
+| T008 | Create `model/apply-coupon.test.ts` — unit tests for ApplyCoupon + RemoveCoupon | WP03 | | [D] |
+| T009 | Run lint, lint:arch, build — verify all checks pass | WP03 | | [D] |
 
 ---
 
@@ -60,8 +60,8 @@
 **Priority**: High (validation)
 
 **Subtasks**:
-- [ ] T008 Create `model/apply-coupon.test.ts` — unit tests with mocked ICartRepository, ICouponRepository, EventBus
-- [ ] T009 Run lint, lint:arch, build — verify all checks pass
+- [x] T008 Create `model/apply-coupon.test.ts` — unit tests with mocked ICartRepository, ICouponRepository, EventBus
+- [x] T009 Run lint, lint:arch, build — verify all checks pass
 
 **Implementation Order**: T008 then T009 (T009 depends on T008 passing)
 
@@ -78,8 +78,8 @@
 - [x] T005: remove-coupon.ts implements RemoveCoupon per spec
 - [x] T006: model/index.ts re-exports errors, events, results, use cases
 - [x] T007: index.ts re-exports model use cases
-- [ ] T008: test file created with all scenarios from spec
-- [ ] T009: All quality gates pass (lint, lint:arch, build)
+- [x] T008: test file created with all scenarios from spec
+- [x] T009: All quality gates pass (lint, lint:arch, build)
 
 ## Dependency Graph
 

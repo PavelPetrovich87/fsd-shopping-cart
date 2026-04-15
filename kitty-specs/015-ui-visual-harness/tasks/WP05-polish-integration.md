@@ -4,7 +4,10 @@ title: Polish & Integration
 dependencies:
 - WP03
 - WP04
-requirement_refs: []
+requirement_refs:
+- FR-001
+- FR-002
+- FR-003
 planning_base_branch: main
 merge_target_branch: main
 branch_strategy: 'Current branch at workflow start: main. Planning/base branch: main. Completed changes merge into main.'

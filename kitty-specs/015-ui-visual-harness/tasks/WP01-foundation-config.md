@@ -2,7 +2,8 @@
 work_package_id: WP01
 title: Foundation & Config
 dependencies: []
-requirement_refs: []
+requirement_refs:
+- FR-003
 planning_base_branch: main
 merge_target_branch: main
 branch_strategy: 'Current branch at workflow start: main. Planning/base branch: main. Completed changes merge into main.'

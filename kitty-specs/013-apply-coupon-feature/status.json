@@ -1,7 +1,7 @@
 {
-  "event_count": 17,
-  "last_event_id": "01KP8BJGMVCX14A1507KJW8AWJ",
-  "materialized_at": "2026-04-15T10:39:13.563645+00:00",
+  "event_count": 18,
+  "last_event_id": "01KP8BN01SS3RX7W11MP4V1WYR",
+  "materialized_at": "2026-04-15T10:40:34.873455+00:00",
   "mission_number": "013",
   "mission_slug": "013-apply-coupon-feature",
   "mission_type": "software-dev",
@@ -12,9 +12,9 @@
     "claimed": 0,
     "done": 0,
     "for_review": 1,
-    "in_progress": 1,
+    "in_progress": 0,
     "in_review": 0,
-    "planned": 0
+    "planned": 1
   },
   "work_packages": {
     "WP01": {
@@ -25,11 +25,11 @@
       "last_transition_at": "2026-04-15T10:38:50.392501+00:00"
     },
     "WP02": {
-      "actor": "opencode",
+      "actor": "user",
       "force_count": 2,
-      "lane": "in_progress",
-      "last_event_id": "01KP8BJGMVCX14A1507KJW8AWJ",
-      "last_transition_at": "2026-04-15T10:39:13.563645+00:00"
+      "lane": "planned",
+      "last_event_id": "01KP8BN01SS3RX7W11MP4V1WYR",
+      "last_transition_at": "2026-04-15T10:40:34.873455+00:00"
     },
     "WP03": {
       "actor": "user",

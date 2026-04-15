@@ -16,7 +16,7 @@ subtasks:
 - T008
 - T009
 shell_pid: "7109"
-agent: "kilocode:minimax-m2.7:implementer:implementer"
+agent: "opencode"
 history:
 - date: '2026-04-15'
   action: created
@@ -345,3 +345,4 @@ interface ICouponRepository {
 
 - 2026-04-15T10:30:30Z – kilocode:minimax-m2.7:implementer:implementer – shell_pid=7109 – Assigned agent via action command
 - 2026-04-15T10:34:07Z – kilocode:minimax-m2.7:implementer:implementer – shell_pid=7109 – Ready for review: Unit tests + lint passed
+- 2026-04-15T10:43:27Z – opencode – shell_pid=7109 – Started review via action command

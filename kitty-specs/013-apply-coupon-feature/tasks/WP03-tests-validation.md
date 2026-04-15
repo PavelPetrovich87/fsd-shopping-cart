@@ -346,3 +346,4 @@ interface ICouponRepository {
 - 2026-04-15T10:30:30Z – kilocode:minimax-m2.7:implementer:implementer – shell_pid=7109 – Assigned agent via action command
 - 2026-04-15T10:34:07Z – kilocode:minimax-m2.7:implementer:implementer – shell_pid=7109 – Ready for review: Unit tests + lint passed
 - 2026-04-15T10:43:27Z – opencode – shell_pid=7109 – Started review via action command
+- 2026-04-15T10:44:27Z – opencode – shell_pid=7109 – Review passed: 8 unit tests all pass. Tests cover ApplyCoupon happy path, empty code (2 cases), invalid code, expired coupon, coupon replacement (no stacking), RemoveCoupon happy path, and no-op when no coupon. Lint clean. Test patterns match T-011 conventions.

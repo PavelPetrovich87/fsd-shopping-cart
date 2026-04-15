@@ -1,108 +1,171 @@
-# Implementation Plan: [FEATURE]
+# Implementation Plan: UI Visual Harness
 *Path: [templates/plan-template.md](templates/plan-template.md)*
 
-
-**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
-**Input**: Feature specification from `/kitty-specs/[###-feature-name]/spec.md`
-
-**Note**: This template is filled in by the `/spec-kitty.plan` command. See `src/specify_cli/missions/software-dev/command-templates/plan.md` for the execution workflow.
-
-The planner will not begin until all planning questions have been answered—capture those answers in this document before progressing to later phases.
+**Branch**: `015-ui-visual-harness` | **Date**: 2026-04-15 | **Spec**: [spec.md](./spec.md)
+**Input**: Feature specification from `/kitty-specs/015-ui-visual-harness/spec.md`
 
 ## Summary
 
-[Extract from feature spec: primary requirement + technical approach from research]
+Create a UI visual harness consisting of two parts: (1) a centralized component gallery using Playwright to capture Storybook story screenshots for visual review, and (2) a Playwright-based visual regression testing setup that captures and compares UI screenshots across viewports. Approach A (Playwright-powered) was selected for the gallery.
 
 ## Technical Context
 
-<!--
-  ACTION REQUIRED: Replace the content in this section with the technical details
-  for the project. The structure here is presented in advisory capacity to guide
-  the iteration process.
--->
+**Language/Version**: TypeScript 5.9
+**Primary Dependencies**: Playwright, Storybook (CSF3 stories), React Router
+**Storage**: File-based (baseline screenshots in `visual-baselines/`, diffs in `visual-diffs/`)
+**Testing**: Playwright visual regression tests
+**Target Platform**: Web (desktop, mobile, tablet viewports)
+**Project Type**: Single web application (React + Vite)
+**Performance Goals**: Gallery load < 2s, visual test suite < 5min for 50 stories
+**Constraints**: FSD-compliant (harness page cannot import from pages layer), no hardcoded config
+**Scale/Scope**: ~10-20 components initially, extensible structure
 
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
-**Project Type**: [single/web/mobile - determines source structure]  
-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
-**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
-**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
+## Engineering Alignment
+
+- Playwright will be used both for gallery screenshot capture (visiting Storybook URLs) and for visual regression testing
+- Storybook must be running during gallery view and visual tests
+- All config in `src/shared/lib/visual-harness-config.ts` (no hardcoding)
+- Gallery page at `/harness` route (app layer routing)
+- Baseline storage: `visual-baselines/{component}/{viewport}/{date}.png`
+- Diff storage: `visual-diffs/{component}/{viewport}/{date}.png`
 
 ## Charter Check
 
-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+*Note: Charter governance has unresolved template_set issue. Proceeding with project-level decisions.*
 
-[Gates determined based on charter file]
+**Charter Compliance**: No conflicts detected with charter requirements.
 
 ## Project Structure
 
 ### Documentation (this feature)
 
 ```
-kitty-specs/[###-feature]/
-├── plan.md              # This file (/spec-kitty.plan command output)
-├── research.md          # Phase 0 output (/spec-kitty.plan command)
-├── data-model.md        # Phase 1 output (/spec-kitty.plan command)
-├── quickstart.md        # Phase 1 output (/spec-kitty.plan command)
-├── contracts/           # Phase 1 output (/spec-kitty.plan command)
-└── tasks.md             # Phase 2 output (/spec-kitty.tasks command - NOT created by /spec-kitty.plan)
+kitty-specs/015-ui-visual-harness/
+├── plan.md              # This file
+├── spec.md              # Feature specification
+├── research.md          # Phase 0 output (not needed - all clarifications resolved)
+├── data-model.md        # Phase 1 output (entities defined in spec)
+├── quickstart.md        # Phase 1 output (developer setup guide)
+├── contracts/           # Phase 1 output (not applicable - no external APIs)
+└── tasks.md             # Phase 2 output (/spec-kitty.tasks - NOT created by /spec-kitty.plan)
 ```
 
 ### Source Code (repository root)
-<!--
-  ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
-  for this feature. Delete unused options and expand the chosen structure with
-  real paths (e.g., apps/admin, packages/something). The delivered plan must
-  not include Option labels.
--->
 
 ```
-# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
 src/
-├── models/
-├── services/
-├── cli/
-└── lib/
-
+├── shared/lib/
+│   └── visual-harness-config.ts    # All harness configuration (C-004)
+├── app/
+│   ├── routing/                     # Add /harness route (FR-003.1)
+│   └── ui/
+│       └── VisualHarness/           # Gallery page (FR-001, FR-003)
+│           ├── VisualHarness.tsx
+│           ├── VisualHarness.stories.tsx
+│           └── components/
+│               ├── ComponentGrid.tsx
+│               ├── ComponentCard.tsx
+│               └── FilterBar.tsx
+├── shared/ui/shadcn/                # Existing shared components
+├── entities/                        # Entity UI components
+├── features/                        # Feature UI components
+├── widgets/                         # Widget components
+visual-baselines/                    # Baseline screenshots (gitignored)
+visual-diffs/                        # Diff images (gitignored)
 tests/
-├── contract/
-├── integration/
-└── unit/
-
-# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
-backend/
-├── src/
-│   ├── models/
-│   ├── services/
-│   └── api/
-└── tests/
-
-frontend/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   └── services/
-└── tests/
-
-# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
-api/
-└── [same as backend above]
-
-ios/ or android/
-└── [platform-specific structure: feature modules, UI flows, platform tests]
+└── visual/
+    ├── playwright.config.ts
+    ├── harness-gallery.spec.ts      # Gallery page tests
+    └── visual-regression.spec.ts   # Screenshot comparison tests
 ```
 
-**Structure Decision**: [Document the selected structure and reference the real
-directories captured above]
+**Structure Decision**: Using Playwright-powered approach (A) — gallery page uses Playwright to visit Storybook story URLs and capture screenshots. Harness page renders captured screenshots in a grid with filtering.
+
+## Phase 0: Research (Not Required)
+
+All technical decisions resolved during planning interrogation:
+- Approach A selected (Playwright-powered gallery)
+- Tech stack confirmed: TypeScript, Playwright, React Router
+- No external API integrations requiring research
+- No [NEEDS CLARIFICATION] markers remain
+
+## Phase 1: Design & Contracts
+
+### Data Model (from spec entities)
+
+**HarnessConfig**
+```typescript
+interface HarnessConfig {
+  storiesPattern: string;      // Glob pattern for story files: "src/**/*.stories.tsx"
+  storybookUrl: string;        // Base Storybook URL: "http://localhost:6006"
+  viewportConfig: Viewport[];  // Screen sizes to test
+  baselineDir: string;         // "visual-baselines"
+  diffDir: string;             // "visual-diffs"
+  failOnDiff: boolean;        // Whether pixel diffs fail the build
+  diffThreshold: number;       // 0.0 - 1.0 threshold for failure (0.001 = 0.1%)
+}
+```
+
+**Viewport**
+```typescript
+interface Viewport {
+  name: 'desktop' | 'mobile' | 'tablet';
+  width: number;
+  height: number;
+}
+```
+
+**ComponentCard (Gallery)**
+```typescript
+interface ComponentCard {
+  id: string;
+  name: string;
+  layer: 'shared' | 'entities' | 'features' | 'widgets';
+  storyCount: number;
+  variants: string[];
+  lastUpdated: string;
+  storyPath: string;   // Path to Storybook story: "UI/Button"
+  previewImage: string; // Path to captured preview
+}
+```
+
+### Contracts (Not Applicable)
+
+This feature has no external API contracts. All interactions are:
+- Direct React component rendering (gallery page)
+- Playwright browser automation (screenshot capture)
+- File system storage (baseline/diff images)
+
+### Quickstart
+
+```bash
+# Development setup
+npm install
+
+# Run Storybook (required for harness gallery)
+npm run storybook
+
+# In another terminal, run harness gallery
+# (requires Storybook running on localhost:6006)
+npm run harness:gallery
+
+# Run visual regression tests
+npm run test:visual
+
+# Update baselines
+UPDATE_BASELINES=true npm run test:visual
+
+# Open harness page
+open http://localhost:5173/harness
+```
 
 ## Complexity Tracking
 
-*Fill ONLY if Charter Check has violations that must be justified*
+*No charter violations requiring justification.*
 
-| Violation | Why Needed | Simpler Alternative Rejected Because |
-|-----------|------------|-------------------------------------|
-| [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
-| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |
+## Gates
+
+- [x] Branch contract confirmed (main → main)
+- [x] Planning question answered (Approach A selected)
+- [x] Spec quality checklist passed
+- [x] No unresolved [NEEDS CLARIFICATION] markers

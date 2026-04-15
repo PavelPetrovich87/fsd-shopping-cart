@@ -4,9 +4,9 @@
 
 | ID | Description | WP | Parallel |
 |----|-------------|----|----------|
-| T001 | Create `model/errors.ts` — ApplyCouponError discriminated union | WP01 | [P] |
-| T002 | Create `model/events.ts` — CouponApplied, CouponRemoved event interfaces | WP01 | [P] |
-| T003 | Create `model/results.ts` — ApplyCouponResult, RemoveCouponResult types | WP01 | [P] |
+| T001 | Create `model/errors.ts` — ApplyCouponError discriminated union | WP01 | [P] | [D] |
+| T002 | Create `model/events.ts` — CouponApplied, CouponRemoved event interfaces | WP01 | [D] |
+| T003 | Create `model/results.ts` — ApplyCouponResult, RemoveCouponResult types | WP01 | [D] |
 | T004 | Create `model/apply-coupon.ts` — ApplyCoupon use case | WP02 | |
 | T005 | Create `model/remove-coupon.ts` — RemoveCoupon use case | WP02 | |
 | T006 | Create `model/index.ts` — re-exports for errors, events, results | WP02 | |
@@ -25,9 +25,9 @@
 **Priority**: High (foundation for WP02)
 
 **Subtasks**:
-- [ ] T001 Create `model/errors.ts` — ApplyCouponError discriminated union
-- [ ] T002 Create `model/events.ts` — CouponApplied, CouponRemoved event interfaces
-- [ ] T003 Create `model/results.ts` — ApplyCouponResult, RemoveCouponResult types
+- [x] T001 Create `model/errors.ts` — ApplyCouponError discriminated union
+- [x] T002 Create `model/events.ts` — CouponApplied, CouponRemoved event interfaces
+- [x] T003 Create `model/results.ts` — ApplyCouponResult, RemoveCouponResult types
 
 **Implementation Order**: T001 → T002 → T003 (but all are independent enough to parallelize if desired)
 
@@ -71,9 +71,9 @@
 
 ## Validation
 
-- [ ] T001: errors.ts created with ApplyCouponError discriminated union
-- [ ] T002: events.ts created with CouponApplied, CouponRemoved interfaces
-- [ ] T003: results.ts created with ApplyCouponResult, RemoveCouponResult
+- [x] T001: errors.ts created with ApplyCouponError discriminated union
+- [x] T002: events.ts created with CouponApplied, CouponRemoved interfaces
+- [x] T003: results.ts created with ApplyCouponResult, RemoveCouponResult
 - [ ] T004: apply-coupon.ts implements ApplyCoupon per spec
 - [ ] T005: remove-coupon.ts implements RemoveCoupon per spec
 - [ ] T006: model/index.ts re-exports errors, events, results, use cases

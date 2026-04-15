@@ -228,3 +228,4 @@ src/features/apply-coupon/
 - 2026-04-15T10:37:57Z – opencode – shell_pid=7109 – Started review via action command
 - 2026-04-15T10:38:50Z – opencode – shell_pid=7109 – Review passed: All 3 type files match T-011 patterns exactly. Errors have correct 3 variants with type+message discriminant. Events use eventType field per T-012 convention. Results follow success discriminant pattern. No runtime logic. TypeScript compilation and ESLint pass for WP01 files.
 - 2026-04-15T10:40:47Z – opencode – shell_pid=7109 – Moved to planned
+- 2026-04-15T10:42:41Z – opencode – shell_pid=7109 – Review passed after fix: RemoveCouponResult now has no-event variant for no-coupon case. All lint and type checks pass.

@@ -312,3 +312,4 @@ Note: `eventType` (not `type`) — this matches the T-012 EventBus fix pattern.
 - 2026-04-15T10:30:09Z – kilocode:minimax-m2.7:implementer:implementer – shell_pid=7109 – Ready for review: ApplyCoupon and RemoveCoupon use cases
 - 2026-04-15T10:39:13Z – opencode – shell_pid=7109 – Started review via action command
 - 2026-04-15T10:40:35Z – opencode – shell_pid=7109 – Moved to planned
+- 2026-04-15T10:42:52Z – opencode – shell_pid=7109 – Moved to for_review

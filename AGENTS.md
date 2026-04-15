@@ -46,9 +46,11 @@ Do not skip steps. Do not suppress warnings. The linter is your guide.
 ## Spec-Kitty Workflow Notes
 
 - `spec-kitty` is an orchestrator. Its CLI scaffolds files and state; the agent writes the actual spec, plan, tasks, and code.
+- **MANDATORY lane-based workflow**: ALL code changes MUST go through worktrees via `spec-kitty agent action implement <WP-ID>` — never edit files directly in the project root or main branch.
 - When working on a WP through `spec-kitty implement`, all code edits MUST happen inside the allocated `.worktrees/.../` directory, never in the main checkout.
 - Before starting implementation in a new worktree, verify the workspace is runnable. If project commands fail because dependencies are missing, run `npm install` in that worktree first.
 - For automation, prefer `spec-kitty next --json`, `spec-kitty agent tasks status --json`, and `spec-kitty agent tasks validate-workflow ... --json` over the dashboard. Treat dashboard output as a convenience view, not the source of truth.
+- **WP Lifecycle**: Work packages MUST progress through lanes: `planned` → `doing` → `for_review` → `approved` → `done`. Use `spec-kitty agent tasks move-task <WP-ID> --to <lane>` to transition.
 - Before considering a WP ready for review, verify both project quality gates and workflow consistency.
 - When adding unit tests, ensure they are executable through the project harness rather than existing only as files.
 

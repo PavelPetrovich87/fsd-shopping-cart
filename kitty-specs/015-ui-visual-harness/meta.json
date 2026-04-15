@@ -1,0 +1,10 @@
+{
+  "created_at": "2026-04-15T12:21:26.983403+00:00",
+  "friendly_name": "ui visual harness",
+  "mission_id": "01KP8HDPA7G6VDNGS88C6GJEXK",
+  "mission_number": "015",
+  "mission_slug": "015-ui-visual-harness",
+  "mission_type": "software-dev",
+  "slug": "015-ui-visual-harness",
+  "target_branch": "main"
+}

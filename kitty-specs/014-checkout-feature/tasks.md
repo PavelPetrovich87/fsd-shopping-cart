@@ -11,11 +11,11 @@
 
 | ID | Description | WP | Parallel |
 |----|-------------|-----|----------|
-| T001 | Create CheckoutInitiated event type | WP01 | [P] |
-| T002 | Create InitiateCheckoutResult and StockConflict types | WP01 | [P] |
-| T003 | Implement InitiateCheckout use case | WP01 | |
+| T001 | Create CheckoutInitiated event type | WP01 | [P] | [D] |
+| T002 | Create InitiateCheckoutResult and StockConflict types | WP01 | [D] |
+| T003 | Implement InitiateCheckout use case | WP01 | | [D] |
 | T004 | Write unit tests for all scenarios | WP02 | |
-| T005 | Create model/index.ts re-exports | WP01 | [P] |
+| T005 | Create model/index.ts re-exports | WP01 | [D] |
 | T006 | Create public API index.ts | WP02 | [P] |
 
 ---
@@ -30,10 +30,10 @@
 
 ### Subtasks
 
-- [ ] T001 Create `src/features/checkout/model/events.ts` — `CheckoutInitiated` event type
-- [ ] T002 Create `src/features/checkout/model/result-types.ts` — `InitiateCheckoutResult` discriminated union and `StockConflict` interface
-- [ ] T003 Implement `src/features/checkout/model/initiate-checkout.ts` — `InitiateCheckout` async function
-- [ ] T005 Create `src/features/checkout/model/index.ts` — re-export use case and types
+- [x] T001 Create `src/features/checkout/model/events.ts` — `CheckoutInitiated` event type
+- [x] T002 Create `src/features/checkout/model/result-types.ts` — `InitiateCheckoutResult` discriminated union and `StockConflict` interface
+- [x] T003 Implement `src/features/checkout/model/initiate-checkout.ts` — `InitiateCheckout` async function
+- [x] T005 Create `src/features/checkout/model/index.ts` — re-export use case and types
 
 ### Implementation Sketch
 

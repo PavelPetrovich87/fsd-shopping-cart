@@ -19,7 +19,7 @@ subtasks:
 - T002
 - T003
 shell_pid: "7109"
-agent: "kilocode:minimax-m2.7:implementer:implementer"
+agent: "opencode"
 history:
 - date: '2026-04-15'
   action: created
@@ -225,3 +225,4 @@ src/features/apply-coupon/
 
 - 2026-04-15T10:25:55Z – kilocode:minimax-m2.7:implementer:implementer – shell_pid=7109 – Assigned agent via action command
 - 2026-04-15T10:27:20Z – kilocode:minimax-m2.7:implementer:implementer – shell_pid=7109 – Ready for review: Foundation types (errors, events, results)
+- 2026-04-15T10:37:57Z – opencode – shell_pid=7109 – Started review via action command

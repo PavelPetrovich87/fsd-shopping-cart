@@ -313,3 +313,4 @@ Note: `eventType` (not `type`) — this matches the T-012 EventBus fix pattern.
 - 2026-04-15T10:39:13Z – opencode – shell_pid=7109 – Started review via action command
 - 2026-04-15T10:40:35Z – opencode – shell_pid=7109 – Moved to planned
 - 2026-04-15T10:42:52Z – opencode – shell_pid=7109 – Moved to for_review
+- 2026-04-15T10:43:10Z – opencode – shell_pid=7109 – Review passed after fix: Removed unused imports (removeCoupon from apply-coupon.ts, applyCoupon from remove-coupon.ts). Logic correct: ApplyCoupon validates code, checks coupon validity, calculates discount, applies to cart, publishes event. RemoveCoupon handles no-coupon no-op case properly. All lint checks pass.

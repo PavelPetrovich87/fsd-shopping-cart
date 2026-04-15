@@ -1,16 +1,16 @@
 {
-  "event_count": 33,
-  "last_event_id": "01KP8BW3H488DWZR6NNGBB0228",
-  "materialized_at": "2026-04-15T10:44:27.812132+00:00",
+  "event_count": 36,
+  "last_event_id": "01KP8BZKWV4ZQZKJ5A4HCCAHEW",
+  "materialized_at": "2026-04-15T10:46:22.875304+00:00",
   "mission_number": "013",
   "mission_slug": "013-apply-coupon-feature",
   "mission_type": "software-dev",
   "summary": {
-    "approved": 3,
+    "approved": 0,
     "blocked": 0,
     "canceled": 0,
     "claimed": 0,
-    "done": 0,
+    "done": 3,
     "for_review": 0,
     "in_progress": 0,
     "in_review": 0,
@@ -18,25 +18,25 @@
   },
   "work_packages": {
     "WP01": {
-      "actor": "user",
+      "actor": "merge",
       "force_count": 2,
-      "lane": "approved",
-      "last_event_id": "01KP8BRW5EF8SYYQY37C83J99Z",
-      "last_transition_at": "2026-04-15T10:42:41.966673+00:00"
+      "lane": "done",
+      "last_event_id": "01KP8BZKJFXEF5VDC9PENAQR4M",
+      "last_transition_at": "2026-04-15T10:46:22.543521+00:00"
     },
     "WP02": {
-      "actor": "user",
+      "actor": "merge",
       "force_count": 2,
-      "lane": "approved",
-      "last_event_id": "01KP8BSRF8MW0SN1MZMDR2E7B5",
-      "last_transition_at": "2026-04-15T10:43:10.952591+00:00"
+      "lane": "done",
+      "last_event_id": "01KP8BZKW93KM62DV2SATF8VED",
+      "last_transition_at": "2026-04-15T10:46:22.857619+00:00"
     },
     "WP03": {
-      "actor": "user",
+      "actor": "merge",
       "force_count": 2,
-      "lane": "approved",
-      "last_event_id": "01KP8BW3H488DWZR6NNGBB0228",
-      "last_transition_at": "2026-04-15T10:44:27.812132+00:00"
+      "lane": "done",
+      "last_event_id": "01KP8BZKWV4ZQZKJ5A4HCCAHEW",
+      "last_transition_at": "2026-04-15T10:46:22.875304+00:00"
     }
   }
 }

@@ -1,5 +1,6 @@
 import fs from 'fs'
-import { DiscoveredStory, discoverStories } from './story-discovery'
+import type { DiscoveredStory } from './story-discovery'
+import { discoverStories } from './story-discovery'
 import type { FsdLayer } from './story-discovery'
 
 export interface StoryMetadata {

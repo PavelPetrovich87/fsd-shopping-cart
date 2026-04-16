@@ -98,12 +98,21 @@ graph TD
 
 ```mermaid
 graph TD
+    subgraph widgets
+        VisualHarness
+    end
+
     subgraph features
         shopping-cart
+        apply-coupon
+        cart-actions
+        checkout
     end
 
     subgraph entities
         product
+        cart
+        coupon
     end
 
     subgraph shared
@@ -113,8 +122,21 @@ graph TD
         shared/config
     end
 
+    VisualHarness --> shared/lib
+    shopping-cart --> cart
     shopping-cart --> product
     shopping-cart --> shared/ui
     shopping-cart --> shared/lib
-    product --> shared/lib
+    apply-coupon --> cart
+    apply-coupon --> coupon
+    apply-coupon --> shared/lib
+    cart-actions --> cart
+    cart-actions --> product
+    cart-actions --> shared/lib
+    checkout --> cart
+    checkout --> product
+    checkout --> shared/lib
+    product --> shared/api
+    coupon --> shared/api
+    coupon --> shared/lib
 ```

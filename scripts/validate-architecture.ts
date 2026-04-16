@@ -91,7 +91,9 @@ function parseArchitectureGraph(content: string): Edge[] {
 
     if (inSubgraph) continue
 
-    const edgeMatch = trimmed.match(/^(\w+(?:\/\w+)?)\s*-->\s*(\w+(?:\/\w+)?)$/)
+    const edgeMatch = trimmed.match(
+      /^([\w-]+(?:\/[\w-]+)?)\s*-->\s*([\w-]+(?:\/[\w-]+)?)$/,
+    )
     if (edgeMatch) {
       edges.push({
         source: edgeMatch[1],

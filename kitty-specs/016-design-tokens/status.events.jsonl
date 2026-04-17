@@ -1,0 +1,1 @@
+{"actor": "finalize-tasks", "at": "2026-04-17T13:59:32.549306+00:00", "event_id": "01KPDVTQY558NNYK2TFM6YJRHA", "evidence": null, "execution_mode": "worktree", "force": true, "from_lane": "planned", "mission_slug": "016-design-tokens", "policy_metadata": null, "reason": "canonical bootstrap", "review_ref": null, "to_lane": "planned", "wp_id": "WP01"}

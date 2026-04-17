@@ -86,12 +86,22 @@ src/
 │   └── <slice>/
 └── shared/             → Reusable, business-agnostic infrastructure
     ├── ui/
+    │   └── tokens/       → Design tokens (theme.css with @theme block)
     ├── lib/
     ├── api/
     └── config/
 ```
 
 Slices are added as the project grows. Always check the actual file system for current state — this diagram is a template, not a snapshot.
+
+## Design Tokens
+
+Design tokens are defined in `src/shared/ui/tokens/theme.css` as a Tailwind v4 `@theme` block. This file is the single source of truth for all design values (colors, spacing, radii, font sizes, font weights).
+
+- **Location**: `src/shared/ui/tokens/theme.css`
+- **Format**: Tailwind v4 `@theme { ... }` block with section comments
+- **Token types**: Primitive colors → Semantic tokens → Typography → Spacing → Radius
+- **Rules**: Never invent values not present in Penpot. Never add inline CSS variables outside this file.
 
 ## Import Rules (Quick Reference)
 

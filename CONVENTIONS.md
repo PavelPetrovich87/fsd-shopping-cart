@@ -341,6 +341,39 @@ Enforced by `npm run validate:arch` (`scripts/validate-architecture.ts`).
 
 ---
 
+## 6. Design System & Styling Conventions
+
+### 6.1 The Token Law (Strict Prohibition of Magic Values) `[eslint]`
+
+- **NO ARBITRARY VALUES:** Do not use arbitrary Tailwind values for colors, spacing, typography, or radii (e.g., `text-[#FF5733]`, `w-[314px]`, `rounded-[10px]`).
+- **Use Theme Variables:** Map visual properties to the CSS variables defined in the `@theme` block (e.g., `text-primary`, `w-80`, `rounded-md`).
+- **Fallback Rule:** If a specific pixel value from Penpot does not exist in the Tailwind scale, use the closest available standard token. Do not invent a new one unless instructed.
+
+### 6.2 Component Authority (shadcn/ui First) `[review]`
+
+- **Do Not Reinvent Atoms:** For any base UI element (Button, Input, Dialog, Select, Card), use the pre-built `shadcn/ui` components located in `@/shared/ui`.
+- **Prop Mapping:** Analyze the Penpot component state (e.g., "Variant: Outline", "State: Disabled") and map it to the corresponding shadcn `variant` or `size` props.
+- **Extension, Not Modification:** If a shadcn component lacks a style present in Penpot, extend it via the `className` prop using the `cn()` utility. Do not rewrite the internal component logic.
+
+### 6.3 Layout Translation (Penpot to Code) `[review]`
+
+- **Flex/Grid Only:** Translate Penpot's Auto Layout strictly into CSS Flexbox or Grid.
+- **Spacing:** Penpot "Gap" properties must translate to Tailwind `gap-*` utilities. Do NOT use margins (`mt-*`, `ml-*`) to separate items within an Auto Layout container.
+- **Padding:** Match Penpot padding exactly using Tailwind `p-*`, `px-*`, `py-*` scales.
+
+### 6.4 Color Semantics `[eslint]`
+
+- Never use raw color names (e.g., `bg-blue-500`) in feature components.
+- Use semantic roles: `bg-background`, `text-foreground`, `bg-primary`, `border-border`, `text-muted-foreground`.
+- Ensure dark mode compatibility automatically by relying exclusively on these semantic variables.
+
+### 6.5 Typography Strictness `[review]`
+
+- Text styles from Penpot (e.g., "Heading 1", "Body Small") must be translated using standard Tailwind typography combos (e.g., `text-2xl font-bold tracking-tight` or `text-sm text-muted-foreground`).
+- Do not use arbitrary line heights unless explicitly defined as a token.
+
+---
+
 ## Enforcement
 
 | Tag           | Tool                       | When                          |

@@ -367,19 +367,210 @@ _User interactions orchestrating entities._
 
 ---
 
-## Tier 5 — UI Components
+## Tier 5 — Design System (Base Components)
 
-_Presentation layer depending on features and entities._
+_Atomic UI components — no dependencies on domain logic. Everything in Tier 6+ depends on these._
 
-### T-013: Entity UI — CartRow, ProductCard, EmptyState
+### T-018: Design Tokens
+
+| Field             | Value               |
+| ----------------- | ------------------- |
+| **Layer / Slice** | `shared/ui/tokens/` |
+| **Complexity**    | 🟢 Small            |
+| **Depends On**    | —                   |
+
+**Description**: Define the foundational design tokens from the Penpot design system — colors (primary, secondary, accent, surface, background, text, border, error, success), typography (font families, sizes, weights, line-heights), spacing scale (4px base), and border radius. Tokens are CSS custom properties exported as a theme object.
+
+**Files to create:**
+
+- `src/shared/ui/tokens/colors.ts` — color palette
+- `src/shared/ui/tokens/typography.ts` — font sizes, weights, families
+- `src/shared/ui/tokens/spacing.ts` — spacing scale
+- `src/shared/ui/tokens/index.ts` — re-exports + combined theme object
+- `src/shared/ui/tokens/tokens.css` — CSS custom properties for runtime theming
+
+**Acceptance Criteria**:
+
+- [ ] All color tokens defined as HSL values for flexibility
+- [ ] Typography scale uses rem units
+- [ ] Spacing scale follows 4px base (4, 8, 12, 16, 24, 32, 48, 64)
+- [ ] Border radius tokens: sm=4px, md=8px, lg=12px, xl=16px
+- [ ] Exported as TypeScript constants + CSS variables
+- [ ] Storybook stories for color swatches and typography specimens
+
+---
+
+### T-019: Button Component
+
+| Field             | Value               |
+| ----------------- | ------------------- |
+| **Layer / Slice** | `shared/ui/button/` |
+| **Complexity**    | 🟡 Medium           |
+| **Depends On**    | T-018               |
+
+**Description**: Build the `Button` component using design tokens. Support variants: `primary`, `secondary`, `ghost`, `danger`. Support sizes: `sm`, `md`, `lg`. Support states: default, hover, active, disabled, loading (spinner).
+
+**Files to create:**
+
+- `src/shared/ui/button/button.tsx`
+- `src/shared/ui/button/button.stories.tsx`
+- `src/shared/ui/button/index.ts`
+- Update `src/shared/ui/index.ts`
+
+**Acceptance Criteria**:
+
+- [ ] All 4 variants + 3 sizes implemented with tokens
+- [ ] Loading state shows spinner and disables interaction
+- [ ] Icon support (left/right slot)
+- [ ] Full keyboard accessibility (focus states, Enter/Space activation)
+- [ ] Storybook stories covering all variant/size/state combinations
+
+---
+
+### T-020: Input Field
+
+| Field             | Value              |
+| ----------------- | ------------------ |
+| **Layer / Slice** | `shared/ui/input/` |
+| **Complexity**    | 🟡 Medium          |
+| **Depends On**    | T-018, T-019       |
+
+**Description**: Build the `Input` component. Support types: text, email, password. States: default, focus, error, disabled. Error message slot below input. Label slot above.
+
+**Files to create:**
+
+- `src/shared/ui/input/input.tsx`
+- `src/shared/ui/input/input.stories.tsx`
+- `src/shared/ui/input/index.ts`
+- Update `src/shared/ui/index.ts`
+
+**Acceptance Criteria**:
+
+- [ ] Controlled component with `value` and `onChange`
+- [ ] `error` prop triggers red border + error message display
+- [ ] `label` prop renders accessible label above
+- [ ] Focus state uses design token border color
+- [ ] Storybook stories for all states
+
+---
+
+### T-021: Cart Control
+
+| Field             | Value                     |
+| ----------------- | ------------------------- |
+| **Layer / Slice** | `shared/ui/cart-control/` |
+| **Complexity**    | 🟡 Medium                 |
+| **Depends On**    | T-018, T-019              |
+
+**Description**: Build a reusable `CartControl` molecule: a quantity selector with "−" / quantity / "+" buttons and a remove button. Combines Button components.
+
+**Files to create:**
+
+- `src/shared/ui/cart-control/cart-control.tsx`
+- `src/shared/ui/cart-control/cart-control.stories.tsx`
+- `src/shared/ui/cart-control/index.ts`
+- Update `src/shared/ui/index.ts`
+
+**Acceptance Criteria**:
+
+- [ ] "−" button disabled when quantity = min (1)
+- [ ] "+" button disabled when quantity = max
+- [ ] Remove button with confirmation state
+- [ ] Emits events: `onIncrement`, `onDecrement`, `onRemove`
+- [ ] Storybook stories for min/max/disabled states
+
+---
+
+### T-022: Tooltip
+
+| Field             | Value                |
+| ----------------- | -------------------- |
+| **Layer / Slice** | `shared/ui/tooltip/` |
+| **Complexity**    | 🟢 Small             |
+| **Depends On**    | T-018                |
+
+**Description**: Build the `Tooltip` component. Position: top, bottom, left, right. Trigger: hover (desktop) / long-press (mobile). Uses design tokens for background, text, shadow.
+
+**Files to create:**
+
+- `src/shared/ui/tooltip/tooltip.tsx`
+- `src/shared/ui/tooltip/tooltip.stories.tsx`
+- `src/shared/ui/tooltip/index.ts`
+- Update `src/shared/ui/index.ts`
+
+**Acceptance Criteria**:
+
+- [ ] All 4 positions implemented
+- [ ] Accessible: uses `role="tooltip"`, `aria-describedby`
+- [ ] Uses design tokens for colors and shadow
+- [ ] Storybook stories for all positions
+
+---
+
+### T-023: Tag
+
+| Field             | Value            |
+| ----------------- | ---------------- |
+| **Layer / Slice** | `shared/ui/tag/` |
+| **Complexity**    | 🟢 Small         |
+| **Depends On**    | T-018, T-019     |
+
+**Description**: Build the `Tag` component. Variants: `success`, `error`, `warning`, `info`, `neutral`. Optional dismiss "×" button.
+
+**Files to create:**
+
+- `src/shared/ui/tag/tag.tsx`
+- `src/shared/ui/tag/tag.stories.tsx`
+- `src/shared/ui/tag/index.ts`
+- Update `src/shared/ui/index.ts`
+
+**Acceptance Criteria**:
+
+- [ ] All 5 variants with semantic colors from design tokens
+- [ ] Optional dismiss button with onClick handler
+- [ ] Storybook stories for all variants + dismiss state
+
+---
+
+### T-024: Modal
+
+| Field             | Value               |
+| ----------------- | ------------------- |
+| **Layer / Slice** | `shared/ui/modal/`  |
+| **Complexity**    | 🟡 Medium           |
+| **Depends On**    | T-018, T-019, T-022 |
+
+**Description**: Build the `Modal` component. Features: backdrop click to close, "×" close button, focus trap, ESC key to close. Uses Tooltip for any helper content.
+
+**Files to create:**
+
+- `src/shared/ui/modal/modal.tsx`
+- `src/shared/ui/modal/modal.stories.tsx`
+- `src/shared/ui/modal/index.ts`
+- Update `src/shared/ui/index.ts`
+
+**Acceptance Criteria**:
+
+- [ ] Backdrop click closes modal
+- [ ] "×" button in top-right corner
+- [ ] Focus trapped inside modal when open
+- [ ] ESC key closes modal
+- [ ] Accessible: `role="dialog"`, `aria-modal="true"`, `aria-labelledby`
+- [ ] Storybook stories for open/close states
+
+---
+
+## Tier 5 (continued) — Entity UI
+
+### T-025: Entity UI — CartRow, ProductCard, EmptyState
 
 | Field             | Value                                       |
 | ----------------- | ------------------------------------------- |
 | **Layer / Slice** | `entities/cart/ui/`, `entities/product/ui/` |
 | **Complexity**    | 🟡 Medium                                   |
-| **Depends On**    | T-004, T-005                                |
+| **Depends On**    | T-004, T-005, T-018, T-019                  |
 
-**Description**: Build pure presentation components for entities. These display data but don't orchestrate business logic.
+**Description**: Build pure presentation components for entities. These display data but don't orchestrate business logic. Use design tokens and base components from T-018–T-024.
 
 **Files to create:**
 
@@ -402,15 +593,15 @@ _Presentation layer depending on features and entities._
 
 ---
 
-### T-014: Feature UI — QuantitySelector, CouponInput, CheckoutButton
+### T-026: Feature UI — QuantitySelector, CouponInput, CheckoutButton
 
 | Field             | Value                                                                             |
 | ----------------- | --------------------------------------------------------------------------------- |
 | **Layer / Slice** | `features/cart-actions/ui/`, `features/apply-coupon/ui/`, `features/checkout/ui/` |
 | **Complexity**    | 🔴 Large                                                                          |
-| **Depends On**    | T-010, T-011, T-012                                                               |
+| **Depends On**    | T-010, T-011, T-012, T-018, T-019, T-021, T-023                                   |
 
-**Description**: Build interactive UI components that trigger feature use cases.
+**Description**: Build interactive UI components that trigger feature use cases. Use base components from design system.
 
 **Files to create:**
 
@@ -435,13 +626,13 @@ _Presentation layer depending on features and entities._
 
 ---
 
-### T-015: Widgets — CartList, OrderSummary
+### T-027: Widgets — CartList, OrderSummary
 
 | Field             | Value                                        |
 | ----------------- | -------------------------------------------- |
 | **Layer / Slice** | `widgets/cart-list`, `widgets/order-summary` |
 | **Complexity**    | 🟡 Medium                                    |
-| **Depends On**    | T-013, T-014                                 |
+| **Depends On**    | T-025, T-026, T-018                          |
 
 **Description**: Compose entity UI + feature UI into self-contained widget blocks.
 
@@ -469,13 +660,13 @@ _Presentation layer depending on features and entities._
 
 _Top-level composition and wiring._
 
-### T-016: Pages — Cart, Home
+### T-028: Pages — Cart, Home
 
 | Field             | Value                      |
 | ----------------- | -------------------------- |
 | **Layer / Slice** | `pages/cart`, `pages/home` |
 | **Complexity**    | 🟡 Medium                  |
-| **Depends On**    | T-015, T-013               |
+| **Depends On**    | T-027, T-025               |
 
 **Description**: Create page-level compositions. Pages compose widgets and handle layout.
 
@@ -494,13 +685,13 @@ _Top-level composition and wiring._
 
 ---
 
-### T-017: App Shell — Routing & Providers
+### T-029: App Shell — Routing & Providers
 
 | Field             | Value               |
 | ----------------- | ------------------- |
 | **Layer / Slice** | `app/`              |
 | **Complexity**    | 🟡 Medium           |
-| **Depends On**    | T-016, T-002, T-009 |
+| **Depends On**    | T-028, T-002, T-009 |
 
 **Description**: Wire everything together. App-level providers (Zustand, EventBus subscriptions), routing, global layout with header/navigation.
 
@@ -524,15 +715,19 @@ _Top-level composition and wiring._
 
 ## Summary Matrix
 
-| Tier                           | Tickets             | Effort |
-| ------------------------------ | ------------------- | ------ |
-| **Tier 1 — Shared Foundation** | T-001, T-002, T-003 | 🟢🟡🟢 |
-| **Tier 2 — Domain Entities**   | T-004, T-005, T-006 | 🟡🟡🟡 |
-| **Tier 3 — Ports & Repos**     | T-007, T-008, T-009 | 🟢🟢🟡 |
-| **Tier 4 — Features**          | T-010, T-011, T-012 | 🔴🟡🔴 |
-| **Tier 5 — UI & Widgets**      | T-013, T-014, T-015 | 🟡🔴🟡 |
-| **Tier 6 — Pages & App**       | T-016, T-017        | 🟡🟡   |
-| **Total**                      | **17 tickets**      |        |
+| Tier                            | Tickets                                         | Effort         |
+| ------------------------------- | ----------------------------------------------- | -------------- |
+| **Tier 1 — Shared Foundation**  | T-001, T-002, T-003                             | 🟢🟡🟢         |
+| **Tier 2 — Domain Entities**    | T-004, T-005, T-006                             | 🟡🟡🟡         |
+| **Tier 3 — Ports & Repos**      | T-007, T-008, T-009                             | 🟢🟢🟡         |
+| **Tier 4 — Features**           | T-010, T-011, T-012                             | 🔴🟡🔴         |
+| **Tier 5 — Design System**      | T-018, T-019, T-020, T-021, T-022, T-023, T-024 | 🟢🟡🟡🟡🟢🟢🟡 |
+| **Tier 5 (cont.) — Entity UI**  | T-025                                           | 🟡             |
+| **Tier 5 (cont.) — Feature UI** | T-026                                           | 🔴             |
+| **Tier 5 (cont.) — Widgets**    | T-027                                           | 🟡             |
+| **Tier 6 — Pages & App**        | T-028, T-029                                    | 🟡🟡           |
+| **Tier 7 — Enhancements**       | T-030, T-031                                    | 🟢🟢           |
+| **Total**                       | **29 tickets**                                  |                |
 
 ### Dependency Graph
 
@@ -544,6 +739,7 @@ graph BT
     classDef t4 fill:#f8cecc,stroke:#b85450,stroke-width:2px
     classDef t5 fill:#e1d5e7,stroke:#9673a6,stroke-width:2px
     classDef t6 fill:#ffe6cc,stroke:#d79b00,stroke-width:2px
+    classDef t7 fill:#d5e8d4,stroke:#82b62a,stroke-width:2px
 
     T001("T-001: Money VO"):::t1
     T002("T-002: EventBus"):::t1
@@ -561,12 +757,23 @@ graph BT
     T011("T-011: Apply Coupon"):::t4
     T012("T-012: Checkout"):::t4
 
-    T013("T-013: Entity UI"):::t5
-    T014("T-014: Feature UI"):::t5
-    T015("T-015: Widgets"):::t5
+    T018("T-018: Design Tokens"):::t5
+    T019("T-019: Button"):::t5
+    T020("T-020: Input"):::t5
+    T021("T-021: Cart Control"):::t5
+    T022("T-022: Tooltip"):::t5
+    T023("T-023: Tag"):::t5
+    T024("T-024: Modal"):::t5
 
-    T016("T-016: Pages"):::t6
-    T017("T-017: App Shell"):::t6
+    T025("T-025: Entity UI"):::t6
+    T026("T-026: Feature UI"):::t6
+    T027("T-027: Widgets"):::t6
+
+    T028("T-028: Pages"):::t6
+    T029("T-029: App Shell"):::t6
+
+    T030("T-030: Order Summary Enhancement"):::t7
+    T031("T-031: Product Card Enhancement"):::t7
 
     T004 -.-> T001
     T005 -.-> T001
@@ -580,11 +787,21 @@ graph BT
     T011 --> T004 & T006 & T007 & T008 & T009
     T012 --> T004 & T005 & T007 & T008 & T009 & T002
 
-    T013 --> T004 & T005
-    T014 --> T010 & T011 & T012
+    T018 -.-> T001
+    T019 --> T018
+    T020 --> T018 & T019
+    T021 --> T018 & T019
+    T022 --> T018
+    T023 --> T018 & T019
+    T024 --> T018 & T019 & T022
 
-    T015 --> T013 & T014
+    T025 --> T004 & T005 & T018 & T019
+    T026 --> T010 & T011 & T012 & T018 & T019 & T021 & T023
+    T027 --> T025 & T026 & T018
 
-    T016 --> T015 & T013
-    T017 --> T016 & T002 & T009
+    T028 --> T027 & T025
+    T029 --> T028 & T002 & T009
+
+    T030 --> T027
+    T031 --> T025
 ```

@@ -50,3 +50,6 @@ kitty-specs/**/.kittify/dossiers/
 .kittify/derived/
 .kittify/.migration-backup/
 .spec-kitty/
+figma/design-tokens.zip
+figma/shopping-cart-section-figma.penpot
+figma/shopping-cart-section-figma.fig

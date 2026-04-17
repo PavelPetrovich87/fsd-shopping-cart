@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "mission_slug": "016-design-tokens",
+  "mission_id": "01KPDVCVVVRF1XSS6T292SP7S9",
+  "mission_branch": "kitty/mission-016-design-tokens",
+  "target_branch": "main",
+  "lanes": [
+    {
+      "lane_id": "lane-a",
+      "wp_ids": [
+        "WP01"
+      ],
+      "write_scope": [
+        "src/shared/ui/tokens/theme.css"
+      ],
+      "predicted_surfaces": [
+        "api",
+        "app-shell",
+        "workspace"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    }
+  ],
+  "computed_at": "2026-04-17T13:59:32.736719+00:00",
+  "computed_from": "dependency_graph+ownership",
+  "planning_artifact_wps": []
+}

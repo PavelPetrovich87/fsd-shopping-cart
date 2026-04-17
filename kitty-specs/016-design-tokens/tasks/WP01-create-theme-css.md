@@ -407,3 +407,7 @@ spec-kitty agent action implement WP01 --agent <name>
 ```
 
 Where `<name>` is the agent identifier (e.g., `sonnet`, `opus`, `Explore`).
+
+## Activity Log
+
+- 2026-04-17T14:04:53Z – unknown – Ready for review

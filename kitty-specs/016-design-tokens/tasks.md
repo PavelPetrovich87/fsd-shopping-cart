@@ -10,12 +10,12 @@
 
 | ID | Description | WP | Parallel |
 |----|-------------|----|----------|
-| T001 | Create directory `src/shared/ui/tokens/` | WP01 | No |
-| T002 | Write primitive color tokens (14 tokens) | WP01 | No |
-| T003 | Write semantic shadcn color tokens (22 tokens) | WP01 | No |
-| T004 | Write typography tokens (1 family + 10 sizes + 4 weights) | WP01 | No |
-| T005 | Write spacing tokens (9 values) | WP01 | No |
-| T006 | Write border radius tokens (2 values) | WP01 | No |
+| T001 | Create directory `src/shared/ui/tokens/` | WP01 | No | [D] |
+| T002 | Write primitive color tokens (14 tokens) | WP01 | No | [D] |
+| T003 | Write semantic shadcn color tokens (22 tokens) | WP01 | No | [D] |
+| T004 | Write typography tokens (1 family + 10 sizes + 4 weights) | WP01 | No | [D] |
+| T005 | Write spacing tokens (9 values) | WP01 | No | [D] |
+| T006 | Write border radius tokens (2 values) | WP01 | No | [D] |
 
 ---
 
@@ -52,12 +52,12 @@
 7. Populate border radius tokens
 
 **Subtasks**:
-- [ ] T001 Create directory `src/shared/ui/tokens/`
-- [ ] T002 Write primitive color tokens (14 tokens)
-- [ ] T003 Write semantic shadcn color tokens (22 tokens)
-- [ ] T004 Write typography tokens (1 family + 10 sizes + 4 weights)
-- [ ] T005 Write spacing tokens (9 values)
-- [ ] T006 Write border radius tokens (2 values)
+- [x] T001 Create directory `src/shared/ui/tokens/`
+- [x] T002 Write primitive color tokens (14 tokens)
+- [x] T003 Write semantic shadcn color tokens (22 tokens)
+- [x] T004 Write typography tokens (1 family + 10 sizes + 4 weights)
+- [x] T005 Write spacing tokens (9 values)
+- [x] T006 Write border radius tokens (2 values)
 
 **Risks**: None — trivial single-file deliverable.
 

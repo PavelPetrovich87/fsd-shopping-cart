@@ -1,0 +1,10 @@
+{
+  "created_at": "2026-04-17T13:51:57.819330+00:00",
+  "friendly_name": "design tokens",
+  "mission_id": "01KPDVCVVVRF1XSS6T292SP7S9",
+  "mission_number": "016",
+  "mission_slug": "016-design-tokens",
+  "mission_type": "software-dev",
+  "slug": "016-design-tokens",
+  "target_branch": "main"
+}

@@ -1,0 +1,10 @@
+{
+  "created_at": "2026-04-17T13:33:45.319164+00:00",
+  "friendly_name": "entity ui",
+  "mission_id": "01KPDTBGZ64QG5AQFM2MGZFMD0",
+  "mission_number": "016",
+  "mission_slug": "016-entity-ui",
+  "mission_type": "software-dev",
+  "slug": "016-entity-ui",
+  "target_branch": "main"
+}

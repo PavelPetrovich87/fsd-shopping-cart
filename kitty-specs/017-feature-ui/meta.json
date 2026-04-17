@@ -1,0 +1,10 @@
+{
+  "created_at": "2026-04-17T13:33:45.347334+00:00",
+  "friendly_name": "feature ui",
+  "mission_id": "01KPDTBH03ZKV7ME7Z3QC0KBRA",
+  "mission_number": "017",
+  "mission_slug": "017-feature-ui",
+  "mission_type": "software-dev",
+  "slug": "017-feature-ui",
+  "target_branch": "main"
+}

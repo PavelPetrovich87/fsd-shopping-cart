@@ -412,3 +412,4 @@ Where `<name>` is the agent identifier (e.g., `sonnet`, `opus`, `Explore`).
 
 - 2026-04-17T14:04:53Z – unknown – Ready for review
 - 2026-04-17T14:06:39Z – unknown – Review passed
+- 2026-04-17T14:07:32Z – unknown – Implementation complete

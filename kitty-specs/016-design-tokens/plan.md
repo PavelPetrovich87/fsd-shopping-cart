@@ -1,108 +1,137 @@
-# Implementation Plan: [FEATURE]
-*Path: [templates/plan-template.md](templates/plan-template.md)*
+# Implementation Plan: 016-design-tokens
 
+**Branch**: `main` | **Date**: 2026-04-17 | **Spec**: `kitty-specs/016-design-tokens/spec.md`
 
-**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
-**Input**: Feature specification from `/kitty-specs/[###-feature-name]/spec.md`
-
-**Note**: This template is filled in by the `/spec-kitty.plan` command. See `src/specify_cli/missions/software-dev/command-templates/plan.md` for the execution workflow.
-
-The planner will not begin until all planning questions have been answered—capture those answers in this document before progressing to later phases.
+---
 
 ## Summary
 
-[Extract from feature spec: primary requirement + technical approach from research]
+Create a single CSS file at `src/shared/ui/tokens/theme.css` containing a Tailwind v4 `@theme` block with all design tokens extracted from Penpot design system. Tokens cover: 14 primitive colors, 22 semantic shadcn/ui colors, 10 font sizes, 4 font weights, 9 spacing values, and 2 border radius values. All values trace directly to Penpot with no invented data.
+
+---
+
+## Branch Strategy
+
+Current branch at workflow start: `main`  
+Planning/base branch for this feature: `main`  
+Final merge target for completed changes: `main`  
+`branch_matches_target`: **true** ✓
+
+All changes commit directly to `main`.
+
+---
 
 ## Technical Context
 
-<!--
-  ACTION REQUIRED: Replace the content in this section with the technical details
-  for the project. The structure here is presented in advisory capacity to guide
-  the iteration process.
--->
+### Feature Overview
 
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
-**Project Type**: [single/web/mobile - determines source structure]  
-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
-**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
-**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
+Create a single CSS file at `src/shared/ui/tokens/theme.css` containing a Tailwind v4 `@theme` block with all design tokens extracted from Penpot design system. Tokens cover:
+
+- **Colors**: 14 primitive tokens + 22 semantic shadcn/ui tokens
+- **Typography**: 1 font family, 10 font sizes, 4 font weights
+- **Spacing**: 9 values mapped to Tailwind numeric scale
+- **Border radius**: 2 values (--radius-sm, --radius-md)
+
+### Extracted Values Summary
+
+| Category | Count | Source |
+|----------|-------|--------|
+| Primitive colors | 14 | Penpot library colors & shape fills |
+| Semantic colors | 22 | shadcn/ui mapping |
+| Font sizes | 10 | Penpot typography (12–72px) |
+| Font weights | 4 | Penpot typography (400, 500, 600, 700) |
+| Spacing values | 9 | Penpot flex layout gaps |
+| Border radius | 2 | Penpot token set "2. Radius/Mode 1" |
+
+### Output File
+
+- **Path**: `src/shared/ui/tokens/theme.css`
+- **Format**: Single `@theme { ... }` block
+- **Comments**: Section headers included (`/* === ... === */`)
+- **No invented values**: All tokens traceable to Penpot exact hex/rgb values
+
+### Constraints
+
+| Constraint | Value |
+|------------|-------|
+| Output file | `src/shared/ui/tokens/theme.css` |
+| All tokens in single @theme block | Yes |
+| No @layer block | Yes |
+| Tailwind v4 compatible | Yes |
+| shadcn/ui semantic token names | Yes |
+| Comments included | Yes (Option A confirmed by user) |
+
+### Out of Scope
+
+- Shadow tokens (none found in Penpot)
+- Line height tokens (not specified in Penpot)
+- Letter-spacing tokens (all values = 0 in Penpot)
+- Component implementation (T-019 Button Component)
+
+---
 
 ## Charter Check
 
-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+**Status**: Skipped — No charter.md found at `.kittify/charter/charter.md`.
 
-[Gates determined based on charter file]
+---
+
+## Gates
+
+| Gate | Status | Notes |
+|------|--------|-------|
+| Spec validated (requirements.md) | ✓ PASS | All 11 FR + 6 NFR + 3 C verified |
+| No outstanding clarifications | ✓ PASS | User confirmed: use comments (Option A) |
+| Branch strategy confirmed | ✓ PASS | Direct commit to main |
+
+---
 
 ## Project Structure
 
-### Documentation (this feature)
+### Implementation Artifacts
 
 ```
-kitty-specs/[###-feature]/
-├── plan.md              # This file (/spec-kitty.plan command output)
-├── research.md          # Phase 0 output (/spec-kitty.plan command)
-├── data-model.md        # Phase 1 output (/spec-kitty.plan command)
-├── quickstart.md        # Phase 1 output (/spec-kitty.plan command)
-├── contracts/           # Phase 1 output (/spec-kitty.plan command)
-└── tasks.md             # Phase 2 output (/spec-kitty.tasks command - NOT created by /spec-kitty.plan)
+kitty-specs/016-design-tokens/
+├── spec.md              # Specification (already created)
+├── requirements.md      # Validation checklist (already created)
+├── plan.md              # This file (created by /spec-kitty.plan)
+└── meta.json            # Mission identity (already created)
 ```
 
-### Source Code (repository root)
-<!--
-  ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
-  for this feature. Delete unused options and expand the chosen structure with
-  real paths (e.g., apps/admin, packages/something). The delivered plan must
-  not include Option labels.
--->
+### Source Code Output
 
 ```
-# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
-src/
-├── models/
-├── services/
-├── cli/
-└── lib/
-
-tests/
-├── contract/
-├── integration/
-└── unit/
-
-# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
-backend/
-├── src/
-│   ├── models/
-│   ├── services/
-│   └── api/
-└── tests/
-
-frontend/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   └── services/
-└── tests/
-
-# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
-api/
-└── [same as backend above]
-
-ios/ or android/
-└── [platform-specific structure: feature modules, UI flows, platform tests]
+src/shared/ui/tokens/
+└── theme.css    # Single @theme block with all design tokens
 ```
 
-**Structure Decision**: [Document the selected structure and reference the real
-directories captured above]
+---
 
-## Complexity Tracking
+## Planning Questions Summary
 
-*Fill ONLY if Charter Check has violations that must be justified*
+| # | Question | Why It Matters | Answer |
+|---|----------|----------------|--------|
+| 1 | Comments in @theme block? | Readability vs clean output | **A) With comments** — Section headers for each token group |
 
-| Violation | Why Needed | Simpler Alternative Rejected Because |
-|-----------|------------|-------------------------------------|
-| [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
-| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |
+**All questions answered. No further interrogation needed.**
+
+---
+
+## Engineering Alignment
+
+Create `src/shared/ui/tokens/theme.css` with a commented `@theme` block containing:
+
+- 14 primitive color tokens (--color-brand-*, --color-neutral-*, --color-error-*)
+- 22 semantic shadcn tokens (--primary, --background, --foreground, etc.)
+- 10 font sizes (--font-size-xs through --font-size-6xl)
+- 4 font weights (--font-weight-normal/semibold etc.)
+- 9 spacing values (--spacing-1 through --spacing-16)
+- 2 border radius (--radius-sm, --radius-md)
+
+All derived from exact Penpot hex/rgb values. Comments included per user preference.
+
+---
+
+## Complexity Assessment
+
+**Trivial** — Single CSS file, no logic, no integration points. No research phase required.

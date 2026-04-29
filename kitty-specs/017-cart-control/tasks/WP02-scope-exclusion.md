@@ -67,3 +67,4 @@ WP02 is a **planning artifact only**. No source files are created or modified.
 - 2026-04-29T14:23:25Z – kilo:minimax:m2.7:reviewer – shell_pid=78619 – Review passed: WP02 is a planning artifact formally documenting FR-006-009 exclusion from mission scope.
 - 2026-04-29T14:53:52Z – kilo:minimax:m2.7:reviewer – shell_pid=78619 – Alternative implementation started
 - 2026-04-29T15:03:06Z – kilo:minimax:m2.7:reviewer – shell_pid=78619 – Review passed: WP02 planning artifact valid
+- 2026-04-29T15:05:18Z – kilo:minimax:m2.7:reviewer – shell_pid=78619 – Moved to done

@@ -118,6 +118,19 @@ Design tokens are defined in `src/shared/ui/tokens/theme.css` as a Tailwind v4 `
 - **Token types**: Primitive colors → Semantic tokens → Typography → Spacing → Radius
 - **Rules**: Never invent values not present in Penpot. Never add inline CSS variables outside this file.
 
+## Planning Artifacts vs Actual Code
+
+`docs/TICKETS.md`, `kitty-specs/`, and `.kilo/plans/` are planning artifacts.
+They may contain file paths, component names, or structural decisions that no longer match the actual codebase.
+
+When implementing any ticket or plan:
+
+1. **Always check the actual file system first** — use `ls`/`glob` to see what exists before creating new files
+2. **Follow current project conventions** — if a ticket says `src/shared/ui/button/` but the project already uses `src/shared/ui/shadcn/`, follow the actual structure
+3. **Treat ticket file paths as intent, not literal instructions** — implement what the ticket describes using current project patterns
+
+Planning artifacts are templates and intentions. The actual codebase is the source of truth.
+
 ## Import Rules (Quick Reference)
 
 | Rule                    | Example of violation                                          |

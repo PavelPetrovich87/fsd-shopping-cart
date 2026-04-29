@@ -20,7 +20,7 @@ subtasks:
 - T002
 - T003
 - T004
-shell_pid: '78619'
+shell_pid: "78619"
 history: []
 authoritative_surface: src/shared/ui/cart-control/
 execution_mode: code_change
@@ -28,6 +28,7 @@ owned_files:
 - src/shared/ui/cart-control/**
 - src/shared/ui/index.ts
 tags: []
+agent: "kilo:minimax:m2.7:implementer"
 ---
 
 # WP01: Cart Control — Stories, Component & Validation
@@ -330,3 +331,7 @@ When reviewing this WP, verify:
 ```
 spec-kitty agent action implement WP01 --agent <name>
 ```
+
+## Activity Log
+
+- 2026-04-29T14:09:49Z – kilo:minimax:m2.7:implementer – shell_pid=78619 – Assigned agent via action command

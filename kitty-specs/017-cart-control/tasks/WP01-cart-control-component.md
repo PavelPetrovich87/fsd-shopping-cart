@@ -29,6 +29,7 @@ owned_files:
 - src/shared/ui/index.ts
 tags: []
 agent: "kilo:minimax:m2.7:reviewer"
+review_status: has_feedback
 ---
 
 # WP01: Cart Control — Stories, Component & Validation
@@ -324,6 +325,24 @@ When reviewing this WP, verify:
 6. Boundary state works: decrement disabled at min, increment disabled at max
 7. No console errors in Storybook
 8. All validation commands pass
+
+---
+
+## Review Feedback
+
+The previous implementation was merged and then reverted due to architectural concerns. This is a **re-implementation with an alternative approach**.
+
+### Issues with Previous Implementation
+1. Used plain `<button>` elements instead of the existing shadcn `Button` primitive
+2. CartControl had to live in `shared/ui/shadcn/cart-control/` solely to bypass the `className` restriction on custom components
+3. Duplicated hover/focus styles that the shadcn Button already provides
+
+### Required Alternative Approach
+1. **Extend shadcn Button** with a new `icon-2xs` size variant (20×20, `size-5`) so CartControl can compose shadcn primitives natively
+2. **Move CartControl** to `shared/ui/cart-control/` (standard shared/ui slice) — it will compose shadcn Button and NOT need raw `className` hacks
+3. CartControl must remain a **stateless quantity selector** (`[−] quantity [+]`) per Penpot Option B
+4. Keep all existing stories and quality gate validations
+5. The new `icon-2xs` size should be added to `src/shared/ui/shadcn/button.tsx` as part of this WP
 
 ---
 

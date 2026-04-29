@@ -52,10 +52,10 @@
 - `npm run lint` passes; `npm run lint:arch` passes; `npm run build` passes
 
 **Subtasks**:
-- [x] T001 Write `cart-control.stories.tsx` — Default, AtMinimum, AtMaximum, Disabled, Interaction (WP01)
-- [x] T002 Implement `cart-control.tsx` — quantity selector component (WP01)
-- [x] T003 Create `index.ts`, export from `shared/ui/index.ts` (WP01)
-- [x] T004 Run all validation commands (WP01)
+- [ ] T001 Write `cart-control.stories.tsx` — Default, AtMinimum, AtMaximum, Disabled, Interaction (WP01)
+- [ ] T002 Implement `cart-control.tsx` — quantity selector component (WP01)
+- [ ] T003 Create `index.ts`, export from `shared/ui/index.ts` (WP01)
+- [ ] T004 Run all validation commands (WP01)
 
 **Prompt file**: `kitty-specs/017-cart-control/tasks/WP01-cart-control-component.md`
 

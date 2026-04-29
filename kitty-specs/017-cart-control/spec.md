@@ -44,10 +44,10 @@ The component is stateless — it receives current quantity, min/max bounds, and
 | FR-003 | Emit `onIncrement` callback when "+" button is clicked | `draft` |
 | FR-004 | Disable "−" button when `quantity <= min` | `draft` |
 | FR-005 | Disable "+" button when `quantity >= max` | `draft` |
-| FR-006 | Emit `onRequestRemove` when remove button is clicked | `draft` |
-| FR-007 | When `confirmingRemove={true}`, show confirmation UI with "Confirm remove?" text and "Yes"/"Cancel" actions | `draft` |
-| FR-008 | Emit `onConfirmRemove` when "Yes" is clicked in confirmation mode | `draft` |
-| FR-009 | Emit `onCancelRemove` when "Cancel" is clicked in confirmation mode | `draft` |
+| FR-006 | Emit `onRequestRemove` when remove button is clicked | `cancelled` — remove button is a separate Penpot element; parent layer owns this callback |
+| FR-007 | When `confirmingRemove={true}`, show confirmation UI with "Confirm remove?" text and "Yes"/"Cancel" actions | `cancelled` — confirmation modal is a separate Penpot element; parent layer owns this state |
+| FR-008 | Emit `onConfirmRemove` when "Yes" is clicked in confirmation mode | `cancelled` — parent layer owns confirm action |
+| FR-009 | Emit `onCancelRemove` when "Cancel" is clicked in confirmation mode | `cancelled` — parent layer owns cancel action |
 | FR-010 | Disable all interactive elements when `disabled={true}` | `draft` |
 
 ## Non-Functional Requirements

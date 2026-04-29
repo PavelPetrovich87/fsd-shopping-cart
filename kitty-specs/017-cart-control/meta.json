@@ -1,0 +1,10 @@
+{
+  "created_at": "2026-04-29T13:28:39.246185+00:00",
+  "friendly_name": "cart control",
+  "mission_id": "01KQCPTT2EGE108DTXKP7EWSVD",
+  "mission_number": "017",
+  "mission_slug": "017-cart-control",
+  "mission_type": "software-dev",
+  "slug": "017-cart-control",
+  "target_branch": "main"
+}

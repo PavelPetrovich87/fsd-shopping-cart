@@ -10,7 +10,7 @@
 
 | ID | Description | WP | Parallel | Dependencies |
 |---|---|---|---|---|
-| T001 | Write `cart-control.stories.tsx` — Default, AtMinimum, AtMaximum, Disabled, Interaction stories | WP01 | ✓ | None | [D] |
+| T001 | Write `cart-control.stories.tsx` — Default, AtMinimum, AtMaximum, Disabled, Interaction stories | WP01 | ✓ | None | [D] | [D] |
 | T002 | Implement `cart-control.tsx` — component with Plus/Minus buttons, quantity display, a11y | WP01 | ✓ | T001 | [D] |
 | T003 | Create `index.ts`, export from `shared/ui/index.ts` | WP01 | ✓ | T002 | [D] |
 | T004 | Validate: `npm run lint`, `npm run lint:arch`, `npm run build`, `npm run test:storybook` | WP01 | ✓ | T002, T003 | [D] |
@@ -52,10 +52,10 @@
 - `npm run lint` passes; `npm run lint:arch` passes; `npm run build` passes
 
 **Subtasks**:
-- [ ] T001 Write `cart-control.stories.tsx` — Default, AtMinimum, AtMaximum, Disabled, Interaction (WP01)
-- [ ] T002 Implement `cart-control.tsx` — quantity selector component (WP01)
-- [ ] T003 Create `index.ts`, export from `shared/ui/index.ts` (WP01)
-- [ ] T004 Run all validation commands (WP01)
+- [x] T001 Write `cart-control.stories.tsx` — Default, AtMinimum, AtMaximum, Disabled, Interaction (WP01)
+- [x] T002 Implement `cart-control.tsx` — quantity selector component (WP01)
+- [x] T003 Create `index.ts`, export from `shared/ui/index.ts` (WP01)
+- [x] T004 Run all validation commands (WP01)
 
 **Prompt file**: `kitty-specs/017-cart-control/tasks/WP01-cart-control-component.md`
 

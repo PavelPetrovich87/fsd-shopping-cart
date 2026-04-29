@@ -99,9 +99,6 @@ graph TD
 ```mermaid
 graph TD
     subgraph widgets
-        CartSidebar
-        Header
-        ProductCatalog
     end
 
     subgraph features
@@ -124,12 +121,6 @@ graph TD
         shared/config
     end
 
-    CartSidebar --> cart
-    CartSidebar --> product
-    CartSidebar --> shopping-cart
-    Header --> shopping-cart
-    ProductCatalog --> product
-    ProductCatalog --> shopping-cart
     shopping-cart --> cart
     shopping-cart --> product
     shopping-cart --> shared/ui

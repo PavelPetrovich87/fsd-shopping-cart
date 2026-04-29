@@ -1,3 +1,1 @@
 export { Button, buttonVariants } from './shadcn/button'
-export { CartControl } from './shadcn/cart-control'
-export type { CartControlProps } from './shadcn/cart-control'

@@ -1,7 +1,7 @@
 {
-  "event_count": 2,
-  "last_event_id": "01KQCRJY7QPPJWN2AH5SHXX554",
-  "materialized_at": "2026-04-29T13:59:18.519537+00:00",
+  "event_count": 4,
+  "last_event_id": "01KQCS603NSWZ48HG37NXKX3WJ",
+  "materialized_at": "2026-04-29T14:09:43.029369+00:00",
   "mission_number": "017",
   "mission_slug": "017-cart-control",
   "mission_type": "software-dev",
@@ -12,17 +12,17 @@
     "claimed": 0,
     "done": 0,
     "for_review": 0,
-    "in_progress": 0,
+    "in_progress": 1,
     "in_review": 0,
-    "planned": 2
+    "planned": 1
   },
   "work_packages": {
     "WP01": {
-      "actor": "finalize-tasks",
+      "actor": "implement-command",
       "force_count": 1,
-      "lane": "planned",
-      "last_event_id": "01KQCRJY11NG2T1JKEZ28CZZ4Q",
-      "last_transition_at": "2026-04-29T13:59:18.305971+00:00"
+      "lane": "in_progress",
+      "last_event_id": "01KQCS603NSWZ48HG37NXKX3WJ",
+      "last_transition_at": "2026-04-29T14:09:43.029369+00:00"
     },
     "WP02": {
       "actor": "finalize-tasks",

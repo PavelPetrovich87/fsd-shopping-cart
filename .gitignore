@@ -53,3 +53,12 @@ kitty-specs/**/.kittify/dossiers/
 figma/design-tokens.zip
 figma/shopping-cart-section-figma.penpot
 figma/shopping-cart-section-figma.fig
+
+# Environment files (keep local secrets out of repo)
+.env.chromatic
+
+# Local plans
+.kilo/plans/*.md
+
+# Unrelated downloads
+figma/*.torrent

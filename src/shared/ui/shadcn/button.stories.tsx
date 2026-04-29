@@ -37,7 +37,7 @@ export const Sizes: Story = {
       <Button size="sm">SM</Button>
       <Button size="default">Default</Button>
       <Button size="lg">LG</Button>
-      <Button size="icon-xs">
+      <Button size="icon-xs" aria-label="Arrow up">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
@@ -50,7 +50,7 @@ export const Sizes: Story = {
           <path d="M12 19V5M5 12l7-7 7 7" />
         </svg>
       </Button>
-      <Button size="icon-sm">
+      <Button size="icon-sm" aria-label="Arrow up">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
@@ -63,7 +63,7 @@ export const Sizes: Story = {
           <path d="M12 19V5M5 12l7-7 7 7" />
         </svg>
       </Button>
-      <Button size="icon">
+      <Button size="icon" aria-label="Arrow up">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
@@ -76,7 +76,7 @@ export const Sizes: Story = {
           <path d="M12 19V5M5 12l7-7 7 7" />
         </svg>
       </Button>
-      <Button size="icon-lg">
+      <Button size="icon-lg" aria-label="Arrow up">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"

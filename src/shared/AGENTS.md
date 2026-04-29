@@ -25,6 +25,7 @@ Segments may import from each other (e.g., `ui/` can use `lib/`).
 - Injecting domain logic into a shared button (e.g., adding `onClick` that calls a cart API).
 - Placing domain-specific API handlers (`getProducts()`) here instead of in entity/feature `api/` segments.
 - Creating `utils/` or `hooks/` folders. Use `lib/` for utilities, place hooks in the appropriate segment by purpose.
+- **Network-dependent stories:** If a component fetches data, mock it in stories with MSW. Stories must be deterministic — no real API calls, no `Math.random()`, no `Date.now()`.
 
 ## Story-First Convention
 

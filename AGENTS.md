@@ -58,11 +58,26 @@ Do not skip steps. Do not suppress warnings. The linter is your guide.
 
 When creating a UI component in `shared/ui/`:
 
-1. Create `ComponentName.stories.tsx` FIRST — define all variants, sizes, and states as Storybook stories
-2. Write the component implementation to satisfy the stories
-3. Stories are executable specifications: Storybook compilation catches type/prop mismatches
+1. Create `ComponentName.stories.tsx` FIRST — define Default + all variants/sizes/states
+2. Use CSF3 format: `export default satisfies Meta<typeof Component>`
+3. Write the component to satisfy the stories
+4. Stories stay forever — they are regression guards, not temporary tests
+5. **Determinism Rule:** Stories MUST NOT rely on real network requests or random data (`Math.random()`, `Date.now()`). Use MSW `parameters.msw.handlers` for API mocking.
+6. **Interaction Rule:** Use the `play` function in stories for interactions (focus, dropdowns, form filling). Do not write separate `.spec.ts` files for UI interactions — they are tested via Vitest Browser Mode.
 
-Story format: Use CSF3 with `satisfies Meta<typeof Component>` for type safety.
+Example with MSW:
+
+```tsx
+export const WithApiData: Story = {
+  parameters: {
+    msw: {
+      handlers: [
+        http.get('/api/products', () => HttpResponse.json(mockProducts)),
+      ],
+    },
+  },
+}
+```
 
 ## Bug Fix Workflow
 

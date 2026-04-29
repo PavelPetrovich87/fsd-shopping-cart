@@ -376,22 +376,26 @@ Enforced by `npm run validate:arch` (`scripts/validate-architecture.ts`).
 
 ## Enforcement
 
-| Tag           | Tool                       | When                          |
-| ------------- | -------------------------- | ----------------------------- |
-| `[steiger]`   | Steiger FSD linter         | `npm run lint:arch`           |
-| `[eslint]`    | ESLint 9 flat config       | `npm run lint`                |
-| `[prettier]`  | Prettier + TW plugin       | `npm run format:check`        |
-| `[review]`    | Code review (manual)       | PR review                     |
-| `[ci-custom]` | `validate-architecture.ts` | CI pipeline (Day 5)           |
-| `[git-hook]`  | Husky hooks                | pre-commit / pre-merge / push |
+| Tag           | Tool                       | When                                     |
+| ------------- | -------------------------- | ---------------------------------------- |
+| `[steiger]`   | Steiger FSD linter         | `npm run lint:arch`                      |
+| `[eslint]`    | ESLint 9 flat config       | `npm run lint`                           |
+| `[prettier]`  | Prettier + TW plugin       | `npm run format:check`                   |
+| `[review]`    | Code review (manual)       | PR review                                |
+| `[ci-custom]` | `validate-architecture.ts` | CI pipeline (Day 5)                      |
+| `[git-hook]`  | Husky hooks                | pre-commit / pre-merge / push            |
+| `[storybook]` | `npm run test:storybook`   | Story rendering + interaction            |
+| `[a11y]`      | Storybook a11y addon       | `test: 'error'` — CI fails on violations |
+| `[msw]`       | Storybook preview MSW      | Network mocking in stories               |
+| `[visual]`    | Chromatic                  | Cloud visual regression                  |
 
 ### Git Hooks
 
-| Hook               | Runs                                                     |
-| ------------------ | -------------------------------------------------------- |
-| `pre-commit`       | `lint-staged` (lint + format on changed files)           |
-| `pre-merge-commit` | `npm run lint && npm run lint:arch && npm run build`     |
-| `pre-push`         | `lint:arch && validate:arch && build && build-storybook` |
+| Hook               | Runs                                                                       |
+| ------------------ | -------------------------------------------------------------------------- |
+| `pre-commit`       | `lint-staged` (lint + format on changed files)                             |
+| `pre-merge-commit` | `npm run lint && npm run lint:arch && npm run build`                       |
+| `pre-push`         | `lint:arch && validate:arch && build && build-storybook && test:storybook` |
 
 The `pre-merge-commit` hook is the **merge gate** — it prevents broken code from landing in `main` even if a reviewing agent approves without running checks.
 

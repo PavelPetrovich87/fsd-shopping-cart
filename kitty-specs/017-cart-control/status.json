@@ -1,5 +1,5 @@
 {
-  "event_count": 26,
+  "event_count": 27,
   "last_event_id": "01KQRESET02",
   "materialized_at": "2026-04-29T17:46:00.000000+00:00",
   "mission_number": "017",
@@ -26,7 +26,7 @@
     },
     "WP02": {
       "actor": "kilo",
-      "force_count": 4,
+      "force_count": 5,
       "lane": "planned",
       "last_event_id": "01KQRESET02",
       "last_transition_at": "2026-04-29T17:46:00.000000+00:00"

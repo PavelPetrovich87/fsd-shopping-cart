@@ -99,7 +99,9 @@ graph TD
 ```mermaid
 graph TD
     subgraph widgets
-        VisualHarness
+        CartSidebar
+        Header
+        ProductCatalog
     end
 
     subgraph features
@@ -122,7 +124,12 @@ graph TD
         shared/config
     end
 
-    VisualHarness --> shared/lib
+    CartSidebar --> cart
+    CartSidebar --> product
+    CartSidebar --> shopping-cart
+    Header --> shopping-cart
+    ProductCatalog --> product
+    ProductCatalog --> shopping-cart
     shopping-cart --> cart
     shopping-cart --> product
     shopping-cart --> shared/ui

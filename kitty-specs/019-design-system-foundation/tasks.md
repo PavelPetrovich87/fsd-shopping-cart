@@ -37,7 +37,7 @@
 | T024 | Create tokens.stories.tsx with color swatch stories | WP07 | | [D] |
 | T025 | Add typography specimen stories (font sizes, weights, families) | WP07 | | [D] |
 | T026 | Add spacing rulers and radius/shadow visual display stories | WP07 | | [D] |
-| T027 | Write README.md documenting token layers, naming conventions, usage | WP08 | | [ ] |
+| T027 | Write README.md documenting token layers, naming conventions, usage | WP08 | | [D] |
 
 ---
 
@@ -263,7 +263,7 @@
 **Priority:** P2 (documentation — important for developer handoff)
 
 **Success Criteria:**
-- [ ] T027: README explains primitive, semantic, and component token layers with examples
+- [x] T027: README explains primitive, semantic, and component token layers with examples
 
 **Implementation Sketch:**
 1. Create `src/shared/ui/tokens/README.md`

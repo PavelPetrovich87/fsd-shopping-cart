@@ -14,10 +14,10 @@
 | T001 | Create colors.ts — primitive color palette in HSL | WP01 | | [D] |
 | T002 | Add semantic color token maps (background, foreground, primary, secondary, muted, accent, destructive, border, input, ring) | WP01 | | [D] |
 | T003 | Add component color tokens (button-focus-ring, button-error-ring, input-focus, input-error) | WP01 | | [D] |
-| T004 | Create typography.ts — font family and TypeScript interface | WP02 | | [ ] |
-| T005 | Define typography size scale (xs through 5xl in rem) | WP02 | | [ ] |
-| T006 | Define font weight, line-height, and letter-spacing scales | WP02 | | [ ] |
-| T007 | Export typed typography constants and interfaces | WP02 | | [ ] |
+| T004 | Create typography.ts — font family and TypeScript interface | WP02 | | [D] |
+| T005 | Define typography size scale (xs through 5xl in rem) | WP02 | | [D] |
+| T006 | Define font weight, line-height, and letter-spacing scales | WP02 | | [D] |
+| T007 | Export typed typography constants and interfaces | WP02 | | [D] |
 | T008 | Create spacing.ts — 4px base grid scale (13 values: 4–128px) | WP03 | [P] | [ ] |
 | T009 | Create radius.ts — border radius scale (sm, md, lg, xl, full) | WP03 | [P] | [ ] |
 | T010 | Create breakpoints.ts — responsive breakpoints (sm=640, md=768, lg=1024, xl=1280) | WP03 | [P] | [ ] |
@@ -79,10 +79,10 @@
 **Priority:** P0 (foundation — unblocks all UI work)
 
 **Success Criteria:**
-- [ ] T004: `typography.ts` exports `FontFamily` with 'Noto Sans' as primary
-- [ ] T005: typography size scale covers xs (0.75rem) through 5xl (3rem)
-- [ ] T006: weights include 400, 500, 600, 700; line-heights are provided; letter-spacing is 0
-- [ ] T007: All typography constants are typed and exported
+- [x] T004: `typography.ts` exports `FontFamily` with 'Noto Sans' as primary
+- [x] T005: typography size scale covers xs (0.75rem) through 5xl (3rem)
+- [x] T006: weights include 400, 500, 600, 700; line-heights are provided; letter-spacing is 0
+- [x] T007: All typography constants are typed and exported
 
 **Implementation Sketch:**
 1. Create `src/shared/ui/tokens/typography.ts`

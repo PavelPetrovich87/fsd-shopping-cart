@@ -1,5 +1,7 @@
 # Input Field Component — Specification
 
+> **STATUS: CANCELLED** — Blocked by incomplete design token system. See T-017 (Design System Foundation) which must be completed before any UI component work resumes.
+
 ## 1. Concept & Vision
 
 A reusable, accessible Input Field component that integrates seamlessly with the existing design system. The component provides a clean, typed way to collect user text input across the application. It maintains visual consistency with the Button component (T-019) and relies on Design Tokens (T-018) for all styling decisions. Validation is handled externally by parent components, keeping the Input focused on presentation and accessibility.

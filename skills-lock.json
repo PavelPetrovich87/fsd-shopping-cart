@@ -1,10 +1,35 @@
 {
   "version": 1,
   "skills": {
+    "shadcn": {
+      "source": "shadcn/ui",
+      "sourceType": "github",
+      "computedHash": "80a6226e78f6d1fe464214ae0ef449d49d8ffaa3e7704f011e9b418c678ad4d1"
+    },
     "tailwind-design-system": {
       "source": "wshobson/agents",
       "sourceType": "github",
       "computedHash": "988d80e52c67c3692d43cc963b6a048a239895e88b272b061de55370d0f8efc3"
+    },
+    "fsd-architecture": {
+      "source": ".agents/skills/fsd-architecture",
+      "sourceType": "project",
+      "computedHash": "9cb42cb5c267613a9d4919cfa4fdab329160643e7b476977ca15e6e1a7a6361a"
+    },
+    "domain-modeling-plain-objects": {
+      "source": ".agents/skills/domain-modeling-plain-objects",
+      "sourceType": "project",
+      "computedHash": "f1fa96efa4910a8b07e0313167bd18ea02aace531c845876ed3d4be695f7a1ee"
+    },
+    "story-first-ui": {
+      "source": ".agents/skills/story-first-ui",
+      "sourceType": "project",
+      "computedHash": "2f35609c66d62b252422d70ad78b3033d498801199c86fee4cedc67429a62c71"
+    },
+    "fsd-ui-styling-constraints": {
+      "source": ".agents/skills/fsd-ui-styling-constraints",
+      "sourceType": "project",
+      "computedHash": "c08e6be66708f33f37947715c4640b26dc857916b58bb7a6b1d82c9e695fcb6f"
     }
   }
 }

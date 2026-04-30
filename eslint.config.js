@@ -44,7 +44,7 @@ export default defineConfig([
       // CONVENTIONS.md: no-nested-components
       'react/no-unstable-nested-components': 'error',
 
-      // CONVENTIONS.md: import-locality — no relative imports that escape the slice
+      // fsd-architecture skill: import-locality — no relative imports that escape the slice
       // ../../ from a segment means you're leaving the slice boundary
       'no-restricted-imports': [
         'error',
@@ -81,7 +81,7 @@ export default defineConfig([
     },
   },
   {
-    // CONVENTIONS.md 3.2: zero-trust styling — no className on custom shared/ui components
+    // fsd-ui-styling-constraints skill: zero-trust styling — no className on custom shared/ui components
     // Does NOT apply to shadcn/ subdirectory (library components retain className by design)
     files: ['src/shared/ui/**/*.{ts,tsx}'],
     ignores: ['src/shared/ui/shadcn/**'],
@@ -97,7 +97,7 @@ export default defineConfig([
     },
   },
   {
-    // CONVENTIONS.md 4.1: Plain Objects Only — no classes in domain layer
+    // domain-modeling-plain-objects skill: Plain Objects Only — no classes in domain layer
     files: ['src/entities/**/*.{ts,tsx}', 'src/features/**/model/**/*.{ts,tsx}'],
     ignores: ['src/entities/coupon/model/coupon.ts'],
     rules: {
@@ -106,12 +106,12 @@ export default defineConfig([
         {
           selector: 'ClassDeclaration',
           message:
-            'Classes are forbidden in entities/ and features/**/model/. Use factory functions + plain objects. See CONVENTIONS.md §4.1.',
+            'Classes are forbidden in entities/ and features/**/model/. Use factory functions + plain objects. See domain-modeling-plain-objects skill.',
         },
         {
           selector: 'ClassExpression',
           message:
-            'Classes are forbidden in entities/ and features/**/model/. Use factory functions + plain objects. See CONVENTIONS.md §4.1.',
+            'Classes are forbidden in entities/ and features/**/model/. Use factory functions + plain objects. See domain-modeling-plain-objects skill.',
         },
       ],
     },

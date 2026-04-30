@@ -3,9 +3,7 @@
   "mcp": {
     "penpot": {
       "type": "remote",
-      "url": "http://localhost:4401/mcp",
-      "enabled": true,
-      "timeout": 30000
+      "url": "https://design.penpot.app/mcp/stream?userToken=eyJhbGciOiJBMjU2S1ciLCJlbmMiOiJBMjU2R0NNIn0.zNzLkALU1jggR6TUsLLI19BStObad6dWO1tnP3ri3k6ZNe2uFBWxNg.zmbqssWqAN16PJ-u.UKv__vYgtn8SymODEBmbhmF5zJC45vwycIOoKyOvnZeQ3PYEYt6_r49niF41f_BmBAx9IlqoX6StlCYaRuyp_pzmxjhX5jNIr2tvDHumVChT24SQqwpFhIBEwHkeEhHEAxNqedVsxngWgXJtLVd9eRE8S5ITJ0LEYnvvFbHT9XqNjwrUkG2C07jP3tx4nvPxhs9M0PaTgdNY.aVEiaZiRJ6j5IrIV6D84Eg"
     }
   }
 }

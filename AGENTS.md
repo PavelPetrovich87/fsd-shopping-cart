@@ -1,20 +1,25 @@
 # AGENTS.md
 
-Vendor-agnostic instructions for AI coding agents. For deep architectural context, see [ARCHITECTURE.md](./ARCHITECTURE.md). For enforceable rules, see [CONVENTIONS.md](./CONVENTIONS.md).
+Vendor-agnostic instructions for AI coding agents.
 
 ## Stack
 
 React 19, TypeScript 5.9, Vite 8, Tailwind CSS v4, ESLint 9 (flat config), Steiger (FSD linter).
 
-## Architecture: Feature-Sliced Design
+## Skill Routing (MANDATORY)
 
-```
-app → pages → widgets → features → entities → shared
-```
+Before editing any file, identify applicable skills by path match and load them via the skill tool.
 
-**One rule to remember:** dependencies flow DOWN only. Never import from a layer above. Never import across slices on the same layer.
+| Path pattern               | Required skills                                                            |
+| -------------------------- | -------------------------------------------------------------------------- |
+| `src/**`                   | `fsd-architecture`                                                         |
+| `src/shared/ui/**`         | `story-first-ui` + `fsd-ui-styling-constraints` + `tailwind-design-system` |
+| `src/entities/**/model/**` | `domain-modeling-plain-objects`                                            |
+| `src/features/**/model/**` | `domain-modeling-plain-objects`                                            |
+| `src/entities/**/api/**`   | `domain-modeling-plain-objects` (Ports & Adapters ref)                     |
 
-Every slice exposes a single `index.ts` as its public API. Direct imports into internal folders (`ui/`, `model/`, `api/`) from outside the slice are forbidden.
+If the directory of the file you are editing contains `README.md` or `DOMAIN.md`,
+read it to understand slice-specific business rules.
 
 ## Commands
 
@@ -28,20 +33,17 @@ All commands must exit with code 0. Warnings are errors.
 
 ## Workflow
 
-```
 1. Explore current file structure (ls/glob src/) before writing code
-2. For shared/ui components: write story first, then component (see Story-First Convention below)
-3. Write code
-4. Run: npm run lint
-5. Errors? Read the message → fix → go to 4
-6. Run: npm run lint:arch
-7. Errors? Fix → go to 4
-8. Run: npm run build
-9. Errors? Fix → go to 8
-10. Done only when ALL commands exit 0
-```
-
-Do not skip steps. Do not suppress warnings. The linter is your guide.
+2. Identify applicable skills by path match (see table above)
+3. Load applicable skills
+4. Write code following skill instructions
+5. Run: npm run lint
+6. Errors? Read the message → fix → go to 5
+7. Run: npm run lint:arch
+8. Errors? Fix → go to 5
+9. Run: npm run build
+10. Errors? Fix → go to 9
+11. Done only when ALL commands exit 0
 
 ## Spec-Kitty Workflow Notes
 
@@ -53,70 +55,6 @@ Do not skip steps. Do not suppress warnings. The linter is your guide.
 - **WP Lifecycle**: Work packages MUST progress through lanes: `planned` → `doing` → `for_review` → `approved` → `done`. Use `spec-kitty agent tasks move-task <WP-ID> --to <lane>` to transition.
 - Before considering a WP ready for review, verify both project quality gates and workflow consistency.
 - When adding unit tests, ensure they are executable through the project harness rather than existing only as files.
-
-## Story-First Convention
-
-When creating a UI component in `shared/ui/`:
-
-1. Create `ComponentName.stories.tsx` FIRST — define Default + all variants/sizes/states
-2. Use CSF3 format: `export default satisfies Meta<typeof Component>`
-3. Write the component to satisfy the stories
-4. Stories stay forever — they are regression guards, not temporary tests
-5. **Determinism Rule:** Stories MUST NOT rely on real network requests or random data (`Math.random()`, `Date.now()`). Use MSW `parameters.msw.handlers` for API mocking.
-6. **Interaction Rule:** Use the `play` function in stories for interactions (focus, dropdowns, form filling). Do not write separate `.spec.ts` files for UI interactions — they are tested via Vitest Browser Mode.
-
-Example with MSW:
-
-```tsx
-export const WithApiData: Story = {
-  parameters: {
-    msw: {
-      handlers: [
-        http.get('/api/products', () => HttpResponse.json(mockProducts)),
-      ],
-    },
-  },
-}
-```
-
-## Bug Fix Workflow
-
-When fixing a bug in `shared/ui/`:
-
-1. Reproduce the bug as a story (e.g., `ButtonOverflow.stories.tsx`)
-2. Verify the story shows the bug
-3. Fix the component
-4. The reproduction story stays as a regression guard — never delete it
-
-## File Structure
-
-```
-src/
-├── app/                → Providers, routing, global styles
-├── pages/              → Route-level composition
-├── widgets/            → Self-contained composite UI blocks
-├── features/           → User interactions + business logic
-│   └── <slice>/
-├── entities/           → Business objects + data shapes
-│   └── <slice>/
-└── shared/             → Reusable, business-agnostic infrastructure
-    ├── ui/
-    │   └── tokens/       → Design tokens (theme.css with @theme block)
-    ├── lib/
-    ├── api/
-    └── config/
-```
-
-Slices are added as the project grows. Always check the actual file system for current state — this diagram is a template, not a snapshot.
-
-## Design Tokens
-
-Design tokens are defined in `src/shared/ui/tokens/theme.css` as a Tailwind v4 `@theme` block. This file is the single source of truth for all design values (colors, spacing, radii, font sizes, font weights).
-
-- **Location**: `src/shared/ui/tokens/theme.css`
-- **Format**: Tailwind v4 `@theme { ... }` block with section comments
-- **Token types**: Primitive colors → Semantic tokens → Typography → Spacing → Radius
-- **Rules**: Never invent values not present in Penpot. Never add inline CSS variables outside this file.
 
 ## Planning Artifacts vs Actual Code
 
@@ -130,13 +68,3 @@ When implementing any ticket or plan:
 3. **Treat ticket file paths as intent, not literal instructions** — implement what the ticket describes using current project patterns
 
 Planning artifacts are templates and intentions. The actual codebase is the source of truth.
-
-## Import Rules (Quick Reference)
-
-| Rule                    | Example of violation                                          |
-| ----------------------- | ------------------------------------------------------------- |
-| No higher-level imports | `entities/` importing from `features/`                        |
-| No cross-slice imports  | `features/cart` importing from `features/wishlist`            |
-| Public API only         | `import { X } from '@/features/cart/ui/Button'`               |
-| Relative inside slice   | `import { X } from '@/features/cart/model/store'` inside cart |
-| Absolute between slices | `import { X } from '../../entities/product'`                  |

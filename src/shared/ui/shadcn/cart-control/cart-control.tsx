@@ -26,7 +26,8 @@ export function CartControl({
     <div
       role="group"
       aria-label="Quantity selector"
-      className="border-border inline-flex h-9 items-center gap-3 rounded-md border bg-neutral-100 p-0.5"
+      className="inline-flex h-9 items-center gap-3 border bg-neutral-100 p-0.5"
+      style={{ width: '125px', borderRadius: '6px', borderColor: '#e5e5e5' }}
     >
       <Button
         variant="ghost"
@@ -35,13 +36,13 @@ export function CartControl({
         disabled={disabled || atMin}
         onClick={onDecrement}
       >
-        <Minus />
+        <Minus className="text-neutral-500" />
       </Button>
 
       <span
         aria-live="polite"
         aria-atomic="true"
-        className="flex h-8 min-w-12 items-center justify-center text-sm font-medium text-neutral-700"
+        className="flex h-8 min-w-12 items-center justify-center rounded-sm text-sm font-medium text-neutral-700"
       >
         {quantity}
       </span>
@@ -53,7 +54,7 @@ export function CartControl({
         disabled={disabled || atMax}
         onClick={onIncrement}
       >
-        <Plus />
+        <Plus className="text-neutral-700" />
       </Button>
     </div>
   )

@@ -34,9 +34,9 @@
 | T021 | Emit all primitive and semantic CSS custom properties in theme.css | WP06 | | [D] |
 | T022 | Emit spacing, radius, shadow, breakpoint, and z-index CSS variables | WP06 | | [D] |
 | T023 | Replace existing partial theme.css with complete token CSS | WP06 | | [D] |
-| T024 | Create tokens.stories.tsx with color swatch stories | WP07 | | [ ] |
-| T025 | Add typography specimen stories (font sizes, weights, families) | WP07 | | [ ] |
-| T026 | Add spacing rulers and radius/shadow visual display stories | WP07 | | [ ] |
+| T024 | Create tokens.stories.tsx with color swatch stories | WP07 | | [D] |
+| T025 | Add typography specimen stories (font sizes, weights, families) | WP07 | | [D] |
+| T026 | Add spacing rulers and radius/shadow visual display stories | WP07 | | [D] |
 | T027 | Write README.md documenting token layers, naming conventions, usage | WP08 | | [ ] |
 
 ---
@@ -229,9 +229,9 @@
 **Priority:** P2 (documentation/verification — needed for visual regression)
 
 **Success Criteria:**
-- [ ] T024: Color swatch stories for primitive palette and semantic tokens
-- [ ] T025: Typography specimen stories showing all font sizes and weights
-- [ ] T026: Spacing rulers, radius visual cards, and shadow display samples
+- [x] T024: Color swatch stories for primitive palette and semantic tokens
+- [x] T025: Typography specimen stories showing all font sizes and weights
+- [x] T026: Spacing rulers, radius visual cards, and shadow display samples
 
 **Implementation Sketch:**
 1. Create `src/shared/ui/tokens/tokens.stories.tsx`

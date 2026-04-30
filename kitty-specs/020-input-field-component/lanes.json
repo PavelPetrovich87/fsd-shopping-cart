@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "mission_slug": "020-input-field-component",
+  "mission_id": "01KQFAMR5K4E62V4NJB3F4M8Y2",
+  "mission_branch": "kitty/mission-020-input-field-component",
+  "target_branch": "main",
+  "lanes": [
+    {
+      "lane_id": "lane-a",
+      "wp_ids": [
+        "WP01"
+      ],
+      "write_scope": [
+        "src/shared/ui/index.ts",
+        "src/shared/ui/input-field/**"
+      ],
+      "predicted_surfaces": [
+        "api",
+        "app-shell",
+        "artifact-rendering"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    }
+  ],
+  "computed_at": "2026-04-30T14:10:18.572082+00:00",
+  "computed_from": "dependency_graph+ownership",
+  "planning_artifact_wps": []
+}

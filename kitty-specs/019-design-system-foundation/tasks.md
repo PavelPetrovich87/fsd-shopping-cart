@@ -23,10 +23,10 @@
 | T010 | Create breakpoints.ts — responsive breakpoints (sm=640, md=768, lg=1024, xl=1280) | WP03 | [P] | [D] |
 | T011 | Create z-index.ts — z-index scale (dropdown, sticky, modal, tooltip, toast) | WP03 | [P] | [D] |
 | T012 | Verify all WP03 token modules compile without errors | WP03 | | [D] |
-| T013 | Create shadows.ts — shadow TypeScript interface | WP04 | | [ ] |
-| T014 | Define elevation tokens (subtle, medium, large) from Penpot | WP04 | | [ ] |
-| T015 | Define state ring tokens (focus-ring, error-ring) from Penpot | WP04 | | [ ] |
-| T016 | Verify shadows.ts exports with correct types and compiles | WP04 | | [ ] |
+| T013 | Create shadows.ts — shadow TypeScript interface | WP04 | | [D] |
+| T014 | Define elevation tokens (subtle, medium, large) from Penpot | WP04 | | [D] |
+| T015 | Define state ring tokens (focus-ring, error-ring) from Penpot | WP04 | | [D] |
+| T016 | Verify shadows.ts exports with correct types and compiles | WP04 | | [D] |
 | T017 | Define Theme interface aggregating all token categories | WP05 | | [ ] |
 | T018 | Create combined theme object with all token re-exports | WP05 | | [ ] |
 | T019 | Export Theme interface and theme constant from index.ts | WP05 | | [ ] |
@@ -143,10 +143,10 @@
 **Priority:** P1 (needed after colors/spacing, before component integration)
 
 **Success Criteria:**
-- [ ] T013: shadows.ts exports `ShadowScale` interface
-- [ ] T014: `subtle` maps to button default shadow, `medium` to tooltip shadow, `large` to card/content shadow
-- [ ] T015: `focus-ring` maps to indigo focus ring, `error-ring` maps to red error ring
-- [ ] T016: shadows.ts compiles without errors
+- [x] T013: shadows.ts exports `ShadowScale` interface
+- [x] T014: `subtle` maps to button default shadow, `medium` to tooltip shadow, `large` to card/content shadow
+- [x] T015: `focus-ring` maps to indigo focus ring, `error-ring` maps to red error ring
+- [x] T016: shadows.ts compiles without errors
 
 **Implementation Sketch:**
 1. Create `src/shared/ui/tokens/shadows.ts`

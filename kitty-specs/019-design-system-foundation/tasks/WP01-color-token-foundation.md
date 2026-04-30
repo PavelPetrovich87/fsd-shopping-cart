@@ -234,3 +234,4 @@ Verify that:
 - 2026-04-30T12:40:50Z – kilocode:minimax-m2.7:fsd-implementer:implementer – shell_pid=53382 – Ready for review: color token foundation with HSL palette, semantic maps, and component states
 - 2026-04-30T12:52:26Z – opencode – shell_pid=53382 – Started review via action command
 - 2026-04-30T12:52:53Z – opencode – shell_pid=53382 – Review passed: all 16 primitive colors, 19 semantic colors, 4 component colors present as HSL strings. No hex values. Build, lint, and FSD arch lint all pass.
+- 2026-04-30T13:30:21Z – opencode – shell_pid=53382 – Merged into main (commit 4879858). All code verified. | Done override: Approved pre-merge. Tracking restored post-revert fix.

@@ -371,15 +371,65 @@ _User interactions orchestrating entities._
 
 _Atomic UI components — no dependencies on domain logic. Everything in Tier 6+ depends on these._
 
+### T-017: Design System Foundation — Token Architecture & Style Guide
+
+| Field             | Value               |
+| ----------------- | ------------------- |
+| **Layer / Slice** | `shared/ui/tokens/` |
+| **Complexity**    | 🔴 Large            |
+| **Depends On**    | —                   |
+
+**Description**: Audit current Penpot design file and existing `theme.css`, then define a complete, extractable design token system. This is a prerequisite for all UI component work. The output must be a single source of truth that lives in code and can be mirrored in Penpot's Design Tokens panel.
+
+**Scope:**
+
+1. **Token Taxonomy**: Define naming convention (primitive vs semantic vs component tokens)
+2. **Color System**: Convert all Penpot colors to HSL; define primitive palette (brand, neutral, error, success, warning) + semantic mappings (background, foreground, surface, border, primary, secondary, muted, accent, destructive)
+3. **Typography Scale**: Font family (Noto Sans), sizes (xs through 5xl), weights (400–700), line-heights, letter-spacing — all in rem units
+4. **Spacing Scale**: 4px-base scale (4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80, 96, 128)
+5. **Border Radius**: sm=4px, md=8px, lg=12px, xl=16px, full=9999px
+6. **Shadows / Elevation**: subtle, medium, large shadow tokens
+7. **Breakpoints**: sm, md, lg, xl
+8. **Z-Index Scale**: dropdown, sticky, modal, tooltip, toast
+9. **Documentation**: README in `shared/ui/tokens/` explaining token layers and usage rules
+
+**Files to create / update:**
+
+- `src/shared/ui/tokens/colors.ts` — primitive + semantic color maps (HSL values)
+- `src/shared/ui/tokens/typography.ts` — font sizes, weights, families, line-heights
+- `src/shared/ui/tokens/spacing.ts` — spacing scale
+- `src/shared/ui/tokens/radius.ts` — border radius tokens
+- `src/shared/ui/tokens/shadows.ts` — shadow/elevation tokens
+- `src/shared/ui/tokens/breakpoints.ts` — responsive breakpoints
+- `src/shared/ui/tokens/z-index.ts` — z-index scale
+- `src/shared/ui/tokens/index.ts` — combined theme object
+- `src/shared/ui/tokens/README.md` — token usage documentation
+- `src/shared/ui/tokens/theme.css` — CSS custom properties (replace existing)
+- `src/shared/ui/tokens/tokens.stories.tsx` — Storybook stories for all token categories
+
+**Acceptance Criteria:**
+
+- [ ] All color tokens are HSL strings (e.g., `hsl(220 80% 50%)`)
+- [ ] No raw hex values in semantic tokens (primitives may use hex as source, exported as HSL)
+- [ ] Typography uses rem units exclusively
+- [ ] Spacing follows 4px grid with no gaps in the scale
+- [ ] All tokens exported as TypeScript constants AND CSS custom properties
+- [ ] Storybook stories exist for: color swatches, typography specimens, spacing scale visualization
+- [ ] README documents: token layers (primitive→semantic→component), when to use which, naming conventions
+- [ ] Tokens are typed (TypeScript interfaces for theme object)
+- [ ] Penpot file updated with matching Design Tokens (or documented mapping if Penpot lacks token support)
+
+---
+
 ### T-018: Design Tokens
 
 | Field             | Value               |
 | ----------------- | ------------------- |
 | **Layer / Slice** | `shared/ui/tokens/` |
 | **Complexity**    | 🟢 Small            |
-| **Depends On**    | —                   |
+| **Depends On**    | T-017               |
 
-**Description**: Define the foundational design tokens from the Penpot design system — colors (primary, secondary, accent, surface, background, text, border, error, success), typography (font families, sizes, weights, line-heights), spacing scale (4px base), and border radius. Tokens are CSS custom properties exported as a theme object.
+**Description**: Implement the foundational design tokens defined in T-017. This is the code-execution layer of the token system.
 
 **Files to create:**
 
@@ -397,6 +447,8 @@ _Atomic UI components — no dependencies on domain logic. Everything in Tier 6+
 - [ ] Border radius tokens: sm=4px, md=8px, lg=12px, xl=16px
 - [ ] Exported as TypeScript constants + CSS variables
 - [ ] Storybook stories for color swatches and typography specimens
+
+> **Status: IN PROGRESS** — Partial implementation exists in `theme.css` (hex values, incomplete spacing/radius, no TS exports). Needs comprehensive design system definition before completion.
 
 ---
 
@@ -425,6 +477,8 @@ _Atomic UI components — no dependencies on domain logic. Everything in Tier 6+
 - [ ] Full keyboard accessibility (focus states, Enter/Space activation)
 - [ ] Storybook stories covering all variant/size/state combinations
 
+> **Status: BLOCKED** — Only shadcn default button exists. Needs proper design tokens first.
+
 ---
 
 ### T-020: Input Field
@@ -451,6 +505,8 @@ _Atomic UI components — no dependencies on domain logic. Everything in Tier 6+
 - [ ] `label` prop renders accessible label above
 - [ ] Focus state uses design token border color
 - [ ] Storybook stories for all states
+
+> **Status: CANCELLED** — Blocked by incomplete design token system. Will be recreated after T-017 and T-018 are complete.
 
 ---
 
@@ -715,19 +771,19 @@ _Top-level composition and wiring._
 
 ## Summary Matrix
 
-| Tier                            | Tickets                                         | Effort         |
-| ------------------------------- | ----------------------------------------------- | -------------- |
-| **Tier 1 — Shared Foundation**  | T-001, T-002, T-003                             | 🟢🟡🟢         |
-| **Tier 2 — Domain Entities**    | T-004, T-005, T-006                             | 🟡🟡🟡         |
-| **Tier 3 — Ports & Repos**      | T-007, T-008, T-009                             | 🟢🟢🟡         |
-| **Tier 4 — Features**           | T-010, T-011, T-012                             | 🔴🟡🔴         |
-| **Tier 5 — Design System**      | T-018, T-019, T-020, T-021, T-022, T-023, T-024 | 🟢🟡🟡🟡🟢🟢🟡 |
-| **Tier 5 (cont.) — Entity UI**  | T-025                                           | 🟡             |
-| **Tier 5 (cont.) — Feature UI** | T-026                                           | 🔴             |
-| **Tier 5 (cont.) — Widgets**    | T-027                                           | 🟡             |
-| **Tier 6 — Pages & App**        | T-028, T-029                                    | 🟡🟡           |
-| **Tier 7 — Enhancements**       | T-030, T-031                                    | 🟢🟢           |
-| **Total**                       | **29 tickets**                                  |                |
+| Tier                            | Tickets                                                | Effort           |
+| ------------------------------- | ------------------------------------------------------ | ---------------- |
+| **Tier 1 — Shared Foundation**  | T-001, T-002, T-003                                    | 🟢🟡🟢           |
+| **Tier 2 — Domain Entities**    | T-004, T-005, T-006                                    | 🟡🟡🟡           |
+| **Tier 3 — Ports & Repos**      | T-007, T-008, T-009                                    | 🟢🟢🟡           |
+| **Tier 4 — Features**           | T-010, T-011, T-012                                    | 🔴🟡🔴           |
+| **Tier 5 — Design System**      | T-017, T-018, T-019, T-020, T-021, T-022, T-023, T-024 | 🔴🟢🟡🟡🟡🟢🟢🟡 |
+| **Tier 5 (cont.) — Entity UI**  | T-025                                                  | 🟡               |
+| **Tier 5 (cont.) — Feature UI** | T-026                                                  | 🔴               |
+| **Tier 5 (cont.) — Widgets**    | T-027                                                  | 🟡               |
+| **Tier 6 — Pages & App**        | T-028, T-029                                           | 🟡🟡             |
+| **Tier 7 — Enhancements**       | T-030, T-031                                           | 🟢🟢             |
+| **Total**                       | **30 tickets**                                         |                  |
 
 ### Dependency Graph
 
@@ -757,6 +813,7 @@ graph BT
     T011("T-011: Apply Coupon"):::t4
     T012("T-012: Checkout"):::t4
 
+    T017("T-017: Token Architecture"):::t5
     T018("T-018: Design Tokens"):::t5
     T019("T-019: Button"):::t5
     T020("T-020: Input"):::t5
@@ -787,7 +844,8 @@ graph BT
     T011 --> T004 & T006 & T007 & T008 & T009
     T012 --> T004 & T005 & T007 & T008 & T009 & T002
 
-    T018 -.-> T001
+    T017 -.-> T001
+    T018 --> T017
     T019 --> T018
     T020 --> T018 & T019
     T021 --> T018 & T019

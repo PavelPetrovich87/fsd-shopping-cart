@@ -11,9 +11,9 @@
 
 | ID | Description | WP | Parallel | Status |
 |----|-------------|-----|----------|--------|
-| T001 | Create colors.ts — primitive color palette in HSL | WP01 | | [ ] |
-| T002 | Add semantic color token maps (background, foreground, primary, secondary, muted, accent, destructive, border, input, ring) | WP01 | | [ ] |
-| T003 | Add component color tokens (button-focus-ring, button-error-ring, input-focus, input-error) | WP01 | | [ ] |
+| T001 | Create colors.ts — primitive color palette in HSL | WP01 | | [D] |
+| T002 | Add semantic color token maps (background, foreground, primary, secondary, muted, accent, destructive, border, input, ring) | WP01 | | [D] |
+| T003 | Add component color tokens (button-focus-ring, button-error-ring, input-focus, input-error) | WP01 | | [D] |
 | T004 | Create typography.ts — font family and TypeScript interface | WP02 | | [ ] |
 | T005 | Define typography size scale (xs through 5xl in rem) | WP02 | | [ ] |
 | T006 | Define font weight, line-height, and letter-spacing scales | WP02 | | [ ] |
@@ -50,9 +50,9 @@
 **Priority:** P0 (foundation — unblocks all UI work)
 
 **Success Criteria:**
-- [ ] T001: colors.ts exports `PrimitiveColors` interface and `primitiveColors` const with all 16 colors as HSL strings
-- [ ] T002: semantic color map covers all shadcn/ui contexts (background, foreground, primary, secondary, muted, accent, destructive, border, input, ring)
-- [ ] T003: component tokens for button/input focus and error rings are present
+- [x] T001: colors.ts exports `PrimitiveColors` interface and `primitiveColors` const with all 16 colors as HSL strings
+- [x] T002: semantic color map covers all shadcn/ui contexts (background, foreground, primary, secondary, muted, accent, destructive, border, input, ring)
+- [x] T003: component tokens for button/input focus and error rings are present
 
 **Implementation Sketch:**
 1. Create `src/shared/ui/tokens/colors.ts`

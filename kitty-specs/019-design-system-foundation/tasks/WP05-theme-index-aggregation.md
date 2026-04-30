@@ -291,3 +291,4 @@ Verify that:
 - 2026-04-30T12:44:52Z – kilocode:minimax-m2.7:fsd-implementer:implementer – shell_pid=53382 – Started implementation via action command
 - 2026-04-30T12:45:39Z – kilocode:minimax-m2.7:fsd-implementer:implementer – shell_pid=53382 – Ready for review: theme index aggregation
 - 2026-04-30T13:28:47Z – kilocode:minimax-m2.7:fsd-implementer:implementer – shell_pid=53382 – Approved pre-merge, now tracking restored after revert fix.
+- 2026-04-30T13:29:22Z – kilocode:minimax-m2.7:fsd-implementer:implementer – shell_pid=53382 – All code merged and verified on main (commit 4879858). Post-revert-fix tracking restore. | Done override: WP05 was approved pre-merge. Revert commit 4879858 restored all merged files to main. Tracking mismatch was caused by spec-kitty auto-commit writing to stale working tree state.

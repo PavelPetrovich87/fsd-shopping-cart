@@ -9,9 +9,12 @@ requirement_refs:
 planning_base_branch: main
 merge_target_branch: main
 branch_strategy: Planning artifacts for this feature were generated on main. During /spec-kitty.implement this WP may branch from a dependency-specific base, but completed changes must merge back into main unless the human explicitly redirects the landing branch.
-created_at: '2026-04-30T12:20:17Z'
+base_branch: kitty/mission-019-design-system-foundation
+base_commit: 4e2fc7cc62e0bb545ba52df85999f493d90cbd8b
+created_at: '2026-04-30T12:48:22.451854+00:00'
 subtasks:
 - T027
+shell_pid: '53382'
 history: []
 authoritative_surface: src/shared/ui/tokens/README.md
 execution_mode: code_change

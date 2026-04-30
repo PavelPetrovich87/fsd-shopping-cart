@@ -1,7 +1,7 @@
 {
-  "event_count": 29,
-  "last_event_id": "01KQF6XCH2JCE72Z1EA9HSGESF",
-  "materialized_at": "2026-04-30T12:48:09.762939+00:00",
+  "event_count": 31,
+  "last_event_id": "01KQF6XS4QWVZGTS1H1Z5DBGAC",
+  "materialized_at": "2026-04-30T12:48:22.679089+00:00",
   "mission_number": "019",
   "mission_slug": "019-design-system-foundation",
   "mission_type": "software-dev",
@@ -12,9 +12,9 @@
     "claimed": 0,
     "done": 0,
     "for_review": 7,
-    "in_progress": 0,
+    "in_progress": 1,
     "in_review": 0,
-    "planned": 1
+    "planned": 0
   },
   "work_packages": {
     "WP01": {
@@ -67,11 +67,11 @@
       "last_transition_at": "2026-04-30T12:48:09.762939+00:00"
     },
     "WP08": {
-      "actor": "finalize-tasks",
+      "actor": "implement-command",
       "force_count": 1,
-      "lane": "planned",
-      "last_event_id": "01KQF5MFM87YCDZFX205Z2FG82",
-      "last_transition_at": "2026-04-30T12:25:49.448398+00:00"
+      "lane": "in_progress",
+      "last_event_id": "01KQF6XS4QWVZGTS1H1Z5DBGAC",
+      "last_transition_at": "2026-04-30T12:48:22.679089+00:00"
     }
   }
 }

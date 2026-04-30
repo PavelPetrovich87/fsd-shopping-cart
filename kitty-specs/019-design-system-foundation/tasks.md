@@ -27,10 +27,10 @@
 | T014 | Define elevation tokens (subtle, medium, large) from Penpot | WP04 | | [D] |
 | T015 | Define state ring tokens (focus-ring, error-ring) from Penpot | WP04 | | [D] |
 | T016 | Verify shadows.ts exports with correct types and compiles | WP04 | | [D] |
-| T017 | Define Theme interface aggregating all token categories | WP05 | | [ ] |
-| T018 | Create combined theme object with all token re-exports | WP05 | | [ ] |
-| T019 | Export Theme interface and theme constant from index.ts | WP05 | | [ ] |
-| T020 | Verify index.ts compiles and all types resolve correctly | WP05 | | [ ] |
+| T017 | Define Theme interface aggregating all token categories | WP05 | | [D] |
+| T018 | Create combined theme object with all token re-exports | WP05 | | [D] |
+| T019 | Export Theme interface and theme constant from index.ts | WP05 | | [D] |
+| T020 | Verify index.ts compiles and all types resolve correctly | WP05 | | [D] |
 | T021 | Emit all primitive and semantic CSS custom properties in theme.css | WP06 | | [ ] |
 | T022 | Emit spacing, radius, shadow, breakpoint, and z-index CSS variables | WP06 | | [ ] |
 | T023 | Replace existing partial theme.css with complete token CSS | WP06 | | [ ] |
@@ -173,10 +173,10 @@
 **Priority:** P1 (depends on all token modules being complete)
 
 **Success Criteria:**
-- [ ] T017: `Theme` interface aggregates `PrimitiveColors`, `SemanticColors`, `ComponentColors`, typography, spacing, radius, shadows, breakpoints, z-index
-- [ ] T018: `theme` const object contains all five token categories
-- [ ] T019: index.ts re-exports all individual token modules and the Theme interface
-- [ ] T020: index.ts compiles without errors
+- [x] T017: `Theme` interface aggregates `PrimitiveColors`, `SemanticColors`, `ComponentColors`, typography, spacing, radius, shadows, breakpoints, z-index
+- [x] T018: `theme` const object contains all five token categories
+- [x] T019: index.ts re-exports all individual token modules and the Theme interface
+- [x] T020: index.ts compiles without errors
 
 **Implementation Sketch:**
 1. Create `src/shared/ui/tokens/index.ts`

@@ -1,0 +1,10 @@
+{
+  "created_at": "2026-04-30T13:53:21.076396+00:00",
+  "friendly_name": "input field component",
+  "mission_id": "01KQFAMR5K4E62V4NJB3F4M8Y2",
+  "mission_number": "020",
+  "mission_slug": "020-input-field-component",
+  "mission_type": "software-dev",
+  "slug": "020-input-field-component",
+  "target_branch": "main"
+}

@@ -31,9 +31,9 @@
 | T018 | Create combined theme object with all token re-exports | WP05 | | [D] |
 | T019 | Export Theme interface and theme constant from index.ts | WP05 | | [D] |
 | T020 | Verify index.ts compiles and all types resolve correctly | WP05 | | [D] |
-| T021 | Emit all primitive and semantic CSS custom properties in theme.css | WP06 | | [ ] |
-| T022 | Emit spacing, radius, shadow, breakpoint, and z-index CSS variables | WP06 | | [ ] |
-| T023 | Replace existing partial theme.css with complete token CSS | WP06 | | [ ] |
+| T021 | Emit all primitive and semantic CSS custom properties in theme.css | WP06 | | [D] |
+| T022 | Emit spacing, radius, shadow, breakpoint, and z-index CSS variables | WP06 | | [D] |
+| T023 | Replace existing partial theme.css with complete token CSS | WP06 | | [D] |
 | T024 | Create tokens.stories.tsx with color swatch stories | WP07 | | [ ] |
 | T025 | Add typography specimen stories (font sizes, weights, families) | WP07 | | [ ] |
 | T026 | Add spacing rulers and radius/shadow visual display stories | WP07 | | [ ] |
@@ -202,9 +202,9 @@
 **Priority:** P1 (CSS is needed for runtime theming; must replace existing file)
 
 **Success Criteria:**
-- [ ] T021: All primitive and semantic color CSS variables are present (--color-*, --background, --foreground, etc.)
-- [ ] T022: Spacing, radius, shadow, breakpoint, and z-index CSS variables are present
-- [ ] T023: The existing partial theme.css is replaced with the complete version
+- [x] T021: All primitive and semantic color CSS variables are present (--color-*, --background, --foreground, etc.)
+- [x] T022: Spacing, radius, shadow, breakpoint, and z-index CSS variables are present
+- [x] T023: The existing partial theme.css is replaced with the complete version
 
 **Implementation Sketch:**
 1. Read the existing `src/shared/ui/tokens/theme.css`

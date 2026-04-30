@@ -1,10 +1,12 @@
 {
   "created_at": "2026-04-30T12:00:34.302590+00:00",
-  "friendly_name": "design system foundation",
+  "friendly_name": "Design System Foundation",
   "mission_id": "01KQF467ZYWXBWJXTDRV0MB0EB",
   "mission_number": "019",
   "mission_slug": "019-design-system-foundation",
   "mission_type": "software-dev",
   "slug": "019-design-system-foundation",
-  "target_branch": "main"
+  "source_description": "T-017: Design System Foundation — Token Architecture & Style Guide. Build a complete, code-first design token system that becomes the single source of truth for all UI components in the shopping cart application.",
+  "target_branch": "main",
+  "vcs": "git"
 }

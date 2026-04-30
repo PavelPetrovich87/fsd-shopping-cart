@@ -1,108 +1,158 @@
-# Implementation Plan: [FEATURE]
-*Path: [templates/plan-template.md](templates/plan-template.md)*
+# Design System Foundation — Implementation Plan
 
+**Mission:** 019-design-system-foundation  
+**Spec:** `kitty-specs/019-design-system-foundation/spec.md`  
+**Branch:** current `main` → merge into `main` (`branch_matches_target: true`)  
+**Generated:** 2026-04-30T12:09:58Z
 
-**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
-**Input**: Feature specification from `/kitty-specs/[###-feature-name]/spec.md`
+---
 
-**Note**: This template is filled in by the `/spec-kitty.plan` command. See `src/specify_cli/missions/software-dev/command-templates/plan.md` for the execution workflow.
+## 1. Technical Context
 
-The planner will not begin until all planning questions have been answered—capture those answers in this document before progressing to later phases.
+### What's building
 
-## Summary
+A code-first design token system at `src/shared/ui/tokens/` consisting of:
 
-[Extract from feature spec: primary requirement + technical approach from research]
+- **TypeScript token modules** (`colors.ts`, `typography.ts`, `spacing.ts`, `radius.ts`, `shadows.ts`, `breakpoints.ts`, `z-index.ts`, `index.ts`)
+- **CSS custom properties** (`theme.css`) as the single CSS source of truth
+- **Storybook stories** (`tokens.stories.tsx`) for visual regression of all token categories
+- **README.md** documenting token layers and usage
 
-## Technical Context
+### Source of truth
 
-<!--
-  ACTION REQUIRED: Replace the content in this section with the technical details
-  for the project. The structure here is presented in advisory capacity to guide
-  the iteration process.
--->
+All primitive color values come from the Penpot design file. The spec's Section 4 documents every extracted value with hex → HSL conversion. No values are invented — all derived values (e.g., full spacing scale, font weights 600/700, radius `lg/xl/full`) are documented as derived.
 
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
-**Project Type**: [single/web/mobile - determines source structure]  
-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
-**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
-**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
+### Key decisions confirmed
 
-## Charter Check
+| Decision | Resolution |
+|----------|------------|
+| Color format | HSL strings for all token exports; hex in comments for reference only |
+| Border radius scale | `sm=4px, md=8px` from Penpot; `lg=12px, xl=16px, full=9999px` derived as standard increments |
+| Spacing scale | Full 4px grid built as specified; gaps in Penpot (20, 24, 40, 48, 80, 96, 128) documented as derived |
+| Breakpoint values | Standard: `sm=640px, md=768px, lg=1024px, xl=1280px` |
+| Font weights | 400, 500 from Penpot; 600, 700 added as derived for future component needs |
+| Shadow grouping | Generic elevation (`subtle`, `medium`, `large`) + state rings (`focus-ring`, `error-ring`) |
+| Gradient swatches | Two gradient swatches in Penpot (neutral-50 → neutral-100/300) are documented but not codified as solid tokens |
 
-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+### Observed gaps in Penpot (documented as derived)
 
-[Gates determined based on charter file]
+- Spacing values not observed: 20, 24, 40, 48, 80, 96, 128px
+- Font weights 600, 700
+- Border radius `lg`, `xl`, `full`
+- Breakpoint pixel values
+- Z-index scale
 
-## Project Structure
+### Existing file to replace
 
-### Documentation (this feature)
+`src/shared/ui/tokens/theme.css` — current file is partial (hex values, incomplete) and will be fully replaced.
+
+---
+
+## 2. Charter Check
+
+**Directive `DIRECTIVE_035` (Lane-based worktrees):** All code changes for this mission must go through spec-kitty worktrees. Work packages will be created via `/spec-kitty.tasks` and implemented via `spec-kitty agent action implement <WP-ID>`. Direct edits to `main` are prohibited.
+
+**Directive `DIRECTIVE_031` (Bounded context alignment):** Token names use flat `category-purpose-variant` kebab-case strings. No ambiguous overloaded terminology — all tokens map directly to a named Penpot source or a documented derivation.
+
+**Directive `DIRECTIVE_003` (Decision capture):** All non-obvious decisions (derived values, format choices, grouping rationale) are captured in Section 1 above and in the spec.md Design Decisions section.
+
+**Directive `DIRECTIVE_032` (Terminology alignment):** Key terms used in this mission:
+- "token" = a named design value (primitive, semantic, or component)
+- "primitive" = raw context-free value (e.g., `hsl(245 58% 51%)`)
+- "semantic" = context-mapped value (e.g., `primary` maps to the brand indigo)
+- "component" = widget-specific value (e.g., `button-focus-ring`)
+- "theme object" = the aggregated TypeScript export combining all token categories
+
+---
+
+## 3. Gate Evaluation
+
+| Gate | Status | Notes |
+|------|--------|-------|
+| Spec committed to target branch | ✅ PASS | spec.md on `main` |
+| No unresolved FR/NFR questions | ✅ PASS | All requirements have concrete resolutions |
+| No planning questions unanswered | ✅ PASS | Breakpoint values confirmed as standard |
+| Charter conflicts with spec | ✅ PASS | No conflicts; charter is orthogonal to design-token work |
+| Governance context resolved | ⚠️ WARN | DIRECTIVE_035 referenced in charter but not yet in `doctrine/directives/shipped/` — see note below |
+
+**Governance note:** Charter context reports "Governance: unresolved" due to `DIRECTIVE_035` not found in `doctrine/directives/shipped/`. This is a charter-to-doctrine alignment issue, not a planning blocker. The directive intent (lane-based worktrees) is clear and will be followed.
+
+---
+
+## 4. Output Structure
+
+All files live at `src/shared/ui/tokens/`:
 
 ```
-kitty-specs/[###-feature]/
-├── plan.md              # This file (/spec-kitty.plan command output)
-├── research.md          # Phase 0 output (/spec-kitty.plan command)
-├── data-model.md        # Phase 1 output (/spec-kitty.plan command)
-├── quickstart.md        # Phase 1 output (/spec-kitty.plan command)
-├── contracts/           # Phase 1 output (/spec-kitty.plan command)
-└── tasks.md             # Phase 2 output (/spec-kitty.tasks command - NOT created by /spec-kitty.plan)
+src/shared/ui/tokens/
+├── colors.ts           # Primitive palette (HSL) + semantic maps
+├── typography.ts       # Font family, sizes (xs–5xl), weights, line-heights, letter-spacing
+├── spacing.ts          # 4px-grid scale: 4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80, 96, 128
+├── radius.ts            # sm=4, md=8, lg=12, xl=16, full=9999
+├── shadows.ts           # subtle, medium, large, focus-ring, error-ring
+├── breakpoints.ts       # sm=640, md=768, lg=1024, xl=1280
+├── z-index.ts           # dropdown, sticky, modal, tooltip, toast
+├── index.ts             # Combined Theme interface + object + re-exports
+├── theme.css            # CSS custom properties (single source of truth)
+├── README.md            # Token layers, naming, usage examples
+└── tokens.stories.tsx   # Storybook: color swatches, type specimens, spacing rulers
 ```
 
-### Source Code (repository root)
-<!--
-  ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
-  for this feature. Delete unused options and expand the chosen structure with
-  real paths (e.g., apps/admin, packages/something). The delivered plan must
-  not include Option labels.
--->
+---
 
+## 5. Execution Approach
+
+### Phase 1: Data model & tokens
+
+All token files are plain TypeScript constant objects with typed interfaces. No class hierarchy, no factory functions, no runtime validation — just typed exports.
+
+Each token module exports:
+1. A TypeScript `interface` for the token type (e.g., `SpacingScale`)
+2. A `const` object with all values
+3. Re-export in `index.ts`
+
+### Phase 2: CSS custom properties
+
+`theme.css` is a flat list of `--color-*`, `--spacing-*`, `--radius-*`, etc. CSS custom properties. Generated from the same TypeScript constants to avoid drift.
+
+### Phase 3: Storybook stories
+
+`tokens.stories.tsx` uses `@storybook/react-vite` with CSF3. Each story category (colors, typography, spacing, shadows, radius, breakpoints, z-index) is a separate story file exported from the main entry.
+
+### Phase 4: README
+
+Explains the three token layers, naming conventions, and provides import examples for both TypeScript modules and CSS custom properties.
+
+---
+
+## 6. Work Package Breakdown
+
+Tasks will be generated by `/spec-kitty.tasks`. Estimated WP structure:
+
+| WP | Content |
+|----|---------|
+| WP-1 | `colors.ts` — primitive palette + semantic maps |
+| WP-2 | `typography.ts` — font scale |
+| WP-3 | `spacing.ts` + `radius.ts` + `breakpoints.ts` + `z-index.ts` |
+| WP-4 | `shadows.ts` — elevation + state rings |
+| WP-5 | `index.ts` — Theme interface + combined export |
+| WP-6 | `theme.css` — all CSS custom properties |
+| WP-7 | `tokens.stories.tsx` — visual swatches + specimens |
+| WP-8 | `README.md` — documentation |
+
+---
+
+## 7. Quality Assurance
+
+Verification via project commands:
+```bash
+npm run lint          # ESLint
+npm run lint:arch     # Steiger FSD linter
+npm run build         # tsc -b + vite build
 ```
-# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
-src/
-├── models/
-├── services/
-├── cli/
-└── lib/
 
-tests/
-├── contract/
-├── integration/
-└── unit/
+All three must exit code 0. Visual regression confirmed via Storybook stories.
 
-# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
-backend/
-├── src/
-│   ├── models/
-│   ├── services/
-│   └── api/
-└── tests/
+---
 
-frontend/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   └── services/
-└── tests/
-
-# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
-api/
-└── [same as backend above]
-
-ios/ or android/
-└── [platform-specific structure: feature modules, UI flows, platform tests]
-```
-
-**Structure Decision**: [Document the selected structure and reference the real
-directories captured above]
-
-## Complexity Tracking
-
-*Fill ONLY if Charter Check has violations that must be justified*
-
-| Violation | Why Needed | Simpler Alternative Rejected Because |
-|-----------|------------|-------------------------------------|
-| [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
-| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |
+**Branch contract:** Planning started on `main`. Completed work merges into `main`. (`branch_matches_target: true`)

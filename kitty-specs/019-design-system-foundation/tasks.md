@@ -18,11 +18,11 @@
 | T005 | Define typography size scale (xs through 5xl in rem) | WP02 | | [D] |
 | T006 | Define font weight, line-height, and letter-spacing scales | WP02 | | [D] |
 | T007 | Export typed typography constants and interfaces | WP02 | | [D] |
-| T008 | Create spacing.ts — 4px base grid scale (13 values: 4–128px) | WP03 | [P] | [ ] |
-| T009 | Create radius.ts — border radius scale (sm, md, lg, xl, full) | WP03 | [P] | [ ] |
-| T010 | Create breakpoints.ts — responsive breakpoints (sm=640, md=768, lg=1024, xl=1280) | WP03 | [P] | [ ] |
-| T011 | Create z-index.ts — z-index scale (dropdown, sticky, modal, tooltip, toast) | WP03 | [P] | [ ] |
-| T012 | Verify all WP03 token modules compile without errors | WP03 | | [ ] |
+| T008 | Create spacing.ts — 4px base grid scale (13 values: 4–128px) | WP03 | [P] | [D] |
+| T009 | Create radius.ts — border radius scale (sm, md, lg, xl, full) | WP03 | [P] | [D] |
+| T010 | Create breakpoints.ts — responsive breakpoints (sm=640, md=768, lg=1024, xl=1280) | WP03 | [P] | [D] |
+| T011 | Create z-index.ts — z-index scale (dropdown, sticky, modal, tooltip, toast) | WP03 | [P] | [D] |
+| T012 | Verify all WP03 token modules compile without errors | WP03 | | [D] |
 | T013 | Create shadows.ts — shadow TypeScript interface | WP04 | | [ ] |
 | T014 | Define elevation tokens (subtle, medium, large) from Penpot | WP04 | | [ ] |
 | T015 | Define state ring tokens (focus-ring, error-ring) from Penpot | WP04 | | [ ] |
@@ -111,11 +111,11 @@
 **Priority:** P0 (foundation — unblocks all UI work)
 
 **Success Criteria:**
-- [ ] T008: spacing.ts exports 13 values on 4px grid: 4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80, 96, 128
-- [ ] T009: radius.ts exports sm=4px, md=8px, lg=12px, xl=16px, full=9999px
-- [ ] T010: breakpoints.ts exports sm=640, md=768, lg=1024, xl=1280
-- [ ] T011: z-index.ts exports dropdown, sticky, modal, tooltip, toast
-- [ ] T012: All four modules compile without errors
+- [x] T008: spacing.ts exports 13 values on 4px grid: 4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80, 96, 128
+- [x] T009: radius.ts exports sm=4px, md=8px, lg=12px, xl=16px, full=9999px
+- [x] T010: breakpoints.ts exports sm=640, md=768, lg=1024, xl=1280
+- [x] T011: z-index.ts exports dropdown, sticky, modal, tooltip, toast
+- [x] T012: All four modules compile without errors
 
 **Implementation Sketch:**
 1. Create `src/shared/ui/tokens/spacing.ts` — `SpacingScale` interface + `spacing` const

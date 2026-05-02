@@ -64,7 +64,7 @@ export function InputField({
             'relative flex h-10 w-80 items-center gap-2 rounded bg-neutral-100 px-3',
             !isDisabled && 'border',
             !isDisabled && hasValue && !hasError && 'border-neutral-200',
-            !isDisabled && '!focus-within:border-transparent',
+            !isDisabled && !hasError && '!focus-within:border-transparent',
             isDisabled && 'border-0',
           ),
         }}

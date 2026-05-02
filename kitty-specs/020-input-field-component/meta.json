@@ -6,5 +6,7 @@
   "mission_slug": "020-input-field-component",
   "mission_type": "software-dev",
   "slug": "020-input-field-component",
-  "target_branch": "main"
+  "target_branch": "main",
+  "vcs": "git",
+  "source_description": "Input field component with design tokens from Penpot design file (https://design.penpot.app/#/workspace?team-id=4cba8d8d-63bf-80c5-8007-e20d2c3a1628&file-id=4cba8d8d-63bf-80c5-8007-e20e604c26a0&page-id=6af293a7-f75e-808e-8007-e20dfb265d42)"
 }

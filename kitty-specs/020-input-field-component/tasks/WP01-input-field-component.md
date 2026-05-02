@@ -37,7 +37,7 @@ subtasks:
 - T005
 - T006
 - T007
-shell_pid: '6863'
+shell_pid: "6863"
 history: []
 authoritative_surface: src/shared/ui/input-field/
 execution_mode: code_change
@@ -45,6 +45,7 @@ owned_files:
 - src/shared/ui/input-field/**
 - src/shared/ui/index.ts
 tags: []
+agent: "kilo:kimi-for-coding:implementer:implementer"
 ---
 
 # WP01: Input Field Component — Stories, Implementation & Validation
@@ -490,3 +491,7 @@ When reviewing this WP, verify:
 ```
 spec-kitty agent action implement WP01 --agent <name>
 ```
+
+## Activity Log
+
+- 2026-05-02T10:06:20Z – kilo:kimi-for-coding:implementer:implementer – shell_pid=6863 – Assigned agent via action command

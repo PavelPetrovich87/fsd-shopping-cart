@@ -13,13 +13,12 @@
 | ID | Description | WP | Parallel |
 |----|-------------|-----|----------|
 | T001 | Create `src/shared/ui/input-field/` directory with component folder structure | WP01 | ✗ |
-| T002 | Create `InputField.tsx` with default state (label, hint, placeholder, controlled/uncontrolled value) | WP01 | ✗ |
-| T003 | Implement error state (border `#ef4444`, error message display, aria-describedby) | WP01 | ✗ |
-| T004 | Implement focus state (border `#000000`, outline ring, `:focus-visible`) | WP01 | ✗ |
-| T005 | Implement disabled state (reduced opacity, `aria-disabled`, non-editable) | WP01 | ✗ |
-| T006 | Create CSF3 story file with all states: default, focus, error, disabled | WP01 | ✗ |
-| T007 | Verify component against Penpot design tokens (colors, radius, typography) | WP01 | ✓ |
-| T008 | Run `npm run lint` and `npm run build` to verify no errors | WP01 | ✓ |
+| T002 | Implement `input-field.tsx` with label, hint, placeholder, icon, and all 8 Penpot states | WP01 | ✗ |
+| T003 | Implement icon switching logic (`CircleHelp` / `AlertCircle` from lucide-react) | WP01 | ✗ |
+| T004 | Create `index.ts` exports for clean public API | WP01 | ✗ |
+| T005 | Create CSF3 story file with all 8 Penpot states | WP01 | ✗ |
+| T006 | Verify component against Penpot design tokens (colors, radius, typography, icon colors) | WP01 | ✓ |
+| T007 | Run `npm run lint` and `npm run build` to verify no errors | WP01 | ✓ |
 
 ---
 
@@ -27,55 +26,73 @@
 
 ### WP01 — Input Field Component Implementation
 
-**Summary**: Implement the InputField component with all states, stories, and design token integration.
+**Summary**: Implement the InputField component with all 8 Penpot states, inline icons, stories, and design token integration.
 
 **Goal**: Deliver a production-ready InputField component in `src/shared/ui/input-field/` that:
-- Renders a labeled text input with optional hint text
-- Supports default, focus, error, and disabled states
-- Uses design tokens from Penpot (`#fafafa` bg, `#e5e5e5` border, `#404040` label, `#737373` hint, 4px radius)
+- Renders a labeled text input with optional hint text and inline icon
+- Supports all 8 Penpot states: Normal, Error, Filled, Error filled, Focused, Error focused, Disabled, Success
+- Uses design tokens mapped to project Tailwind classes (`neutral-*`, `error-*`)
+- Switches icons based on state (`CircleHelp` default, `AlertCircle` on error)
 - Exports via `index.ts` for clean public API
-- Includes CSF3 stories for all states
+- Includes CSF3 stories for all 8 states
 - Passes lint and typecheck
 
 **Priority**: P0 (MVP)
 
 **Success Criteria**:
-- [ ] Component renders in all states (default, focus, error, disabled)
-- [ ] Design tokens match Penpot specification
+- [ ] Component renders in all 8 Penpot states (Normal, Error, Filled, Error filled, Focused, Error focused, Disabled, Success)
+- [ ] Design tokens match Penpot specification (no inferred/guessed values)
+- [ ] Inline icon switches correctly (`CircleHelp` ↔ `AlertCircle`)
+- [ ] Border behavior: `#e5e5e5` default, `#f5f5f5` filled, none on focus/disabled
+- [ ] Hint color: `#737373` default, `#dc2626` on error
+- [ ] Input text color: `#737373` placeholder, `#a3a3a3` filled, `#171717` focused
 - [ ] Stories in CSF3 format with controls for all props
 - [ ] Clean export via `index.ts`
 - [ ] Passes `npm run lint` and `npm run build`
 
-**Independent Test**: Story in browser shows all states correctly rendered
+**Independent Test**: Story in browser shows all 8 states correctly rendered with correct colors, borders, and icons
 
 **Included Subtasks**:
 - [ ] T001 Create `src/shared/ui/input-field/` directory with component folder structure
-- [ ] T002 Create `InputField.tsx` with default state (label, hint, placeholder, controlled/uncontrolled value)
-- [ ] T003 Implement error state (border `#ef4444`, error message display, aria-describedby)
-- [ ] T004 Implement focus state (border `#000000`, outline ring, `:focus-visible`)
-- [ ] T005 Implement disabled state (reduced opacity, `aria-disabled`, non-editable)
-- [ ] T006 Create CSF3 story file with all states: default, focus, error, disabled
-- [ ] T007 Verify component against Penpot design tokens (colors, radius, typography)
-- [ ] T008 Run `npm run lint` and `npm run build` to verify no errors
+- [ ] T002 Implement `input-field.tsx` with label, hint, placeholder, icon, and all 8 Penpot states
+- [ ] T003 Implement icon switching logic (`CircleHelp` / `AlertCircle` from lucide-react)
+- [ ] T004 Create `index.ts` exports for clean public API
+- [ ] T005 Create CSF3 story file with all 8 Penpot states
+- [ ] T006 Verify component against Penpot design tokens (colors, radius, typography, icon colors)
+- [ ] T007 Run `npm run lint` and `npm run build` to verify no errors
 
 **Implementation Sketch**:
 1. Create directory `src/shared/ui/input-field/`
-2. Write `InputField.tsx` using local `cn` utility and Tailwind classes
-3. Use CVA for state variant management (optional, or direct conditional classes)
-4. Implement state-specific styling based on design tokens
-5. Create `InputField.stories.tsx` with `Default`, `WithLabel`, `WithHint`, `Error`, `Disabled` stories
-6. Export from `index.ts`
-7. Verify build
+2. Write `input-field.tsx` using `cn` utility and Tailwind semantic classes
+3. Import icons from `lucide-react`: `CircleHelp` (default), `AlertCircle` (error)
+4. Implement conditional border logic:
+   - `disabled || focus-within` → no border
+   - `value` present + no focus + no error → `border-neutral-200`
+   - Default → inline `borderColor: '#e5e5e5'`
+5. Implement conditional text colors:
+   - Placeholder → `placeholder:text-neutral-600`
+   - Value (unfocused) → `text-neutral-500`
+   - Value (focused) → `text-neutral-950`
+6. Implement conditional hint color:
+   - `error` → `text-error-600`
+   - Default → `text-neutral-600`
+7. Implement icon switching:
+   - `error` → `<AlertCircle className="text-error-600" />`
+   - Default → `<CircleHelp className="text-neutral-500" />`
+8. Create `input-field.stories.tsx` with 8 stories
+9. Export from `index.ts`
+10. Verify build
 
 **Parallel Opportunities**:
-- T007 (verify) can run concurrently with T008 (build) after component is complete
-- Story creation (T006) can happen once component structure (T002-T005) is finalized
+- T006 (verify) can run concurrently with T007 (build) after component is complete
+- Story creation (T005) can happen once component structure (T002-T003) is finalized
 
 **Dependencies**: None
 
 **Risks**:
 - Font (Noto Sans) loading assumed to be global — may need font-face declaration if not already loaded
-- Color tokens in spec use hex (`#fafafa`, `#e5e5e5`) but Tailwind uses HSL from existing token system — use closest semantic token or add custom utility
+- Border removal on focus may fail WCAG 2.1 focus visibility — add `focus-visible:ring` as safety net
+- `lucide-react` icons may not match Penpot icons exactly — use closest semantic equivalents
 
 **Estimated Prompt Size**: ~450 lines
 
@@ -86,8 +103,8 @@
 - This is a **trivial feature** (single UI component) — all work fits in WP01
 - No multi-phase planning needed
 - Technology stack: React 19 + TypeScript + Tailwind CSS v4 + CSF3 stories
-- Component location follows existing patterns (`src/shared/ui/shadcn/<component>/`)
-- Design tokens from Penpot need mapping to Tailwind CSS token system
+- Component location follows existing patterns (`src/shared/ui/<component>/`)
+- Design tokens from Penpot are mapped to existing project Tailwind tokens (no arbitrary values)
 
 ---
 

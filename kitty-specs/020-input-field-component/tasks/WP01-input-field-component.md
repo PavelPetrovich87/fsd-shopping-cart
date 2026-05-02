@@ -497,3 +497,4 @@ spec-kitty agent action implement WP01 --agent <name>
 - 2026-05-02T10:06:20Z – kilo:kimi-for-coding:implementer:implementer – shell_pid=6863 – Assigned agent via action command
 - 2026-05-02T10:14:00Z – kilo:kimi-for-coding:implementer:implementer – shell_pid=6863 – Ready for review: InputField component with 8 Penpot states, all quality gates pass
 - 2026-05-02T10:16:57Z – opencode – shell_pid=5702 – Started review via action command
+- 2026-05-02T10:19:44Z – opencode – shell_pid=5702 – Review passed: All 8 Penpot states implemented correctly. One bug found and fixed during review — focus-within border removal was applying to error states, but spec requires error+focused to retain #e5e5e5 border. Fixed by adding !hasError condition. All quality gates pass.

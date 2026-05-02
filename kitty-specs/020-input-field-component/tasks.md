@@ -12,13 +12,13 @@
 
 | ID | Description | WP | Parallel |
 |----|-------------|-----|----------|
-| T001 | Create `src/shared/ui/input-field/` directory with component folder structure | WP01 | ✗ |
-| T002 | Implement `input-field.tsx` with label, hint, placeholder, icon, and all 8 Penpot states | WP01 | ✗ |
-| T003 | Implement icon switching logic (`CircleHelp` / `AlertCircle` from lucide-react) | WP01 | ✗ |
-| T004 | Create `index.ts` exports for clean public API | WP01 | ✗ |
-| T005 | Create CSF3 story file with all 8 Penpot states | WP01 | ✗ |
-| T006 | Verify component against Penpot design tokens (colors, radius, typography, icon colors) | WP01 | ✓ |
-| T007 | Run `npm run lint` and `npm run build` to verify no errors | WP01 | ✓ |
+| T001 | Create `src/shared/ui/input-field/` directory with component folder structure | WP01 | ✗ | [D] |
+| T002 | Implement `input-field.tsx` with label, hint, placeholder, icon, and all 8 Penpot states | WP01 | ✗ | [D] |
+| T003 | Implement icon switching logic (`CircleHelp` / `AlertCircle` from lucide-react) | WP01 | ✗ | [D] |
+| T004 | Create `index.ts` exports for clean public API | WP01 | ✗ | [D] |
+| T005 | Create CSF3 story file with all 8 Penpot states | WP01 | ✗ | [D] |
+| T006 | Verify component against Penpot design tokens (colors, radius, typography, icon colors) | WP01 | ✓ | [D] |
+| T007 | Run `npm run lint` and `npm run build` to verify no errors | WP01 | ✓ | [D] |
 
 ---
 
@@ -53,13 +53,13 @@
 **Independent Test**: Story in browser shows all 8 states correctly rendered with correct colors, borders, and icons
 
 **Included Subtasks**:
-- [ ] T001 Create `src/shared/ui/input-field/` directory with component folder structure
-- [ ] T002 Implement `input-field.tsx` with label, hint, placeholder, icon, and all 8 Penpot states
-- [ ] T003 Implement icon switching logic (`CircleHelp` / `AlertCircle` from lucide-react)
-- [ ] T004 Create `index.ts` exports for clean public API
-- [ ] T005 Create CSF3 story file with all 8 Penpot states
-- [ ] T006 Verify component against Penpot design tokens (colors, radius, typography, icon colors)
-- [ ] T007 Run `npm run lint` and `npm run build` to verify no errors
+- [x] T001 Create `src/shared/ui/input-field/` directory with component folder structure
+- [x] T002 Implement `input-field.tsx` with label, hint, placeholder, icon, and all 8 Penpot states
+- [x] T003 Implement icon switching logic (`CircleHelp` / `AlertCircle` from lucide-react)
+- [x] T004 Create `index.ts` exports for clean public API
+- [x] T005 Create CSF3 story file with all 8 Penpot states
+- [x] T006 Verify component against Penpot design tokens (colors, radius, typography, icon colors)
+- [x] T007 Run `npm run lint` and `npm run build` to verify no errors
 
 **Implementation Sketch**:
 1. Create directory `src/shared/ui/input-field/`

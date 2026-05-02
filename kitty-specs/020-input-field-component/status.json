@@ -1,7 +1,7 @@
 {
-  "event_count": 1,
-  "last_event_id": "01KQFBKSMJ81Y9AG3G3FA4C5WX",
-  "materialized_at": "2026-04-30T14:10:18.386168+00:00",
+  "event_count": 3,
+  "last_event_id": "01KQM2EAZV6J55QKMY4C5KN0VS",
+  "materialized_at": "2026-05-02T10:06:14.523231+00:00",
   "mission_number": "020",
   "mission_slug": "020-input-field-component",
   "mission_type": "software-dev",
@@ -12,17 +12,17 @@
     "claimed": 0,
     "done": 0,
     "for_review": 0,
-    "in_progress": 0,
+    "in_progress": 1,
     "in_review": 0,
-    "planned": 1
+    "planned": 0
   },
   "work_packages": {
     "WP01": {
-      "actor": "finalize-tasks",
+      "actor": "implement-command",
       "force_count": 1,
-      "lane": "planned",
-      "last_event_id": "01KQFBKSMJ81Y9AG3G3FA4C5WX",
-      "last_transition_at": "2026-04-30T14:10:18.386168+00:00"
+      "lane": "in_progress",
+      "last_event_id": "01KQM2EAZV6J55QKMY4C5KN0VS",
+      "last_transition_at": "2026-05-02T10:06:14.523231+00:00"
     }
   }
 }

@@ -26,9 +26,9 @@ requirement_refs:
 planning_base_branch: main
 merge_target_branch: main
 branch_strategy: Planning artifacts for this feature were generated on main. During /spec-kitty.implement this WP may branch from a dependency-specific base, but completed changes must merge back into main unless the human explicitly redirects the landing branch.
-base_branch: main
-base_commit: 6b4c2045372abd4a259fa484841591515bb47aaa
-created_at: '2026-04-30T14:06:00Z'
+base_branch: kitty/mission-020-input-field-component
+base_commit: 01540c57313a056f7030ee6a28a890325da944ed
+created_at: '2026-05-02T10:06:14.305891+00:00'
 subtasks:
 - T001
 - T002
@@ -37,6 +37,7 @@ subtasks:
 - T005
 - T006
 - T007
+shell_pid: '6863'
 history: []
 authoritative_surface: src/shared/ui/input-field/
 execution_mode: code_change

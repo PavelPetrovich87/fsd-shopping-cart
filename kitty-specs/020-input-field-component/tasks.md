@@ -40,7 +40,7 @@
 **Priority**: P0 (MVP)
 
 **Success Criteria**:
-- [ ] Component renders in all 8 Penpot states (Normal, Error, Filled, Error filled, Focused, Error focused, Disabled, Success)
+- [x] Component renders in all 8 Penpot states (Normal, Error, Filled, Error filled, Focused, Error focused, Disabled, Success)
 - [ ] Design tokens match Penpot specification (no inferred/guessed values)
 - [ ] Inline icon switches correctly (`CircleHelp` ↔ `AlertCircle`)
 - [ ] Border behavior: `#e5e5e5` default, `#f5f5f5` filled, none on focus/disabled

@@ -42,7 +42,7 @@
 **Success Criteria**:
 - [x] Component renders in all 8 Penpot states (Normal, Error, Filled, Error filled, Focused, Error focused, Disabled, Success)
 - [x] Design tokens match Penpot specification (no inferred/guessed values)
-- [ ] Inline icon switches correctly (`CircleHelp` ↔ `AlertCircle`)
+- [x] Inline icon switches correctly (`CircleHelp` ↔ `AlertCircle`)
 - [ ] Border behavior: `#e5e5e5` default, `#f5f5f5` filled, none on focus/disabled
 - [ ] Hint color: `#737373` default, `#dc2626` on error
 - [ ] Input text color: `#737373` placeholder, `#a3a3a3` filled, `#171717` focused

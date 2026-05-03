@@ -45,7 +45,7 @@
 - [x] Inline icon switches correctly (`CircleHelp` ↔ `AlertCircle`)
 - [x] Border behavior: `#e5e5e5` default, `#f5f5f5` filled, none on focus/disabled
 - [x] Hint color: `#737373` default, `#dc2626` on error
-- [ ] Input text color: `#737373` placeholder, `#a3a3a3` filled, `#171717` focused
+- [x] Input text color: `#737373` placeholder, `#a3a3a3` filled, `#171717` focused
 - [ ] Stories in CSF3 format with controls for all props
 - [ ] Clean export via `index.ts`
 - [ ] Passes `npm run lint` and `npm run build`

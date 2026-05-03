@@ -33,6 +33,7 @@ All token names follow `category-purpose-variant` kebab-case format:
 - **Variant**: optional modifier (sm, md, lg, full)
 
 Examples:
+
 - `color-brand-700` — brand color at 700 intensity
 - `color-neutral-950` — neutral color at 950 intensity
 - `spacing-4` — 4rem spacing (4 × 16px base)
@@ -43,38 +44,40 @@ Examples:
 Import individual token modules:
 
 ```typescript
-import { primitiveColors, semanticColors } from '@/shared/ui/tokens';
-import { spacing } from '@/shared/ui/tokens';
-import { fontSizes, fontWeights } from '@/shared/ui/tokens';
+import { primitiveColors, semanticColors } from '@/shared/ui/tokens'
+import { spacing } from '@/shared/ui/tokens'
+import { fontSizes, fontWeights } from '@/shared/ui/tokens'
 
 // Use in styled components or inline styles
 const buttonStyle = {
   backgroundColor: semanticColors.primary,
   padding: spacing['4'],
   fontSize: fontSizes.sm,
-};
+}
 ```
 
 Or import the aggregated theme object:
 
 ```typescript
-import { theme } from '@/shared/ui/tokens';
+import { theme } from '@/shared/ui/tokens'
 
 // Access all tokens through the theme object
 const buttonStyle = {
   backgroundColor: theme.colors.semantic.primary,
   padding: theme.spacing['4'],
-};
+}
 ```
 
 ## CSS Custom Property Usage
 
-Import `theme.css` in your application entry point:
+Import `theme.css` via CSS `@import` in `src/index.css` (after `@import 'tailwindcss'`):
 
-```typescript
-// main.tsx or App.tsx
-import '@/shared/ui/tokens/theme.css';
+```css
+@import 'tailwindcss';
+@import './shared/ui/tokens/theme.css';
 ```
+
+Do NOT import `theme.css` from JavaScript (e.g., `main.tsx`). Tailwind v4 only processes `@theme` blocks that are part of the CSS pipeline started by `@import 'tailwindcss'`.
 
 Use CSS custom properties in your styles:
 
@@ -91,11 +94,13 @@ Use CSS custom properties in your styles:
 ## Value Sources
 
 **Penpot-extracted values** (exact):
+
 - All primitive colors from the Penpot style guide
 - Button, tooltip, card, and input shadow values
 - Border radius sm (4px) and md (8px)
 
 **Derived values** (standard conventions):
+
 - Spacing: 20, 24, 40, 48, 80, 96, 128px (4px grid)
 - Border radius: lg (12px), xl (16px), full (9999px)
 - Font weights: 600, 700 (added for future component needs)
@@ -144,6 +149,7 @@ src/shared/ui/tokens/
 ### Shadows (`shadows.ts`)
 
 5 shadow tokens:
+
 - **subtle**: Light elevation for buttons
 - **medium**: Medium elevation for tooltips
 - **large**: High elevation for cards

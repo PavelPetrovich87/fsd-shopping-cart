@@ -52,7 +52,9 @@ All commands must exit with code 0. Warnings are errors.
 8. Errors? Fix → go to 5
 9. Run: npm run build
 10. Errors? Fix → go to 9
-11. Done only when ALL commands exit 0
+11. If you added custom Tailwind classes (e.g., `text-error-600`), verify the CSS rule exists:
+    `grep '<class-name>' dist/assets/index-*.css`
+12. Done only when ALL commands exit 0
 
 ## Spec-Kitty Workflow Notes
 

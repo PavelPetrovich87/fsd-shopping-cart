@@ -1,5 +1,5 @@
 import { useId } from 'react'
-import { CircleHelp, AlertCircle } from 'lucide-react'
+import { AlertCircle } from 'lucide-react'
 import { cn } from '@/shared/lib/utils'
 
 export interface InputFieldProps {
@@ -37,15 +37,9 @@ export function InputField({
   const inputId = id ?? generatedId
   const hintId = `${inputId}-hint`
 
-  const Icon = error ? AlertCircle : CircleHelp
-  const iconColorClass = error ? 'text-error-600' : 'text-neutral-500'
-
   const hasValue = !!value && value !== ''
   const hasError = !!error
   const isDisabled = !!disabled
-
-  const showInlineBorder =
-    !isDisabled && (!hasValue || hasError)
 
   return (
     <div {...{ className: cn('flex flex-col gap-1.5') }}>
@@ -62,23 +56,13 @@ export function InputField({
         {...{
           className: cn(
             'relative flex h-10 w-80 items-center gap-2 rounded bg-neutral-100 px-3',
-            !isDisabled && 'border',
-            !isDisabled && hasValue && !hasError && 'border-neutral-200',
-            !isDisabled && !hasError && '!focus-within:border-transparent',
-            isDisabled && 'border-0',
+            'border',
+            isDisabled && 'border-neutral-100',
+            !isDisabled && 'border-[#e5e5e5]',
+            !isDisabled && 'focus-within:!border-transparent',
           ),
         }}
-        style={{
-          borderColor: showInlineBorder ? '#e5e5e5' : undefined,
-        }}
       >
-        <Icon
-          {...{
-            className: cn('size-4 shrink-0', iconColorClass),
-          }}
-          aria-hidden="true"
-        />
-
         <input
           id={inputId}
           name={name}
@@ -97,13 +81,21 @@ export function InputField({
           {...{
             className: cn(
               'flex-1 bg-transparent text-sm outline-none placeholder:text-neutral-600',
-              'text-neutral-950',
-              hasValue && !isDisabled && 'text-neutral-500',
-              !isDisabled && 'focus:text-neutral-950',
-              isDisabled && 'cursor-not-allowed',
+              !hasValue && !isDisabled && 'text-neutral-600',
+              hasValue && !isDisabled && 'text-neutral-950',
+              isDisabled && 'cursor-not-allowed text-neutral-500',
             ),
           }}
         />
+
+        {hasError && (
+          <AlertCircle
+            {...{
+              className: cn('size-4 shrink-0 text-error-600'),
+            }}
+            aria-hidden="true"
+          />
+        )}
       </div>
 
       {(hint || error) && (

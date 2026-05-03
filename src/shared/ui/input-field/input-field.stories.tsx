@@ -47,8 +47,8 @@ export const Error: Story = {
 export const ErrorFilled: Story = {
   args: {
     label: 'Coupon code',
-    value: 'OFFSPRING',
-    error: 'Invalid code',
+    value: 'NOSUCHCODE',
+    error: "Sorry, but this coupon doesn't exist.",
   },
 }
 
@@ -66,14 +66,6 @@ export const Disabled: Story = {
     label: 'Coupon code',
     value: 'Add coupon code',
     disabled: true,
-    error: 'Please type coupon to add.',
-  },
-}
-
-export const Success: Story = {
-  args: {
-    label: 'Coupon code',
-    value: 'NOSUCHCODE',
-    error: "Sorry, but this coupon doesn't exist.",
+    hint: 'This is a hint text to help user.',
   },
 }

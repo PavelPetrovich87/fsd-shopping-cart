@@ -47,7 +47,7 @@
 - [x] Hint color: `#737373` default, `#dc2626` on error
 - [x] Input text color: `#737373` placeholder, `#a3a3a3` filled, `#171717` focused
 - [x] Stories in CSF3 format with controls for all props
-- [ ] Clean export via `index.ts`
+- [x] Clean export via `index.ts`
 - [ ] Passes `npm run lint` and `npm run build`
 
 **Independent Test**: Story in browser shows all 8 states correctly rendered with correct colors, borders, and icons

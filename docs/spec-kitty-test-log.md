@@ -689,6 +689,9 @@ spec-kitty agent tasks move-task WP01 --to done --force --done-override-reason "
    - Root cause: Git worktree operations leave the index in stale state
    - Fix: `git checkout HEAD -- src/shared/lib/event-bus.ts src/shared/lib/event-bus.test.ts`
    - This is a cleanup artifact, not real data loss
+   - **⚠️ Escalated variant (2026-05-04, T-022):** If a normal `git commit` runs via lint-staged/husky AFTER merge, the stale index can cause the newly-merged files to be recorded as **deleted in the commit**. The commit will physically remove the files from `main`.
+   - **Recovery:** `git revert --no-commit <bad-commit>`, then `git reset` + `git checkout HEAD --` for the deleted files, then recommit only the intended changes.
+   - **Prevention:** Always run `git status` before committing after a spec-kitty merge. If files appear deleted, restore them with `git checkout HEAD -- <paths>` before staging anything else.
 
 6. **Merge created new files with unexpected line counts**
    - `event-bus.ts` shows 44 lines in worktree, 1143 bytes after merge

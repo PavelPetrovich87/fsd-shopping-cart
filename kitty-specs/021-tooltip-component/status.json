@@ -1,7 +1,7 @@
 {
-  "event_count": 11,
-  "last_event_id": "01KQSGCFK0DNDMKH5ZC7H22V8H",
-  "materialized_at": "2026-05-04T12:46:05.920582+00:00",
+  "event_count": 12,
+  "last_event_id": "01KQSGHWGFZV3HDWXZ146JXTM8",
+  "materialized_at": "2026-05-04T12:49:02.991485+00:00",
   "mission_number": "021",
   "mission_slug": "021-tooltip-component",
   "mission_type": "software-dev",
@@ -11,8 +11,8 @@
     "canceled": 0,
     "claimed": 0,
     "done": 0,
-    "for_review": 0,
-    "in_progress": 1,
+    "for_review": 1,
+    "in_progress": 0,
     "in_review": 0,
     "planned": 0
   },
@@ -25,11 +25,11 @@
       "last_transition_at": "2026-05-04T12:45:41.497624+00:00"
     },
     "WP02": {
-      "actor": "kilo:kimi-for-coding::implementer",
+      "actor": "user",
       "force_count": 1,
-      "lane": "in_progress",
-      "last_event_id": "01KQSGCFK0DNDMKH5ZC7H22V8H",
-      "last_transition_at": "2026-05-04T12:46:05.920582+00:00"
+      "lane": "for_review",
+      "last_event_id": "01KQSGHWGFZV3HDWXZ146JXTM8",
+      "last_transition_at": "2026-05-04T12:49:02.991485+00:00"
     }
   }
 }

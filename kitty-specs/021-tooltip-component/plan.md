@@ -1,108 +1,117 @@
-# Implementation Plan: [FEATURE]
-*Path: [templates/plan-template.md](templates/plan-template.md)*
+# Implementation Plan: Tooltip Component
 
+## Branch Contract
 
-**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
-**Input**: Feature specification from `/kitty-specs/[###-feature-name]/spec.md`
-
-**Note**: This template is filled in by the `/spec-kitty.plan` command. See `src/specify_cli/missions/software-dev/command-templates/plan.md` for the execution workflow.
-
-The planner will not begin until all planning questions have been answered—capture those answers in this document before progressing to later phases.
-
-## Summary
-
-[Extract from feature spec: primary requirement + technical approach from research]
+- **Current branch at plan start:** `main`
+- **Planning/base branch:** `main`
+- **Final merge target:** `main`
+- **Branch matches target:** ✅
 
 ## Technical Context
 
-<!--
-  ACTION REQUIRED: Replace the content in this section with the technical details
-  for the project. The structure here is presented in advisory capacity to guide
-  the iteration process.
--->
-
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
-**Project Type**: [single/web/mobile - determines source structure]  
-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
-**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
-**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
+- **Stack:** React 19, TypeScript 5.9, Tailwind CSS v4, Vite 8, Storybook
+- **Component library approach:** shadcn/ui first + design tokens
+- **Accessibility primitive:** `@radix-ui/react-tooltip` (already used in project ecosystem)
+- **Styling rules:** Zero-trust (no `className` prop), token-only values, no arbitrary CSS
+- **Testing approach:** Story-first (CSF3) with Vitest Browser Mode
+- **FSD layer:** `shared/ui` — business-agnostic, reusable across all layers
 
 ## Charter Check
 
-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+- Charter unavailable (DIRECTIVE_035 unresolved) — proceeding with project conventions from AGENTS.md and skills
+- No conflicts with FSD architecture: component lives in `shared/ui/tooltip/`
+- No conflicts with story-first workflow: stories created before/during component
 
-[Gates determined based on charter file]
+## Design Decisions
 
-## Project Structure
+### Decision 1: Use @radix-ui/react-tooltip
+- **Rationale:** Provides robust positioning (collision detection, viewport boundary handling), full ARIA support, keyboard navigation, and uncontrolled/controlled state management out of the box.
+- **Alternatives considered:** 
+  - Custom implementation with Floating UI — rejected: adds complexity for a small component, Radix already wraps Floating UI
+  - Pure CSS hover — rejected: no collision detection, poor mobile support, no focus management
 
-### Documentation (this feature)
+### Decision 2: Story-first development
+- **Rationale:** Project mandate from `story-first-ui` skill. Stories serve as visual regression guards and documentation.
+- **Stories to create:** Default, Top, Bottom, Left, Right, With Custom Content, Long Text
+
+### Decision 3: Token mapping from Penpot
+- Background: `bg-neutral-950` (#0a0a0a)
+- Text: `text-neutral-50` (#ffffff)
+- Border radius: `rounded-md` (8px)
+- Font: `text-xs font-medium` (12px / 500)
+- Shadow: `shadow-medium`
+- Z-index: inline style for `z-index: 400` (no Tailwind token for tooltip z-index)
+
+## File Structure
 
 ```
-kitty-specs/[###-feature]/
-├── plan.md              # This file (/spec-kitty.plan command output)
-├── research.md          # Phase 0 output (/spec-kitty.plan command)
-├── data-model.md        # Phase 1 output (/spec-kitty.plan command)
-├── quickstart.md        # Phase 1 output (/spec-kitty.plan command)
-├── contracts/           # Phase 1 output (/spec-kitty.plan command)
-└── tasks.md             # Phase 2 output (/spec-kitty.tasks command - NOT created by /spec-kitty.plan)
+src/shared/ui/tooltip/
+├── tooltip.tsx           # Component implementation
+├── tooltip.stories.tsx   # Storybook stories
+├── index.ts              # Public API export
 ```
 
-### Source Code (repository root)
-<!--
-  ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
-  for this feature. Delete unused options and expand the chosen structure with
-  real paths (e.g., apps/admin, packages/something). The delivered plan must
-  not include Option labels.
--->
+Plus update:
+- `src/shared/ui/index.ts` — re-export Tooltip
 
-```
-# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
-src/
-├── models/
-├── services/
-├── cli/
-└── lib/
+## Implementation Steps
 
-tests/
-├── contract/
-├── integration/
-└── unit/
-
-# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
-backend/
-├── src/
-│   ├── models/
-│   ├── services/
-│   └── api/
-└── tests/
-
-frontend/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   └── services/
-└── tests/
-
-# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
-api/
-└── [same as backend above]
-
-ios/ or android/
-└── [platform-specific structure: feature modules, UI flows, platform tests]
+### Step 1: Install dependency
+```bash
+npm install @radix-ui/react-tooltip
 ```
 
-**Structure Decision**: [Document the selected structure and reference the real
-directories captured above]
+### Step 2: Write tooltip.tsx
+- Create compound component structure: `Tooltip`, `TooltipTrigger`, `TooltipContent`
+- Wrap Radix primitives with design token styles
+- Implement arrow with same background color
+- Add CSS transitions for opacity/transform
+- Ensure no `className` prop leaks (zero-trust)
+- Export type-safe props interface
 
-## Complexity Tracking
+### Step 3: Write tooltip.stories.tsx
+- CSF3 format with `satisfies Meta<typeof Tooltip>`
+- Stories: Default (top), Bottom, Left, Right
+- Use a trigger button as anchor element in each story
+- Add play function for hover interaction testing
 
-*Fill ONLY if Charter Check has violations that must be justified*
+### Step 4: Write index.ts
+- Export component and subcomponents
+- Export types
 
-| Violation | Why Needed | Simpler Alternative Rejected Because |
-|-----------|------------|-------------------------------------|
-| [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
-| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |
+### Step 5: Update src/shared/ui/index.ts
+- Add Tooltip export
+
+### Step 6: Quality gates
+```bash
+npm run lint
+npm run lint:arch
+npm run build
+```
+
+## Quality Gates
+
+| Gate | Command | Must Pass |
+|------|---------|-----------|
+| ESLint | `npm run lint` | ✅ |
+| FSD Architecture | `npm run lint:arch` | ✅ |
+| TypeScript + Build | `npm run build` | ✅ |
+
+## Risks & Mitigations
+
+| Risk | Impact | Mitigation |
+|------|--------|------------|
+| Radix tooltip may conflict with existing z-index system | Low | Use explicit z-index: 400 from tokens |
+| Mobile long-press not supported by Radix | Medium | Add custom touch event handlers with 500ms threshold |
+| Arrow positioning in edge cases | Low | Radix handles collision detection automatically |
+
+## Dependencies
+
+- `@radix-ui/react-tooltip` — accessibility and positioning primitive
+- Existing design tokens from `src/shared/ui/tokens/`
+
+## Out of Scope
+
+- Tooltip with interactive content (forms, buttons inside) — covered by Radix, but not explicitly tested
+- Multi-line rich content with complex formatting — basic React node support is enough
+- Animation customization beyond default CSS transition — use project animation tokens

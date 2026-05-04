@@ -419,46 +419,13 @@ _Atomic UI components — no dependencies on domain logic. Everything in Tier 6+
 - [ ] Tokens are typed (TypeScript interfaces for theme object)
 - [ ] Penpot file updated with matching Design Tokens (or documented mapping if Penpot lacks token support)
 
----
-
-### T-018: Design Tokens
-
-| Field             | Value               |
-| ----------------- | ------------------- |
-| **Layer / Slice** | `shared/ui/tokens/` |
-| **Complexity**    | 🟢 Small            |
-| **Depends On**    | T-017               |
-
-**Description**: Implement the foundational design tokens defined in T-017. This is the code-execution layer of the token system.
-
-**Files to create:**
-
-- `src/shared/ui/tokens/colors.ts` — color palette
-- `src/shared/ui/tokens/typography.ts` — font sizes, weights, families
-- `src/shared/ui/tokens/spacing.ts` — spacing scale
-- `src/shared/ui/tokens/index.ts` — re-exports + combined theme object
-- `src/shared/ui/tokens/tokens.css` — CSS custom properties for runtime theming
-
-**Acceptance Criteria**:
-
-- [ ] All color tokens defined as HSL values for flexibility
-- [ ] Typography scale uses rem units
-- [ ] Spacing scale follows 4px base (4, 8, 12, 16, 24, 32, 48, 64)
-- [ ] Border radius tokens: sm=4px, md=8px, lg=12px, xl=16px
-- [ ] Exported as TypeScript constants + CSS variables
-- [ ] Storybook stories for color swatches and typography specimens
-
-> **Status: IN PROGRESS** — Partial implementation exists in `theme.css` (hex values, incomplete spacing/radius, no TS exports). Needs comprehensive design system definition before completion.
-
----
-
 ### T-019: Button Component
 
 | Field             | Value               |
 | ----------------- | ------------------- |
 | **Layer / Slice** | `shared/ui/button/` |
 | **Complexity**    | 🟡 Medium           |
-| **Depends On**    | T-018               |
+| **Depends On**    | T-017               |
 
 **Description**: Build the `Button` component using design tokens. Support variants: `primary`, `secondary`, `ghost`, `danger`. Support sizes: `sm`, `md`, `lg`. Support states: default, hover, active, disabled, loading (spinner).
 
@@ -487,7 +454,7 @@ _Atomic UI components — no dependencies on domain logic. Everything in Tier 6+
 | ----------------- | ------------------ |
 | **Layer / Slice** | `shared/ui/input/` |
 | **Complexity**    | 🟡 Medium          |
-| **Depends On**    | T-018, T-019       |
+| **Depends On**    | T-017, T-019       |
 
 **Description**: Build the `Input` component. Support types: text, email, password. States: default, focus, error, disabled. Error message slot below input. Label slot above.
 
@@ -506,7 +473,7 @@ _Atomic UI components — no dependencies on domain logic. Everything in Tier 6+
 - [ ] Focus state uses design token border color
 - [ ] Storybook stories for all states
 
-> **Status: CANCELLED** — Blocked by incomplete design token system. Will be recreated after T-017 and T-018 are complete.
+> **Status: CANCELLED** — Blocked by incomplete design token system. Will be recreated after T-017 is complete.
 
 ---
 
@@ -516,7 +483,7 @@ _Atomic UI components — no dependencies on domain logic. Everything in Tier 6+
 | ----------------- | ------------------------- |
 | **Layer / Slice** | `shared/ui/cart-control/` |
 | **Complexity**    | 🟡 Medium                 |
-| **Depends On**    | T-018, T-019              |
+| **Depends On**    | T-017, T-019              |
 
 **Description**: Build a reusable `CartControl` molecule: a quantity selector with "−" / quantity / "+" buttons and a remove button. Combines Button components.
 
@@ -535,6 +502,8 @@ _Atomic UI components — no dependencies on domain logic. Everything in Tier 6+
 - [ ] Emits events: `onIncrement`, `onDecrement`, `onRemove`
 - [ ] Storybook stories for min/max/disabled states
 
+> **Status: DONE** — Implemented via spec-kitty mission `017-cart-control`. Merged to `main`.
+
 ---
 
 ### T-022: Tooltip
@@ -543,7 +512,7 @@ _Atomic UI components — no dependencies on domain logic. Everything in Tier 6+
 | ----------------- | -------------------- |
 | **Layer / Slice** | `shared/ui/tooltip/` |
 | **Complexity**    | 🟢 Small             |
-| **Depends On**    | T-018                |
+| **Depends On**    | T-017                |
 
 **Description**: Build the `Tooltip` component. Position: top, bottom, left, right. Trigger: hover (desktop) / long-press (mobile). Uses design tokens for background, text, shadow.
 
@@ -569,7 +538,7 @@ _Atomic UI components — no dependencies on domain logic. Everything in Tier 6+
 | ----------------- | ---------------- |
 | **Layer / Slice** | `shared/ui/tag/` |
 | **Complexity**    | 🟢 Small         |
-| **Depends On**    | T-018, T-019     |
+| **Depends On**    | T-017, T-019     |
 
 **Description**: Build the `Tag` component. Variants: `success`, `error`, `warning`, `info`, `neutral`. Optional dismiss "×" button.
 
@@ -594,7 +563,7 @@ _Atomic UI components — no dependencies on domain logic. Everything in Tier 6+
 | ----------------- | ------------------- |
 | **Layer / Slice** | `shared/ui/modal/`  |
 | **Complexity**    | 🟡 Medium           |
-| **Depends On**    | T-018, T-019, T-022 |
+| **Depends On**    | T-017, T-019, T-022 |
 
 **Description**: Build the `Modal` component. Features: backdrop click to close, "×" close button, focus trap, ESC key to close. Uses Tooltip for any helper content.
 
@@ -624,9 +593,9 @@ _Atomic UI components — no dependencies on domain logic. Everything in Tier 6+
 | ----------------- | ------------------------------------------- |
 | **Layer / Slice** | `entities/cart/ui/`, `entities/product/ui/` |
 | **Complexity**    | 🟡 Medium                                   |
-| **Depends On**    | T-004, T-005, T-018, T-019                  |
+| **Depends On**    | T-004, T-005, T-017, T-019                  |
 
-**Description**: Build pure presentation components for entities. These display data but don't orchestrate business logic. Use design tokens and base components from T-018–T-024.
+**Description**: Build pure presentation components for entities. These display data but don't orchestrate business logic. Use design tokens and base components from T-017–T-024.
 
 **Files to create:**
 
@@ -655,7 +624,7 @@ _Atomic UI components — no dependencies on domain logic. Everything in Tier 6+
 | ----------------- | --------------------------------------------------------------------------------- |
 | **Layer / Slice** | `features/cart-actions/ui/`, `features/apply-coupon/ui/`, `features/checkout/ui/` |
 | **Complexity**    | 🔴 Large                                                                          |
-| **Depends On**    | T-010, T-011, T-012, T-018, T-019, T-021, T-023                                   |
+| **Depends On**    | T-010, T-011, T-012, T-017, T-019, T-021, T-023                                   |
 
 **Description**: Build interactive UI components that trigger feature use cases. Use base components from design system.
 
@@ -688,7 +657,7 @@ _Atomic UI components — no dependencies on domain logic. Everything in Tier 6+
 | ----------------- | -------------------------------------------- |
 | **Layer / Slice** | `widgets/cart-list`, `widgets/order-summary` |
 | **Complexity**    | 🟡 Medium                                    |
-| **Depends On**    | T-025, T-026, T-018                          |
+| **Depends On**    | T-025, T-026, T-017                          |
 
 **Description**: Compose entity UI + feature UI into self-contained widget blocks.
 
@@ -769,21 +738,99 @@ _Top-level composition and wiring._
 
 ---
 
+## Tier 7 — Agent Automation & Tooling
+
+_Infrastructure to enable fully autonomous agent-driven development cycles._
+
+### T-032: Full-Cycle Agent Automation Harness
+
+| Field             | Value                            |
+| ----------------- | -------------------------------- |
+| **Layer / Slice** | `.agents/`, `.kilo/`, `scripts/` |
+| **Complexity**    | 🔴 Large                         |
+| **Depends On**    | —                                |
+
+**Description**: Build an orchestration layer that enables an agent to run the **complete spec-kitty lifecycle autonomously**: specify → plan → tasks → implement → automated review (browser-based visual verification) → approve → merge. The agent receives a feature request (e.g., "implement input field from Penpot design") and executes the entire workflow without human intervention.
+
+**This is a meta-ticket — it builds the tooling, not product features.**
+
+**Scope:**
+
+1. **Orchestrator Script** — Master loop that calls spec-kitty CLI commands in sequence and dispatches worker agents for each phase:
+   - `spec-kitty agent mission create` (specify)
+   - `spec-kitty agent mission setup-plan` (plan)
+   - `spec-kitty agent mission finalize-tasks` (tasks)
+   - `spec-kitty agent action implement WP##` → dispatch implementer agent
+   - `spec-kitty agent action review WP##` → dispatch reviewer agent
+   - `spec-kitty merge --mission <slug>` (merge)
+
+2. **Automated Discovery** — For UI components, bypass interactive discovery by:
+   - Parsing Penpot URLs to extract design tokens automatically
+   - Using template-based specs for known feature types (UI component, API endpoint, entity)
+   - Feeding structured answers into spec-kitty programmatically
+
+3. **Automated Review Engine** — Replace human review judgment with automated checks:
+   - **Static gates**: `lint`, `lint:arch`, `build`, `test:storybook` (already exist)
+   - **Visual regression**: Playwright-based screenshot capture of each story, compared against design spec (color sampling, layout validation)
+   - **Rule-based approval**: Acceptance criteria encoded as assertions (e.g., "border must be #e5e5e5 in default state")
+   - **Baseline management**: First run of a new story = approve baseline, subsequent runs = detect regressions
+
+4. **Browser Automation** — Agent starts Storybook dev server, navigates stories via Playwright, captures screenshots, validates pixels:
+   - `npm run storybook` (background process)
+   - Playwright navigates to `http://localhost:6006/iframe.html?id=...`
+   - Screenshots each state, extracts dominant colors, validates against Penpot tokens
+   - Closes dev server when done
+
+5. **Tiered Safety Model** — Not all features get full automation:
+   - **Tier A (UI components)**: Full auto — implement, screenshot-compare, approve, merge
+   - **Tier B (features/entities)**: Auto-implement, automated tests, but human review required for logic
+   - **Tier C (critical infrastructure)**: Human at every gate (auth, payments, security)
+
+6. **Self-Healing Merge** — Automated conflict resolution for common merge scenarios:
+   - `__init__.py` conflicts: combine imports from both sides
+   - Shared file conflicts: keep both changes
+   - Retry merge after resolution
+
+**Files to create:**
+
+- `.agents/skills/auto-orchestrator/SKILL.md` — skill definition for the orchestrator
+- `scripts/auto-spec-kitty.ts` — master orchestration script
+- `scripts/visual-review.ts` — Playwright-based visual validation script
+- `scripts/baseline-manager.ts` — screenshot baseline store (git LFS or S3)
+- `.github/workflows/visual-regression.yml` — CI Chromatic check (complementary)
+- Update `AGENTS.md` — document the new quality gate tier and visual review checklist
+
+**Acceptance Criteria:**
+
+- [ ] Orchestrator can run full cycle: `npm run auto:implement --mission "input-field-component" --penpot-url "..."`
+- [ ] Agent generates spec, plan, tasks, implements WP, and moves to `for_review` without human input
+- [ ] Automated reviewer runs `test:storybook` + Playwright screenshot checks before approving
+- [ ] Playwright validates at least: border colors, text colors, icon presence, disabled state
+- [ ] Baseline system: first run approves baseline, subsequent runs detect pixel regressions
+- [ ] Merge succeeds automatically when all WPs approved (with conflict resolution)
+- [ ] Tiered safety: UI components auto-approved, business logic requires human override flag
+- [ ] No modifications to spec-kitty internal files (`.kittify/`, `kitty-specs/` managed via CLI only)
+
+> **Status: DRAFT** — Vision document. Requires Playwright browser access and spec-kitty CLI stability before implementation.
+
+---
+
 ## Summary Matrix
 
-| Tier                            | Tickets                                                | Effort           |
-| ------------------------------- | ------------------------------------------------------ | ---------------- |
-| **Tier 1 — Shared Foundation**  | T-001, T-002, T-003                                    | 🟢🟡🟢           |
-| **Tier 2 — Domain Entities**    | T-004, T-005, T-006                                    | 🟡🟡🟡           |
-| **Tier 3 — Ports & Repos**      | T-007, T-008, T-009                                    | 🟢🟢🟡           |
-| **Tier 4 — Features**           | T-010, T-011, T-012                                    | 🔴🟡🔴           |
-| **Tier 5 — Design System**      | T-017, T-018, T-019, T-020, T-021, T-022, T-023, T-024 | 🔴🟢🟡🟡🟡🟢🟢🟡 |
-| **Tier 5 (cont.) — Entity UI**  | T-025                                                  | 🟡               |
-| **Tier 5 (cont.) — Feature UI** | T-026                                                  | 🔴               |
-| **Tier 5 (cont.) — Widgets**    | T-027                                                  | 🟡               |
-| **Tier 6 — Pages & App**        | T-028, T-029                                           | 🟡🟡             |
-| **Tier 7 — Enhancements**       | T-030, T-031                                           | 🟢🟢             |
-| **Total**                       | **30 tickets**                                         |                  |
+| Tier                            | Tickets                                         | Effort           |
+| ------------------------------- | ----------------------------------------------- | ---------------- |
+| **Tier 1 — Shared Foundation**  | T-001, T-002, T-003                             | 🟢🟡🟢           |
+| **Tier 2 — Domain Entities**    | T-004, T-005, T-006                             | 🟡🟡🟡           |
+| **Tier 3 — Ports & Repos**      | T-007, T-008, T-009                             | 🟢🟢🟡           |
+| **Tier 4 — Features**           | T-010, T-011, T-012                             | 🔴🟡🔴           |
+| **Tier 5 — Design System**      | T-017, T-019, T-020, T-021, T-022, T-023, T-024 | 🔴🟡🟡🟡🟡🟢🟢🟡 |
+| **Tier 5 (cont.) — Entity UI**  | T-025                                           | 🟡               |
+| **Tier 5 (cont.) — Feature UI** | T-026                                           | 🔴               |
+| **Tier 5 (cont.) — Widgets**    | T-027                                           | 🟡               |
+| **Tier 6 — Pages & App**        | T-028, T-029                                    | 🟡🟡             |
+| **Tier 7 — Enhancements**       | T-030, T-031                                    | 🟢🟢             |
+| **Tier 7 — Agent Automation**   | T-032                                           | 🔴               |
+| **Total**                       | **30 tickets**                                  |                  |
 
 ### Dependency Graph
 
@@ -813,8 +860,7 @@ graph BT
     T011("T-011: Apply Coupon"):::t4
     T012("T-012: Checkout"):::t4
 
-    T017("T-017: Token Architecture"):::t5
-    T018("T-018: Design Tokens"):::t5
+    T017("T-017: Design System Foundation"):::t5
     T019("T-019: Button"):::t5
     T020("T-020: Input"):::t5
     T021("T-021: Cart Control"):::t5
@@ -831,6 +877,7 @@ graph BT
 
     T030("T-030: Order Summary Enhancement"):::t7
     T031("T-031: Product Card Enhancement"):::t7
+    T032("T-032: Full-Cycle Agent Automation Harness"):::t7
 
     T004 -.-> T001
     T005 -.-> T001
@@ -845,17 +892,16 @@ graph BT
     T012 --> T004 & T005 & T007 & T008 & T009 & T002
 
     T017 -.-> T001
-    T018 --> T017
-    T019 --> T018
-    T020 --> T018 & T019
-    T021 --> T018 & T019
-    T022 --> T018
-    T023 --> T018 & T019
-    T024 --> T018 & T019 & T022
+    T019 --> T017
+    T020 --> T017 & T019
+    T021 --> T017 & T019
+    T022 --> T017
+    T023 --> T017 & T019
+    T024 --> T017 & T019 & T022
 
-    T025 --> T004 & T005 & T018 & T019
-    T026 --> T010 & T011 & T012 & T018 & T019 & T021 & T023
-    T027 --> T025 & T026 & T018
+    T025 --> T004 & T005 & T017 & T019
+    T026 --> T010 & T011 & T012 & T017 & T019 & T021 & T023
+    T027 --> T025 & T026 & T017
 
     T028 --> T027 & T025
     T029 --> T028 & T002 & T009

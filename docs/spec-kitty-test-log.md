@@ -1458,3 +1458,56 @@ git worktree remove .worktrees/016-design-tokens-lane-a --force
 2. **@theme block syntax** — Tailwind v4 CSS requires `@theme { ... }` wrapper, not bare CSS variables
 3. **branch_matches_target: true** simplifies merge — no lane branch needed for final merge
 4. **Planning artifacts on lane branch** — must restore/clean kitty-specs/ from main before merging
+
+---
+
+## Tailwind v4 Custom Token Trap (Mission 020 - InputField)
+
+### Issue
+
+Custom Tailwind classes (e.g., `text-error-600`) were present in the DOM but had **no styles applied**. The color rendered as default body text instead of red.
+
+### Root Cause
+
+`src/shared/ui/tokens/theme.css` defines tokens inside a `@theme { ... }` block. However, Tailwind v4's Vite plugin **only processes `@theme` blocks that are part of the CSS pipeline started by `@import 'tailwindcss'`**. Importing `theme.css` from JavaScript (`main.tsx`) outputs the `@theme` block as raw dead CSS that browsers ignore.
+
+**What does NOT work:**
+
+```typescript
+// main.tsx — JavaScript import
+import '@/shared/ui/tokens/theme.css'
+```
+
+**What DOES work:**
+
+```css
+/* index.css — CSS @import inside the Tailwind pipeline */
+@import 'tailwindcss';
+@import './shared/ui/tokens/theme.css';
+```
+
+### Discovery Chain
+
+1. Component used `text-error-600` → class appeared in DOM but no styles
+2. Checked built CSS → `.text-error-600` rule was missing entirely
+3. Added `theme.css` import to `main.tsx` → still no rule (imported via JS, not CSS pipeline)
+4. Added `theme.css` import to `.storybook/preview.ts` → still no rule (same JS import issue)
+5. Added `@import './shared/ui/tokens/theme.css'` to `index.css` → **rule generated correctly**
+
+### Fix Applied
+
+- `src/index.css`: Added `@import './shared/ui/tokens/theme.css';` right after `@import 'tailwindcss';`
+- `src/shared/ui/tokens/README.md`: Updated to document CSS `@import` method (not JS import)
+- `AGENTS.md`: Added verification step — `grep '<class-name>' dist/assets/index-*.css`
+
+### Lesson
+
+**When adding custom Tailwind tokens, always verify the CSS rule exists in the build output:**
+
+```bash
+npm run build
+grep 'text-error-600' dist/assets/index-*.css
+# Should output: .text-error-600{color:var(--color-error-600)}
+```
+
+The build can succeed, tests can pass, and the class can be in the DOM — but if the rule is missing, the style is silently broken.

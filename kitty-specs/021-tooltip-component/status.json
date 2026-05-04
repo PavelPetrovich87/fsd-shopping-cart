@@ -1,7 +1,7 @@
 {
   "event_count": 4,
-  "last_event_id": "01KQSFV5KSNEVNXVTDZ0AB49MN",
-  "materialized_at": "2026-05-04T12:36:38.649865+00:00",
+  "last_event_id": "01KQSFXW6B0BWM232HSKZHSEEH",
+  "materialized_at": "2026-05-04T12:38:07.307446+00:00",
   "mission_number": "021",
   "mission_slug": "021-tooltip-component",
   "mission_type": "software-dev",
@@ -18,11 +18,11 @@
   },
   "work_packages": {
     "WP01": {
-      "actor": "implement-command",
+      "actor": "kilo:kimi-for-coding::implementer",
       "force_count": 1,
       "lane": "in_progress",
-      "last_event_id": "01KQSFV5KSNEVNXVTDZ0AB49MN",
-      "last_transition_at": "2026-05-04T12:36:38.649865+00:00"
+      "last_event_id": "01KQSFXW6B0BWM232HSKZHSEEH",
+      "last_transition_at": "2026-05-04T12:38:07.307446+00:00"
     },
     "WP02": {
       "actor": "finalize-tasks",

@@ -11,14 +11,10 @@ requirement_refs:
 planning_base_branch: main
 merge_target_branch: main
 branch_strategy: Planning artifacts for this feature were generated on main. During /spec-kitty.implement this WP may branch from a dependency-specific base, but completed changes must merge back into main unless the human explicitly redirects the landing branch.
-base_branch: kitty/mission-021-tooltip-component
-base_commit: 25cf8ca133c2605a738d3fca768328db301ddb15
-created_at: '2026-05-04T12:36:38.414792+00:00'
 subtasks:
 - T001
 - T002
 - T004
-shell_pid: "5702"
 history: []
 authoritative_surface: src/shared/ui/tooltip/
 execution_mode: code_change
@@ -28,7 +24,8 @@ owned_files:
 - package.json
 - package-lock.json
 tags: []
-agent: "kilo:kimi-for-coding:implementer:implementer"
+agent: "kilo:kimi-for-coding::implementer"
+shell_pid: "5702"
 ---
 
 # WP01: Component Foundation
@@ -183,4 +180,4 @@ export type {
 
 ## Activity Log
 
-- 2026-05-04T12:36:45Z – kilo:kimi-for-coding:implementer:implementer – shell_pid=5702 – Assigned agent via action command
+- 2026-05-04T12:38:07Z – kilo:kimi-for-coding::implementer – shell_pid=5702 – Started implementation via action command

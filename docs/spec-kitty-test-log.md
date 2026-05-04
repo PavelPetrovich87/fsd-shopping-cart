@@ -1511,3 +1511,118 @@ grep 'text-error-600' dist/assets/index-*.css
 ```
 
 The build can succeed, tests can pass, and the class can be in the DOM — but if the rule is missing, the style is silently broken.
+
+---
+
+## Post-Mortem: Incomplete Design Token Extraction (Mission 020 — InputField)
+
+### Problem
+
+InputField implementation required **7 rounds of fixes** after the initial "complete" implementation. Most fixes were caused by missing or mismatched design tokens.
+
+### Issues Discovered Post-Implementation
+
+| #   | Issue                                               | Root Cause                                                    | Fix                                                                |
+| --- | --------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------ |
+| 1   | `text-error-600` class in DOM but no styles applied | `theme.css` imported via JS (`main.tsx`), not CSS `@import`   | Moved import to `index.css` after `@import 'tailwindcss'`          |
+| 2   | Error border missing in Storybook                   | No `error-500` token; only `error-600` existed in `theme.css` | Used `error-600` for border (shade mismatch with Penpot `#F04438`) |
+| 3   | Red border applied to ALL error states              | Logic error: `border-error-600` without focus condition       | Changed to `focus-within:border-error-600`                         |
+| 4   | Text colors reversed (empty vs filled)              | Agent misread Penpot state mapping                            | Fixed: empty→neutral-600, filled→neutral-950                       |
+| 5   | AlertCircle icon on left, visible in all states     | Wrong icon placement logic                                    | Moved to right, error-only                                         |
+| 6   | Disabled border transparent                         | Used `focus-within:!border-transparent` unconditionally       | Added `!hasError` guard                                            |
+| 7   | Success story was invalid                           | No "Success" state in Penpot design                           | Removed Success story                                              |
+
+### Root Cause Analysis: Why Tokens Were Incomplete
+
+#### 1. Token Extraction Was Not Systematic
+
+**What happened:** `theme.css` was created in Mission 016 (Design Tokens) by visually inspecting the Penpot file. The extraction was manual and ad-hoc — colors were picked from what seemed "important" rather than from an exhaustive inventory of all states.
+
+**What was missing:**
+
+- `error-500` token (used in Penpot for error borders: `#F04438`)
+- Dedicated default border token (`#e5e5e5` doesn't map to any existing neutral token)
+
+**Evidence:**
+
+```css
+/* theme.css had only */
+--color-error-600: hsl(0 72% 50%); /* #db2424 */
+
+/* Penpot required */
+error-500: #f04438; /* for error borders */
+```
+
+#### 2. No Token → State Mapping Document
+
+**What happened:** There was no document linking Penpot states to token values. The agent had to visually inspect the design file and guess which token to use.
+
+**Example:** The default border color `#e5e5e5` was hardcoded because no token matched it exactly:
+
+- `neutral-200` = `#f5f5f5` (too light)
+- `neutral-300` = `#e0e2e5` (too blue-ish)
+- `neutral-400` = `#d4d4d4` (too dark)
+
+#### 3. Tokens Created in Isolation from Components
+
+**What happened:** Mission 016 created `theme.css` as a "foundational" ticket. InputField (Mission 020) was implemented weeks later. By then, the token file was treated as "done" and not revisited.
+
+**Result:** Component implementation revealed token gaps, but the token file was already "complete" in the project mindset.
+
+#### 4. No Automated Token Verification
+
+**What happened:** There was no process to verify that every color/value used in a Penpot state has a corresponding token.
+
+**What should exist:** A checklist or script that verifies:
+
+- Every color in Penpot → has a token
+- Every state in Penpot → token assignment documented
+- Every component using hardcoded values → flagged
+
+### What Should Have Happened
+
+**Before any UI component implementation:**
+
+1. **Exhaustive token inventory** from Penpot:
+   - Export all colors used in the design system
+   - Group by semantic meaning (error-500, error-600, etc.)
+   - Document which tokens are primitives vs. semantic aliases
+
+2. **State → Token mapping document:**
+
+   ```
+   InputField states:
+   - Default:    border → neutral-300, text → neutral-600
+   - Filled:     border → neutral-300, text → neutral-950
+   - Focused:    border → transparent, text → neutral-950
+   - Error:      border → error-500,   text → error-600
+   - Error Focus:border → error-500,   text → error-600
+   - Disabled:   border → neutral-100, text → neutral-500
+   ```
+
+3. **Token verification gate:**
+   ```bash
+   # Before component implementation
+   npm run tokens:verify  # Checks all used values have tokens
+   ```
+
+### Skill Implication
+
+This pattern will repeat for every UI component unless the token extraction process is systematized. The skill should enforce:
+
+1. **Token completeness check** before component implementation
+2. **No hardcoded values** in components (lint rule)
+3. **State → token mapping** as a required planning artifact
+4. **Visual regression** comparing Storybook against Penpot pixel values
+
+### Fix Applied to Harness
+
+- `AGENTS.md` step 12: verify custom Tailwind classes exist in build output
+- `src/shared/lib/AGENTS.md`: registry for reusable utilities like `formControlBorder`
+- `src/shared/ui/tokens/README.md`: documents correct CSS `@import` method
+
+### Remaining Debt
+
+- `error-500` token still missing from `theme.css` (using `error-600` as approximation)
+- Default border `#e5e5e5` is still hardcoded (no matching neutral token)
+- No automated Penpot → token extraction pipeline

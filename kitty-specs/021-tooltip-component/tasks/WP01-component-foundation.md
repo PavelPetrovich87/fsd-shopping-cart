@@ -18,7 +18,7 @@ subtasks:
 - T001
 - T002
 - T004
-shell_pid: '5702'
+shell_pid: "5702"
 history: []
 authoritative_surface: src/shared/ui/tooltip/
 execution_mode: code_change
@@ -28,6 +28,7 @@ owned_files:
 - package.json
 - package-lock.json
 tags: []
+agent: "kilo:kimi-for-coding:implementer:implementer"
 ---
 
 # WP01: Component Foundation
@@ -179,3 +180,7 @@ export type {
 - Verify zero-trust: search for `className` in `tooltip.tsx` — should not appear in public props
 - Verify token usage: no arbitrary values like `text-[12px]` or `bg-[#0a0a0a]`
 - Check that Radix Provider is documented/re-exported
+
+## Activity Log
+
+- 2026-05-04T12:36:45Z – kilo:kimi-for-coding:implementer:implementer – shell_pid=5702 – Assigned agent via action command

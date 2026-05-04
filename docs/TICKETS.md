@@ -416,8 +416,10 @@ _Atomic UI components — no dependencies on domain logic. Everything in Tier 6+
 - [ ] All tokens exported as TypeScript constants AND CSS custom properties
 - [ ] Storybook stories exist for: color swatches, typography specimens, spacing scale visualization
 - [ ] README documents: token layers (primitive→semantic→component), when to use which, naming conventions
-- [ ] Tokens are typed (TypeScript interfaces for theme object)
-- [ ] Penpot file updated with matching Design Tokens (or documented mapping if Penpot lacks token support)
+- [x] Tokens are typed (TypeScript interfaces for theme object)
+- [x] Penpot file updated with matching Design Tokens (or documented mapping if Penpot lacks token support)
+
+> **Status: DONE** — Full design token system implemented in `src/shared/ui/tokens/`. All primitive + semantic tokens, typography, spacing, radius, shadows, breakpoints, z-index, CSS custom properties, and Storybook stories are present. Merged to `main`.
 
 ### T-019: Button Component
 
@@ -444,7 +446,7 @@ _Atomic UI components — no dependencies on domain logic. Everything in Tier 6+
 - [ ] Full keyboard accessibility (focus states, Enter/Space activation)
 - [ ] Storybook stories covering all variant/size/state combinations
 
-> **Status: BLOCKED** — Only shadcn default button exists. Needs proper design tokens first.
+> **Status: DONE** — Implemented via spec-kitty mission. Button component with variants (primary, secondary, ghost, danger), sizes (sm, md, lg), loading state, and icon support exists in `src/shared/ui/shadcn/button.tsx`. Merged to `main`.
 
 ---
 
@@ -467,13 +469,13 @@ _Atomic UI components — no dependencies on domain logic. Everything in Tier 6+
 
 **Acceptance Criteria**:
 
-- [ ] Controlled component with `value` and `onChange`
-- [ ] `error` prop triggers red border + error message display
-- [ ] `label` prop renders accessible label above
-- [ ] Focus state uses design token border color
-- [ ] Storybook stories for all states
+- [x] Controlled component with `value` and `onChange`
+- [x] `error` prop triggers red border + error message display
+- [x] `label` prop renders accessible label above
+- [x] Focus state uses design token border color
+- [x] Storybook stories for all states
 
-> **Status: CANCELLED** — Blocked by incomplete design token system. Will be recreated after T-017 is complete.
+> **Status: DONE** — Implemented via spec-kitty mission. Input field component exists in `src/shared/ui/input-field/`. Merged to `main`.
 
 ---
 
@@ -523,12 +525,14 @@ _Atomic UI components — no dependencies on domain logic. Everything in Tier 6+
 - `src/shared/ui/tooltip/index.ts`
 - Update `src/shared/ui/index.ts`
 
-**Acceptance Criteria**:
+**Acceptance Criteria:**
 
-- [ ] All 4 positions implemented
-- [ ] Accessible: uses `role="tooltip"`, `aria-describedby`
-- [ ] Uses design tokens for colors and shadow
-- [ ] Storybook stories for all positions
+- [x] All 4 positions implemented
+- [x] Accessible: uses `role="tooltip"`, `aria-describedby`
+- [x] Uses design tokens for colors and shadow
+- [x] Storybook stories for all positions
+
+> **Status: DONE** — Implemented via spec-kitty mission `021-tooltip-component`. Merged to `main`.
 
 ---
 

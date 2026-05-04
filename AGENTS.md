@@ -46,15 +46,16 @@ All commands must exit with code 0. Warnings are errors.
 2. Identify applicable skills by path match (see table above)
 3. Load applicable skills
 4. Write code following skill instructions
-5. Run: npm run lint
-6. Errors? Read the message → fix → go to 5
-7. Run: npm run lint:arch
-8. Errors? Fix → go to 5
-9. Run: npm run build
-10. Errors? Fix → go to 9
-11. If you added custom Tailwind classes (e.g., `text-error-600`), verify the CSS rule exists:
+5. If you added a new utility to `src/shared/lib/`, register it in `src/shared/lib/AGENTS.md`
+6. Run: npm run lint
+7. Errors? Read the message → fix → go to 6
+8. Run: npm run lint:arch
+9. Errors? Fix → go to 6
+10. Run: npm run build
+11. Errors? Fix → go to 10
+12. If you added custom Tailwind classes (e.g., `text-error-600`), verify the CSS rule exists:
     `grep '<class-name>' dist/assets/index-*.css`
-12. Done only when ALL commands exit 0
+13. Done only when ALL commands exit 0
 
 ## Spec-Kitty Workflow Notes
 

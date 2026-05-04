@@ -1,6 +1,7 @@
 import { useId } from 'react'
 import { AlertCircle } from 'lucide-react'
 import { cn } from '@/shared/lib/utils'
+import { formControlBorder } from '@/shared/lib/form-control-styles'
 
 export interface InputFieldProps {
   label?: string
@@ -56,10 +57,7 @@ export function InputField({
         {...{
           className: cn(
             'relative flex h-10 w-80 items-center gap-2 rounded bg-neutral-100 px-3',
-            'border',
-            isDisabled && 'border-neutral-100',
-            !isDisabled && 'border-[#e5e5e5]',
-            !isDisabled && 'focus-within:!border-transparent',
+            formControlBorder({ disabled: isDisabled, hasError }),
           ),
         }}
       >

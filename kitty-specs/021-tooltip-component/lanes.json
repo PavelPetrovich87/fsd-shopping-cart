@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "mission_slug": "021-tooltip-component",
+  "mission_id": "01KQSF4BWF28R9PQHFRE549Y16",
+  "mission_branch": "kitty/mission-021-tooltip-component",
+  "target_branch": "main",
+  "lanes": [
+    {
+      "lane_id": "lane-a",
+      "wp_ids": [
+        "WP01",
+        "WP02"
+      ],
+      "write_scope": [
+        "package-lock.json",
+        "package.json",
+        "src/shared/ui/index.ts",
+        "src/shared/ui/tooltip/index.ts",
+        "src/shared/ui/tooltip/tooltip.stories.tsx",
+        "src/shared/ui/tooltip/tooltip.tsx"
+      ],
+      "predicted_surfaces": [
+        "api",
+        "app-shell",
+        "artifact-rendering"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    }
+  ],
+  "computed_at": "2026-05-04T12:35:11.492699+00:00",
+  "computed_from": "dependency_graph+ownership",
+  "planning_artifact_wps": [],
+  "collapse_report": {
+    "events": [
+      {
+        "wp_a": "WP02",
+        "wp_b": "WP01",
+        "rule": "dependency",
+        "evidence": "WP02 depends on WP01"
+      }
+    ],
+    "total_merges": 1,
+    "independent_wps_collapsed": 0,
+    "by_rule": {
+      "dependency": 1
+    }
+  }
+}

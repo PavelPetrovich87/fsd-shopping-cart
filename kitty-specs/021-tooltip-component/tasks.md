@@ -4,10 +4,10 @@
 
 | ID | Description | WP | Parallel |
 |----|-------------|----|----------|
-| T001 | Install `@radix-ui/react-tooltip` dependency | WP01 | [P] |
-| T002 | Implement `tooltip.tsx` with Radix primitives and design tokens | WP01 | — |
+| T001 | Install `@radix-ui/react-tooltip` dependency | WP01 | [P] | [D] |
+| T002 | Implement `tooltip.tsx` with Radix primitives and design tokens | WP01 | — | [D] |
 | T003 | Create `tooltip.stories.tsx` with CSF3 stories for all 4 positions | WP02 | — |
-| T004 | Create `index.ts` public API export | WP01 | [P] |
+| T004 | Create `index.ts` public API export | WP01 | [D] |
 | T005 | Update `src/shared/ui/index.ts` to re-export Tooltip | WP02 | — |
 | T006 | Run quality gates: lint, lint:arch, build | WP02 | — |
 
@@ -28,9 +28,9 @@
 - `src/shared/ui/tooltip/index.ts` exports component and types
 
 **Included Subtasks:**
-- [ ] T001 Install `@radix-ui/react-tooltip` dependency
-- [ ] T002 Implement `tooltip.tsx` with Radix primitives and design tokens
-- [ ] T004 Create `index.ts` public API export
+- [x] T001 Install `@radix-ui/react-tooltip` dependency
+- [x] T002 Implement `tooltip.tsx` with Radix primitives and design tokens
+- [x] T004 Create `index.ts` public API export
 
 **Implementation Sketch:**
 1. Run `npm install @radix-ui/react-tooltip`

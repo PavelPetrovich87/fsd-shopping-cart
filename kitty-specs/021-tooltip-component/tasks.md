@@ -6,10 +6,10 @@
 |----|-------------|----|----------|
 | T001 | Install `@radix-ui/react-tooltip` dependency | WP01 | [P] | [D] |
 | T002 | Implement `tooltip.tsx` with Radix primitives and design tokens | WP01 | — | [D] |
-| T003 | Create `tooltip.stories.tsx` with CSF3 stories for all 4 positions | WP02 | — |
+| T003 | Create `tooltip.stories.tsx` with CSF3 stories for all 4 positions | WP02 | — | [D] |
 | T004 | Create `index.ts` public API export | WP01 | [D] |
-| T005 | Update `src/shared/ui/index.ts` to re-export Tooltip | WP02 | — |
-| T006 | Run quality gates: lint, lint:arch, build | WP02 | — |
+| T005 | Update `src/shared/ui/index.ts` to re-export Tooltip | WP02 | — | [D] |
+| T006 | Run quality gates: lint, lint:arch, build | WP02 | — | [D] |
 
 ---
 
@@ -63,9 +63,9 @@
 - All quality gates pass (lint, lint:arch, build)
 
 **Included Subtasks:**
-- [ ] T003 Create `tooltip.stories.tsx` with CSF3 stories for all 4 positions
-- [ ] T005 Update `src/shared/ui/index.ts` to re-export Tooltip
-- [ ] T006 Run quality gates: lint, lint:arch, build
+- [x] T003 Create `tooltip.stories.tsx` with CSF3 stories for all 4 positions
+- [x] T005 Update `src/shared/ui/index.ts` to re-export Tooltip
+- [x] T006 Run quality gates: lint, lint:arch, build
 
 **Implementation Sketch:**
 1. Create `src/shared/ui/tooltip/tooltip.stories.tsx`:

@@ -1,10 +1,12 @@
 {
   "created_at": "2026-05-04T12:24:11.407591+00:00",
-  "friendly_name": "tooltip component",
+  "friendly_name": "Tooltip Component",
   "mission_id": "01KQSF4BWF28R9PQHFRE549Y16",
   "mission_number": "021",
   "mission_slug": "021-tooltip-component",
   "mission_type": "software-dev",
-  "slug": "021-tooltip-component",
-  "target_branch": "main"
+  "slug": "tooltip-component",
+  "target_branch": "main",
+  "vcs": "git",
+  "source_description": "T-022: Build Tooltip component with 4 positions, hover/long-press triggers, and full accessibility support using design tokens"
 }

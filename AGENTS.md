@@ -2,6 +2,15 @@
 
 Vendor-agnostic instructions for AI coding agents.
 
+## Agent-Specific Configuration
+
+| Agent | Config file |
+|-------|-------------|
+| Claude Code | `CLAUDE.md` or `CLAUDE-for-fsd-project.md` |
+| Kimi (OpenClaw / Kimi Claw) | `KIMI.md` |
+
+Load your agent-specific file AFTER reading this document.
+
 ## Stack
 
 React 19, TypeScript 5.9, Vite 8, Tailwind CSS v4, ESLint 9 (flat config), Steiger (FSD linter).

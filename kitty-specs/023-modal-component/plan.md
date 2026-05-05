@@ -1,108 +1,80 @@
-# Implementation Plan: [FEATURE]
-*Path: [templates/plan-template.md](templates/plan-template.md)*
+# Implementation Plan: Modal Component
 
-
-**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
-**Input**: Feature specification from `/kitty-specs/[###-feature-name]/spec.md`
-
-**Note**: This template is filled in by the `/spec-kitty.plan` command. See `src/specify_cli/missions/software-dev/command-templates/plan.md` for the execution workflow.
-
-The planner will not begin until all planning questions have been answered—capture those answers in this document before progressing to later phases.
+**Branch**: `main` | **Date**: 2026-05-05 | **Spec**: [spec.md](./spec.md)
+**Input**: Feature specification from `/kitty-specs/023-modal-component/spec.md`
 
 ## Summary
 
-[Extract from feature spec: primary requirement + technical approach from research]
+Implement a reusable, accessible Modal dialog component for the FSD shopping cart project. The Modal provides a backdrop overlay, a dismissible card container, focus trapping, keyboard navigation (ESC), and smooth enter/exit animations (fade + scale). The component is generic — arbitrary content can be rendered inside via children — while matching the Penpot design extracted for T-024.
+
+**Technical approach**: Build as a `shared/ui` component following FSD conventions. Use Tailwind CSS for styling with design tokens. Implement focus management via a custom hook. Use CSS transitions for animations. Provide Storybook stories for visual regression and documentation.
 
 ## Technical Context
 
-<!--
-  ACTION REQUIRED: Replace the content in this section with the technical details
-  for the project. The structure here is presented in advisory capacity to guide
-  the iteration process.
--->
-
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
-**Project Type**: [single/web/mobile - determines source structure]  
-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
-**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
-**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
+**Language/Version**: TypeScript 5.9, React 19  
+**Primary Dependencies**: Tailwind CSS v4, Vite 8, Storybook (CSF3), Vitest (browser mode)  
+**Storage**: N/A  
+**Testing**: Vitest browser mode + Storybook visual stories  
+**Target Platform**: Web (modern browsers: Chrome, Firefox, Safari, Edge)  
+**Project Type**: Web application (FSD architecture)  
+**Performance Goals**: Animation completes ≤300ms; zero layout shift on open/close  
+**Constraints**: Must use existing design tokens (T-017); must reuse Button (T-019) and Tooltip (T-022); FSD `shared/ui` layer only — no domain logic  
+**Scale/Scope**: Single reusable component; 4 work packages
 
 ## Charter Check
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on charter file]
+- [x] No unresolved governance directives block this feature
+- [x] Feature scope fits within a single mission (one component)
+- [x] Dependencies (T-017, T-019, T-022) are complete
 
 ## Project Structure
 
 ### Documentation (this feature)
 
 ```
-kitty-specs/[###-feature]/
-├── plan.md              # This file (/spec-kitty.plan command output)
-├── research.md          # Phase 0 output (/spec-kitty.plan command)
-├── data-model.md        # Phase 1 output (/spec-kitty.plan command)
-├── quickstart.md        # Phase 1 output (/spec-kitty.plan command)
-├── contracts/           # Phase 1 output (/spec-kitty.plan command)
-└── tasks.md             # Phase 2 output (/spec-kitty.tasks command - NOT created by /spec-kitty.plan)
+kitty-specs/023-modal-component/
+├── plan.md              # This file
+├── spec.md              # Feature specification
+├── checklists/
+│   └── requirements.md  # Spec quality checklist
+└── tasks.md             # Work packages (Phase 2)
 ```
 
 ### Source Code (repository root)
-<!--
-  ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
-  for this feature. Delete unused options and expand the chosen structure with
-  real paths (e.g., apps/admin, packages/something). The delivered plan must
-  not include Option labels.
--->
 
 ```
-# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
-src/
-├── models/
-├── services/
-├── cli/
-└── lib/
+src/shared/ui/modal/
+├── modal.tsx            # Modal component (root + backdrop + card + close button)
+├── modal.stories.tsx    # Storybook stories (open, closed, with title, long content)
+└── index.ts             # Public API export
 
-tests/
-├── contract/
-├── integration/
-└── unit/
-
-# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
-backend/
-├── src/
-│   ├── models/
-│   ├── services/
-│   └── api/
-└── tests/
-
-frontend/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   └── services/
-└── tests/
-
-# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
-api/
-└── [same as backend above]
-
-ios/ or android/
-└── [platform-specific structure: feature modules, UI flows, platform tests]
+src/shared/ui/index.ts   # Updated to re-export Modal
 ```
 
-**Structure Decision**: [Document the selected structure and reference the real
-directories captured above]
+**Structure Decision**: Single `shared/ui/modal/` slice following the established FSD pattern used by `input-field/`, `tooltip/`, and other UI components. No model/api/lib segments needed — this is a pure presentation component.
+
+## Work Package Overview
+
+| WP | Name | Scope | Est. Complexity |
+|---|---|---|---|
+| WP1 | Modal Structure & Styling | Component shell, backdrop, card, close button, Tailwind styling per Penpot | Medium |
+| WP2 | Interaction & Accessibility | Backdrop click, ESC, close button, focus trap, focus restoration, aria | Medium |
+| WP3 | Animations | Enter (fade-in + scale-up) and exit (fade-out + scale-down) CSS transitions | Small |
+| WP4 | Stories & Integration | Storybook stories, export from `shared/ui/index.ts`, visual regression coverage | Small |
+
+## Dependency Graph
+
+```
+WP1 (Structure)
+  └── WP2 (Interaction)
+        └── WP3 (Animations)
+              └── WP4 (Stories)
+```
+
+All WPs are sequential — each builds on the previous.
 
 ## Complexity Tracking
 
-*Fill ONLY if Charter Check has violations that must be justified*
-
-| Violation | Why Needed | Simpler Alternative Rejected Because |
-|-----------|------------|-------------------------------------|
-| [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
-| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |
+No charter violations. Feature stays within a single `shared/ui` slice, uses existing dependencies, and introduces no new infrastructure.

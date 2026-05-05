@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "mission_slug": "023-modal-component",
+  "mission_id": "01KQVGTX0HVEFGAXEDPY0ZCFAY",
+  "mission_branch": "kitty/mission-023-modal-component",
+  "target_branch": "main",
+  "lanes": [
+    {
+      "lane_id": "lane-a",
+      "wp_ids": [
+        "WP01",
+        "WP02"
+      ],
+      "write_scope": [
+        "src/shared/ui/index.ts",
+        "src/shared/ui/modal/index.ts",
+        "src/shared/ui/modal/modal.stories.tsx",
+        "src/shared/ui/modal/modal.tsx"
+      ],
+      "predicted_surfaces": [
+        "api",
+        "app-shell",
+        "artifact-rendering",
+        "legacy-cleanup",
+        "tracker-integration"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    }
+  ],
+  "computed_at": "2026-05-05T07:41:40.252872+00:00",
+  "computed_from": "dependency_graph+ownership",
+  "planning_artifact_wps": [],
+  "collapse_report": {
+    "events": [
+      {
+        "wp_a": "WP02",
+        "wp_b": "WP01",
+        "rule": "dependency",
+        "evidence": "WP02 depends on WP01"
+      }
+    ],
+    "total_merges": 1,
+    "independent_wps_collapsed": 0,
+    "by_rule": {
+      "dependency": 1
+    }
+  }
+}

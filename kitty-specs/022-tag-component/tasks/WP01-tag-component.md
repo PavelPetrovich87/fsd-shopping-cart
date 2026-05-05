@@ -271,3 +271,4 @@ export type { TagProps } from './tag';
 - 2026-05-05T07:44:52Z – kilo:kimi-for-coding::implementer – shell_pid=5702 – Assigned agent via action command
 - 2026-05-05T07:49:04Z – kilo:kimi-for-coding::implementer – shell_pid=5702 – Ready for review: Tag component with neutral styling, optional dismiss button, 3 Storybook stories. All quality gates pass (lint, lint:arch, build).
 - 2026-05-05T07:49:49Z – kilo:kimi-for-coding::reviewer – shell_pid=5702 – Started review via action command
+- 2026-05-05T07:50:40Z – kilo:kimi-for-coding::reviewer – shell_pid=5702 – Review passed: Tag component implements all requirements. Neutral styling matches Penpot design (28px height, neutral-200 bg, neutral-900 text, 4px radius). Optional dismiss button with keyboard accessibility. 3 CSF3 stories. All quality gates pass (lint, lint:arch, build). Also fixed pre-existing duplicate Tooltip type exports in shared/ui/index.ts.

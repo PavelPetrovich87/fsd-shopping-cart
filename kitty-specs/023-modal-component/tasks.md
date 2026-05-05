@@ -44,16 +44,16 @@
 **Priority**: P0 (blocks WP02)
 
 **Success Criteria**:
-- [ ] Backdrop covers full viewport with `#0a0a0a` at 70% opacity
-- [ ] Card is white, `border-radius: 8px`, padding `24px`
-- [ ] Close button (×) renders in top-right of card
-- [ ] Title renders when provided (18px, 600 weight, `#171717`)
-- [ ] Backdrop click, close button, and ESC all dismiss modal
-- [ ] Focus trapped inside modal; cycles on Tab/Shift+Tab
-- [ ] Focus restores to trigger element on close
+- [x] Backdrop covers full viewport with `#0a0a0a` at 70% opacity
+- [x] Card is white, `border-radius: 8px`, padding `24px`
+- [x] Close button (×) renders in top-right of card
+- [x] Title renders when provided (18px, 600 weight, `#171717`)
+- [x] Backdrop click, close button, and ESC all dismiss modal
+- [x] Focus trapped inside modal; cycles on Tab/Shift+Tab
+- [x] Focus restores to trigger element on close
 - [ ] `role="dialog"` and `aria-modal="true"` present
-- [ ] Enter animation: backdrop fade-in + card scale-up/fade-in
-- [ ] Exit animation: reverse, completes within 300ms
+- [x] Enter animation: backdrop fade-in + card scale-up/fade-in
+- [x] Exit animation: reverse, completes within 300ms
 - [ ] Zero-trust: no `className` prop on Modal
 
 **Included Subtasks**:

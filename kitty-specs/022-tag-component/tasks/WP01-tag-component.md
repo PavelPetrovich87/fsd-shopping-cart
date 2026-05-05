@@ -32,7 +32,7 @@ owned_files:
 - src/shared/ui/tag/**
 - src/shared/ui/index.ts
 tags: []
-agent: "kilo:kimi-for-coding::implementer"
+agent: "kilo:kimi-for-coding::reviewer"
 ---
 
 # WP01: Implement Tag Component
@@ -270,3 +270,4 @@ export type { TagProps } from './tag';
 
 - 2026-05-05T07:44:52Z – kilo:kimi-for-coding::implementer – shell_pid=5702 – Assigned agent via action command
 - 2026-05-05T07:49:04Z – kilo:kimi-for-coding::implementer – shell_pid=5702 – Ready for review: Tag component with neutral styling, optional dismiss button, 3 Storybook stories. All quality gates pass (lint, lint:arch, build).
+- 2026-05-05T07:49:49Z – kilo:kimi-for-coding::reviewer – shell_pid=5702 – Started review via action command

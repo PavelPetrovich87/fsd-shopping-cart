@@ -54,7 +54,7 @@
 - [ ] `role="dialog"` and `aria-modal="true"` present
 - [x] Enter animation: backdrop fade-in + card scale-up/fade-in
 - [x] Exit animation: reverse, completes within 300ms
-- [ ] Zero-trust: no `className` prop on Modal
+- [x] Zero-trust: no `className` prop on Modal
 
 **Included Subtasks**:
 - [x] T001 Create directory structure

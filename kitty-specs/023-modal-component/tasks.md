@@ -20,9 +20,9 @@
 | T006 | Implement enter/exit animations | WP01 | ✗ | [D] |
 | T007 | Refine animation timing | WP01 | ✗ | [D] |
 | T008 | Create `index.ts` public API export | WP01 | ✗ | [D] |
-| T009 | Create `modal.stories.tsx` with CSF3 stories | WP02 | ✗ |
-| T010 | Update `src/shared/ui/index.ts` to re-export Modal | WP02 | ✗ |
-| T011 | Run quality gates: lint, lint:arch, build | WP02 | ✗ |
+| T009 | Create `modal.stories.tsx` with CSF3 stories | WP02 | ✗ | [D] |
+| T010 | Update `src/shared/ui/index.ts` to re-export Modal | WP02 | ✗ | [D] |
+| T011 | Run quality gates: lint, lint:arch, build | WP02 | ✗ | [D] |
 
 ---
 
@@ -101,9 +101,9 @@
 - [ ] All quality gates pass (lint, lint:arch, build)
 
 **Included Subtasks**:
-- [ ] T009 Create `modal.stories.tsx`
-- [ ] T010 Update `src/shared/ui/index.ts`
-- [ ] T011 Run quality gates
+- [x] T009 Create `modal.stories.tsx`
+- [x] T010 Update `src/shared/ui/index.ts`
+- [x] T011 Run quality gates
 
 **Implementation Sketch**:
 1. Create CSF3 stories with controls for `open` and `title`

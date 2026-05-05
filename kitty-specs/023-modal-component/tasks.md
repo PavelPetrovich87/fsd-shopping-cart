@@ -12,14 +12,14 @@
 
 | ID | Description | WP | Parallel |
 |----|-------------|-----|----------|
-| T001 | Create `src/shared/ui/modal/` directory structure | WP01 | ✗ |
-| T002 | Implement `modal.tsx` — structure and styling | WP01 | ✗ |
-| T003 | Implement dismissal handlers (backdrop, close button, ESC) | WP01 | ✗ |
-| T004 | Implement focus trap and focus management | WP01 | ✗ |
-| T005 | Add ARIA attributes and accessibility | WP01 | ✗ |
-| T006 | Implement enter/exit animations | WP01 | ✗ |
-| T007 | Refine animation timing | WP01 | ✗ |
-| T008 | Create `index.ts` public API export | WP01 | ✗ |
+| T001 | Create `src/shared/ui/modal/` directory structure | WP01 | ✗ | [D] |
+| T002 | Implement `modal.tsx` — structure and styling | WP01 | ✗ | [D] |
+| T003 | Implement dismissal handlers (backdrop, close button, ESC) | WP01 | ✗ | [D] |
+| T004 | Implement focus trap and focus management | WP01 | ✗ | [D] |
+| T005 | Add ARIA attributes and accessibility | WP01 | ✗ | [D] |
+| T006 | Implement enter/exit animations | WP01 | ✗ | [D] |
+| T007 | Refine animation timing | WP01 | ✗ | [D] |
+| T008 | Create `index.ts` public API export | WP01 | ✗ | [D] |
 | T009 | Create `modal.stories.tsx` with CSF3 stories | WP02 | ✗ |
 | T010 | Update `src/shared/ui/index.ts` to re-export Modal | WP02 | ✗ |
 | T011 | Run quality gates: lint, lint:arch, build | WP02 | ✗ |
@@ -57,14 +57,14 @@
 - [ ] Zero-trust: no `className` prop on Modal
 
 **Included Subtasks**:
-- [ ] T001 Create directory structure
-- [ ] T002 Implement structure and styling
-- [ ] T003 Implement dismissal handlers
-- [ ] T004 Implement focus trap
-- [ ] T005 Add ARIA attributes
-- [ ] T006 Implement animations
-- [ ] T007 Refine animation timing
-- [ ] T008 Create `index.ts` export
+- [x] T001 Create directory structure
+- [x] T002 Implement structure and styling
+- [x] T003 Implement dismissal handlers
+- [x] T004 Implement focus trap
+- [x] T005 Add ARIA attributes
+- [x] T006 Implement animations
+- [x] T007 Refine animation timing
+- [x] T008 Create `index.ts` export
 
 **Implementation Sketch**:
 1. Create `src/shared/ui/modal/` directory

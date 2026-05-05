@@ -28,6 +28,9 @@ requirement_refs:
 planning_base_branch: main
 merge_target_branch: main
 branch_strategy: Planning artifacts for this feature were generated on main. During /spec-kitty.implement this WP may branch from a dependency-specific base, but completed changes must merge back into main unless the human explicitly redirects the landing branch.
+base_branch: kitty/mission-023-modal-component
+base_commit: 308c3ab4d4b02bd296fe06e1222f7ce7c84cf32f
+created_at: '2026-05-05T07:43:57.422236+00:00'
 subtasks:
 - T001
 - T002
@@ -37,6 +40,7 @@ subtasks:
 - T006
 - T007
 - T008
+shell_pid: '4019'
 history: []
 authoritative_surface: src/shared/ui/modal/
 execution_mode: code_change

@@ -555,9 +555,11 @@ _Atomic UI components — no dependencies on domain logic. Everything in Tier 6+
 
 **Acceptance Criteria**:
 
-- [ ] All 5 variants with semantic colors from design tokens
-- [ ] Optional dismiss button with onClick handler
-- [ ] Storybook stories for all variants + dismiss state
+- [x] Neutral style matching Penpot design (`bg-neutral-200`, `text-neutral-900`, 28px height, 4px radius)
+- [x] Optional dismiss button with onClick handler
+- [x] Storybook stories for default and dismiss states
+
+> **Status: DONE** — Implemented via spec-kitty mission `022-tag-component`. Single neutral variant per Penpot design. Merged to `main`.
 
 ---
 

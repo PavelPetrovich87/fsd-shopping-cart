@@ -1,7 +1,7 @@
 {
-  "event_count": 10,
-  "last_event_id": "01KQVKR67Q7Q1AE4R00QBQ27FD",
-  "materialized_at": "2026-05-05T08:23:24.151423+00:00",
+  "event_count": 11,
+  "last_event_id": "01KQVKRNZPG32NRMK9JW8H0ZBV",
+  "materialized_at": "2026-05-05T08:23:40.278761+00:00",
   "mission_number": "023",
   "mission_slug": "023-modal-component",
   "mission_type": "software-dev",
@@ -11,8 +11,8 @@
     "canceled": 0,
     "claimed": 0,
     "done": 0,
-    "for_review": 1,
-    "in_progress": 0,
+    "for_review": 0,
+    "in_progress": 1,
     "in_review": 0,
     "planned": 0
   },
@@ -25,11 +25,11 @@
       "last_transition_at": "2026-05-05T07:56:28.996956+00:00"
     },
     "WP02": {
-      "actor": "user",
-      "force_count": 2,
-      "lane": "for_review",
-      "last_event_id": "01KQVKR67Q7Q1AE4R00QBQ27FD",
-      "last_transition_at": "2026-05-05T08:23:24.151423+00:00"
+      "actor": "kilo",
+      "force_count": 3,
+      "lane": "in_progress",
+      "last_event_id": "01KQVKRNZPG32NRMK9JW8H0ZBV",
+      "last_transition_at": "2026-05-05T08:23:40.278761+00:00"
     }
   }
 }

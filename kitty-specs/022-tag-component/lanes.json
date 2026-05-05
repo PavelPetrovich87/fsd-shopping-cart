@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "mission_slug": "022-tag-component",
+  "mission_id": "01KQVG4V3WGZ015GNH11SBKM5C",
+  "mission_branch": "kitty/mission-022-tag-component",
+  "target_branch": "main",
+  "lanes": [
+    {
+      "lane_id": "lane-a",
+      "wp_ids": [
+        "WP01"
+      ],
+      "write_scope": [
+        "src/shared/ui/index.ts",
+        "src/shared/ui/tag/**"
+      ],
+      "predicted_surfaces": [
+        "api",
+        "app-shell",
+        "artifact-rendering",
+        "legacy-cleanup"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    }
+  ],
+  "computed_at": "2026-05-05T07:42:18.249895+00:00",
+  "computed_from": "dependency_graph+ownership",
+  "planning_artifact_wps": []
+}

@@ -13,6 +13,9 @@ requirement_refs:
 planning_base_branch: main
 merge_target_branch: main
 branch_strategy: Planning artifacts for this feature were generated on main. During /spec-kitty.implement this WP may branch from a dependency-specific base, but completed changes must merge back into main unless the human explicitly redirects the landing branch.
+base_branch: kitty/mission-022-tag-component
+base_commit: 1c6d3673242e7e1ee07a625c216f2a7d8fb694aa
+created_at: '2026-05-05T07:44:39.007800+00:00'
 subtasks:
 - T001
 - T002
@@ -21,6 +24,7 @@ subtasks:
 - T005
 - T006
 - T007
+shell_pid: '5702'
 history: []
 authoritative_surface: src/shared/ui/tag/
 execution_mode: code_change

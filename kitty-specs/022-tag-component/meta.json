@@ -6,5 +6,7 @@
   "mission_slug": "022-tag-component",
   "mission_type": "software-dev",
   "slug": "022-tag-component",
-  "target_branch": "main"
+  "target_branch": "main",
+  "vcs": "git",
+  "vcs_locked_at": "2026-05-05T07:44:37.521964+00:00"
 }

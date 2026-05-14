@@ -1,8 +1,8 @@
 export interface Breakpoints {
-  sm: string;
-  md: string;
-  lg: string;
-  xl: string;
+  sm: string
+  md: string
+  lg: string
+  xl: string
 }
 
 export const breakpoints: Breakpoints = {
@@ -10,4 +10,4 @@ export const breakpoints: Breakpoints = {
   md: '768px',
   lg: '1024px',
   xl: '1280px',
-};
+}

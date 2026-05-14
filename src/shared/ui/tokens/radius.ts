@@ -1,9 +1,9 @@
 export interface RadiusScale {
-  sm: string;
-  md: string;
-  lg: string;
-  xl: string;
-  full: string;
+  sm: string
+  md: string
+  lg: string
+  xl: string
+  full: string
 }
 
 export const radius: RadiusScale = {
@@ -12,4 +12,4 @@ export const radius: RadiusScale = {
   lg: '0.75rem',
   xl: '1rem',
   full: '9999px',
-};
+}

@@ -98,7 +98,10 @@ export default defineConfig([
   },
   {
     // domain-modeling-plain-objects skill: Plain Objects Only — no classes in domain layer
-    files: ['src/entities/**/*.{ts,tsx}', 'src/features/**/model/**/*.{ts,tsx}'],
+    files: [
+      'src/entities/**/*.{ts,tsx}',
+      'src/features/**/model/**/*.{ts,tsx}',
+    ],
     ignores: ['src/entities/coupon/model/coupon.ts'],
     rules: {
       'no-restricted-syntax': [

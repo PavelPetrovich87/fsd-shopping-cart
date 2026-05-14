@@ -1,24 +1,24 @@
 export interface FontFamily {
-  notoSans: string;
-  fallback: string;
+  notoSans: string
+  fallback: string
 }
 
 export const fontFamily: FontFamily = {
   notoSans: "'Noto Sans', system-ui, sans-serif",
   fallback: 'system-ui, sans-serif',
-};
+}
 
 export interface TypographySizeScale {
-  xs: string;
-  sm: string;
-  base: string;
-  lg: string;
-  xl: string;
-  '2xl': string;
-  '3xl': string;
-  '4xl': string;
-  '5xl': string;
-  '6xl': string;
+  xs: string
+  sm: string
+  base: string
+  lg: string
+  xl: string
+  '2xl': string
+  '3xl': string
+  '4xl': string
+  '5xl': string
+  '6xl': string
 }
 
 export const fontSizes: TypographySizeScale = {
@@ -32,13 +32,13 @@ export const fontSizes: TypographySizeScale = {
   '4xl': '2.25rem',
   '5xl': '3rem',
   '6xl': '4.5rem',
-};
+}
 
 export interface FontWeightScale {
-  normal: number;
-  medium: number;
-  semibold: number;
-  bold: number;
+  normal: number
+  medium: number
+  semibold: number
+  bold: number
 }
 
 export const fontWeights: FontWeightScale = {
@@ -46,14 +46,14 @@ export const fontWeights: FontWeightScale = {
   medium: 500,
   semibold: 600,
   bold: 700,
-};
+}
 
 export interface LineHeightScale {
-  tight: string;
-  snug: string;
-  normal: string;
-  relaxed: string;
-  loose: string;
+  tight: string
+  snug: string
+  normal: string
+  relaxed: string
+  loose: string
 }
 
 export const lineHeights: LineHeightScale = {
@@ -62,14 +62,14 @@ export const lineHeights: LineHeightScale = {
   normal: '1.2',
   relaxed: '1.33',
   loose: '1.5',
-};
+}
 
-export const letterSpacing: string = '0';
+export const letterSpacing: string = '0'
 
 export interface TypographyTokens {
-  fontFamily: FontFamily;
-  fontSizes: TypographySizeScale;
-  fontWeights: FontWeightScale;
-  lineHeights: LineHeightScale;
-  letterSpacing: string;
+  fontFamily: FontFamily
+  fontSizes: TypographySizeScale
+  fontWeights: FontWeightScale
+  lineHeights: LineHeightScale
+  letterSpacing: string
 }

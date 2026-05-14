@@ -1,9 +1,9 @@
 export interface ZIndexScale {
-  dropdown: number;
-  sticky: number;
-  modal: number;
-  tooltip: number;
-  toast: number;
+  dropdown: number
+  sticky: number
+  modal: number
+  tooltip: number
+  toast: number
 }
 
 export const zIndex: ZIndexScale = {
@@ -12,4 +12,4 @@ export const zIndex: ZIndexScale = {
   modal: 300,
   tooltip: 400,
   toast: 500,
-};
+}

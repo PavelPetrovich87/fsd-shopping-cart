@@ -4,10 +4,10 @@ Vendor-agnostic instructions for AI coding agents.
 
 ## Agent-Specific Configuration
 
-| Agent | Config file |
-|-------|-------------|
-| Claude Code | `CLAUDE.md` or `CLAUDE-for-fsd-project.md` |
-| Kimi (OpenClaw / Kimi Claw) | `KIMI.md` |
+| Agent                       | Config file                                |
+| --------------------------- | ------------------------------------------ |
+| Claude Code                 | `CLAUDE.md` or `CLAUDE-for-fsd-project.md` |
+| Kimi (OpenClaw / Kimi Claw) | `KIMI.md`                                  |
 
 Load your agent-specific file AFTER reading this document.
 

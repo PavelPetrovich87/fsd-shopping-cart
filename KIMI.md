@@ -19,6 +19,7 @@
 ### 1. General Rules (from AGENTS.md)
 
 Always start by reading `AGENTS.md` — the root router for all agents. It contains:
+
 - Skill routing by path
 - Mandatory commands (`npm run lint`, `npm run lint:arch`, `npm run build`)
 - Workflow for code changes
@@ -30,6 +31,7 @@ Always start by reading `AGENTS.md` — the root router for all agents. It conta
 This means Kimi agents participate in the implement phase of work packages through the spec-kitty orchestrator.
 
 **Key differences from Claude:**
+
 - Kimi works through spec-kitty CLI, not directly with files
 - All code changes go through worktrees (`.worktrees/`)
 - Kimi must not edit files in the main checkout directly
@@ -109,15 +111,15 @@ spec-kitty merge --mission 017-cart-control
 
 ## Agent Configuration Files
 
-| File | For |
-|------|-----|
-| `AGENTS.md` | All agents (shared router) |
-| `CLAUDE.md` | Claude Code |
-| `CLAUDE-for-fsd-project.md` | Claude (detailed FSD spec) |
-| `KIMI.md` | Kimi (this file) |
-| `CONVENTIONS.md` | All agents (machine-enforceable rules) |
+| File                        | For                                    |
+| --------------------------- | -------------------------------------- |
+| `AGENTS.md`                 | All agents (shared router)             |
+| `CLAUDE.md`                 | Claude Code                            |
+| `CLAUDE-for-fsd-project.md` | Claude (detailed FSD spec)             |
+| `KIMI.md`                   | Kimi (this file)                       |
+| `CONVENTIONS.md`            | All agents (machine-enforceable rules) |
 
 ---
 
-*Created: 2026-05-04*  
-*Agent: OpenClaw for Pavel Petrovich*
+_Created: 2026-05-04_  
+_Agent: OpenClaw for Pavel Petrovich_

@@ -1,20 +1,20 @@
 export interface PrimitiveColors {
-  brand700: string;
-  brand600: string;
-  brand100: string;
-  neutral950: string;
-  neutral900: string;
-  neutral800: string;
-  neutral700: string;
-  neutral600: string;
-  neutral500: string;
-  neutral400: string;
-  neutral300: string;
-  neutral200: string;
-  neutral100: string;
-  neutral50: string;
-  error600: string;
-  brandPrimaryEmphasize: string;
+  brand700: string
+  brand600: string
+  brand100: string
+  neutral950: string
+  neutral900: string
+  neutral800: string
+  neutral700: string
+  neutral600: string
+  neutral500: string
+  neutral400: string
+  neutral300: string
+  neutral200: string
+  neutral100: string
+  neutral50: string
+  error600: string
+  brandPrimaryEmphasize: string
 }
 
 export const primitiveColors: PrimitiveColors = {
@@ -34,28 +34,28 @@ export const primitiveColors: PrimitiveColors = {
   neutral50: 'hsl(0 0% 100%)',
   error600: 'hsl(0 72% 50%)',
   brandPrimaryEmphasize: 'hsl(244 55% 41%)',
-};
+}
 
 export interface SemanticColors {
-  background: string;
-  foreground: string;
-  card: string;
-  cardForeground: string;
-  popover: string;
-  popoverForeground: string;
-  primary: string;
-  primaryForeground: string;
-  secondary: string;
-  secondaryForeground: string;
-  muted: string;
-  mutedForeground: string;
-  accent: string;
-  accentForeground: string;
-  destructive: string;
-  destructiveForeground: string;
-  border: string;
-  input: string;
-  ring: string;
+  background: string
+  foreground: string
+  card: string
+  cardForeground: string
+  popover: string
+  popoverForeground: string
+  primary: string
+  primaryForeground: string
+  secondary: string
+  secondaryForeground: string
+  muted: string
+  mutedForeground: string
+  accent: string
+  accentForeground: string
+  destructive: string
+  destructiveForeground: string
+  border: string
+  input: string
+  ring: string
 }
 
 export const semanticColors: SemanticColors = {
@@ -78,13 +78,13 @@ export const semanticColors: SemanticColors = {
   border: 'hsl(220 9% 89%)',
   input: 'hsl(0 0% 98%)',
   ring: 'hsl(245 58% 51%)',
-};
+}
 
 export interface ComponentColors {
-  buttonFocusRing: string;
-  buttonErrorRing: string;
-  inputFocus: string;
-  inputError: string;
+  buttonFocusRing: string
+  buttonErrorRing: string
+  inputFocus: string
+  inputError: string
 }
 
 export const componentColors: ComponentColors = {
@@ -92,4 +92,4 @@ export const componentColors: ComponentColors = {
   buttonErrorRing: 'hsl(0 72% 50%)',
   inputFocus: 'hsl(245 59% 55%)',
   inputError: 'hsl(0 72% 50%)',
-};
+}

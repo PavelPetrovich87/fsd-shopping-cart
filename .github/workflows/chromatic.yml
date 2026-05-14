@@ -1,0 +1,73 @@
+name: Chromatic
+# ↑ Имя workflow. Отображается в списке Actions на вкладке "Actions" репозитория.
+
+on:
+  # ↑ Секция "триггеров" — события GitHub, которые запускают этот workflow.
+  push:
+    branches: [main]
+    # ↑ Когда кто-то пушит (или мержит PR) в ветку main — запускаем Chromatic.
+    # Здесь baseline обновляется: новые скриншоты становятся эталоном.
+  pull_request:
+    branches: [main]
+    # ↑ Когда создаётся или обновляется Pull Request в main — запускаем Chromatic.
+    # Здесь сравниваем PR с текущим baseline из main.
+
+jobs:
+  # ↑ Секция "задач". Каждая job — изолированный runner (виртуальная машина).
+  chromatic:
+    name: Run Chromatic
+    # ↑ Имя job. Видно в UI GitHub Actions рядом с зелёной/красной галочкой.
+    runs-on: ubuntu-latest
+    # ↑ На какой ОС бежит job. ubuntu-latest — стандарт для Node-проектов.
+
+    steps:
+      # ↑ Шаги выполняются последовательно. Если один падает — вся job падает.
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+        # ↑ Клонирует код репозитория в рабочую директорию runner.
+        # fetch-depth: 0 — полная git history. Обязательно для TurboSnap:
+        # Chromatic анализирует git diff и dependency graph, чтобы снимать
+        # скриншоты только для изменённых stories, а не для всего проекта.
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+        # ↑ Устанавливает Node.js 22 и кеширует node_modules через package-lock.json.
+        # "cache: npm" ускоряет CI — не качает зависимости с нуля каждый раз.
+
+      - name: Install dependencies
+        run: npm ci
+        # ↑ "npm ci" — чистая установка по package-lock.json.
+        # Отличается от "npm install": не обновляет lock-файл, строго воспроизводит зависимости.
+        # В CI всегда используем npm ci, чтобы избежать "works on my machine".
+
+      # ── Шаг для main: обновление baseline ──
+      - name: Run Chromatic (main)
+        if: github.ref == 'refs/heads/main'
+        uses: chromaui/action@latest
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          # ↑ Токен проекта Chromatic. Хранится в GitHub Secrets, не в коде.
+          onlyChanged: true
+          # ↑ TurboSnap: снимать скриншоты только для изменённых stories.
+          autoAcceptChanges: true
+          # ↑ Принять все изменения как новый baseline автоматически.
+          # После merge PR в main новые скриншоты становятся эталоном.
+
+      # ── Шаг для PR: проверка diff (soft mode) ──
+      - name: Run Chromatic (PR)
+        if: github.event_name == 'pull_request'
+        uses: chromaui/action@latest
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          onlyChanged: true
+          exitZeroOnChanges: true
+          # ↑ Soft mode: Chromatic показывает diff, но не блокирует merge.
+          # GitHub check остаётся зелёным даже при visual changes.
+          # Дизайнер может зайти в Chromatic UI и вручную Accept/Deny,
+          # но PR можно мержить без этого.

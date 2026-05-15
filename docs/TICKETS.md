@@ -586,8 +586,10 @@ _Atomic UI components — no dependencies on domain logic. Everything in Tier 6+
 - [ ] "×" button in top-right corner
 - [ ] Focus trapped inside modal when open
 - [ ] ESC key closes modal
-- [ ] Accessible: `role="dialog"`, `aria-modal="true"`, `aria-labelledby`
-- [ ] Storybook stories for open/close states
+- [x] Accessible: `role="dialog"`, `aria-modal="true"`, `aria-labelledby`
+- [x] Storybook stories for open/close states
+
+> **Status: DONE** — Implemented via spec-kitty mission `023-modal-component`. WP01 approved, done, merged to `main`. Component in `src/shared/ui/modal/` with backdrop, focus trap, animations, and full ARIA support.
 
 ---
 

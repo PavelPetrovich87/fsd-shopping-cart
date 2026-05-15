@@ -80,3 +80,26 @@ When implementing any ticket or plan:
 3. **Treat ticket file paths as intent, not literal instructions** — implement what the ticket describes using current project patterns
 
 Planning artifacts are templates and intentions. The actual codebase is the source of truth.
+
+## Documentation-First Rule for Third-Party APIs
+
+When a task involves any third-party library, framework, CLI tool, or SDK — especially when there is uncertainty about the correct API, import path, configuration option, or peer dependency — **consult the official documentation FIRST** before attempting installation, code changes, or trial-and-error.
+
+### When this rule applies
+
+- Uncertainty about import paths (e.g., `@storybook/test` vs `storybook/test`)
+- Uncertainty about peer dependencies or required packages
+- Uncertainty about configuration options, flags, or CLI commands
+- Uncertainty about API signatures, deprecated features, or version-specific behavior
+- Any task mentioning a library name in a "how do I..." context
+
+### Procedure
+
+1. **Do NOT run `npm install` or modify code** until documentation is checked.
+2. Use `webfetch` to retrieve the official docs for the specific version in use.
+3. If docs are unclear, check the package's `package.json` exports field in `node_modules/` as a secondary source.
+4. Only after confirming the correct approach from docs, proceed with implementation.
+
+### Rationale
+
+Trial-and-error with package installation wastes time, creates unnecessary lockfile churn, and can introduce dependency conflicts. The official documentation is the single source of truth for API behavior, especially across major version boundaries.

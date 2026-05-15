@@ -51,7 +51,7 @@
 - [x] Backdrop click, close button, and ESC all dismiss modal
 - [x] Focus trapped inside modal; cycles on Tab/Shift+Tab
 - [x] Focus restores to trigger element on close
-- [ ] `role="dialog"` and `aria-modal="true"` present
+- [x] `role="dialog"` and `aria-modal="true"` present
 - [x] Enter animation: backdrop fade-in + card scale-up/fade-in
 - [x] Exit animation: reverse, completes within 300ms
 - [x] Zero-trust: no `className` prop on Modal

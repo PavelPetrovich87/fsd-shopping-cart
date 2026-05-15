@@ -500,3 +500,4 @@ spec-kitty agent action implement WP01 --agent <name>
 - 2026-05-02T10:19:44Z – opencode – shell_pid=5702 – Review passed: All 8 Penpot states implemented correctly. One bug found and fixed during review — focus-within border removal was applying to error states, but spec requires error+focused to retain #e5e5e5 border. Fixed by adding !hasError condition. All quality gates pass.
 - 2026-05-03T07:28:13Z – opencode – shell_pid=5702 – Re-opening for Penpot design fixes
 - 2026-05-03T08:00:37Z – opencode – shell_pid=5702 – Moved to for_review
+- 2026-05-15T09:05:48Z – opencode – shell_pid=5702 – Диагностика проведена, стили корректны, задача закрывается.

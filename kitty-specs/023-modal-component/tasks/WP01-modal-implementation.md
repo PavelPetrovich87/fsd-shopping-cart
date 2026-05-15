@@ -299,3 +299,4 @@ export type { ModalProps } from './modal'
 - 2026-05-05T07:50:27Z – kilo – shell_pid=4019 – Ready for review: Modal component with backdrop, focus trap, accessibility, animations
 - 2026-05-05T07:55:54Z – kilo – shell_pid=4019 – Started review via action command
 - 2026-05-05T07:56:29Z – kilo – shell_pid=4019 – Review passed: Modal component implements backdrop, focus trap, accessibility, animations. All quality gates pass.
+- 2026-05-15T09:11:26Z – kilo – shell_pid=4019 – Финализировано: все acceptance criteria выполнены, компонент в main. | Done override: Компонент уже в main (eee9850), последний коммит в ворктри — только cleanup.

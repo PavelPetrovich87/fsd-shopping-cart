@@ -595,31 +595,38 @@ _Atomic UI components — no dependencies on domain logic. Everything in Tier 6+
 
 ## Tier 5 (continued) — Entity UI
 
-### T-025: Entity UI — CartRow, ProductCard, EmptyState
+### T-025: Entity UI — CartRow, EmptyState
 
-| Field             | Value                                       |
-| ----------------- | ------------------------------------------- |
-| **Layer / Slice** | `entities/cart/ui/`, `entities/product/ui/` |
-| **Complexity**    | 🟡 Medium                                   |
-| **Depends On**    | T-004, T-005, T-017, T-019                  |
+| Field             | Value                      |
+| ----------------- | -------------------------- |
+| **Layer / Slice** | `entities/cart/ui/`        |
+| **Complexity**    | 🟡 Medium                  |
+| **Depends On**    | T-004, T-005, T-017, T-019 |
 
-**Description**: Build pure presentation components for entities. These display data but don't orchestrate business logic. Use design tokens and base components from T-017–T-024.
+**Description**: Build entity presentation components for the cart. CartRow displays a cart item with interactive controls. EmptyState displays the empty cart message. Design takes priority over ticket text — see Penpot references below.
+
+**Penpot Design References** (page: `Design`):
+
+| Component         | Penpot Board          | Shape ID                               |
+| ----------------- | --------------------- | -------------------------------------- |
+| CartRow (desktop) | `product`             | `58d46d69-db46-5106-82fd-6a11c472a236` |
+| CartRow (mobile)  | `product`             | `47a24fd6-208a-522f-a7dc-5775c730273d` |
+| EmptyState        | `Empty state message` | `62aaf9f0-22d7-53ff-b1bd-87752e16bfe3` |
+
+**Note**: `ProductCard` referenced in the original ticket is implemented as part of **T-026** (StockConflictModal) — the design's `product-card` board belongs to the "Change of stock" flow.
 
 **Files to create:**
 
-- `src/entities/cart/ui/CartRow.tsx` — variant image, name, pricing, quantity display
-- `src/entities/cart/ui/CartRow.stories.tsx`
-- `src/entities/cart/ui/EmptyState.tsx` — empty cart illustration/message
-- `src/entities/cart/ui/EmptyState.stories.tsx`
-- `src/entities/product/ui/ProductCard.tsx` — image, name, price
-- `src/entities/product/ui/ProductCard.stories.tsx`
-- Update each slice's `index.ts`
+- `src/entities/cart/ui/cart-row/cart-row.tsx`
+- `src/entities/cart/ui/cart-row/cart-row.stories.tsx`
+- `src/entities/cart/ui/empty-state/empty-state.tsx`
+- `src/entities/cart/ui/empty-state/empty-state.stories.tsx`
+- Update `entities/cart/index.ts`
 
 **Acceptance Criteria**:
 
-- [ ] CartRow: shows image, name, pricing (strikethrough list price if discounted), quantity
-- [ ] EmptyState: rendered when cart is empty
-- [ ] ProductCard: shows product image, name, price
+- [ ] CartRow: shows image thumbnail, name, variant specs, description, price, quantity, CartControl (+/−), and Remove button
+- [ ] EmptyState: shows cart icon, title, description, primary action button, optional secondary action button
 - [ ] All components have Storybook stories (story-first convention)
 - [ ] Components receive data via props only — no direct store access
 - [ ] Responsive: works on mobile and desktop

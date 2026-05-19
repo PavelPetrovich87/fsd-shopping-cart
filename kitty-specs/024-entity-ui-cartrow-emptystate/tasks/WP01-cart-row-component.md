@@ -19,6 +19,9 @@ requirement_refs:
 planning_base_branch: main
 merge_target_branch: main
 branch_strategy: Planning artifacts for this feature were generated on main. During /spec-kitty.implement this WP may branch from a dependency-specific base, but completed changes must merge back into main unless the human explicitly redirects the landing branch.
+base_branch: kitty/mission-024-entity-ui-cartrow-emptystate
+base_commit: fa105973a3a24d8a0a03a55e36655623fcbd6a62
+created_at: '2026-05-19T11:16:35.202926+00:00'
 subtasks:
 - T001
 - T002
@@ -29,6 +32,7 @@ subtasks:
 phase: Phase 1 - Component Implementation
 assignee: ''
 agent: ''
+shell_pid: '5453'
 history:
 - timestamp: '2026-05-18T12:32:09Z'
   agent: system

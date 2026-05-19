@@ -16,11 +16,11 @@
 | T004 | Integrate CartControl and Remove button with callbacks | WP01 | [D] |
 | T005 | Write CartRow Storybook stories | WP01 | [D] |
 | T006 | Verify CartRow accessibility | WP01 | [D] |
-| T007 | Create EmptyState directory structure and define EmptyStateProps interface | WP02 | [P] |
-| T008 | Implement EmptyState layout (icon, title, description, actions) | WP02 | [P] |
-| T009 | Integrate Button component for primary/secondary actions | WP02 | [P] |
-| T010 | Write EmptyState Storybook stories | WP02 | [P] |
-| T011 | Verify EmptyState accessibility | WP02 | [P] |
+| T007 | Create EmptyState directory structure and define EmptyStateProps interface | WP02 | [D] |
+| T008 | Implement EmptyState layout (icon, title, description, actions) | WP02 | [D] |
+| T009 | Integrate Button component for primary/secondary actions | WP02 | [D] |
+| T010 | Write EmptyState Storybook stories | WP02 | [D] |
+| T011 | Verify EmptyState accessibility | WP02 | [D] |
 | T012 | Update entities/cart/index.ts exports | WP03 | - |
 | T013 | Run lint and fix errors | WP03 | - |
 | T014 | Run lint:arch and fix FSD violations | WP03 | - |
@@ -58,11 +58,11 @@ CartRow displays a single cart line item with product image, name, variant specs
 EmptyState displays the zero-items cart message with icon, title, description, and primary/secondary action buttons.
 
 **Subtasks**:
-- [ ] T007 Create EmptyState directory structure and define EmptyStateProps interface
-- [ ] T008 Implement EmptyState layout (icon, title, description, actions)
-- [ ] T009 Integrate Button component for primary/secondary actions
-- [ ] T010 Write EmptyState Storybook stories
-- [ ] T011 Verify EmptyState accessibility
+- [x] T007 Create EmptyState directory structure and define EmptyStateProps interface
+- [x] T008 Implement EmptyState layout (icon, title, description, actions)
+- [x] T009 Integrate Button component for primary/secondary actions
+- [x] T010 Write EmptyState Storybook stories
+- [x] T011 Verify EmptyState accessibility
 
 **Dependencies**: None
 

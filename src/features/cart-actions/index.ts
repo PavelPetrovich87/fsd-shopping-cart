@@ -7,3 +7,8 @@ export type {
   RemoveFromCartResult,
   ChangeCartItemQuantityResult,
 } from './model'
+
+export { QuantitySelector } from './ui/quantity-selector'
+export type { QuantitySelectorProps } from './ui/quantity-selector'
+export { RemoveButton } from './ui/remove-button'
+export type { RemoveButtonProps } from './ui/remove-button'

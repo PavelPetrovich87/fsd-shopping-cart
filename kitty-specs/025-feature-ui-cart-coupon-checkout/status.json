@@ -1,18 +1,18 @@
 {
-  "event_count": 21,
-  "last_event_id": "01KS02XEG3MWJP2YK0D39SCENV",
-  "materialized_at": "2026-05-19T12:21:04.643422+00:00",
+  "event_count": 24,
+  "last_event_id": "01KS02XMXX1XQVCBM8VRFDY1PC",
+  "materialized_at": "2026-05-19T12:21:11.229160+00:00",
   "mission_number": "025",
   "mission_slug": "025-feature-ui-cart-coupon-checkout",
   "mission_type": "software-dev",
   "summary": {
-    "approved": 2,
+    "approved": 3,
     "blocked": 0,
     "canceled": 0,
     "claimed": 0,
     "done": 0,
     "for_review": 0,
-    "in_progress": 1,
+    "in_progress": 0,
     "in_review": 0,
     "planned": 0
   },
@@ -32,11 +32,11 @@
       "last_transition_at": "2026-05-19T12:21:04.643422+00:00"
     },
     "WP03": {
-      "actor": "kilocode:kimi-for-coding:reviewer:reviewer",
+      "actor": "user",
       "force_count": 2,
-      "lane": "in_progress",
-      "last_event_id": "01KS02WGW1C4X8HZSKF6MHQ6WW",
-      "last_transition_at": "2026-05-19T12:20:34.305999+00:00"
+      "lane": "approved",
+      "last_event_id": "01KS02XMXX1XQVCBM8VRFDY1PC",
+      "last_transition_at": "2026-05-19T12:21:11.229160+00:00"
     }
   }
 }

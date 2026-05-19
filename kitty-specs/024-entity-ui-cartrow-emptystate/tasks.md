@@ -10,12 +10,12 @@
 
 | ID | Description | WP | Parallel |
 |---|---|---|---|
-| T001 | Create CartRow directory structure and define CartRowProps interface | WP01 | [P] |
-| T002 | Implement CartRow desktop layout (horizontal, `>= lg`) | WP01 | [P] |
-| T003 | Implement CartRow responsive tablet and mobile layouts | WP01 | [P] |
-| T004 | Integrate CartControl and Remove button with callbacks | WP01 | [P] |
-| T005 | Write CartRow Storybook stories | WP01 | [P] |
-| T006 | Verify CartRow accessibility | WP01 | [P] |
+| T001 | Create CartRow directory structure and define CartRowProps interface | WP01 | [P] | [D] |
+| T002 | Implement CartRow desktop layout (horizontal, `>= lg`) | WP01 | [D] |
+| T003 | Implement CartRow responsive tablet and mobile layouts | WP01 | [D] |
+| T004 | Integrate CartControl and Remove button with callbacks | WP01 | [D] |
+| T005 | Write CartRow Storybook stories | WP01 | [D] |
+| T006 | Verify CartRow accessibility | WP01 | [D] |
 | T007 | Create EmptyState directory structure and define EmptyStateProps interface | WP02 | [P] |
 | T008 | Implement EmptyState layout (icon, title, description, actions) | WP02 | [P] |
 | T009 | Integrate Button component for primary/secondary actions | WP02 | [P] |
@@ -39,12 +39,12 @@
 CartRow displays a single cart line item with product image, name, variant specs, description, price, quantity controls, and remove button.
 
 **Subtasks**:
-- [ ] T001 Create CartRow directory structure and define CartRowProps interface
-- [ ] T002 Implement CartRow desktop layout (horizontal)
-- [ ] T003 Implement CartRow responsive mobile layout (vertical)
-- [ ] T004 Integrate CartControl and Remove button with callbacks
-- [ ] T005 Write CartRow Storybook stories
-- [ ] T006 Verify CartRow accessibility
+- [x] T001 Create CartRow directory structure and define CartRowProps interface
+- [x] T002 Implement CartRow desktop layout (horizontal)
+- [x] T003 Implement CartRow responsive mobile layout (vertical)
+- [x] T004 Integrate CartControl and Remove button with callbacks
+- [x] T005 Write CartRow Storybook stories
+- [x] T006 Verify CartRow accessibility
 
 **Dependencies**: None
 

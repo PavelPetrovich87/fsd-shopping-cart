@@ -144,7 +144,7 @@ The components are organized into three feature areas:
 
 1. The ChangeQuantity, RemoveFromCart, ApplyCoupon, and InitiateCheckout use cases are already implemented and expose stable interfaces
 2. The CartControl, Button, InputField, Tag, and Modal base components are already implemented with the interfaces documented in their respective stories
-3. The Zustand cart store and mock repositories provide reactive data that parent components can pass as props
+3. The reactive cart store and mock repositories provide data that parent components can pass as props
 4. Product images for StockConflictModal are available as URLs or placeholders
 
 ## Dependencies

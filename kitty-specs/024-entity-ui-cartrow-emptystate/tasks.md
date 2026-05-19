@@ -21,11 +21,11 @@
 | T009 | Integrate Button component for primary/secondary actions | WP02 | [D] |
 | T010 | Write EmptyState Storybook stories | WP02 | [D] |
 | T011 | Verify EmptyState accessibility | WP02 | [D] |
-| T012 | Update entities/cart/index.ts exports | WP03 | - |
-| T013 | Run lint and fix errors | WP03 | - |
-| T014 | Run lint:arch and fix FSD violations | WP03 | - |
-| T015 | Run build and fix type/build errors | WP03 | - |
-| T016 | Verify all Storybook stories render | WP03 | - |
+| T012 | Update entities/cart/index.ts exports | WP03 | - | [D] |
+| T013 | Run lint and fix errors | WP03 | - | [D] |
+| T014 | Run lint:arch and fix FSD violations | WP03 | - | [D] |
+| T015 | Run build and fix type/build errors | WP03 | - | [D] |
+| T016 | Verify all Storybook stories render | WP03 | - | [D] |
 
 ---
 
@@ -76,11 +76,11 @@ EmptyState displays the zero-items cart message with icon, title, description, a
 Export UI components from entity public API and run all quality gates.
 
 **Subtasks**:
-- [ ] T012 Update entities/cart/index.ts exports
-- [ ] T013 Run lint and fix errors
-- [ ] T014 Run lint:arch and fix FSD violations
-- [ ] T015 Run build and fix type/build errors
-- [ ] T016 Verify all Storybook stories render
+- [x] T012 Update entities/cart/index.ts exports
+- [x] T013 Run lint and fix errors
+- [x] T014 Run lint:arch and fix FSD violations
+- [x] T015 Run build and fix type/build errors
+- [x] T016 Verify all Storybook stories render
 
 **Dependencies**: WP01, WP02
 

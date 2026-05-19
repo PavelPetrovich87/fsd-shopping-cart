@@ -10,12 +10,12 @@
 
 | ID | Description | WP | Parallel |
 |---|---|---|---|
-| T001 | Create QuantitySelector component | WP01 | [P] |
-| T002 | Create QuantitySelector stories | WP01 | [P] |
-| T003 | Create RemoveButton component | WP01 | [P] |
-| T004 | Create RemoveButton stories | WP01 | [P] |
-| T005 | Update cart-actions index.ts exports | WP01 | — |
-| T006 | Quality gates: lint, lint:arch, build | WP01 | — |
+| T001 | Create QuantitySelector component | WP01 | [P] | [D] |
+| T002 | Create QuantitySelector stories | WP01 | [D] |
+| T003 | Create RemoveButton component | WP01 | [D] |
+| T004 | Create RemoveButton stories | WP01 | [D] |
+| T005 | Update cart-actions index.ts exports | WP01 | — | [D] |
+| T006 | Quality gates: lint, lint:arch, build | WP01 | — | [D] |
 | T007 | Create CouponInput component | WP02 | [P] |
 | T008 | Create CouponInput stories | WP02 | [P] |
 | T009 | Update apply-coupon index.ts exports | WP02 | — |
@@ -42,12 +42,12 @@
 **Dependencies**: None
 
 **Included subtasks**:
-- [ ] T001 Create QuantitySelector component (WP01)
-- [ ] T002 Create QuantitySelector stories (WP01)
-- [ ] T003 Create RemoveButton component (WP01)
-- [ ] T004 Create RemoveButton stories (WP01)
-- [ ] T005 Update cart-actions index.ts exports (WP01)
-- [ ] T006 Quality gates: lint, lint:arch, build (WP01)
+- [x] T001 Create QuantitySelector component (WP01)
+- [x] T002 Create QuantitySelector stories (WP01)
+- [x] T003 Create RemoveButton component (WP01)
+- [x] T004 Create RemoveButton stories (WP01)
+- [x] T005 Update cart-actions index.ts exports (WP01)
+- [x] T006 Quality gates: lint, lint:arch, build (WP01)
 
 **Implementation sketch**:
 1. Create `src/features/cart-actions/ui/quantity-selector/` with component and index.ts

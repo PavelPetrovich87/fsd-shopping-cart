@@ -1,7 +1,7 @@
 {
-  "event_count": 10,
-  "last_event_id": "01KRZZPYJF8CGABK8N9CAD5W00",
-  "materialized_at": "2026-05-19T11:25:05.999420+00:00",
+  "event_count": 12,
+  "last_event_id": "01KRZZQXMM815CXJJ2EP4HS4MV",
+  "materialized_at": "2026-05-19T11:25:37.812244+00:00",
   "mission_number": "024",
   "mission_slug": "024-entity-ui-cartrow-emptystate",
   "mission_type": "software-dev",
@@ -12,9 +12,9 @@
     "claimed": 0,
     "done": 0,
     "for_review": 0,
-    "in_progress": 0,
+    "in_progress": 1,
     "in_review": 0,
-    "planned": 2
+    "planned": 1
   },
   "work_packages": {
     "WP01": {
@@ -25,11 +25,11 @@
       "last_transition_at": "2026-05-19T11:25:05.999420+00:00"
     },
     "WP02": {
-      "actor": "finalize-tasks",
+      "actor": "kilo:kimi-for-coding:frontend-implementer:implementer",
       "force_count": 1,
-      "lane": "planned",
-      "last_event_id": "01KRXHHKND3P60917W3PC6GC8R",
-      "last_transition_at": "2026-05-18T12:39:02.061679+00:00"
+      "lane": "in_progress",
+      "last_event_id": "01KRZZQXMM815CXJJ2EP4HS4MV",
+      "last_transition_at": "2026-05-19T11:25:37.812244+00:00"
     },
     "WP03": {
       "actor": "finalize-tasks",

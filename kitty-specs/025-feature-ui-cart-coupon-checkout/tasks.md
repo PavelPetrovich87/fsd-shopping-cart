@@ -16,10 +16,10 @@
 | T004 | Create RemoveButton stories | WP01 | [D] |
 | T005 | Update cart-actions index.ts exports | WP01 | — | [D] |
 | T006 | Quality gates: lint, lint:arch, build | WP01 | — | [D] |
-| T007 | Create CouponInput component | WP02 | [P] |
-| T008 | Create CouponInput stories | WP02 | [P] |
-| T009 | Update apply-coupon index.ts exports | WP02 | — |
-| T010 | Quality gates: lint, lint:arch, build | WP02 | — |
+| T007 | Create CouponInput component | WP02 | [D] |
+| T008 | Create CouponInput stories | WP02 | [D] |
+| T009 | Update apply-coupon index.ts exports | WP02 | — | [D] |
+| T010 | Quality gates: lint, lint:arch, build | WP02 | — | [D] |
 | T011 | Create CheckoutButton component | WP03 | [P] |
 | T012 | Create CheckoutButton stories | WP03 | [P] |
 | T013 | Create StockConflictModal component | WP03 | [P] |
@@ -80,10 +80,10 @@
 **Dependencies**: None
 
 **Included subtasks**:
-- [ ] T007 Create CouponInput component (WP02)
-- [ ] T008 Create CouponInput stories (WP02)
-- [ ] T009 Update apply-coupon index.ts exports (WP02)
-- [ ] T010 Quality gates: lint, lint:arch, build (WP02)
+- [x] T007 Create CouponInput component (WP02)
+- [x] T008 Create CouponInput stories (WP02)
+- [x] T009 Update apply-coupon index.ts exports (WP02)
+- [x] T010 Quality gates: lint, lint:arch, build (WP02)
 
 **Implementation sketch**:
 1. Create `src/features/apply-coupon/ui/coupon-input/` with component and index.ts

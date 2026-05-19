@@ -23,7 +23,7 @@ function PriceDisplay({ price }: { price: string }) {
     return (
       <span className="text-base font-medium text-neutral-900">
         <span>{parts[0]}</span>{' '}
-        <span className="text-neutral-500 line-through">{parts[1]}</span>
+        <span className="text-neutral-600 line-through">{parts[1]}</span>
       </span>
     )
   }
@@ -37,7 +37,7 @@ function SpecsDisplay({ specs }: { specs?: Record<string, string> }) {
   return (
     <div className="flex flex-wrap gap-x-3 gap-y-1">
       {entries.map(([key, value], index) => (
-        <span key={key} className="text-sm text-neutral-500">
+        <span key={key} className="text-sm text-neutral-600">
           {key}: {value}
           {index < entries.length - 1 && (
             <span className="ml-3 text-neutral-300">·</span>
@@ -64,7 +64,7 @@ export function CartRow({
   onRemove,
 }: CartRowProps) {
   return (
-    <li
+    <article
       data-skuid={skuId}
       className="flex flex-col gap-3 border-b border-neutral-200 p-4 md:flex-row md:gap-3 lg:gap-4"
     >
@@ -84,8 +84,6 @@ export function CartRow({
         </div>
 
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-          <PriceDisplay price={price} />
-
           <div className="flex items-center gap-3">
             <CartControl
               quantity={quantity}
@@ -104,8 +102,10 @@ export function CartRow({
               Remove
             </Button>
           </div>
+
+          <PriceDisplay price={price} />
         </div>
       </div>
-    </li>
+    </article>
   )
 }

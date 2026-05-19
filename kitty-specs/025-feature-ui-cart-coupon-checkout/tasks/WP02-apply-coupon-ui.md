@@ -26,6 +26,8 @@ subtasks:
 - T008
 - T009
 - T010
+agent: "kilocode:kimi-for-coding:implementer:implementer"
+shell_pid: "5450"
 history:
 - timestamp: '2026-05-19T11:59:19Z'
   event: created
@@ -238,3 +240,7 @@ npm run build
 3. **Form submission**: Decide whether to use a `<form>` element or a standalone button. A `<form onSubmit={...}>` is more semantic and handles Enter key submission naturally. If using a form, call `e.preventDefault()` in the submit handler.
 4. **FSD layer violations**: Ensure `apply-coupon/ui/` does NOT import from other feature slices. Only `shared/` and `entities/` are allowed.
 5. **Input autoFocus**: When the input is revealed, it should receive focus automatically. Use the `autoFocus` prop on `InputField`.
+
+## Activity Log
+
+- 2026-05-19T12:09:26Z – kilocode:kimi-for-coding:implementer:implementer – shell_pid=5450 – Started implementation via action command

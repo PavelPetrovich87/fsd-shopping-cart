@@ -21,13 +21,13 @@ function PriceDisplay({ price }: { price: string }) {
   const parts = price.split(' ')
   if (parts.length === 2) {
     return (
-      <span className="font-medium text-base text-neutral-900">
+      <span className="text-base font-medium text-neutral-900">
         <span>{parts[0]}</span>{' '}
         <span className="text-neutral-500 line-through">{parts[1]}</span>
       </span>
     )
   }
-  return <span className="font-medium text-base text-neutral-900">{price}</span>
+  return <span className="text-base font-medium text-neutral-900">{price}</span>
 }
 
 function SpecsDisplay({ specs }: { specs?: Record<string, string> }) {
@@ -64,20 +64,23 @@ export function CartRow({
   onRemove,
 }: CartRowProps) {
   return (
-    <li data-skuid={skuId} className="flex flex-col gap-3 border-b border-neutral-200 p-4 md:flex-row md:gap-3 lg:gap-4">
+    <li
+      data-skuid={skuId}
+      className="flex flex-col gap-3 border-b border-neutral-200 p-4 md:flex-row md:gap-3 lg:gap-4"
+    >
       <div className="shrink-0">
         <img
           src={imageUrl}
           alt={name}
-          className="w-full h-48 object-cover rounded-md md:w-20 md:h-20 lg:w-24 lg:h-24"
+          className="h-48 w-full rounded-md object-cover md:h-20 md:w-20 lg:h-24 lg:w-24"
         />
       </div>
 
-      <div className="flex flex-1 flex-col gap-2 min-w-0">
+      <div className="flex min-w-0 flex-1 flex-col gap-2">
         <div className="flex flex-col gap-1">
-          <h3 className="font-semibold text-base text-neutral-900">{name}</h3>
+          <h3 className="text-base font-semibold text-neutral-900">{name}</h3>
           <SpecsDisplay specs={specs} />
-          <p className="text-sm text-neutral-600 line-clamp-2">{description}</p>
+          <p className="line-clamp-2 text-sm text-neutral-600">{description}</p>
         </div>
 
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">

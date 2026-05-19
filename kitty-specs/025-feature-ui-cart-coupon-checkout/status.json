@@ -1,7 +1,7 @@
 {
-  "event_count": 3,
-  "last_event_id": "01KS01Y507HKHXRT9KXX23T9WW",
-  "materialized_at": "2026-05-19T12:03:59.111549+00:00",
+  "event_count": 5,
+  "last_event_id": "01KS0279XJ5H4X23MJ750NQQEN",
+  "materialized_at": "2026-05-19T12:08:59.058812+00:00",
   "mission_number": "025",
   "mission_slug": "025-feature-ui-cart-coupon-checkout",
   "mission_type": "software-dev",
@@ -12,17 +12,17 @@
     "claimed": 0,
     "done": 0,
     "for_review": 0,
-    "in_progress": 0,
+    "in_progress": 1,
     "in_review": 0,
-    "planned": 3
+    "planned": 2
   },
   "work_packages": {
     "WP01": {
-      "actor": "finalize-tasks",
+      "actor": "implement-command",
       "force_count": 1,
-      "lane": "planned",
-      "last_event_id": "01KS01Y4T76N3C03337DW1KSNE",
-      "last_transition_at": "2026-05-19T12:03:58.919655+00:00"
+      "lane": "in_progress",
+      "last_event_id": "01KS0279XJ5H4X23MJ750NQQEN",
+      "last_transition_at": "2026-05-19T12:08:59.058812+00:00"
     },
     "WP02": {
       "actor": "finalize-tasks",

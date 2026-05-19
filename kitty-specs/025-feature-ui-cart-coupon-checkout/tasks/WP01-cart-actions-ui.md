@@ -26,6 +26,9 @@ requirement_refs:
 planning_base_branch: main
 merge_target_branch: main
 branch_strategy: Planning artifacts for this feature were generated on main. During /spec-kitty.implement this WP may branch from a dependency-specific base, but completed changes must merge back into main unless the human explicitly redirects the landing branch.
+base_branch: kitty/mission-025-feature-ui-cart-coupon-checkout
+base_commit: 0eff897e74b8ee9699e03a9781fcbd18ebd4c546
+created_at: '2026-05-19T12:08:58.853839+00:00'
 subtasks:
 - T001
 - T002
@@ -33,6 +36,7 @@ subtasks:
 - T004
 - T005
 - T006
+shell_pid: '5450'
 history:
 - timestamp: '2026-05-19T11:59:19Z'
   event: created

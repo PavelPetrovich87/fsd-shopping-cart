@@ -607,11 +607,14 @@ _Atomic UI components — no dependencies on domain logic. Everything in Tier 6+
 
 **Penpot Design References** (page: `Design`):
 
-| Component         | Penpot Board          | Shape ID                               |
-| ----------------- | --------------------- | -------------------------------------- |
-| CartRow (desktop) | `product`             | `58d46d69-db46-5106-82fd-6a11c472a236` |
-| CartRow (mobile)  | `product`             | `47a24fd6-208a-522f-a7dc-5775c730273d` |
-| EmptyState        | `Empty state message` | `62aaf9f0-22d7-53ff-b1bd-87752e16bfe3` |
+| Component            | Penpot Board          | Shape ID                               |
+| -------------------- | --------------------- | -------------------------------------- |
+| CartRow (desktop)    | `product`             | `58d46d69-db46-5106-82fd-6a11c472a236` |
+| CartRow (tablet)     | `product`             | `88e44c78-33ee-5d5d-8200-494cc60b3aaa` |
+| CartRow (mobile)     | `product`             | `47a24fd6-208a-522f-a7dc-5775c730273d` |
+| EmptyState (desktop) | `Empty state message` | `62aaf9f0-22d7-53ff-b1bd-87752e16bfe3` |
+| EmptyState (tablet)  | `Empty state message` | `69f41acf-6b36-58c3-a594-95e79dfcb9c9` |
+| EmptyState (mobile)  | `Empty state message` | `a1ff7867-132c-5687-a94b-07009623abd8` |
 
 **Note**: `ProductCard` referenced in the original ticket is implemented as part of **T-026** (StockConflictModal) — the design's `product-card` board belongs to the "Change of stock" flow.
 
@@ -629,7 +632,7 @@ _Atomic UI components — no dependencies on domain logic. Everything in Tier 6+
 - [ ] EmptyState: shows cart icon, title, description, primary action button, optional secondary action button
 - [ ] All components have Storybook stories (story-first convention)
 - [ ] Components receive data via props only — no direct store access
-- [ ] Responsive: works on mobile and desktop
+- [ ] Responsive: works on desktop, tablet, and mobile
 
 ---
 
@@ -653,6 +656,80 @@ _Atomic UI components — no dependencies on domain logic. Everything in Tier 6+
 - `src/features/checkout/ui/CheckoutButton.tsx` — triggers InitiateCheckout
 - `src/features/checkout/ui/StockConflictModal.tsx` — shows if stock changed during checkout
 - Update each slice's `index.ts`
+
+**Penpot Design References** (page: `Design`):
+
+| Component             | Penpot Board | Shape ID                               |
+| --------------------- | ------------ | -------------------------------------- |
+| **CartRow (desktop)** | `product`    | `58d46d69-db46-5106-82fd-6a11c472a236` |
+| **CartRow (tablet)**  | `product`    | `88e44c78-33ee-5d5d-8200-494cc60b3aaa` |
+| **CartRow (mobile)**  | `product`    | `47a24fd6-208a-522f-a7dc-5775c730273d` |
+
+**QuantitySelector** (Cart Control inside product rows):
+
+| Breakpoint | Shape ID                               |
+| ---------- | -------------------------------------- |
+| Desktop    | `a94f4110-e583-53fd-8fb6-f047e6148615` |
+| Tablet     | `6245c59f-593f-5b19-b581-50fd0975247b` |
+| Mobile     | `56857ad0-bed6-52b1-ba6e-a9747aa25c1a` |
+
+**RemoveButton** (inside product row `controls`):
+
+| Breakpoint | Shape ID                               |
+| ---------- | -------------------------------------- |
+| Desktop    | `92430445-5d5a-5e36-9774-22a732bf8cfb` |
+| Tablet     | `ed75d546-7b97-5d78-8c6c-4c84b41920a1` |
+| Mobile     | `612e7504-d9b3-5d56-9105-09b5dca63955` |
+
+**RemoveButton** (Style guide states):
+
+| State    | Shape ID                               |
+| -------- | -------------------------------------- |
+| Normal   | `be8c965d-94c1-5cce-98ee-9859ac701e42` |
+| Hover    | `be20ea61-4f78-539a-b6c4-c8d27ae00f67` |
+| Focus    | `6fdef497-a3c9-5e87-8b76-d0ca44ccc6d3` |
+| Disabled | `89dceed6-645f-5d5d-90df-171420d06aae` |
+
+**CouponInput** (order-summary states):
+
+| State                  | order-summary ID                       | Notes                                        |
+| ---------------------- | -------------------------------------- | -------------------------------------------- |
+| Initial (button only)  | `00fcddfd-b172-526e-b823-af7fea493d6c` | Button `247ba480...` with coupon-line icon   |
+| Normal (input visible) | `f986aef6-e315-5bfa-8614-f94433499a87` | Input with `question-line` icon              |
+| Error                  | `d29a318a-d2c9-585d-b369-0754ab6ef167` | Input with `error-warning-line` icon         |
+| Error filled           | `e68658c7-932a-5ea9-af4d-ae5536aff7a3` | Input with error icon                        |
+| Success (tag shown)    | `6f330398-c65f-5434-b3d7-b887ac3c8fb4` | Dismissible tag `e7cd9c05...` + discount row |
+
+**Input field states** (Style guide):
+
+| State         | Shape ID                               |
+| ------------- | -------------------------------------- |
+| Normal        | `38ffd2ae-b984-5457-b5fd-469228dfb350` |
+| Error         | `f1d1d4cf-b9df-5f97-b64f-4c03e7a4a238` |
+| Filled        | `902d5c15-0be3-543e-98cb-6294d97fe685` |
+| Error filled  | `b843d0fa-dfa3-5744-8564-addc76570040` |
+| Focused       | `266d8f2c-eba7-5062-9c51-e037714f053d` |
+| Error focused | `af67a77b-33b3-529d-a11b-98dce5a2d458` |
+| Disabled      | `5a812d66-859b-5faa-a29c-154c6daa4f8e` |
+| Success       | `49f2aecc-47d1-5b5f-8ec6-040701ec5748` |
+
+**CheckoutButton** (CTA inside order-summary):
+
+| order-summary ID                       | Button ID                              |
+| -------------------------------------- | -------------------------------------- |
+| `00fcddfd-b172-526e-b823-af7fea493d6c` | `a3f1302f-b787-5224-b44a-153ae3cd6862` |
+| `f986aef6-e315-5bfa-8614-f94433499a87` | `5fcb7de9-4a91-5a06-b1a1-3cebee9b0952` |
+| `d29a318a-d2c9-585d-b369-0754ab6ef167` | `6728127a-9371-5b0d-b581-2a4ed89c9a1e` |
+| `e68658c7-932a-5ea9-af4d-ae5536aff7a3` | `a2e60662-13ca-565c-8d9f-5c52663ddcd1` |
+| `6f330398-c65f-5434-b3d7-b887ac3c8fb4` | `cf400676-61d9-5ab6-b6ce-820e4385fc76` |
+
+**StockConflictModal**:
+
+| Variant         | Shape ID                               |
+| --------------- | -------------------------------------- |
+| 2 product cards | `a8277032-687c-5fff-9bf6-5a57bd60a3d8` |
+| 1 product card  | `f24bc276-1984-581c-b5a7-38157e1469f4` |
+| Modal shell     | `9e5617d4-9412-5f4f-af2e-dc8cfcded584` |
 
 **Acceptance Criteria**:
 

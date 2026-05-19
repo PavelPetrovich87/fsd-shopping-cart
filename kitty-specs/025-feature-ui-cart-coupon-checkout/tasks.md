@@ -20,12 +20,12 @@
 | T008 | Create CouponInput stories | WP02 | [D] |
 | T009 | Update apply-coupon index.ts exports | WP02 | — | [D] |
 | T010 | Quality gates: lint, lint:arch, build | WP02 | — | [D] |
-| T011 | Create CheckoutButton component | WP03 | [P] |
-| T012 | Create CheckoutButton stories | WP03 | [P] |
-| T013 | Create StockConflictModal component | WP03 | [P] |
-| T014 | Create StockConflictModal stories | WP03 | [P] |
-| T015 | Update checkout index.ts exports | WP03 | — |
-| T016 | Quality gates: lint, lint:arch, build | WP03 | — |
+| T011 | Create CheckoutButton component | WP03 | [D] |
+| T012 | Create CheckoutButton stories | WP03 | [D] |
+| T013 | Create StockConflictModal component | WP03 | [D] |
+| T014 | Create StockConflictModal stories | WP03 | [D] |
+| T015 | Update checkout index.ts exports | WP03 | — | [D] |
+| T016 | Quality gates: lint, lint:arch, build | WP03 | — | [D] |
 
 ---
 
@@ -115,12 +115,12 @@
 **Dependencies**: None
 
 **Included subtasks**:
-- [ ] T011 Create CheckoutButton component (WP03)
-- [ ] T012 Create CheckoutButton stories (WP03)
-- [ ] T013 Create StockConflictModal component (WP03)
-- [ ] T014 Create StockConflictModal stories (WP03)
-- [ ] T015 Update checkout index.ts exports (WP03)
-- [ ] T016 Quality gates: lint, lint:arch, build (WP03)
+- [x] T011 Create CheckoutButton component (WP03)
+- [x] T012 Create CheckoutButton stories (WP03)
+- [x] T013 Create StockConflictModal component (WP03)
+- [x] T014 Create StockConflictModal stories (WP03)
+- [x] T015 Update checkout index.ts exports (WP03)
+- [x] T016 Quality gates: lint, lint:arch, build (WP03)
 
 **Implementation sketch**:
 1. Create `src/features/checkout/ui/checkout-button/` with component and index.ts

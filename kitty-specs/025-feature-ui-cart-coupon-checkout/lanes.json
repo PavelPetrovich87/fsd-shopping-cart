@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "mission_slug": "025-feature-ui-cart-coupon-checkout",
+  "mission_id": "01KRZZYFKP1640F8HJDV2XXTZW",
+  "mission_branch": "kitty/mission-025-feature-ui-cart-coupon-checkout",
+  "target_branch": "main",
+  "lanes": [
+    {
+      "lane_id": "lane-a",
+      "wp_ids": [
+        "WP01",
+        "WP02",
+        "WP03"
+      ],
+      "write_scope": [
+        "src/features/cart-actions/ui/quantity-selector/**",
+        "src/features/cart-actions/ui/remove-button/**",
+        "src/features/cart-actions/index.ts",
+        "src/features/apply-coupon/ui/coupon-input/**",
+        "src/features/apply-coupon/index.ts",
+        "src/features/checkout/ui/checkout-button/**",
+        "src/features/checkout/ui/stock-conflict-modal/**",
+        "src/features/checkout/index.ts"
+      ],
+      "predicted_surfaces": [
+        "ui",
+        "tests"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    }
+  ],
+  "computed_at": "2026-05-19T12:06:00.000000+00:00",
+  "computed_from": "dependency_graph+ownership",
+  "planning_artifact_wps": [],
+  "collapse_report": {
+    "events": [],
+    "total_merges": 0,
+    "independent_wps_collapsed": 0,
+    "by_rule": {}
+  }
+}

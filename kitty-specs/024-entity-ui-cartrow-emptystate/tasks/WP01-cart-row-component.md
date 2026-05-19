@@ -108,12 +108,12 @@ export interface CartRowProps {
 
 ### T002: Implement CartRow desktop layout (horizontal)
 
-**Purpose**: Build the desktop layout where the cart row is displayed horizontally (image left, details right).
+**Purpose**: Build the desktop layout (`>= lg` / 1024px) where the cart row is displayed horizontally (image left, details right).
 
 **Steps**:
 1. In `cart-row.tsx`, implement the desktop layout using Tailwind CSS:
    - Outer container: flex row, gap-4, padding, border-bottom for separator
-   - Left side: Product image thumbnail (fixed size ~96px x 96px, border-radius 8px using `rounded-lg`)
+   - Left side: Product image thumbnail (fixed size ~96px x 96px, border-radius 8px using `rounded-md`)
    - Right side: Product details stacked vertically
      - Product name: font-semibold, text-base
      - Variant specs (if provided): horizontal flex of key-value pairs, text-sm, text-neutral-500
@@ -123,44 +123,52 @@ export interface CartRowProps {
    - Colors: `text-neutral-900` (name), `text-neutral-600` (description), `text-neutral-900` (price)
    - Spacing: `gap-4`, `p-4`
    - Border: `border-b border-neutral-200` for row separator
-   - Image radius: `rounded-lg` (maps to --radius-lg: 0.75rem / 12px; but ticket says 8px - use `rounded-md` which is 0.5rem / 8px)
+   - Image radius: `rounded-md` (maps to --radius-md: 0.5rem / 8px)
 
 **Design notes**:
-- Desktop breakpoint: `md:` prefix in Tailwind (768px and above)
+- Desktop breakpoint: `lg:` prefix in Tailwind (1024px and above)
 - Image should not stretch: `object-cover`
 - Image alt text: use product `name` prop
 
 **Validation**:
-- [ ] Desktop layout renders as horizontal flex
+- [ ] Desktop layout renders as horizontal flex at `lg` and above
 - [ ] Image has correct size and border-radius
 - [ ] All text uses design token colors
 - [ ] No raw hex values in class names
 
 ---
 
-### T003: Implement CartRow responsive mobile layout (vertical)
+### T003: Implement CartRow responsive tablet and mobile layouts
 
-**Purpose**: Build the mobile layout where the cart row stacks vertically (image on top, details below).
+**Purpose**: Build the mobile (`< md` / 768px) and tablet (`md` to `lg` / 768px - 1024px) layouts.
 
 **Steps**:
-1. Add responsive classes to switch from horizontal to vertical below the `md` breakpoint:
-   - Default (mobile): `flex-col`
-   - Desktop (`md:`): `flex-row`
-   - Image: full width on mobile, fixed size on desktop
-2. Ensure quantity controls and remove button are positioned correctly in both layouts:
+1. Implement the three-tier responsive strategy using Tailwind breakpoints:
+   - **Mobile** (default, `< md`): `flex-col` - full vertical stack (image top, details below, controls at bottom)
+   - **Tablet** (`md:` to `lg:`): `md:flex-row` - compact horizontal layout with smaller image (~80px), tighter spacing
+   - **Desktop** (`lg:`): `lg:flex-row` with full sizing - image ~96px, generous spacing
+2. Image sizing across breakpoints:
+   - Mobile: `w-full h-48` (full width, fixed height)
+   - Tablet: `md:w-20 md:h-20` (compact square)
+   - Desktop: `lg:w-24 lg:h-24` (full size)
+3. Ensure quantity controls and remove button are positioned correctly in all three layouts:
    - Mobile: controls below product details, full-width aligned
-   - Desktop: controls inline with price or at the right edge
-3. Ensure touch targets are at least 44px tall on mobile
+   - Tablet: controls inline with price or at the right edge, compact spacing
+   - Desktop: controls inline with price or at the right edge, standard spacing
+4. Ensure touch targets are at least 44px tall on mobile and tablet
 
 **Design notes**:
-- Mobile-first approach: default styles for mobile, `md:` prefixes for desktop enhancements
-- CartControl already has proper sizing (`h-9` = 36px, which is close to 44px - ensure the surrounding container has enough padding)
+- Mobile-first approach: default styles for mobile, `md:` for tablet, `lg:` for desktop
+- Tablet is a transition state - it may share characteristics with both mobile and desktop
+- CartControl already has proper sizing (`h-9` = 36px, ensure surrounding container padding makes total touch target >= 44px)
+- Use `gap-3` on tablet, `gap-4` on desktop for spacing efficiency
 
 **Validation**:
-- [ ] Mobile layout stacks vertically
-- [ ] Desktop layout is horizontal
+- [ ] Mobile layout (`< md`) stacks vertically
+- [ ] Tablet layout (`md` to `lg`) renders correctly (compact horizontal or adjusted layout)
+- [ ] Desktop layout (`>= lg`) is full horizontal
 - [ ] No information loss at any breakpoint
-- [ ] Touch targets are accessible on mobile
+- [ ] Touch targets are accessible on mobile and tablet
 
 ---
 
@@ -285,7 +293,7 @@ const baseArgs = {
 
 - [ ] All 6 subtasks complete
 - [ ] Component renders correctly in all Storybook stories
-- [ ] Desktop and mobile layouts verified
+- [ ] Desktop (`>= lg`), tablet (`md` to `lg`), and mobile (`< md`) layouts verified
 - [ ] All callbacks fire correctly
 - [ ] No TypeScript errors
 - [ ] No lint errors (`npm run lint`)
@@ -293,7 +301,8 @@ const baseArgs = {
 
 ## Risks
 
-- **Responsive complexity**: CartRow has different layouts for desktop and mobile. Test both thoroughly.
+- **Responsive complexity**: CartRow has three distinct layouts (mobile, tablet, desktop). Test all three thoroughly using browser dev tools.
+- **Tablet breakpoint ambiguity**: Without direct access to Penpot designs, the tablet layout is an interpretation. Verify visually and adjust if needed.
 - **CartControl integration**: Ensure the CartControl component's styling doesn't conflict with CartRow's layout.
 - **Image loading**: External images (picsum.photos) may be slow. This is acceptable for Storybook but note that real usage should use optimized images.
 
@@ -301,7 +310,8 @@ const baseArgs = {
 
 - Verify the component receives ALL data via props (no store access)
 - Check that design tokens are used (no raw hex values in class names)
-- Confirm responsive behavior at sm/md/lg breakpoints
+- Confirm responsive behavior at sm, md, and lg breakpoints (three-tier layout)
+- Verify tablet layout (`md` to `lg`) is explicitly handled, not just an accidental in-between state
 - Verify CartControl is reused, not reimplemented
 - Check that the Remove button uses the correct Button variant (ghost)
 - Verify all 6 stories render correctly

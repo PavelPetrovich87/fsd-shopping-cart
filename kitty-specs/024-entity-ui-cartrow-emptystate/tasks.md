@@ -11,8 +11,8 @@
 | ID | Description | WP | Parallel |
 |---|---|---|---|
 | T001 | Create CartRow directory structure and define CartRowProps interface | WP01 | [P] |
-| T002 | Implement CartRow desktop layout (horizontal) | WP01 | [P] |
-| T003 | Implement CartRow responsive mobile layout (vertical) | WP01 | [P] |
+| T002 | Implement CartRow desktop layout (horizontal, `>= lg`) | WP01 | [P] |
+| T003 | Implement CartRow responsive tablet and mobile layouts | WP01 | [P] |
 | T004 | Integrate CartControl and Remove button with callbacks | WP01 | [P] |
 | T005 | Write CartRow Storybook stories | WP01 | [P] |
 | T006 | Verify CartRow accessibility | WP01 | [P] |

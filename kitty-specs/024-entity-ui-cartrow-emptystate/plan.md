@@ -154,7 +154,7 @@ See `data-model.md` for detailed prop interfaces and data flow.
 2. **Price formatting is consumer responsibility** - CartRow receives a pre-formatted price string, keeping the component presentation-only.
 3. **Variant specs are optional** - `specs?: Record<string, string>` allows flexible key-value pairs without prescribing product attributes.
 4. **EmptyState actions are optional** - both primary and secondary actions are optional for maximum reusability.
-5. **Responsive breakpoint at `md` (768px)** - desktop horizontal layout below, mobile vertical layout above.
+5. **Three-tier responsive breakpoints** - mobile vertical (`< md` / 768px), tablet compact horizontal or adjusted vertical (`md` to `lg` / 768px - 1024px), desktop full horizontal (`>= lg` / 1024px).
 
 ### Accessibility Requirements
 

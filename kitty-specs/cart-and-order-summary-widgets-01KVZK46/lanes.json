@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "mission_slug": "cart-and-order-summary-widgets-01KVZK46",
+  "mission_id": "01KVZK46SYN5KG0N5JP5BXGKTN",
+  "mission_branch": "kitty/mission-cart-and-order-summary-widgets-01KVZK46",
+  "target_branch": "main",
+  "lanes": [
+    {
+      "lane_id": "lane-a",
+      "wp_ids": [
+        "WP01",
+        "WP02",
+        "WP03",
+        "WP04"
+      ],
+      "write_scope": [
+        "src/widgets/cart/cart-list/",
+        "src/widgets/cart/cart-list/**",
+        "src/widgets/cart/cart-page.stories.tsx",
+        "src/widgets/cart/index.ts",
+        "src/widgets/cart/model/types.ts",
+        "src/widgets/cart/order-summary/",
+        "src/widgets/cart/order-summary/**"
+      ],
+      "predicted_surfaces": [
+        "api",
+        "app-shell",
+        "artifact-rendering",
+        "legacy-cleanup"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    }
+  ],
+  "computed_at": "2026-06-25T15:17:32.313600+00:00",
+  "computed_from": "dependency_graph+ownership",
+  "planning_artifact_wps": [],
+  "collapse_report": {
+    "events": [
+      {
+        "wp_a": "WP01",
+        "wp_b": "WP02",
+        "rule": "write_scope_overlap",
+        "evidence": "overlapping globs: 'src/widgets/cart/cart-list/' vs 'src/widgets/cart/cart-list/**'; WP02 depends on WP01"
+      },
+      {
+        "wp_a": "WP01",
+        "wp_b": "WP03",
+        "rule": "write_scope_overlap",
+        "evidence": "overlapping globs: 'src/widgets/cart/order-summary/' vs 'src/widgets/cart/order-summary/**'; WP03 depends on WP01"
+      },
+      {
+        "wp_a": "WP02",
+        "wp_b": "WP04",
+        "rule": "write_scope_overlap",
+        "evidence": "overlapping globs: 'src/widgets/cart/index.ts' vs 'src/widgets/cart/index.ts'; WP04 depends on WP02"
+      }
+    ],
+    "total_merges": 3,
+    "independent_wps_collapsed": 0,
+    "by_rule": {
+      "write_scope_overlap": 3
+    }
+  }
+}

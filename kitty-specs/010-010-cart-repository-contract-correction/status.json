@@ -2,7 +2,7 @@
   "event_count": 7,
   "last_event_id": "01KP5VM0EH16WGBE4QRNBFFPRT",
   "materialized_at": "2026-04-14T11:21:56.434056+00:00",
-  "mission_number": "010",
+  "mission_number": "10",
   "mission_slug": "010-010-cart-repository-contract-correction",
   "mission_type": "software-dev",
   "summary": {

@@ -2,7 +2,7 @@
   "event_count": 27,
   "last_event_id": "01KP5VSKQMJAJACCE4WH58P5HV",
   "materialized_at": "2026-04-14T11:25:00.020351+00:00",
-  "mission_number": "007",
+  "mission_number": "7",
   "mission_slug": "007-reactive-zustand-cart-repository",
   "mission_type": "software-dev",
   "summary": {

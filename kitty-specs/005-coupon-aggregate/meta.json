@@ -1,7 +1,8 @@
 {
   "created_at": "2026-04-09T13:59:08.120506+00:00",
   "friendly_name": "Coupon Aggregate",
-  "mission_number": "005",
+  "mission_id": "01KVZDVPZMN6DRD9Y4WPR8JVNY",
+  "mission_number": 5,
   "mission_slug": "005-coupon-aggregate",
   "mission_type": "software-dev",
   "slug": "coupon-aggregate",

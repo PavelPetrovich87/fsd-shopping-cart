@@ -2,7 +2,7 @@
   "event_count": 14,
   "last_event_id": "01KNVWPJTR8HKQHJ2AGPG91KQT",
   "materialized_at": "2026-04-10T14:28:25.048720+00:00",
-  "mission_number": "009",
+  "mission_number": "9",
   "mission_slug": "009-entity-repository-ports",
   "mission_type": "software-dev",
   "summary": {

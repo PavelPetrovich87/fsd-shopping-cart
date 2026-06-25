@@ -2,7 +2,7 @@
   "event_count": 29,
   "last_event_id": "01KNVWHV2VFAVPXZHTF61VMSB4",
   "materialized_at": "2026-04-10T14:25:49.659531+00:00",
-  "mission_number": "008",
+  "mission_number": "8",
   "mission_slug": "008-mock-repository-adapters",
   "mission_type": "software-dev",
   "summary": {

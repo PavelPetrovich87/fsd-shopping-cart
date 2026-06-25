@@ -17,6 +17,7 @@ export default defineConfig([
     'kitty-specs',
     '.kittify',
     '.worktrees',
+    'public/mockServiceWorker.js',
   ]),
   {
     files: ['**/*.{ts,tsx}'],

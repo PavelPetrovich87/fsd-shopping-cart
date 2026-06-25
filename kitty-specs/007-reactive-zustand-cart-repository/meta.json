@@ -1,11 +1,12 @@
 {
-  "mission_number": "007",
-  "slug": "reactive-zustand-cart-repository",
-  "mission_slug": "007-reactive-zustand-cart-repository",
-  "friendly_name": "Reactive Zustand Cart Repository",
-  "mission_type": "software-dev",
-  "target_branch": "main",
-  "vcs": "git",
   "created_at": "2026-04-10T13:47:11.501756+00:00",
-  "source_description": "T-009 here @docs/TICKETS.md"
+  "friendly_name": "Reactive Zustand Cart Repository",
+  "mission_id": "01KVZDVQ06YCNY7WPVS2JFAH8M",
+  "mission_number": 7,
+  "mission_slug": "007-reactive-zustand-cart-repository",
+  "mission_type": "software-dev",
+  "slug": "reactive-zustand-cart-repository",
+  "source_description": "T-009 here @docs/TICKETS.md",
+  "target_branch": "main",
+  "vcs": "git"
 }

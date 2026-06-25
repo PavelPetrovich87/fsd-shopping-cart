@@ -2,7 +2,7 @@
   "event_count": 27,
   "last_event_id": "01KS02YCPFEPDN99CRM06EPTRX",
   "materialized_at": "2026-05-19T12:21:35.567125+00:00",
-  "mission_number": "025",
+  "mission_number": "25",
   "mission_slug": "025-feature-ui-cart-coupon-checkout",
   "mission_type": "software-dev",
   "summary": {

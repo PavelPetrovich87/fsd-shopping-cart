@@ -20,8 +20,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "validate:arch": "tsx scripts/validate-architecture.ts",
-    "chromatic": "chromatic --project-token $CHROMATIC_PROJECT_TOKEN",
-    "chromatic:local": "chromatic --project-token $CHROMATIC_PROJECT_TOKEN --exit-zero-on-changes"
+    "chromatic": "dotenv -e .env.chromatic -- chromatic",
+    "chromatic:local": "dotenv -e .env.chromatic -- chromatic --exit-zero-on-changes"
   },
   "dependencies": {
     "@base-ui/react": "^1.3.0",
@@ -55,6 +55,7 @@
     "@vitest/browser-playwright": "^4.1.2",
     "@vitest/coverage-v8": "^4.1.2",
     "chromatic": "^16.9.1",
+    "dotenv-cli": "^11.0.0",
     "eslint": "^9.39.4",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-react": "^7.37.5",

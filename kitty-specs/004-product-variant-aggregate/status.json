@@ -2,7 +2,7 @@
   "event_count": 14,
   "last_event_id": "01KNSGC2A4FEWG2VZ30MWHHR7P",
   "materialized_at": "2026-04-09T16:14:28.676485+00:00",
-  "mission_number": "004",
+  "mission_number": "4",
   "mission_slug": "004-product-variant-aggregate",
   "mission_type": "software-dev",
   "summary": {

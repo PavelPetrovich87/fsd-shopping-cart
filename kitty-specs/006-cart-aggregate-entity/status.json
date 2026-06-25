@@ -2,7 +2,7 @@
   "event_count": 24,
   "last_event_id": "01KNSDC8DTYTKJNVANC3VA2N0J",
   "materialized_at": "2026-04-09T15:22:09.210707+00:00",
-  "mission_number": "006",
+  "mission_number": "6",
   "mission_slug": "006-cart-aggregate-entity",
   "mission_type": "software-dev",
   "summary": {

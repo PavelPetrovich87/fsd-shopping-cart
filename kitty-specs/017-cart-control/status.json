@@ -1,8 +1,8 @@
 {
-  "event_count": 31,
-  "last_event_id": "01KQRESET02",
-  "materialized_at": "2026-04-29T18:05:00.000000+00:00",
-  "mission_number": "017",
+  "event_count": 29,
+  "last_event_id": "3BDHZXBPHHJHXYZS61T8DYDZFD",
+  "materialized_at": "2026-04-29T17:46:00.000000+00:00",
+  "mission_number": "17",
   "mission_slug": "017-cart-control",
   "mission_type": "software-dev",
   "summary": {
@@ -10,26 +10,26 @@
     "blocked": 0,
     "canceled": 0,
     "claimed": 0,
-    "done": 2,
+    "done": 0,
     "for_review": 0,
     "in_progress": 0,
     "in_review": 0,
-    "planned": 0
+    "planned": 2
   },
   "work_packages": {
     "WP01": {
       "actor": "kilo",
       "force_count": 6,
-      "lane": "done",
-      "last_event_id": "01KQRESET01",
-      "last_transition_at": "2026-04-29T18:05:00.000000+00:00"
+      "lane": "planned",
+      "last_event_id": "3BDHZXBPHHJHXYZS61T8DYDZFD",
+      "last_transition_at": "2026-04-29T17:46:00.000000+00:00"
     },
     "WP02": {
       "actor": "kilo",
       "force_count": 6,
-      "lane": "done",
-      "last_event_id": "01KQRESET02",
-      "last_transition_at": "2026-04-29T18:05:00.000000+00:00"
+      "lane": "planned",
+      "last_event_id": "0F083HJP16DFTSAHTBK3838NVQ",
+      "last_transition_at": "2026-04-29T17:46:00.000000+00:00"
     }
   }
 }

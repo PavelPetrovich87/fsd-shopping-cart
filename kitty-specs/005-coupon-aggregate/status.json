@@ -2,7 +2,7 @@
   "event_count": 23,
   "last_event_id": "01KNVNQEJZ3E61HWPS5F4ATEQG",
   "materialized_at": "2026-04-10T12:26:33.439383+00:00",
-  "mission_number": "005",
+  "mission_number": "5",
   "mission_slug": "005-coupon-aggregate",
   "mission_type": "software-dev",
   "summary": {

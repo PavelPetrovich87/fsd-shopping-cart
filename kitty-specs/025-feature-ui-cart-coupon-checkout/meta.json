@@ -2,7 +2,7 @@
   "created_at": "2026-05-19T11:29:12.822676+00:00",
   "friendly_name": "Feature UI Components for Cart, Coupon, and Checkout",
   "mission_id": "01KRZZYFKP1640F8HJDV2XXTZW",
-  "mission_number": "025",
+  "mission_number": 25,
   "mission_slug": "025-feature-ui-cart-coupon-checkout",
   "mission_type": "software-dev",
   "slug": "feature-ui-cart-coupon-checkout",

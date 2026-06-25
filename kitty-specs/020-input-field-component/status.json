@@ -2,7 +2,7 @@
   "event_count": 10,
   "last_event_id": "01KRNE513K61JKKP6H62AYFW41",
   "materialized_at": "2026-05-15T09:05:48.659410+00:00",
-  "mission_number": "020",
+  "mission_number": "20",
   "mission_slug": "020-input-field-component",
   "mission_type": "software-dev",
   "summary": {

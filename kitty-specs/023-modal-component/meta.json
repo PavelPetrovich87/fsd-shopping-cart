@@ -2,11 +2,11 @@
   "created_at": "2026-05-05T07:32:27.281568+00:00",
   "friendly_name": "Modal Component",
   "mission_id": "01KQVGTX0HVEFGAXEDPY0ZCFAY",
-  "mission_number": "023",
+  "mission_number": 23,
   "mission_slug": "023-modal-component",
   "mission_type": "software-dev",
   "slug": "023-modal-component",
+  "source_description": "T-024: Reusable Modal dialog component with backdrop, close controls, focus trap, ESC dismissal, and fade/scale animations. Generic container for arbitrary content. Based on Penpot design.",
   "target_branch": "main",
-  "vcs": "git",
-  "source_description": "T-024: Reusable Modal dialog component with backdrop, close controls, focus trap, ESC dismissal, and fade/scale animations. Generic container for arbitrary content. Based on Penpot design."
+  "vcs": "git"
 }

@@ -93,14 +93,18 @@ graph TD
     shopping-cart --> shared/lib
     apply-coupon --> cart
     apply-coupon --> coupon
+    apply-coupon --> shared/ui
     apply-coupon --> shared/lib
     cart-actions --> cart
     cart-actions --> product
+    cart-actions --> shared/ui
     cart-actions --> shared/lib
     checkout --> cart
     checkout --> product
+    checkout --> shared/ui
     checkout --> shared/lib
     product --> shared/api
     coupon --> shared/api
     coupon --> shared/lib
+    cart --> shared/ui
 ```

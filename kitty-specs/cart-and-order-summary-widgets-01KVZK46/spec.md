@@ -77,3 +77,26 @@ On the cart page, a shopper sees a summary card showing the subtotal for all ite
 - T-025: Cart actions feature (quantity selector, remove button) — completed.
 - T-026: Coupon input feature — completed.
 - T-017: Cart entity (CartRow, EmptyState) — completed.
+
+## Design Reference
+
+Source file: `shopping-cart-section-figma` (Penpot)
+- File ID: `4cba8d8d-63bf-80c5-8007-e20e604c26a0`
+- Page: `Design`
+- Page ID: `6af293a7-f75e-808e-8007-e20dfb265d42`
+
+### Widget boards
+
+| Widget | Board name | Board ID |
+| ------ | ---------- | -------- |
+| CartList | `product-list container` | `385bff8a-10f2-525c-818e-84b70d058d27` |
+| OrderSummary | `order-summary` | `051c740f-9da6-5b2e-a071-97948e3db770` |
+| OrderSummary (with discount/coupon applied) | `order-summary-discount` | `01133815-c5a9-54d9-b582-06c74f37a294` |
+
+### Supported viewport resolutions
+
+| Viewport | Width | Layout of CartList + OrderSummary |
+| -------- | ----- | --------------------------------- |
+| Desktop | 1440px | Side-by-side (CartList left, OrderSummary right) |
+| Tablet | 768px | Stacked vertically (OrderSummary above CartList) |
+| Mobile | 375px | Stacked vertically (OrderSummary above CartList) |

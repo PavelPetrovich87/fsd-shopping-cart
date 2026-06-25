@@ -68,6 +68,24 @@ All commands must exit with code 0. Warnings are errors.
 - Before considering a WP ready for review, verify both project quality gates and workflow consistency.
 - When adding unit tests, ensure they are executable through the project harness rather than existing only as files.
 
+### Front-end specifications: Penpot design reference
+
+For any ticket that creates or modifies UI components, widgets, pages, or other visual elements (paths under `src/shared/ui/`, `src/entities/**/ui/`, `src/features/**/ui/`, `src/widgets/`, or `src/pages/`), the generated `kitty-specs/<mission>/spec.md` MUST include a `## Design Reference` section.
+
+The design reference must contain:
+
+1. Penpot file name, file ID, page name, and page ID.
+2. IDs of the relevant Penpot boards or components for each UI element being specified.
+3. Supported viewport resolutions (Desktop, Tablet, Mobile) with widths in pixels.
+4. Layout behavior at each breakpoint (e.g., side-by-side vs. stacked).
+
+Procedure:
+
+1. After discovery and before writing the spec, verify the Penpot MCP connection by running `execute_code` that returns `penpot.currentFile` and `penpot.currentPage`. Do not rely on `high_level_overview` or `penpot_api_info` alone — those tools may return documentation even when no file is active.
+2. If Penpot is not connected, ask the user to connect it via **File → MCP Server → Connect**. Do not skip the design reference for front-end tasks.
+3. Use `execute_code` with `penpotUtils` to extract the required IDs, board/component names, viewport dimensions, and layout directions.
+4. Add the `## Design Reference` section to `spec.md` before committing it.
+
 ## Planning Artifacts vs Actual Code
 
 `docs/TICKETS.md`, `kitty-specs/`, and `.kilo/plans/` are planning artifacts.

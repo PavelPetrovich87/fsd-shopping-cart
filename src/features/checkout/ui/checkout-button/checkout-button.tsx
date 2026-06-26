@@ -5,9 +5,17 @@ export interface CheckoutButtonProps {
   onCheckout: () => void
 }
 
-export function CheckoutButton({ disabled = false, onCheckout }: CheckoutButtonProps) {
+export function CheckoutButton({
+  disabled = false,
+  onCheckout,
+}: CheckoutButtonProps) {
   return (
-    <Button variant="default" size="lg" disabled={disabled} onClick={onCheckout}>
+    <Button
+      variant="default"
+      size="lg"
+      disabled={disabled}
+      onClick={onCheckout}
+    >
       Checkout
     </Button>
   )

@@ -36,7 +36,9 @@ export const Default: Story = {
     disabled: false,
     onChangeQuantity: () => {},
   },
-  render: () => <QuantitySelectorWrapper initialQuantity={3} availableStock={10} />,
+  render: () => (
+    <QuantitySelectorWrapper initialQuantity={3} availableStock={10} />
+  ),
 }
 
 export const AtMinimum: Story = {
@@ -46,7 +48,9 @@ export const AtMinimum: Story = {
     disabled: false,
     onChangeQuantity: () => {},
   },
-  render: () => <QuantitySelectorWrapper initialQuantity={1} availableStock={10} />,
+  render: () => (
+    <QuantitySelectorWrapper initialQuantity={1} availableStock={10} />
+  ),
 }
 
 export const AtMaximum: Story = {
@@ -56,7 +60,9 @@ export const AtMaximum: Story = {
     disabled: false,
     onChangeQuantity: () => {},
   },
-  render: () => <QuantitySelectorWrapper initialQuantity={10} availableStock={10} />,
+  render: () => (
+    <QuantitySelectorWrapper initialQuantity={10} availableStock={10} />
+  ),
 }
 
 export const Disabled: Story = {
@@ -78,5 +84,7 @@ export const OutOfStock: Story = {
     disabled: false,
     onChangeQuantity: () => {},
   },
-  render: () => <QuantitySelectorWrapper initialQuantity={3} availableStock={0} />,
+  render: () => (
+    <QuantitySelectorWrapper initialQuantity={3} availableStock={0} />
+  ),
 }

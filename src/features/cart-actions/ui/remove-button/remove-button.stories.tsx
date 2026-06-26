@@ -31,7 +31,11 @@ export const ModalOpen: Story = {
         <Button variant="link" onClick={() => setOpen(true)}>
           Remove
         </Button>
-        <Modal open={open} onClose={() => setOpen(false)} title="Confirm Item Removal">
+        <Modal
+          open={open}
+          onClose={() => setOpen(false)}
+          title="Confirm Item Removal"
+        >
           <p className="text-sm text-neutral-600">
             Are you sure you want to remove this item from your shopping cart?
           </p>

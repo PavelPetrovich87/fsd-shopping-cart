@@ -52,7 +52,8 @@ export function StockConflictModal({
 
         {isSingleProductEmptyCart && (
           <p className="text-sm text-neutral-600">
-            Since there are no more items in your cart, you will be brought back to cart
+            Since there are no more items in your cart, you will be brought back
+            to cart
           </p>
         )}
       </div>

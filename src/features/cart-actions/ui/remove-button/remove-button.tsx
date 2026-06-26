@@ -24,7 +24,11 @@ export function RemoveButton({ onRemove }: RemoveButtonProps) {
         Remove
       </Button>
 
-      <Modal open={isModalOpen} onClose={handleClose} title="Confirm Item Removal">
+      <Modal
+        open={isModalOpen}
+        onClose={handleClose}
+        title="Confirm Item Removal"
+      >
         <p className="text-sm text-neutral-600">
           Are you sure you want to remove this item from your shopping cart?
         </p>

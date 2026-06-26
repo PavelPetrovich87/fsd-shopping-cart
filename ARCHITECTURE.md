@@ -65,6 +65,7 @@ graph TD
 ```mermaid
 graph TD
     subgraph widgets
+        cart
     end
 
     subgraph features
@@ -106,5 +107,7 @@ graph TD
     product --> shared/api
     coupon --> shared/api
     coupon --> shared/lib
+    cart --> apply-coupon
+    cart --> checkout
     cart --> shared/ui
 ```

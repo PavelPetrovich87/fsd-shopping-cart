@@ -767,9 +767,9 @@ _Atomic UI components — no dependencies on domain logic. Everything in Tier 6+
 
 **Acceptance Criteria**:
 
-- [ ] CartList: renders list sorted by `created_at` (latest first), shows EmptyState when empty
-- [ ] OrderSummary: subtotal, shipping (FREE), applied discounts, total — updates in real time
-- [ ] Responsive layout: two-column on desktop, stacked on mobile
+- [x] CartList: renders list sorted by `created_at` (latest first), shows EmptyState when empty
+- [x] OrderSummary: subtotal, shipping (FREE), applied discounts, total — updates in real time
+- [x] Responsive layout: two-column on desktop, stacked on mobile
 
 ---
 
@@ -918,7 +918,7 @@ _Infrastructure to enable fully autonomous agent-driven development cycles._
 | **Tier 5 — Design System**      | T-017, T-019, T-020, T-021, T-022, T-023, T-024 | 🔴🟡🟡🟡🟡🟢🟢🟡 |
 | **Tier 5 (cont.) — Entity UI**  | T-025                                           | 🟡               |
 | **Tier 5 (cont.) — Feature UI** | T-026                                           | 🔴               |
-| **Tier 5 (cont.) — Widgets**    | T-027                                           | 🟡               |
+| **Tier 5 (cont.) — Widgets**    | T-027                                           | 🟢               |
 | **Tier 6 — Pages & App**        | T-028, T-029                                    | 🟡🟡             |
 | **Tier 7 — Enhancements**       | T-030, T-031                                    | 🟢🟢             |
 | **Tier 7 — Agent Automation**   | T-032                                           | 🔴               |

@@ -13,6 +13,7 @@
     "test:unit:watch": "vitest --config vitest.unit.config.ts",
     "test:storybook": "vitest run --project storybook --config vite.config.ts",
     "test:storybook:watch": "vitest --project storybook --config vite.config.ts",
+    "test:browser": "vitest run --project browser --config vite.config.ts",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "preview": "vite preview",

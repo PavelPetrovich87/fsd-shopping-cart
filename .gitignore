@@ -17,6 +17,10 @@ storybook-static
 visual-baselines/
 visual-diffs/
 
+# Vitest browser test artifacts
+.vitest-attachments/
+**/__screenshots__/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

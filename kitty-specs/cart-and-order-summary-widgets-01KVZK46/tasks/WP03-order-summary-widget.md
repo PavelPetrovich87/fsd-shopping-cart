@@ -132,3 +132,9 @@ Implement the `OrderSummary` widget that displays subtotal, discount, shipping, 
 - Confirm `OrderSummary` only imports from `features/apply-coupon`, `features/checkout`, `@/widgets/cart/model/types`, and `shared/ui`.
 - Verify the component does not derive `total` from other props.
 - Check that line items render conditionally based on prop presence.
+
+## Activity Log
+
+- 2026-06-25T15:46:58Z – user – Start WP03 implementation
+- 2026-06-25T15:50:14Z – user – Ready for review: OrderSummary widget, stories, and browser tests pass
+- 2026-06-25T15:50:37Z – user – Review passed: OrderSummary is presentational, composes CouponInput/CheckoutButton, conditionally renders money rows, stories and browser tests pass

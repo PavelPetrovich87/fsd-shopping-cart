@@ -51,9 +51,9 @@
 
 **Included subtasks**:
 
-- [ ] T003 Implement `CartList` component (WP02)
-- [ ] T004 Add `CartList` Storybook stories (WP02)
-- [ ] T005 Add `CartList` Vitest Browser Mode tests (WP02)
+- [x] T003 Implement `CartList` component (WP02)
+- [x] T004 Add `CartList` Storybook stories (WP02)
+- [x] T005 Add `CartList` Vitest Browser Mode tests (WP02)
 
 **Implementation sketch**:
 
@@ -79,9 +79,9 @@
 
 **Included subtasks**:
 
-- [ ] T006 Implement `OrderSummary` component (WP03)
-- [ ] T007 Add `OrderSummary` Storybook stories (WP03)
-- [ ] T008 Add `OrderSummary` Vitest Browser Mode tests (WP03)
+- [x] T006 Implement `OrderSummary` component (WP03)
+- [x] T007 Add `OrderSummary` Storybook stories (WP03)
+- [x] T008 Add `OrderSummary` Vitest Browser Mode tests (WP03)
 
 **Implementation sketch**:
 
@@ -107,9 +107,9 @@
 
 **Included subtasks**:
 
-- [ ] T009 Create `src/widgets/cart/index.ts` public API (WP04)
-- [ ] T010 Add combined layout story for cart page composition (WP04)
-- [ ] T011 Run lint, lint:arch, build and fix issues (WP04)
+- [x] T009 Create `src/widgets/cart/index.ts` public API (WP04)
+- [x] T010 Add combined layout story for cart page composition (WP04)
+- [x] T011 Run lint, lint:arch, build and fix issues (WP04)
 
 **Implementation sketch**:
 

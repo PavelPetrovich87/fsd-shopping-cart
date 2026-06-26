@@ -1,8 +1,8 @@
 {
-  "event_count": 4,
-  "last_event_id": "01KVZNQ42MVYXGCW8E87WKBGZM",
-  "materialized_at": "2026-06-25T15:17:31.348979+00:00",
-  "mission_number": "",
+  "event_count": 21,
+  "last_event_id": "01KW17PWWCF1WXWXNE2MSECXES",
+  "materialized_at": "2026-06-26T05:51:12.780477+00:00",
+  "mission_number": "26",
   "mission_slug": "cart-and-order-summary-widgets-01KVZK46",
   "mission_type": "software-dev",
   "summary": {
@@ -10,40 +10,40 @@
     "blocked": 0,
     "canceled": 0,
     "claimed": 0,
-    "done": 0,
+    "done": 4,
     "for_review": 0,
     "in_progress": 0,
     "in_review": 0,
-    "planned": 4
+    "planned": 0
   },
   "work_packages": {
     "WP01": {
-      "actor": "finalize-tasks",
-      "force_count": 0,
-      "lane": "planned",
-      "last_event_id": "01KVZNPZEZD4QYHHVSQEDQKSZM",
-      "last_transition_at": "2026-06-25T15:17:26.623180+00:00"
+      "actor": "merge",
+      "force_count": 2,
+      "lane": "done",
+      "last_event_id": "01KW17PR3TXXGQJ3HT35KCG7QJ",
+      "last_transition_at": "2026-06-26T05:51:07.898451+00:00"
     },
     "WP02": {
-      "actor": "finalize-tasks",
-      "force_count": 0,
-      "lane": "planned",
-      "last_event_id": "01KVZNQ1JJV9C6MNAA96X8NV9W",
-      "last_transition_at": "2026-06-25T15:17:28.786294+00:00"
+      "actor": "merge",
+      "force_count": 3,
+      "lane": "done",
+      "last_event_id": "01KW17PSSSR05WW71RWXZR4PEW",
+      "last_transition_at": "2026-06-26T05:51:09.625249+00:00"
     },
     "WP03": {
-      "actor": "finalize-tasks",
-      "force_count": 0,
-      "lane": "planned",
-      "last_event_id": "01KVZNQ2TGKSN04P07KT7RM77Z",
-      "last_transition_at": "2026-06-25T15:17:30.064145+00:00"
+      "actor": "merge",
+      "force_count": 3,
+      "lane": "done",
+      "last_event_id": "01KW17PVCEET8WZ7KFKGZJFB6T",
+      "last_transition_at": "2026-06-26T05:51:11.246922+00:00"
     },
     "WP04": {
-      "actor": "finalize-tasks",
-      "force_count": 0,
-      "lane": "planned",
-      "last_event_id": "01KVZNQ42MVYXGCW8E87WKBGZM",
-      "last_transition_at": "2026-06-25T15:17:31.348979+00:00"
+      "actor": "merge",
+      "force_count": 3,
+      "lane": "done",
+      "last_event_id": "01KW17PWWCF1WXWXNE2MSECXES",
+      "last_transition_at": "2026-06-26T05:51:12.780477+00:00"
     }
   }
 }

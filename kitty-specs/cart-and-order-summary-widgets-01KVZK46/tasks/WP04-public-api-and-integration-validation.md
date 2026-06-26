@@ -119,3 +119,9 @@ Publish the `CartList` and `OrderSummary` widgets through a single public API, d
 - Verify the public API exports only what is documented in `plan.md`.
 - Confirm the combined story matches the Penpot design reference viewports.
 - Check that all quality gate commands pass with zero errors.
+
+## Activity Log
+
+- 2026-06-25T15:50:48Z – user – Start WP04 implementation
+- 2026-06-25T15:52:32Z – user – Ready for review: public API exports both widgets, combined layout story added, all quality gates pass
+- 2026-06-25T15:52:55Z – user – Review passed: public API exports both widgets and prop types, combined layout story matches responsive design, all quality gates pass

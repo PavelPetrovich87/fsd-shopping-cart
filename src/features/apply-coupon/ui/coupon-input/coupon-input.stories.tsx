@@ -28,7 +28,7 @@ function CouponInputWrapper(props: {
       if (code === '') {
         setError('Please enter a valid code')
       } else if (code === 'INVALID') {
-        setError("Sorry, but this coupon doesn't exist")
+        setError("Sorry, this coupon doesn't exist.")
       } else {
         setError(undefined)
         setAppliedCoupon({ code, discountLabel: '-$10.00' })
@@ -77,7 +77,7 @@ export const InputVisible: Story = {
           className="flex h-10 w-80 items-center rounded bg-neutral-100 px-3 text-sm outline-none"
           autoFocus
         />
-        <button className="inline-flex h-8 items-center justify-center rounded-lg bg-primary px-2.5 text-sm font-medium text-primary-foreground">
+        <button className="bg-primary text-primary-foreground inline-flex h-8 items-center justify-center rounded-lg px-2.5 text-sm font-medium">
           Apply
         </button>
       </div>
@@ -103,18 +103,18 @@ export const ErrorEmpty: Story = {
   render: () => (
     <div className="flex items-end gap-2">
       <div className="flex flex-col gap-1.5">
-        <div className="relative flex h-10 w-80 items-center gap-2 rounded bg-neutral-100 px-3 border border-[#e5e5e5]">
+        <div className="relative flex h-10 w-80 items-center gap-2 rounded border border-[#e5e5e5] bg-neutral-100 px-3">
           <input
             placeholder="Enter coupon code"
             className="flex-1 bg-transparent text-sm outline-none"
             autoFocus
           />
         </div>
-        <span className="text-sm text-error-600" role="alert">
+        <span className="text-error-600 text-sm" role="alert">
           Please enter a valid code
         </span>
       </div>
-      <button className="inline-flex h-8 items-center justify-center rounded-lg bg-primary px-2.5 text-sm font-medium text-primary-foreground">
+      <button className="bg-primary text-primary-foreground inline-flex h-8 items-center justify-center rounded-lg px-2.5 text-sm font-medium">
         Apply
       </button>
     </div>
@@ -123,25 +123,25 @@ export const ErrorEmpty: Story = {
 
 export const ErrorInvalid: Story = {
   args: {
-    error: "Sorry, but this coupon doesn't exist",
+    error: "Sorry, this coupon doesn't exist.",
     onApply: () => {},
     onRemove: () => {},
   },
   render: () => (
     <div className="flex items-end gap-2">
       <div className="flex flex-col gap-1.5">
-        <div className="relative flex h-10 w-80 items-center gap-2 rounded bg-neutral-100 px-3 border border-[#e5e5e5]">
+        <div className="relative flex h-10 w-80 items-center gap-2 rounded border border-[#e5e5e5] bg-neutral-100 px-3">
           <input
             placeholder="Enter coupon code"
             className="flex-1 bg-transparent text-sm outline-none"
             autoFocus
           />
         </div>
-        <span className="text-sm text-error-600" role="alert">
+        <span className="text-error-600 text-sm" role="alert">
           Sorry, but this coupon doesn&apos;t exist
         </span>
       </div>
-      <button className="inline-flex h-8 items-center justify-center rounded-lg bg-primary px-2.5 text-sm font-medium text-primary-foreground">
+      <button className="bg-primary text-primary-foreground inline-flex h-8 items-center justify-center rounded-lg px-2.5 text-sm font-medium">
         Apply
       </button>
     </div>

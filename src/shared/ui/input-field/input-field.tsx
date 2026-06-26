@@ -96,20 +96,25 @@ export function InputField({
         )}
       </div>
 
-      {(hint || error) && (
+      <div
+        {...{
+          className: cn('min-h-5'),
+        }}
+      >
         <span
           id={hintId}
           {...{
             className: cn(
               'text-sm',
               error ? 'text-error-600' : 'text-neutral-600',
+              !error && !hint && 'invisible',
             ),
           }}
           role={error ? 'alert' : undefined}
         >
-          {error || hint}
+          {error || hint || '\u00A0'}
         </span>
-      )}
+      </div>
     </div>
   )
 }

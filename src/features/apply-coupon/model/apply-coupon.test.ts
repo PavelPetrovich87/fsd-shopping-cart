@@ -125,9 +125,7 @@ describe('ApplyCoupon', () => {
       expect(result.success).toBe(false)
       if (!result.success) {
         expect(result.error.type).toBe('INVALID_CODE')
-        expect(result.error.message).toBe(
-          "Sorry, but this coupon doesn't exist",
-        )
+        expect(result.error.message).toBe("Sorry, this coupon doesn't exist.")
       }
       expect(mockCartRepo.saveCart).not.toHaveBeenCalled()
     })

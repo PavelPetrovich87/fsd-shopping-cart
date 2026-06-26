@@ -48,7 +48,7 @@ export const ErrorFilled: Story = {
   args: {
     label: 'Coupon code',
     value: 'NOSUCHCODE',
-    error: "Sorry, but this coupon doesn't exist.",
+    error: "Sorry, this coupon doesn't exist.",
   },
 }
 

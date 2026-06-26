@@ -27,7 +27,7 @@ export async function ApplyCoupon(
   if (!coupon) {
     const error: ApplyCouponError = {
       type: 'INVALID_CODE',
-      message: "Sorry, but this coupon doesn't exist",
+      message: "Sorry, this coupon doesn't exist.",
     }
     return { success: false, error }
   }

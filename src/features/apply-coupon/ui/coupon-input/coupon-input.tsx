@@ -50,7 +50,7 @@ export function CouponInput({
   // Input mode: input is visible, no coupon applied yet
   if (isInputVisible) {
     return (
-      <form onSubmit={handleSubmit} className="flex items-end gap-2">
+      <form onSubmit={handleSubmit} className="flex items-start gap-2">
         <InputField
           placeholder="Enter coupon code"
           value={inputValue}

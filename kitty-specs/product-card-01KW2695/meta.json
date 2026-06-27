@@ -4,7 +4,7 @@
   "mission_slug": "product-card-01KW2695",
   "friendly_name": "Product Card",
   "mission_type": "software-dev",
-  "target_branch": "main",
+  "target_branch": "kitty/mission-product-card-01KW2695",
   "coordination_branch": "kitty/mission-product-card-01KW2695",
   "topology": "coord",
   "vcs": "git",

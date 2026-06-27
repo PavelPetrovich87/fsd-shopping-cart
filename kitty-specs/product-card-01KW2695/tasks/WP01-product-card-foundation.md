@@ -9,9 +9,9 @@ requirement_refs:
 - FR-004
 - FR-007
 tracker_refs: []
-planning_base_branch: main
-merge_target_branch: main
-branch_strategy: Planning artifacts for this mission were generated on main. During /spec-kitty.implement this WP may branch from a dependency-specific base, but completed changes must merge back into main unless the human explicitly redirects the landing branch.
+planning_base_branch: kitty/mission-product-card-01KW2695
+merge_target_branch: kitty/mission-product-card-01KW2695
+branch_strategy: Planning artifacts for this mission were generated on kitty/mission-product-card-01KW2695. During /spec-kitty.implement this WP may branch from a dependency-specific base, but completed changes must merge back into kitty/mission-product-card-01KW2695 unless the human explicitly redirects the landing branch.
 subtasks:
 - T001
 - T002

@@ -1,16 +1,16 @@
 {
-  "event_count": 4,
-  "last_event_id": "X2LPSQ5QJXHURJ51F8H6X8UEGI",
-  "materialized_at": "2026-06-30T16:04:01.059Z",
+  "event_count": 6,
+  "last_event_id": "T6VT62PP009QVVSGDNACC4WOXM",
+  "materialized_at": "2026-06-30T16:06:22.603Z",
   "mission_number": "31",
   "mission_slug": "product-card-01KW2695",
   "mission_type": "software-dev",
   "summary": {
-    "approved": 2,
+    "approved": 0,
     "blocked": 0,
     "canceled": 0,
     "claimed": 0,
-    "done": 0,
+    "done": 2,
     "for_review": 0,
     "in_progress": 0,
     "in_review": 0,
@@ -20,16 +20,16 @@
     "WP01": {
       "actor": "kilo",
       "force_count": 1,
-      "lane": "approved",
-      "last_event_id": "X2LPSQ5QJXHURJ51F8H6X8UEGI",
-      "last_transition_at": "2026-06-30T16:04:01.059Z"
+      "lane": "done",
+      "last_event_id": "85T14EA2K2J4Z4KK9X94BVLZ06",
+      "last_transition_at": "2026-06-30T16:06:22.603Z"
     },
     "WP02": {
       "actor": "kilo",
       "force_count": 1,
-      "lane": "approved",
-      "last_event_id": "PPB0UHIJS4QB8R17SZ26UPIANV",
-      "last_transition_at": "2026-06-30T16:04:01.059Z"
+      "lane": "done",
+      "last_event_id": "T6VT62PP009QVVSGDNACC4WOXM",
+      "last_transition_at": "2026-06-30T16:06:22.603Z"
     }
   }
 }

@@ -907,6 +907,47 @@ _Infrastructure to enable fully autonomous agent-driven development cycles._
 
 ---
 
+## Tier 7 — Enhancements
+
+### T-030: Order Summary Enhancement
+
+> **Status: PLANNED** — Enhancement ideas for OrderSummary widget. Details TBD.
+
+---
+
+### T-031: Product Card
+
+| Field             | Value                  |
+| ----------------- | ---------------------- |
+| **Layer / Slice** | `entities/product/ui/` |
+| **Complexity**    | 🟢 Small               |
+| **Depends On**    | T-025                  |
+
+**Description**: Create a `ProductCard` pure presentation component in the `entities/product` layer. Displays product image, name, and price (with strikethrough list price + highlighted sale price when applicable). Used by the HomePage (T-028) to render a product grid.
+
+**Files to create:**
+
+- `src/entities/product/ui/ProductCard/ProductCard.tsx` — ProductCard component
+- `src/entities/product/ui/ProductCard/ProductCard.stories.tsx` — Storybook stories
+- `src/entities/product/ui/ProductCard/index.ts` — barrel export
+- Update `src/entities/product/index.ts` — export ProductCard
+
+**Acceptance Criteria:**
+
+- [x] ProductCard displays product image at consistent aspect ratio
+- [x] ProductCard displays product name below the image
+- [x] ProductCard displays price with strikethrough list price + highlighted sale price when applicable
+- [x] ProductCard accepts all data via props — no direct store access
+- [x] ProductCard is responsive across desktop, tablet, and mobile
+- [x] ProductCard supports loading/skeleton state
+- [x] ProductCard has Storybook stories for default, sale, and skeleton states
+- [x] Planning complete — spec, plan, and work packages generated
+- [ ] Implementation complete — all WPs done and merged
+
+> **Status: PLANNING COMPLETE** — Spec, plan, and tasks (WP01 + WP02) generated via spec-kitty. Ready for implementation.
+
+---
+
 ## Summary Matrix
 
 | Tier                            | Tickets                                         | Effort           |

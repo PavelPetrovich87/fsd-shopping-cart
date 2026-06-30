@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "mission_slug": "product-card-01KW2695",
+  "mission_id": "product-card-01KW2695",
+  "mission_branch": "kitty/mission-product-card-01KW2695",
+  "target_branch": "kitty/mission-product-card-01KW2695",
+  "lanes": [
+    {
+      "lane_id": "lane-a",
+      "wp_ids": [
+        "WP01",
+        "WP02"
+      ],
+      "write_scope": [
+        "src/entities/product/index.ts",
+        "src/entities/product/ui/.gitkeep",
+        "src/entities/product/ui/ProductCard/**"
+      ],
+      "predicted_surfaces": [
+        "api",
+        "app-shell",
+        "artifact-rendering",
+        "legacy-cleanup"
+      ],
+      "depends_on_lanes": [],
+      "parallel_group": 0
+    }
+  ],
+  "computed_at": "2026-06-27T12:34:19.378458+00:00",
+  "computed_from": "dependency_graph+ownership",
+  "planning_artifact_wps": [],
+  "collapse_report": {
+    "events": [
+      {
+        "wp_a": "WP01",
+        "wp_b": "WP02",
+        "rule": "write_scope_overlap",
+        "evidence": "overlapping globs: 'src/entities/product/ui/ProductCard/**' vs 'src/entities/product/ui/ProductCard/**'; WP02 depends on WP01"
+      }
+    ],
+    "total_merges": 1,
+    "independent_wps_collapsed": 0,
+    "by_rule": {
+      "write_scope_overlap": 1
+    }
+  }
+}

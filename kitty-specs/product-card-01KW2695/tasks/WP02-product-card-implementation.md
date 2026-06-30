@@ -320,3 +320,7 @@ export type { ProductCardProps } from './ui/ProductCard'
 - Check that `npm run lint`, `npm run lint:arch`, and `npm run build` all pass
 - Verify the component is exported from `entities/product/index.ts`
 - Confirm the skeleton state prevents layout shift by matching the loaded card's structure
+
+## Activity Log
+
+- 2026-06-30T16:02:29Z – user – Implemented and reviewed manually

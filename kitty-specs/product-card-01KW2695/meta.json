@@ -1,12 +1,13 @@
 {
-  "mission_number": "031",
-  "slug": "product-card",
-  "mission_slug": "product-card-01KW2695",
-  "friendly_name": "Product Card",
-  "mission_type": "software-dev",
-  "target_branch": "main",
   "coordination_branch": "kitty/mission-product-card-01KW2695",
+  "created_at": "2026-06-26T14:45:28.444764+00:00",
+  "friendly_name": "Product Card",
+  "mission_id": "01KWCKG60Y9H10421H5DJEJVR0",
+  "mission_number": 31,
+  "mission_slug": "product-card-01KW2695",
+  "mission_type": "software-dev",
+  "slug": "product-card",
+  "target_branch": "main",
   "topology": "coord",
-  "vcs": "git",
-  "created_at": "2026-06-26T14:45:28.444764+00:00"
+  "vcs": "git"
 }

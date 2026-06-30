@@ -105,6 +105,7 @@ graph TD
     checkout --> shared/ui
     checkout --> shared/lib
     product --> shared/api
+    product --> shared/lib
     coupon --> shared/api
     coupon --> shared/lib
     cart --> apply-coupon

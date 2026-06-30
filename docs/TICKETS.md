@@ -942,9 +942,9 @@ _Infrastructure to enable fully autonomous agent-driven development cycles._
 - [x] ProductCard supports loading/skeleton state
 - [x] ProductCard has Storybook stories for default, sale, and skeleton states
 - [x] Planning complete — spec, plan, and work packages generated
-- [ ] Implementation complete — all WPs done and merged
+- [x] Implementation complete — all WPs done and merged
 
-> **Status: PLANNING COMPLETE** — Spec, plan, and tasks (WP01 + WP02) generated via spec-kitty. Ready for implementation.
+> **Status: DONE** — ProductCard implemented, stories created, quality gates passed, and merged to main.
 
 ---
 

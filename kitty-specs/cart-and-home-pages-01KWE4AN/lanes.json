@@ -3,7 +3,7 @@
   "mission_slug": "cart-and-home-pages-01KWE4AN",
   "mission_id": "01KWE4AN617FF8Z3VM4XZ8AE7J",
   "mission_branch": "kitty/mission-cart-and-home-pages-01KWE4AN",
-  "target_branch": "kitty/mission-cart-and-home-pages-01KWE4AN",
+  "target_branch": "main",
   "lanes": [
     {
       "lane_id": "lane-a",

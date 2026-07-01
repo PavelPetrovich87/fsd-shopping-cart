@@ -74,9 +74,9 @@
 **Estimated Prompt Size**: ~250 lines
 **Parallel**: Must run after WP01 and WP02.
 
-- [ ] T008 Create `src/pages/index.ts` — barrel re-export for all pages (WP03)
-- [ ] T009 Update `src/pages/App.tsx` to render pages (demo composition) (WP03)
-- [ ] T010 Run quality gates: lint, lint:arch, test:unit, build (WP03)
+- [x] T008 Create `src/pages/index.ts` — barrel re-export for all pages (WP03)
+- [x] T009 Update `src/pages/App.tsx` to render pages (demo composition) (WP03)
+- [x] T010 Run quality gates: lint, lint:arch, test:unit, build (WP03)
 
 **Implementation Notes**:
 - `src/pages/index.ts` must re-export `CartPage` from `@/pages/cart` and `HomePage` from `@/pages/home`.

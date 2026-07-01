@@ -6,6 +6,7 @@ export default defineConfig([
   {
     rules: {
       'fsd/insignificant-slice': 'off',
+      'fsd/no-layer-public-api': 'off',
     },
   },
 ])

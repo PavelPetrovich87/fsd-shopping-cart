@@ -17,17 +17,17 @@ subtasks:
 - T002
 - T003
 - T004
-create_intent:
-- src/shared/mocks/products.ts
-- src/pages/home/ui/home-page.tsx
-- src/pages/home/index.ts
-- src/pages/home/ui/home-page.stories.tsx
 history:
 - date: '2026-07-01'
   agent: kilo
   action: created
   event: WP01 prompt generated
 authoritative_surface: src/pages/home/
+create_intent:
+- src/shared/mocks/products.ts
+- src/pages/home/ui/home-page.tsx
+- src/pages/home/index.ts
+- src/pages/home/ui/home-page.stories.tsx
 execution_mode: code_change
 owned_files:
 - src/shared/mocks/**

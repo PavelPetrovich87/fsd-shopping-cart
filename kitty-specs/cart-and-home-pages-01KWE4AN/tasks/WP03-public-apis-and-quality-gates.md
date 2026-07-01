@@ -15,14 +15,14 @@ subtasks:
 - T008
 - T009
 - T010
-create_intent:
-- src/pages/index.ts
 history:
 - date: '2026-07-01'
   agent: kilo
   action: created
   event: WP03 prompt generated
 authoritative_surface: src/pages/
+create_intent:
+- src/pages/index.ts
 execution_mode: code_change
 owned_files:
 - src/pages/index.ts

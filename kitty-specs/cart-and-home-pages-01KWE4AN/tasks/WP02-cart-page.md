@@ -17,16 +17,16 @@ subtasks:
 - T005
 - T006
 - T007
-create_intent:
-- src/pages/cart/ui/cart-page.tsx
-- src/pages/cart/index.ts
-- src/pages/cart/ui/cart-page.stories.tsx
 history:
 - date: '2026-07-01'
   agent: kilo
   action: created
   event: WP02 prompt generated
 authoritative_surface: src/pages/cart/
+create_intent:
+- src/pages/cart/ui/cart-page.tsx
+- src/pages/cart/index.ts
+- src/pages/cart/ui/cart-page.stories.tsx
 execution_mode: code_change
 owned_files:
 - src/pages/cart/**

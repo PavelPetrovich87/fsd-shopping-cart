@@ -20,6 +20,7 @@ subtasks:
 - T005
 - T006
 - T007
+agent: "kilo:kimi-k2.7-code::implementer"
 shell_pid: '70422'
 history:
 - date: '2026-07-01'

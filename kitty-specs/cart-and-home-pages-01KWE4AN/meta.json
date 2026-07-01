@@ -1,0 +1,17 @@
+{
+  "coordination_branch": "kitty/mission-cart-and-home-pages-01KWE4AN",
+  "created_at": "2026-07-01T06:02:13.571796+00:00",
+  "flattened": false,
+  "friendly_name": "Cart and Home Pages",
+  "mission_id": "01KWE4AN617FF8Z3VM4XZ8AE7J",
+  "mission_number": null,
+  "mission_slug": "cart-and-home-pages-01KWE4AN",
+  "mission_type": "software-dev",
+  "purpose_context": "This mission advances cart and home pages on main so stakeholders can track the work from mission creation onward.",
+  "purpose_tldr": "Cart and Home Pages",
+  "slug": "cart-and-home-pages-01KWE4AN",
+  "source_description": "Create page-level compositions for Cart and Home pages, composing existing widgets and features. Home page will be populated with static mock products.",
+  "target_branch": "main",
+  "topology": "coord",
+  "vcs": "git"
+}

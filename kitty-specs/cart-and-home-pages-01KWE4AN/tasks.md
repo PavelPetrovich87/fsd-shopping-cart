@@ -29,10 +29,10 @@
 **Estimated Prompt Size**: ~350 lines
 **Parallel**: Safe to execute in parallel with WP02.
 
-- [x] T001 Create `src/shared/mocks/products.ts` with typed mock data (6+ products) (WP01)
-- [x] T002 Create `src/pages/home/ui/home-page.tsx` — responsive grid of ProductCards (WP01)
-- [x] T003 Create `src/pages/home/index.ts` — barrel export for HomePage (WP01)
-- [x] T004 Create `src/pages/home/ui/home-page.stories.tsx` — Storybook stories with mock data (WP01)
+- [ ] T001 Create `src/shared/mocks/products.ts` with typed mock data (6+ products) (WP01)
+- [ ] T002 Create `src/pages/home/ui/home-page.tsx` — responsive grid of ProductCards (WP01)
+- [ ] T003 Create `src/pages/home/index.ts` — barrel export for HomePage (WP01)
+- [ ] T004 Create `src/pages/home/ui/home-page.stories.tsx` — Storybook stories with mock data (WP01)
 
 **Implementation Notes**:
 - Mock product interface must match `ProductCardProps` exactly: `skuId`, `name`, `imageUrl`, `listPriceCents`, `salePriceCents`.
@@ -51,9 +51,9 @@
 **Estimated Prompt Size**: ~300 lines
 **Parallel**: Safe to execute in parallel with WP01.
 
-- [x] T005 Create `src/pages/cart/ui/cart-page.tsx` — two-column layout with CartList + OrderSummary (WP02)
-- [x] T006 Create `src/pages/cart/index.ts` — barrel export for CartPage (WP02)
-- [x] T007 Create `src/pages/cart/ui/cart-page.stories.tsx` — empty + populated states (WP02)
+- [ ] T005 Create `src/pages/cart/ui/cart-page.tsx` — two-column layout with CartList + OrderSummary (WP02)
+- [ ] T006 Create `src/pages/cart/index.ts` — barrel export for CartPage (WP02)
+- [ ] T007 Create `src/pages/cart/ui/cart-page.stories.tsx` — empty + populated states (WP02)
 
 **Implementation Notes**:
 - CartPage is a presentational component. It receives all data and callbacks via props.

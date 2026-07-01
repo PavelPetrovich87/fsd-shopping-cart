@@ -9,25 +9,25 @@ requirement_refs:
 - FR-004
 - NFR-002
 tracker_refs: []
-planning_base_branch: kitty/mission-cart-and-home-pages-01KWE4AN
-merge_target_branch: kitty/mission-cart-and-home-pages-01KWE4AN
-branch_strategy: Planning artifacts for this mission were generated on kitty/mission-cart-and-home-pages-01KWE4AN. During /spec-kitty.implement this WP may branch from a dependency-specific base, but completed changes must merge back into kitty/mission-cart-and-home-pages-01KWE4AN unless the human explicitly redirects the landing branch.
+planning_base_branch: main
+merge_target_branch: main
+branch_strategy: Planning artifacts for this mission were generated on main. During /spec-kitty.implement this WP may branch from a dependency-specific base, but completed changes must merge back into main unless the human explicitly redirects the landing branch.
 subtasks:
 - T001
 - T002
 - T003
 - T004
+create_intent:
+- src/shared/mocks/products.ts
+- src/pages/home/ui/home-page.tsx
+- src/pages/home/index.ts
+- src/pages/home/ui/home-page.stories.tsx
 history:
 - date: '2026-07-01'
   agent: kilo
   action: created
   event: WP01 prompt generated
 authoritative_surface: src/pages/home/
-create_intent:
-- src/shared/mocks/products.ts
-- src/pages/home/ui/home-page.tsx
-- src/pages/home/index.ts
-- src/pages/home/ui/home-page.stories.tsx
 execution_mode: code_change
 owned_files:
 - src/shared/mocks/**

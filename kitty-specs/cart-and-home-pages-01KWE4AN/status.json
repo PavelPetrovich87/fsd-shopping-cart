@@ -19,21 +19,21 @@
   "work_packages": {
     "WP01": {
       "actor": "finalize-tasks",
-      "force_count": 1,
+      "force_count": 0,
       "lane": "planned",
       "last_event_id": "01KWE68A57T78XC5PVH2BB7EGJ",
       "last_transition_at": "2026-07-01T06:35:53.895770+00:00"
     },
     "WP02": {
       "actor": "finalize-tasks",
-      "force_count": 1,
+      "force_count": 0,
       "lane": "planned",
       "last_event_id": "01KWE68BF4ZDP06EFPTHNG8DE6",
       "last_transition_at": "2026-07-01T06:35:55.236774+00:00"
     },
     "WP03": {
       "actor": "finalize-tasks",
-      "force_count": 1,
+      "force_count": 0,
       "lane": "planned",
       "last_event_id": "01KWE68CHXSR9RCFFX9SRFBC6K",
       "last_transition_at": "2026-07-01T06:35:56.349934+00:00"

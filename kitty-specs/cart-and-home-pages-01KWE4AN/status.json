@@ -1,19 +1,19 @@
 {
   "event_count": 20,
-  "last_event_id": "01KWEFAH092FCQSRCK3X42F4Z5",
-  "materialized_at": "2026-07-01T09:14:23.625861+00:00",
+  "last_event_id": "01KWEFEHYD7QMWNR1S4VXD3JYS",
+  "materialized_at": "2026-07-01T09:16:35.661282+00:00",
   "mission_number": "",
   "mission_slug": "cart-and-home-pages-01KWE4AN",
   "mission_type": "software-dev",
   "summary": {
-    "approved": 2,
+    "approved": 3,
     "blocked": 0,
     "canceled": 0,
     "claimed": 0,
     "done": 0,
     "for_review": 0,
     "in_progress": 0,
-    "in_review": 1,
+    "in_review": 0,
     "planned": 0
   },
   "work_packages": {
@@ -32,11 +32,11 @@
       "last_transition_at": "2026-07-01T07:30:49.211473+00:00"
     },
     "WP03": {
-      "actor": "kilo:kimi-k2.7-code::reviewer",
-      "force_count": 2,
-      "lane": "in_review",
-      "last_event_id": "01KWEFAH092FCQSRCK3X42F4Z5",
-      "last_transition_at": "2026-07-01T09:14:23.625861+00:00"
+      "actor": "user",
+      "force_count": 3,
+      "lane": "approved",
+      "last_event_id": "01KWEFEHYD7QMWNR1S4VXD3JYS",
+      "last_transition_at": "2026-07-01T09:16:35.661282+00:00"
     }
   }
 }

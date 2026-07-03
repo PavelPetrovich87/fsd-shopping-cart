@@ -5,9 +5,9 @@ dependencies:
 - WP01
 - WP02
 requirement_refs:
+- C-004
 - FR-005
 - FR-011
-- C-004
 tracker_refs: []
 planning_base_branch: spec/app-shell-routing-providers
 merge_target_branch: spec/app-shell-routing-providers

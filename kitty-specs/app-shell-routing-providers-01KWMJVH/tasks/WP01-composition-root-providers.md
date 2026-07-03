@@ -3,8 +3,8 @@ work_package_id: WP01
 title: Composition Root (Providers & DI)
 dependencies: []
 requirement_refs:
-- FR-001
 - C-002
+- FR-001
 - NFR-007
 tracker_refs: []
 planning_base_branch: spec/app-shell-routing-providers

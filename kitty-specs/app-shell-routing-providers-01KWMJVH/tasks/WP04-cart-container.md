@@ -4,12 +4,12 @@ title: Cart Container
 dependencies:
 - WP01
 requirement_refs:
+- C-003
+- C-004
 - FR-006
 - FR-007
 - FR-010
 - FR-012
-- C-003
-- C-004
 tracker_refs: []
 planning_base_branch: spec/app-shell-routing-providers
 merge_target_branch: spec/app-shell-routing-providers

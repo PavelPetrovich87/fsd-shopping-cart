@@ -9,10 +9,10 @@ dependencies:
 - WP05
 - WP06
 requirement_refs:
-- FR-001
-- FR-012
 - C-001
 - C-002
+- FR-001
+- FR-012
 - NFR-004
 - NFR-005
 tracker_refs: []

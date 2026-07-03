@@ -45,6 +45,7 @@ visual-diffs/
 .roo/
 .amazonq/
 .github/copilot/
+.zcode/
 .kittify/
 .claudeignore
 .kittify/runtime/

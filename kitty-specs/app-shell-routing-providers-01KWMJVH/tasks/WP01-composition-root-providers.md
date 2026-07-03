@@ -215,3 +215,4 @@ No new tests required by the spec for this WP. However, the single-instance inva
 ## Activity Log
 
 - 2026-07-03T19:03:37Z – claude – shell_pid=65639 – Assigned agent via action command
+- 2026-07-03T19:17:03Z – claude – shell_pid=65639 – Ready for review. Implementation committed (bc6fc51 on lane-a). All 4 quality gates green: lint 0, lint:arch 0, build 0, test:unit 181/181. Subtasks T001-T003 marked [x] on coord branch (canonical status authority for coord topology); --force used because move-task pre-flight reads target-branch tasks.md where checkbox sync is deferred. Key design decisions: (1) useState lazy-init instead of useRef to satisfy eslint-plugin-react-hooks v7 react-hooks/refs rule (ref-during-render forbidden); (2) zustandCartRepository re-exported from @/entities/cart barrel to satisfy Steiger no-public-api-sidestep (app layer must import through public API).

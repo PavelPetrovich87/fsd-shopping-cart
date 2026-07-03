@@ -1,0 +1,15 @@
+{
+  "coordination_branch": "kitty/mission-app-shell-routing-providers-01KWMJVH",
+  "created_at": "2026-07-03T18:11:33.954746+00:00",
+  "flattened": false,
+  "friendly_name": "App Shell — Routing & Providers",
+  "mission_id": "01KWMJVHXZ60DKKPZ8M77NFZC5",
+  "mission_number": null,
+  "mission_slug": "app-shell-routing-providers-01KWMJVH",
+  "mission_type": "software-dev",
+  "purpose_context": "Wire the application together at the app/ layer so pages no longer carry their own state. Replace the demo entry point with real providers, routing, layout with cart icon, and event subscriptions.",
+  "purpose_tldr": "App shell: routing, providers, reactive cart icon",
+  "slug": "app-shell-routing-providers-01KWMJVH",
+  "target_branch": "spec/app-shell-routing-providers",
+  "topology": "coord"
+}

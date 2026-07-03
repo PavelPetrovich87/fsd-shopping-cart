@@ -1,7 +1,7 @@
 {
-  "event_count": 3,
-  "last_event_id": "01KWMMR32R24G69YGRB63R8DXN",
-  "materialized_at": "2026-07-03T18:44:37.592084+00:00",
+  "event_count": 4,
+  "last_event_id": "01KWMMR4HWA9ND0BDH9NC4JBGH",
+  "materialized_at": "2026-07-03T18:44:39.100784+00:00",
   "mission_number": "",
   "mission_slug": "app-shell-routing-providers-01KWMJVH",
   "mission_type": "software-dev",
@@ -14,7 +14,7 @@
     "for_review": 0,
     "in_progress": 0,
     "in_review": 0,
-    "planned": 3
+    "planned": 4
   },
   "work_packages": {
     "WP01": {
@@ -37,6 +37,13 @@
       "lane": "planned",
       "last_event_id": "01KWMMR32R24G69YGRB63R8DXN",
       "last_transition_at": "2026-07-03T18:44:37.592084+00:00"
+    },
+    "WP04": {
+      "actor": "finalize-tasks",
+      "force_count": 0,
+      "lane": "planned",
+      "last_event_id": "01KWMMR4HWA9ND0BDH9NC4JBGH",
+      "last_transition_at": "2026-07-03T18:44:39.100784+00:00"
     }
   }
 }

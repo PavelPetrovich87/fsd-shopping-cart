@@ -93,9 +93,9 @@ WP07 (App Shell Assembly) ← needs WP01..WP06 all merged
 **Estimated prompt size**: ~250 lines.
 
 Included subtasks:
-- [ ] T001 Create `AppDeps` type + `AppDepsContext` + `useAppDeps` hook (WP01)
-- [ ] T002 Create `AppProviders` component (`useRef(new EventBus())`, singletons) (WP01)
-- [ ] T003 Export `AppProviders` from `src/app/index.ts` (WP01)
+- [x] T001 Create `AppDeps` type + `AppDepsContext` + `useAppDeps` hook (WP01)
+- [x] T002 Create `AppProviders` component (`useRef(new EventBus())`, singletons) (WP01)
+- [x] T003 Export `AppProviders` from `src/app/index.ts` (WP01)
 
 Dependencies: none.
 Owned files: `src/app/providers/**`, `src/app/index.ts`.

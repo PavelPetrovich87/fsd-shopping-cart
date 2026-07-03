@@ -11,5 +11,7 @@
   "purpose_tldr": "App shell: routing, providers, reactive cart icon",
   "slug": "app-shell-routing-providers-01KWMJVH",
   "target_branch": "spec/app-shell-routing-providers",
-  "topology": "coord"
+  "topology": "coord",
+  "vcs": "git",
+  "vcs_locked_at": "2026-07-03T19:03:33.668932+00:00"
 }

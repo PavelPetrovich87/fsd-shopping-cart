@@ -68,6 +68,10 @@ graph TD
         cart
     end
 
+    subgraph pages
+        home
+    end
+
     subgraph features
         shopping-cart
         apply-coupon
@@ -86,8 +90,11 @@ graph TD
         shared/lib
         shared/api
         shared/config
+        shared/mocks
     end
 
+    home --> product
+    home --> shared/mocks
     shopping-cart --> cart
     shopping-cart --> product
     shopping-cart --> shared/ui
